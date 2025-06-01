@@ -5,3 +5,19 @@
   font-weight: 400;
   src: url("./assets/fonts/Inter-VariableFont_opsz,wght.ttf") format("ttf");
 }
+
+.menu-selection-button a {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.legal-information-button a {
+  font-size: 16px;
+  font-weight: 400;
+  color: #a8a8a8;
+}
+
+.header-content h1 {
+  font-size: 20px;
+  font-weight: 400;
+}
