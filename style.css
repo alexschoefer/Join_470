@@ -1,0 +1,30 @@
+.menuLogo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100.03px;
+  height: 121.97px;
+  margin-bottom: 100px;
+}
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+
+  height: 229px;
+}
+
+.menu-selection-button {
+  display: flex;
+  align-items: center;
+  height: 46px;
+  width: 232px;
+  padding: 8px 56px 8px 56px;
+  gap: 8px;
+}
+.menu-selection-icons {
+  height: 30px;
+  width: 30px;
+}
