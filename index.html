@@ -10,6 +10,8 @@
     <script src="./scripts/template-login.js"></script>
     <script src="./scripts/template-summary.js"></script>
 
+    <link rel="shortcut icon" href="./assets/img/MenuLogo.png" type="image/x-icon">
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./styles/standard.css">
     <link rel="stylesheet" href="./styles/assets.css#">
@@ -19,6 +21,10 @@
 </head>
 
 <body>
+    <div class="login-registration-container">
+        <span id="login-registration-slogan">Not a Join user?</span>
+        <a class="btn-sign-up" href="">Sign up</a>
+    </div>
     <img class="main-logo-img" src="./assets/img/MainLogo.png" alt="">
     <div class="login-main-container">
         <div class="login-headline-container">
@@ -30,7 +36,8 @@
                 <input class="input-email-password email-icon" type="email" name="email" placeholder="Email" required>
             </div>
             <div class="user-login-input-password">
-                <input class="input-email-password password-icon" type="password" name="password" placeholder="Password">
+                <input class="input-email-password password-icon" type="password" name="password"
+                    placeholder="Password">
             </div>
         </div>
         <div class="btn-login-container">
@@ -38,6 +45,10 @@
             <button id="btn-login-guest">Guest Log in</button>
         </div>
     </div>
+    <footer class="footer-login">
+        <a class="nav-login-privacy-legal" href="">Privacy Police</a>
+        <a class="nav-login-privacy-legal" href="">Legal Notice</a>
+    </footer>
 </body>
 
 </html>

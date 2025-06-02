@@ -86,7 +86,9 @@
     border-radius: 10px;
     gap: 10px;
     border: 1px solid #D1D1D1;
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 120%;
 }
 
 .btn-login-container {
@@ -127,4 +129,58 @@
     color: #2A3647;
     line-height: 120%;
     font-weight: 700;
+}
+
+.footer-login {
+    display: flex;
+    position: absolute;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    width: 246px;
+    height: 35px;
+    top: 849px;
+    left: 597px;
+}
+
+.nav-login-privacy-legal {
+    font-size: 16px;
+    color: #A8A8A8;
+    font-weight: 400;
+    line-height: 120%;
+    padding: 8px;
+}
+
+.login-registration-container {
+    width: 279px;
+    height: 49px;
+    position: absolute;
+    top: 67px;
+    left: 1039px;
+    display: flex;
+    gap: 35px;
+    justify-content: center;
+    align-items: center;
+}
+
+#login-registration-slogan {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.btn-sign-up {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: #2A3647;
+    width: 91px;
+    height: 49px;
+    border-radius: 8px;
+    padding: 15px 16px 15px 16px;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 120%;
 }
