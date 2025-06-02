@@ -59,3 +59,41 @@
   height: 56px;
   width: 56px;
 }
+
+.add-task{
+  display: flex;
+  flex-direction: column;
+  width: 1207px;
+  height: calc(100vh - 96px);
+}
+
+.add-task-form{
+  display: flex;
+}
+
+.add-task-center-dividor{
+  width: 1px;
+  height: 100%;
+  background-color: cornflowerblue;
+}
+
+.add-task-form-left{
+  display: flex;
+  flex-direction: column;
+}
+
+.add-task-form-right{
+display: flex;
+  flex-direction: column;
+}
+
+.add-task-priority-buttons{
+  display: flex;
+}
+
+.add-task-h1{
+font-weight: 700;
+font-size: 61px;
+line-height: 120%;
+letter-spacing: 0%;
+}

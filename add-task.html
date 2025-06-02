@@ -4,16 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>join-add-task</title>
 
     <link rel="stylesheet" href="./styles/standard.css">
     <link rel="stylesheet" href="./styles/fonts.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&family=Teko:wght@300..700&display=swap"
-        rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
 
 
@@ -67,6 +61,48 @@
                 <div class="header-user-content">
                     <img id="help-icon" src="./assets/icons/help.png" alt="">
                     <img id="guest-icon" src="./assets/icons/guest-icon.png" alt="">
+                </div>
+            </div>
+            <div class="add-task">
+                <h1 class="add-task-h1">Add Task</h1>
+                <div>
+                    <form action="" class="add-task-form">
+                        <div class="add-task-form-left"> <label for="add-task-title">Title</label>
+                            <input type="text" id="add-task-title" placeholder="Enter a Title" required>
+                            <label for="add-task-description">Description</label>
+                            <textarea name="add-task-description" id="add-task-description"
+                                placeholder="Enter a Description" rows="4" cols="50"></textarea>
+                            <label for="add-task-due-date">Due Date</label>
+                            <input name="add-task-due-date" type="date" id="add-task-due-date" placeholder="dd/mm/yyyy">
+                        </div>
+                        <div class="add-task-center-dividor"></div>
+                        <div class="add-task-form-right">
+                            <label for="add-task-priority">Priority</label>
+                            <div class="add-task-priority-buttons">
+                                <button id="add-task-priority-urgent" class="add-task-priority-button">Urgent</button>
+                                <button id="add-task-priority-medium" class="add-task-priority-button">Medium</button>
+                                <button id="add-task-priority-low" class="add-task-priority-button">Low</button>
+                            </div>
+                            <label for="add-task-assigned-to">Select contacts to assign</label>
+                            <select name="add-task-assigned-to" id="add-task-assigned-to">
+                                <option value="contactToChoose">dynamische contacts</option>
+                                <option value="saab">Saab</option>
+
+                            </select>
+                            <label for="add-task-category">Category</label>
+                            <select name="add-task-category" type="text" id="add-task-description"
+                                placeholder="Select task category">
+                                <option value="technicalTask">Technical Task</option>
+                                <option value="userStory">User Story</option>
+                            </select>
+                            <label for="add-task-due-date">Subtasaks</label>
+                            <input type="text" id="add-task-due-date" placeholder="Add new subtask">
+                        </div>
+                    </form>
+                </div>
+
+                <div>
+
                 </div>
             </div>
         </header>
