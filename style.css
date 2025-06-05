@@ -6,6 +6,7 @@
   width: 100.03px;
   height: 121.97px;
 }
+
 .menu-container {
   display: flex;
   flex-direction: column;
@@ -23,6 +24,7 @@
   padding: 8px 56px 8px 56px;
   gap: 8px;
 }
+
 .menu-selection-icons {
   height: 30px;
   width: 30px;
@@ -60,40 +62,66 @@
   width: 56px;
 }
 
-.add-task{
+.add-task {
   display: flex;
   flex-direction: column;
   width: 1207px;
   height: calc(100vh - 96px);
 }
 
-.add-task-form{
+.add-task-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-task-form-div {
   display: flex;
 }
 
-.add-task-center-dividor{
+.add-task-center-dividor {
   width: 1px;
-  height: 100%;
-  background-color: cornflowerblue;
+  height: 376px;
+  background-color: #D1D1D1;
 }
 
-.add-task-form-left{
+.add-task-form-left {
   display: flex;
   flex-direction: column;
+  width: 440px;
+  height: 376px;
 }
 
-.add-task-form-right{
-display: flex;
+.add-task-form-right {
+  display: flex;
   flex-direction: column;
+  width: 440px;
+  height: 376px;
 }
 
-.add-task-priority-buttons{
+.add-task-priority-buttons {
   display: flex;
 }
 
-.add-task-h1{
-font-weight: 700;
-font-size: 61px;
-line-height: 120%;
-letter-spacing: 0%;
+.add-task-h1 {
+  font-weight: 700;
+  font-size: 61px;
+  line-height: 120%;
+  letter-spacing: 0%;
+}
+
+.red-asterix-required {
+  color: red;
+  vertical-align: super;
+}
+
+.add-task-form-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.label-add-task {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0%;
 }

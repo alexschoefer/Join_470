@@ -67,43 +67,51 @@
                 <h1 class="add-task-h1">Add Task</h1>
                 <div>
                     <form action="" class="add-task-form">
-                        <div>
-                             <div class="add-task-form-left"> <label for="add-task-title">Title</label>
-                            <input type="text" id="add-task-title" placeholder="Enter a Title" required>
-                            <label for="add-task-description">Description</label>
-                            <textarea name="add-task-description" id="add-task-description"
-                                placeholder="Enter a Description" rows="4" cols="50"></textarea>
-                            <label for="add-task-due-date">Due Date</label>
-                            <input name="add-task-due-date" type="date" id="add-task-due-date" placeholder="dd/mm/yyyy">
-                        </div>
-                        <div class="add-task-center-dividor"></div>
-                        <div class="add-task-form-right">
-                            <label for="add-task-priority">Priority</label>
-                            <div class="add-task-priority-buttons">
-                                <button id="add-task-priority-urgent" class="add-task-priority-button" type="button" >Urgent</button>
-                                <button id="add-task-priority-medium" class="add-task-priority-button" type="button" >Medium</button>
-                                <button id="add-task-priority-low" class="add-task-priority-button" type="button" >Low</button>
+                        <div class="add-task-form-div">
+                            <div class="add-task-form-left">
+                                <label for="add-task-title" class="label-add-task">Title</label>
+                                <input type="text" id="add-task-title" placeholder="Enter a Title" required>
+                                <label for="add-task-description" class="label-add-task">Description</label>
+                                <textarea name="add-task-description" id="add-task-description"
+                                    placeholder="Enter a Description" rows="4" cols="50"></textarea>
+                                <label for="add-task-due-date" class="label-add-task">Due Date</label>
+                                <input name="add-task-due-date" type="date" id="add-task-due-date"
+                                    placeholder="dd/mm/yyyy">
                             </div>
-                            <label for="add-task-assigned-to">Select contacts to assign</label>
-                            <select name="add-task-assigned-to" id="add-task-assigned-to">
-                                <option value="contactToChoose">dynamische contacts</option>
-                                <option value="saab">Saab</option>
-
-                            </select>
-                            <label for="add-task-category">Category</label>
-                            <select name="add-task-category" type="text" id="add-task-description"
-                                placeholder="Select task category">
-                                <option value="technicalTask">Technical Task</option>
-                                <option value="userStory">User Story</option>
-                            </select>
-                            <label for="add-task-due-date">Subtasaks</label>
-                            <input type="text" id="add-task-due-date" placeholder="Add new subtask">
+                            <div class="add-task-center-dividor"></div>
+                            <div class="add-task-form-right">
+                                <label for="add-task-priority" class="label-add-task">Priority</label>
+                                <div class="add-task-priority-buttons">
+                                    <button id="add-task-priority-urgent" class="add-task-priority-button label-add-task"
+                                        type="button">Urgent</button>
+                                    <button id="add-task-priority-medium" class="add-task-priority-button label-add-task"
+                                        type="button">Medium</button>
+                                    <button id="add-task-priority-low" class="add-task-priority-button label-add-task"
+                                        type="button">Low</button>
+                                </div>
+                                <label for="add-task-assigned-to" class="label-add-task">Select contacts to assign</label>
+                                <select name="add-task-assigned-to" id="add-task-assigned-to">
+                                    <option value="contactToChoose" class="label-add-task">dynamische contacts</option>
+                                    <option value="saab" class="label-add-task">dynamic data</option>
+                                </select>
+                                <label for="add-task-category" class="label-add-task">Category</label>
+                                <select name="add-task-category" type="text" class="label-add-task" id="add-task-description"
+                                    placeholder="Select task category">
+                                    <option value="technicalTask" class="label-add-task">Technical Task</option>
+                                    <option value="userStory" class="label-add-task">User Story</option>
+                                </select>
+                                <label for="add-task-due-date" class="label-add-task">Subtasaks</label>
+                                <input type="text" class="label-add-task" id="add-task-due-date" placeholder="Add new subtask">
+                            </div>
                         </div>
+                        <div class="add-task-form-buttons">
+                            <div>
+                                <span class="label-add-task"><p class="red-asterix-required">*</p>This field is required</span>
+                            </div>
+                            <div>
+                                <button type="button" class="label-add-task">Clear</button><button type="button" class="label-add-task">Create Task</button>
+                            </div>
                         </div>
-                        <div>
-                            legende and buttons
-                        </div>
-                       
                     </form>
                 </div>
 
