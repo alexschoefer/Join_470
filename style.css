@@ -65,8 +65,11 @@
 .add-task {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 1207px;
   height: calc(100vh - 96px);
+  background: #F6F7F8;
 }
 
 .add-task-form {
@@ -115,6 +118,7 @@
 }
 
 .add-task-form-buttons {
+  width: 881px;
   display: flex;
   justify-content: space-between;
 }
@@ -124,4 +128,16 @@
   font-size: 20px;
   line-height: 120%;
   letter-spacing: 0%;
+}
+
+.add-task-input-style{
+height: 48px;
+padding-top: 12px;
+padding-right: 21px;
+padding-bottom: 12px;
+padding-left: 21px;
+gap: 10px;
+border-width: 1px;
+border-radius: 10px;
+
 }

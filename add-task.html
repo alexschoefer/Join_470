@@ -69,13 +69,13 @@
                     <form action="" class="add-task-form">
                         <div class="add-task-form-div">
                             <div class="add-task-form-left">
-                                <label for="add-task-title" class="label-add-task">Title</label>
-                                <input type="text" id="add-task-title" placeholder="Enter a Title" required>
+                                <label for="add-task-title" class="label-add-task">Title<p class="red-asterix-required">*</p></label>
+                                <input type="text" id="add-task-title" class="add-task-input-style" placeholder="Enter a Title" required>
                                 <label for="add-task-description" class="label-add-task">Description</label>
                                 <textarea name="add-task-description" id="add-task-description"
                                     placeholder="Enter a Description" rows="4" cols="50"></textarea>
-                                <label for="add-task-due-date" class="label-add-task">Due Date</label>
-                                <input name="add-task-due-date" type="date" id="add-task-due-date"
+                                <label for="add-task-due-date" class="label-add-task">Due Date<p class="red-asterix-required">*</p></label>
+                                <input name="add-task-due-date" type="date" id="add-task-due-date" class="add-task-input-style"
                                     placeholder="dd/mm/yyyy">
                             </div>
                             <div class="add-task-center-dividor"></div>
@@ -90,18 +90,18 @@
                                         type="button">Low</button>
                                 </div>
                                 <label for="add-task-assigned-to" class="label-add-task">Select contacts to assign</label>
-                                <select name="add-task-assigned-to" id="add-task-assigned-to">
+                                <select name="add-task-assigned-to" id="add-task-assigned-to" class="add-task-input-style">
                                     <option value="contactToChoose" class="label-add-task">dynamische contacts</option>
                                     <option value="saab" class="label-add-task">dynamic data</option>
                                 </select>
-                                <label for="add-task-category" class="label-add-task">Category</label>
-                                <select name="add-task-category" type="text" class="label-add-task" id="add-task-description"
+                                <label for="add-task-category" class="label-add-task">Category<p class="red-asterix-required">*</p></label>
+                                <select name="add-task-category" type="text" class="label-add-task add-task-input-style" id="add-task-description"
                                     placeholder="Select task category">
                                     <option value="technicalTask" class="label-add-task">Technical Task</option>
                                     <option value="userStory" class="label-add-task">User Story</option>
                                 </select>
                                 <label for="add-task-due-date" class="label-add-task">Subtasaks</label>
-                                <input type="text" class="label-add-task" id="add-task-due-date" placeholder="Add new subtask">
+                                <input type="text" class="label-add-task add-task-input-style" id="add-task-due-date" placeholder="Add new subtask">
                             </div>
                         </div>
                         <div class="add-task-form-buttons">
