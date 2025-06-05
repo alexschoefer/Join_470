@@ -18,17 +18,21 @@
 
 <body>
     <img class="main-logo-img" src="./assets/img/MainLogo.png" alt="">
+
     <main class="main-content-signup">
         <div class="sign-up-main-container">
-            
-            <div class="login-headline-container">
-                <a href="">
-                    <img src="./assets/icons/arrow-left-line-icon.png" alt="">
-                </a>
-                <h1 id="login-headline">Sign up</h1>
-                <div class="login-underline"></div>
+            <div class="sign-up-headline-container">
+                <a href=""><img src="./assets/icons/arrow-left-line-icon.png" alt="Back Arrow" class="arrow-icon"></a>
+                <div class="headline-wrapper">
+                    <h1 id="login-headline">Sign up</h1>
+                    <div class="login-underline"></div>
+                </div>
             </div>
-            <div class="user-login-input-container">
+            <div class="sign-up-input-container">
+                <div class="user-sign-input-name">
+                    <input class="input-email-password person-icon" type="email" name="email" placeholder="Name"
+                        required>
+                </div>
                 <div class="user-login-input-email">
                     <input class="input-email-password email-icon" type="email" name="email" placeholder="Email"
                         required>
@@ -36,6 +40,17 @@
                 <div class="user-login-input-password">
                     <input class="input-email-password password-icon" type="password" name="password"
                         placeholder="Password">
+                </div>
+                <div class="user-login-input-password">
+                    <input class="input-email-password password-icon" type="password" name="password"
+                        placeholder="Confirm Password">
+                </div>
+                <div class="checkbox-privacy-policy-container">
+                    <input type="checkbox" name="" id="" required>
+                    <span id="acception-privacy-policy">I accept the <a id="privacy-policy">Privacy Policy</a></span>
+                </div>
+                <div class="sign-up-registration-container">
+                    <a class="btn-sign-up" href="">Sign up</a>
                 </div>
             </div>
         </div>
