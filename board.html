@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Board</title>
+
+    <link rel="stylesheet" href="./styles/standard.css" />
+    <link rel="stylesheet" href="./styles/assets.css">
+    <link rel="stylesheet" href="./styles/board.css">
+    <link rel="stylesheet" href="./styles/media.css">
+    <link rel="stylesheet" href="./styles/">
+    <link rel="stylesheet" href="./styles/fonts.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&family=Teko:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="main-content">
+      <aside class="aside-content">
+        <div class="menuLogo-container">
+          <img src="./assets/img/MenuLogo.png" alt="" />
+        </div>
+        <div class="menu-container">
+          <div class="menu-selection-button">
+            <img
+              class="menu-selection-icons"
+              src="./assets/icons/summary-icon.png"
+              alt=""
+            />
+            <a href="">Summary</a>
+          </div>
+          <div class="menu-selection-button">
+            <img
+              class="menu-selection-icons"
+              src="./assets/icons/add-task-icon.png"
+              alt=""
+            />
+            <a href="">Add Task</a>
+          </div>
+          <div class="menu-selection-button">
+            <img
+              class="menu-selection-icons"
+              src="./assets/icons/board-icon.png"
+              alt=""
+            />
+            <a href="">Board</a>
+          </div>
+          <div class="menu-selection-button">
+            <img
+              class="menu-selection-icons"
+              src="./assets/icons/contacts-icon.png"
+              alt=""
+            />
+            <a href="">Contacts</a>
+          </div>
+        </div>
+        <div class="legal-information-container">
+          <div class="legal-information-button">
+            <a href="">Privacy Policy</a>
+          </div>
+          <div class="legal-information-button">
+            <a href="">Legal notice</a>
+          </div>
+        </div>
+      </aside>
+      <section id="board-content">
+        <header>
+          <div class="header-content">
+            <h1>Kanban Project Management Tool</h1>
+            <div class="header-user-content">
+              <img id="help-icon" src="./assets/icons/help.png" alt="" />
+              <img id="guest-icon" src="./assets/icons/guest-icon.png" alt="" />
+            </div>
+          </div>
+        </header>
+        <div class="board-container">
+          <div class="board-find-task">
+            <h1>Board</h1>
+            <div class="task-search">
+              <div class="input-search">
+                <input type="text" placeholder="Find Task" />
+                <button class="search">
+                  <span class="border-img">
+                    <img src="./assets/icons/search.png" />
+                  </span>
+                </button>
+              </div>
+              <button class="add-task"><span>Add task</span> <span class="img-add-task"><img src="./assets/icons/add.png"></span></button>
+            </div>
+          </div>
+          <section id="all-task">
+            <div class="board-task-column to-do">
+              <div class="task-title">
+                <h2>To do</h2>
+               <div class="add-task-icon"></div>
+              </div>
+              <div class="not-task">
+                <p>No tasks To do</p>
+              </div>
+            </div>
+
+
+            <div class="board-task-column in-progress">
+
+            <div class="task-title">
+                <h2>In progress</h2>
+               <div class="add-task-icon"></div>
+              </div>
+               <div class="card">
+                <div class="card-content">
+                  <span class="card-name">
+                    User Story
+                  </span>
+                  <div class="card-description">
+                    <h4>Kochwelt Page & Recipe Recommender</h4>
+                    <p>Build start page with recipe recommendation...</p>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="bar"><span class="col-bar"></span></div>
+                    <span class="nr-progress-tasks">1/2 Subtasks</span>
+                  </div>
+                   <div class="assignees-priority">
+                     <div class="assignees">
+                      <span class="exemplu">MN</span>
+                     </div>
+                     <div class="prioriti">
+                      <img src="./assets/icons/priority-medium.png">
+                     </div>
+                   </div>
+                </div>
+               </div>
+
+            </div>
+            <div class="board-task-column await-feedback">
+
+            <div class="task-title">
+                <h2>Await feedback</h2>
+               <div class="add-task-icon"></div>
+              </div>
+              <div class="not-task">
+                <p>No tasks To do</p>
+              </div>
+
+            </div>
+            <div class="board-task-column done">
+
+            <div class="task-title">
+                <h2>Done</h2>
+               <div class="add-task-icon"></div>
+              </div>
+              <div class="not-task">
+                <p>No tasks To do</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </body>
+
+</html>
