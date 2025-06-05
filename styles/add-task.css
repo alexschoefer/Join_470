@@ -1,0 +1,79 @@
+.add-task {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 1207px;
+  height: calc(100vh - 96px);
+  background: #F6F7F8;
+}
+
+.add-task-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-task-form-div {
+  display: flex;
+}
+
+.add-task-center-dividor {
+  width: 1px;
+  height: 376px;
+  background-color: #D1D1D1;
+}
+
+.add-task-form-left {
+  display: flex;
+  flex-direction: column;
+  width: 440px;
+  height: 376px;
+}
+
+.add-task-form-right {
+  display: flex;
+  flex-direction: column;
+  width: 440px;
+  height: 376px;
+}
+
+.add-task-priority-buttons {
+  display: flex;
+}
+
+.add-task-h1 {
+  font-weight: 700;
+  font-size: 61px;
+  line-height: 120%;
+  letter-spacing: 0%;
+}
+
+.red-asterix-required {
+  color: red;
+  vertical-align: super;
+}
+
+.add-task-form-buttons {
+  width: 881px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.label-add-task {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0%;
+}
+
+.add-task-input-style{
+height: 48px;
+padding-top: 12px;
+padding-right: 21px;
+padding-bottom: 12px;
+padding-left: 21px;
+gap: 10px;
+border-width: 1px;
+border-radius: 10px;
+
+}

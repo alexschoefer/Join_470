@@ -6,6 +6,7 @@
   width: 100.03px;
   height: 121.97px;
 }
+
 .menu-container {
   display: flex;
   flex-direction: column;
@@ -23,6 +24,7 @@
   padding: 8px 56px 8px 56px;
   gap: 8px;
 }
+
 .menu-selection-icons {
   height: 30px;
   width: 30px;
@@ -59,3 +61,4 @@
   height: 56px;
   width: 56px;
 }
+
