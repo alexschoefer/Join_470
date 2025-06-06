@@ -1,3 +1,13 @@
+:root {
+  --main-color: #2a3647;
+  --icon: #a8a8a8;
+  --style: #a8a8a8;
+  --bottom-gradient: #f4f4f4;
+  --black: #000000;
+  --white: #ffffff;
+  --light-blue: #29abe2;
+}
+
 .menuLogo-container {
   display: flex;
   justify-content: center;
@@ -61,4 +71,3 @@
   height: 56px;
   width: 56px;
 }
-

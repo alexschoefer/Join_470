@@ -39,13 +39,44 @@
 
 .add-task-priority-buttons {
   display: flex;
+  justify-content: space-between;
+  
 }
 
+.add-task-priority-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 136px;
+  height: 56px;
+  padding-top: 16px;
+  padding-right: 10px;
+  padding-bottom: 16px;
+  padding-left: 10px;
+  gap: 8px;
+  border-radius: 10px;
+   border: 1px solid #D1D1D1;
+}
+
+.add-task-priority-button-image {
+  width: 20px;
+  height: 14.51px;
+}
+
+.add-task-priority-button-medium-image {
+  width: 20px;
+  height: 7.45px;
+
+}
+
+
 .add-task-h1 {
+  width: 100%;
   font-weight: 700;
   font-size: 61px;
   line-height: 120%;
-  letter-spacing: 0%;
+  display: flex;
+  justify-content: start;
 }
 
 .red-asterix-required {
@@ -66,14 +97,25 @@
   letter-spacing: 0%;
 }
 
-.add-task-input-style{
-height: 48px;
-padding-top: 12px;
-padding-right: 21px;
-padding-bottom: 12px;
-padding-left: 21px;
-gap: 10px;
-border-width: 1px;
-border-radius: 10px;
+.add-task-input-style {
+  height: 48px;
+  padding-top: 12px;
+  padding-right: 21px;
+  padding-bottom: 12px;
+  padding-left: 21px;
+  gap: 10px;
+  border-width: 1px;
+  border-radius: 10px;
+  border: 1px solid #D1D1D1;
+}
 
+.add-task-input-textarea-style {
+  padding-top: 12px;
+  padding-right: 21px;
+  padding-bottom: 12px;
+  padding-left: 21px;
+  gap: 10px;
+  border-width: 1px;
+  border-radius: 10px;
+  border: 1px solid #D1D1D1;
 }

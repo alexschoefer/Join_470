@@ -64,20 +64,22 @@
                 </div>
             </div>
             <div class="add-task">
-                <h1 class="add-task-h1">Add Task</h1>
+
                 <div>
+                    <h1 class="add-task-h1">Add Task</h1>
                     <form action="" class="add-task-form">
                         <div class="add-task-form-div">
                             <div class="add-task-form-left">
-                                <label for="add-task-title" class="label-add-task">Title<p class="red-asterix-required">
-                                        *</p></label>
+                                <label for="add-task-title" class="label-add-task">Title<span
+                                        class="red-asterix-required">*</span></label>
                                 <input type="text" id="add-task-title" class="add-task-input-style"
                                     placeholder="Enter a Title" required>
                                 <label for="add-task-description" class="label-add-task">Description</label>
                                 <textarea name="add-task-description" id="add-task-description"
-                                    placeholder="Enter a Description" rows="4" cols="50"></textarea>
-                                <label for="add-task-due-date" class="label-add-task">Due Date<p
-                                        class="red-asterix-required">*</p></label>
+                                    class="add-task-input-textarea-style" placeholder="Enter a Description" rows="4"
+                                    cols="50"></textarea>
+                                <label for="add-task-due-date" class="label-add-task">Due Date<span
+                                        class="red-asterix-required">*</span></label>
                                 <input name="add-task-due-date" type="date" id="add-task-due-date"
                                     class="add-task-input-style" placeholder="dd/mm/yyyy">
                             </div>
@@ -86,11 +88,19 @@
                                 <label for="add-task-priority" class="label-add-task">Priority</label>
                                 <div class="add-task-priority-buttons">
                                     <button id="add-task-priority-urgent"
-                                        class="add-task-priority-button label-add-task" type="button">Urgent</button>
+                                        class="add-task-priority-button label-add-task" type="button">Urgent<img
+                                            class="add-task-priority-button-image"
+                                            src="../assets/icons/add-task-prio-alta.svg"
+                                            alt="urgent-button"></img></button>
                                     <button id="add-task-priority-medium"
-                                        class="add-task-priority-button label-add-task" type="button">Medium</button>
+                                        class="add-task-priority-button label-add-task" type="button">Medium<img
+                                            class="add-task-priority-button-medium-image"
+                                            src="../assets/icons/add-task-prio-media.svg"
+                                            alt="urgent-button"></img></button>
                                     <button id="add-task-priority-low" class="add-task-priority-button label-add-task"
-                                        type="button">Low</button>
+                                        type="button">Low<img class="add-task-priority-button-image"
+                                            src="../assets/icons/add-task-prio-baja.svg"
+                                            alt="urgent-button"></img></button>
                                 </div>
                                 <label for="add-task-assigned-to" class="label-add-task">Select contacts to
                                     assign</label>
@@ -99,8 +109,8 @@
                                     <option value="contactToChoose" class="label-add-task">dynamische contacts</option>
                                     <option value="saab" class="label-add-task">dynamic data</option>
                                 </select>
-                                <label for="add-task-category" class="label-add-task">Category<p
-                                        class="red-asterix-required">*</p></label>
+                                <label for="add-task-category" class="label-add-task">Category<span
+                                        class="red-asterix-required">*</span></label>
                                 <select name="add-task-category" type="text" class="label-add-task add-task-input-style"
                                     id="add-task-description" placeholder="Select task category">
                                     <option value="technicalTask" class="label-add-task">Technical Task</option>
@@ -113,8 +123,8 @@
                         </div>
                         <div class="add-task-form-buttons">
                             <div>
-                                <span class="label-add-task">
-                                    <p class="red-asterix-required">*</p>This field is required
+                                <span class="label-add-task"><span
+                                        class="red-asterix-required">*</span>This field is required
                                 </span>
                             </div>
                             <div>
