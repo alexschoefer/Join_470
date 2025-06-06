@@ -70,22 +70,40 @@
                     <form action="" class="add-task-form">
                         <div class="add-task-form-div">
                             <div class="add-task-form-left">
-                                <label for="add-task-title" class="label-add-task">Title<span
-                                        class="red-asterix-required">*</span></label>
-                                <input type="text" id="add-task-title" class="add-task-input-style"
-                                    placeholder="Enter a Title" required>
-                                <label for="add-task-description" class="label-add-task">Description</label>
-                                <textarea name="add-task-description" id="add-task-description"
-                                    class="add-task-input-textarea-style" placeholder="Enter a Description" rows="4"
-                                    cols="50"></textarea>
-                                <label for="add-task-due-date" class="label-add-task">Due Date<span
-                                        class="red-asterix-required">*</span></label>
-                                <input name="add-task-due-date" type="date" id="add-task-due-date"
-                                    class="add-task-input-style" placeholder="dd/mm/yyyy">
+                                <div class="add-task-form-left-title">
+                                    <label for="add-task-title" class="label-add-task">Title<span
+                                            class="red-asterix-required">*</span></label>
+                                    <input type="text" id="add-task-title" class="add-task-input-style"
+                                        placeholder="Enter a Title" required>
+                                    <span id="mobile-required-text-no-asterix-title"
+                                        class="mobile-required-text-no-asterix"></span>
+                                </div>
+                                <div class="add-task-form-left-description">
+                                    <label for="add-task-description" class="label-add-task">Description</label>
+                                    <textarea name="add-task-description" id="add-task-description-textarea"
+                                        class="add-task-input-textarea-style" placeholder="Enter a Description" rows="4"
+                                        cols="50"></textarea>
+                                    <span id="mobile-required-text-no-asterix-description"
+                                        class="mobile-required-text-no-asterix"></span>
+                                </div>
+                                <div class="add-task-form-left-title">
+                                    <label for="add-task-due-date" class="label-add-task">Due Date<span
+                                            class="red-asterix-required">*</span></label>
+                                    <input name="add-task-due-date" type="date" id="add-task-due-date-input"
+                                        class="add-task-input-style" placeholder="dd/mm/yyyy">
+                                    <span id="mobile-required-text-no-asterix-due-date"
+                                        class="mobile-required-text-no-asterix"></span>
+                                </div>
+                                <div class="add-task-form-left-title"></div>
+                                <div class="add-task-form-left-title"></div>
+                                <div class="add-task-form-left-title"></div>
+
+
+
                             </div>
                             <div class="add-task-center-dividor"></div>
                             <div class="add-task-form-right">
-                                <label for="add-task-priority" class="label-add-task">Priority</label>
+                                <label for="add-task-priority" class="label-add-task-black">Priority</label>
                                 <div class="add-task-priority-buttons">
                                     <button id="add-task-priority-urgent"
                                         class="add-task-priority-button label-add-task" type="button">Urgent<img
@@ -123,8 +141,8 @@
                         </div>
                         <div class="add-task-form-buttons">
                             <div>
-                                <span class="label-add-task"><span
-                                        class="red-asterix-required">*</span>This field is required
+                                <span class="label-add-task"><span class="red-asterix-required">*</span>This field is
+                                    required
                                 </span>
                             </div>
                             <div>
