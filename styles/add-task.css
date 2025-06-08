@@ -1,10 +1,12 @@
 .add-task {
+  width: calc(100% - 232px);
+  height: calc(100vh - 96px);
+  min-width: calc(1440px - 232px);
+  min-height: calc(1024px -96px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 1207px;
-  height: calc(100vh - 96px);
   background: #F6F7F8;
 }
 
@@ -150,4 +152,57 @@
   border-width: 1px;
   border-radius: 10px;
   border: 1px solid #D1D1D1;
+}
+
+.add-task-buttons-create-clear {
+  width: 309px;
+  height: 56px;
+  top: 889px;
+  left: 995.25px;
+  gap: 16px;
+
+}
+
+.add-task-button-clear {
+  width: 110px;
+  height: 56px;
+  gap: 4px;
+  border-width: 1px;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.add-task-button-create {
+  width: 183px;
+  height: 56px;
+  gap: 4px;
+  border-radius: 10px;
+  padding: 16px;
+  background-color: var(--main-color);
+}
+
+.add-task-button-create :hover {
+  width: 183px;
+  height: 56px;
+  gap: 4px;
+  border-radius: 10px;
+  padding: 16px;
+  background-color: var(--light-blue);
+  cursor: pointer;
+}
+
+.add-task-button-create-text {
+  width: 123px;
+  height: 24px;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  color: var(--white);
+}
+
+.add-task-button-create-icon {
+  width: 15.49px;
+  height: 11.22px;
+  margin-left: 8.51px;
 }
