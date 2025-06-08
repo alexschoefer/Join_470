@@ -154,7 +154,10 @@
   border: 1px solid #D1D1D1;
 }
 
-.add-task-buttons-create-clear {
+.add-task-buttons-create-and-clear {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   width: 309px;
   height: 56px;
   top: 889px;
@@ -164,12 +167,49 @@
 }
 
 .add-task-button-clear {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   width: 110px;
   height: 56px;
   gap: 4px;
   border-width: 1px;
   border-radius: 10px;
   padding: 16px;
+  border: 1px solid var(--main-color);
+}
+
+.add-task-button-clear:hover {
+  width: 110px;
+  height: 56px;
+  gap: 4px;
+  border-width: 1px;
+  border-radius: 10px;
+  padding: 16px;
+  border: 1px solid var(--light-blue);
+}
+
+.add-task-button-clear:hover .add-task-button-clear-text {
+  color: var(--light-blue);
+}
+
+.add-task-button-clear:hover add-task-button-clear-icon {
+  fill: var(--light-blue);
+}
+
+.add-task-button-clear-text {
+  width: 50px;
+  height: 24px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  color: var(--main-color);
+}
+
+.add-task-button-clear-icon {
+  width: 24px;
+  height: 24px;
 }
 
 .add-task-button-create {
@@ -182,12 +222,7 @@
 }
 
 .add-task-button-create :hover {
-  width: 183px;
-  height: 56px;
-  gap: 4px;
-  border-radius: 10px;
-  padding: 16px;
-  background-color: var(--light-blue);
+  background: var(--light-blue);
   cursor: pointer;
 }
 
@@ -199,6 +234,7 @@
   line-height: 120%;
   letter-spacing: 0%;
   color: var(--white);
+  white-space: nowrap;
 }
 
 .add-task-button-create-icon {
