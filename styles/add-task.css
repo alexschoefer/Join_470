@@ -139,6 +139,9 @@
 }
 
 .add-task-input-textarea-style {
+  width: 440px;
+  height: 136px;
+  gap: 4px;
   padding-top: 12px;
   padding-right: 21px;
   padding-bottom: 12px;
