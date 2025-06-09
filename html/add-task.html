@@ -30,7 +30,7 @@
                                 <div class="add-task-form-left-title">
                                     <label for="add-task-title" class="label-add-task">Title<span
                                             class="red-asterix-required">*</span></label>
-                                    <input type="text" id="add-task-title" class="add-task-input-style"
+                                    <input type="text" id="add-task-title" class="add-task-input-style add-task-placeholder-style"
                                         placeholder="Enter a Title" required>
                                     <span id="mobile-required-text-no-asterix-title"
                                         class="mobile-required-text-no-asterix"></span>
@@ -38,7 +38,7 @@
                                 <div class="add-task-form-left-description">
                                     <label for="add-task-description" class="label-add-task">Description</label>
                                     <textarea name="add-task-description" id="add-task-description-textarea"
-                                        class="add-task-input-textarea-style" placeholder="Enter a Description" rows="4"
+                                        class="add-task-input-textarea-style add-task-placeholder-style" placeholder="Enter a Description" rows="4"
                                         cols="50"></textarea>
                                     <span id="mobile-required-text-no-asterix-description"
                                         class="mobile-required-text-no-asterix"></span>
@@ -47,7 +47,7 @@
                                     <label for="add-task-due-date" class="label-add-task">Due Date<span
                                             class="red-asterix-required">*</span></label>
                                     <input name="add-task-due-date" type="date" id="add-task-due-date-input"
-                                        class="add-task-input-style" placeholder="dd/mm/yyyy">
+                                        class="add-task-input-style add-task-placeholder-style" placeholder="dd/mm/yyyy" required>
                                     <span id="mobile-required-text-no-asterix-due-date"
                                         class="mobile-required-text-no-asterix"></span>
                                 </div>
@@ -57,48 +57,48 @@
                                 <div class="add-task-form-right-priority">
                                     <label for="add-task-priority" class="label-add-task-black">Priority</label>
 
-                                    <div class="add-task-priority-buttons">
+                                    <div class="add-task-priority-buttons add-task-priority-button-hover-text">
                                         <button id="add-task-priority-urgent"
-                                            class="add-task-priority-button label-add-task" type="button">Urgent<img
+                                            class="add-task-priority-button label-add-task add-task-priority-button-urgent" type="button">Urgent<img
                                                 class="add-task-priority-button-image"
-                                                src="../assets/icons/add-task-prio-alta.svg"
+                                                src="../assets/icons/add-task-prio-capa-2-urgent-default.svg"
                                                 alt="urgent-button"></img></button>
                                         <button id="add-task-priority-medium"
                                             class="add-task-priority-button add-task-priority-button-medium label-add-task"
                                             type="button"><span
-                                                class="add-task-priority-button-medium-text">Medium</span><img
+                                                class="add-task-priority-button-hover-text">Medium</span><img
                                                 class="add-task-priority-button-medium-image"
-                                                src="../assets/icons/add-task-prio-media.svg"
+                                                src="../assets/icons/add-task-prio-capa-2-medium-default.svg"
                                                 alt="urgent-button"></img></button>
                                         <button id="add-task-priority-low"
-                                            class="add-task-priority-button label-add-task" type="button">Low<img
+                                            class="add-task-priority-button label-add-task add-task-priority-button-low add-task-priority-button-hover-text" type="button">Low<img
                                                 class="add-task-priority-button-image"
-                                                src="../assets/icons/add-task-prio-baja.svg"
+                                                src="../assets/icons/add-task-prio-capa-2-low-default.svg"
                                                 alt="urgent-button"></img></button>
                                     </div>
                                 </div>
                                 <div class="add-task-form-right-select-contacts">
                                     <label for="add-task-assigned-to" class="label-add-task">Assigned to</label>
-                                    <select name="add-task-assigned-to" id="add-task-assigned-to"
-                                        class="add-task-input-style">
-                                        <option value="contactToChoose" class="label-add-task">Select contacts to assign
+                                    <select name="add-task-assigned-to" id="add-task-assigned-to "
+                                        class="add-task-input-style add-task-placeholder-black" placeholder="Select contacts to assign">
+                                        <option value="contactToChoose" class="label-add-task add-task-placeholder-black">Select contacts to assign
                                         </option>
-                                        <option value="saab" class="label-add-task">dynamic data</option>
+                                        <option value="saab" class="label-add-task add-task-placeholder-black">dynamic data</option>
                                     </select>
                                 </div>
                                 <div class="add-task-form-right-category">
                                     <label for="add-task-category" class="label-add-task">Category<span
                                             class="red-asterix-required">*</span></label>
                                     <select name="add-task-category" type="text"
-                                        class="label-add-task add-task-input-style" id="add-task-description"
-                                        placeholder="Select task category">
+                                        class="label-add-task add-task-input-style" id="add-task-description" class="add-task-placeholder-black"
+                                        placeholder="Select task category" required>
                                         <option value="technicalTask" class="label-add-task">Technical Task</option>
                                         <option value="userStory" class="label-add-task">User Story</option>
                                     </select>
                                 </div>
                                 <div class="add-task-form-right-subtasks">
                                     <label for="add-task-due-date" class="label-add-task">Subtasaks</label>
-                                    <input type="text" class="label-add-task add-task-input-style"
+                                    <input type="text" class="label-add-task add-task-input-style add-task-placeholder-style"
                                         id="add-task-due-date" placeholder="Add new subtask">
                                 </div>
                             </div>
