@@ -1,0 +1,20 @@
+.privacy-policy-content h1 {
+  position: absolute;
+  top: 206px;
+  left: 328px;
+  height: 73px;
+  font-size: 61px;
+  font-weight: 700;
+  height: 73px;
+}
+
+.privacy-policy-content-container {
+  display: flex;
+  gap: 35px;
+  flex-direction: column;
+  width: 1016px;
+  height: 309px;
+  position: absolute;
+  top: 311px;
+  left: 328px;
+}
