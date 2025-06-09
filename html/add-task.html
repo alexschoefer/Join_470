@@ -11,9 +11,10 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../styles/add-task.css">
     <script src="../scripts/include.js"></script>
+    <script src="../scripts/add-task.js"></script>
 </head>
 
-<body>
+<body onload="addTaskInit()">
 
     <main class="main-content">
         <div id="sidebar"></div>
@@ -57,21 +58,21 @@
                                 <div class="add-task-form-right-priority">
                                     <label for="add-task-priority" class="label-add-task-black">Priority</label>
 
-                                    <div class="add-task-priority-buttons add-task-priority-button-hover-text">
-                                        <button id="add-task-priority-urgent"
-                                            class="add-task-priority-button label-add-task add-task-priority-button-urgent" type="button">Urgent<img
-                                                class="add-task-priority-button-image"
+                                    <div class="add-task-priority-buttons">
+                                        <button onclick="addTaskPrioButton('urgent')" id="add-task-priority-urgent"
+                                            class="add-task-priority-button add-task-priority-button-urgent" type="button">Urgent<img
+                                                class="add-task-priority-button-medium-image"
                                                 src="../assets/icons/add-task-prio-capa-2-urgent-default.svg"
                                                 alt="urgent-button"></img></button>
-                                        <button id="add-task-priority-medium"
-                                            class="add-task-priority-button add-task-priority-button-medium label-add-task"
+                                        <button onclick="addTaskPrioButton('medium')" id="add-task-priority-medium"
+                                            class="add-task-priority-button add-task-priority-button-medium "
                                             type="button"><span
-                                                class="add-task-priority-button-hover-text">Medium</span><img
+                                                class="">Medium</span><img
                                                 class="add-task-priority-button-medium-image"
                                                 src="../assets/icons/add-task-prio-capa-2-medium-default.svg"
                                                 alt="urgent-button"></img></button>
-                                        <button id="add-task-priority-low"
-                                            class="add-task-priority-button label-add-task add-task-priority-button-low add-task-priority-button-hover-text" type="button">Low<img
+                                        <button onclick="addTaskPrioButton('low')" id="add-task-priority-low"
+                                            class="add-task-priority-button add-task-priority-button-low" type="button">Low<img
                                                 class="add-task-priority-button-image"
                                                 src="../assets/icons/add-task-prio-capa-2-low-default.svg"
                                                 alt="urgent-button"></img></button>

@@ -1,9 +1,6 @@
-
 .add-task {
-  width: calc(100% - 232px);
+  width: calc(100% + 232px);
   height: calc(100vh - 96px);
-  min-width: calc(1440px - 232px);
-  min-height: 928px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -89,6 +86,17 @@
   border-radius: 10px;
   border: 1px solid #D1D1D1;
   background-color: var(--white);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  color: var(--main-color);
+}
+
+.add-task-priority-button:hover {
+  color: var(--white);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 }
 
 .add-task-priority-button-urgent:hover {
@@ -106,16 +114,6 @@
 .add-task-priority-button-image {
   width: 20px;
   height: 14.51px;
-}
-
-.add-task-priority-button-hover-text:hover {
-  width: 84px;
-  height: 24px;
-  font-weight: 700;
-  font-size: 21px;
-  line-height: 120%;
-  letter-spacing: 0%;
-  color: var(--white);
 }
 
 .add-task-title {
@@ -260,6 +258,7 @@
   border-radius: 10px;
   padding: 16px;
   border: 1px solid var(--light-blue);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .add-task-button-clear:hover .add-task-button-clear-text {
@@ -298,6 +297,7 @@
   background: var(--light-blue);
   border: 1px solid var(--light-blue);
   cursor: pointer;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .add-task-button-create-text {
