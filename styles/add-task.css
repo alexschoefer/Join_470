@@ -94,9 +94,15 @@
 }
 
 .add-task-priority-button:hover {
+  transform: translateY(0px) scale(1.005);
   color: var(--white);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   cursor: pointer;
+}
+
+.add-task-priority-button:active {
+  transform: scale(0.9);
+  box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.25);
 }
 
 .add-task-priority-button-urgent:hover {
@@ -258,15 +264,18 @@
   border-radius: 10px;
   padding: 16px;
   border: 1px solid var(--light-blue);
+  transform: translateY(0px) scale(1.005);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 }
 
 .add-task-button-clear:hover .add-task-button-clear-text {
   color: var(--light-blue);
 }
 
-.add-task-button-clear:hover add-task-button-clear-icon {
-  fill: var(--light-blue);
+.add-task-button-clear:active {
+  transform: scale(0.9);
+  box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.25);
 }
 
 .add-task-button-clear-text {
@@ -294,10 +303,16 @@
 }
 
 .add-task-button-create:hover {
+  transform: translateY(0px) scale(1.005);
   background: var(--light-blue);
   border: 1px solid var(--light-blue);
   cursor: pointer;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.add-task-button-create:active {
+  transform: scale(0.9);
+  box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.25);
 }
 
 .add-task-button-create-text {
