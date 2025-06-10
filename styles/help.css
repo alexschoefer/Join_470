@@ -1,0 +1,107 @@
+/* Ganzer Bildschirm */
+.page-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Horizontale Struktur: Sidebar + rechter Bereich */
+  .content-row {
+    display: flex;
+    height: 100vh; 
+  }
+  
+  /* Sidebar fix links */
+  #sidebar {
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  /* Rechter Bereich: Header + Content */
+  .right-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+  }
+  
+  /* Hauptinhalt */
+  .help-main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 40px 48px;
+    margin-left: 60px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 120%;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+  }
+  
+  /* Headline-Bereich */
+  .help-headline-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  #help-headline {
+    font-weight: 700;
+    font-size: 61px;
+    line-height: 120%;
+    color: #000000;
+  }
+
+  .help-introduction-container {
+    width: 1014px;
+    height: 38px;
+  }
+
+  .help-subtitle {
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 120%;
+    height: 32px;
+    width: 346px;
+  }
+
+  .help-explanation-join-container {
+    width: 1014px;
+    height: 190px;
+  }
+
+  .help-using-container {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    width: 1014px;
+    height: 521px;
+  }
+
+  .help-enumeration {
+    font-size: 27px;
+    line-height: 120%;
+    font-weight: 700;
+    color: #000000;
+  }
+
+  .help-instruction-container {
+    width: 1014px;
+    display: flex;
+    gap: 35px;
+    margin-bottom: 10px;
+  }
+
+  .help-instruction-headline {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 120%;
+    margin-bottom: 8px;
+  }
+
+  .help-instruction-text {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+  }

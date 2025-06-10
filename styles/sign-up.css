@@ -2,7 +2,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .sign-up-main-container {
@@ -19,31 +18,39 @@
     gap: 32px;
 }
 
+
+#login-headline {
+    font-weight: 700;
+    font-size: 61px;
+    line-height: 120%;
+    text-align: center;
+}
+
 .headline-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 16px;
+    width: 422px;
+    height: 89px;
 }
 
 .sign-up-headline-container {
-    width: 315px;
+    width: 100%;
     height: 89px;
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: center;
     gap: 16px;
 }
 
-.user-sign-input-name {
+.user-sign-input-name, .user-sign-input-email {
     display: flex;
     align-items: center;
     flex-direction: column;
     width: 422px;
     height: 48px;
-    gap: 8px;
 }
 
 .footer-sign-up {
@@ -61,7 +68,6 @@
     background-image: url(../assets/icons/person-icon.png);
     background-repeat: no-repeat;
     background-position: right 10px center;
-    padding-left: 40px;
 }
 
 .sign-up-input-container {
