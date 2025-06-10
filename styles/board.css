@@ -1,3 +1,9 @@
+
+.main-content{
+  display: flex;
+  height: 100vh;
+  overflow: auto;
+}
  header {
       width: auto;
       background-color: #fff;
@@ -6,9 +12,6 @@
       width: 100%;
       background-color: #F6F7F8;
 
-    }
-    .aside-content{
-      height: auto !important;
     }
     div.board-find-task {
       display: flex;
@@ -78,7 +81,6 @@
       background-color: #d9d9d9;
     }
     button.add-task{
-      width: 160px;
       height: 48px;
       padding: 8px 16px 8px 16px;
       background-color: #2A3647;
@@ -110,7 +112,11 @@
      }
      span.border-img:hover{
       transform: scale(1.05);
-     }
+      -webkit-transform: scale(1.05);
+      -moz-transform: scale(1.05);
+      -ms-transform: scale(1.05);
+      -o-transform: scale(1.05);
+}
      div.board-task-column {
       width: 252px;
       height: auto;
@@ -136,13 +142,13 @@
       font-weight: 700;
      }
      div.add-task-icon{
-      background-image: url(./assets/icons/add-task-plus.png);
+      background-image: url(../assets/icons/add-task-plus.png);
       width: 24px;
       height: 24px;
       cursor: pointer;
      }
      div.add-task-icon:hover{
-      background-image: url(./assets/icons/add-task-plus-hover.png);
+      background-image: url(../assets/icons/add-task-plus-hover.png);
      }
      div.not-task{
       width: 100%;
@@ -237,3 +243,205 @@
      div.assignees span{
       font-size: 12px;
      }
+div#task-overlay{ width: 525px;
+  height: auto; 
+  padding: 48px 40px 48px 40px; 
+  display: flex;
+   flex-direction: column; 
+   gap: 24px; 
+   background-color: #fff; 
+   border-radius: 30px;
+    -webkit-border-radius: 30px; 
+    -moz-border-radius: 30px; 
+    -ms-border-radius: 30px;
+     -o-border-radius: 30px;
+      max-height: 90vh;
+      overflow: auto;
+     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+     position: fixed;
+    top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+
+}
+div.card-name-overlay{
+  display: flex;
+  justify-content: space-between;
+
+}
+div.card-name-overlay span.card-name{
+  width: 164px;
+  height: 36px;
+  padding: 4px 24px 4px 24px;
+  font-size: 23px;
+  font-weight: 400;
+  color: white;
+}
+span.close-overlay{
+  width: 32px;
+  height: 32px;
+  display: block;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+}
+span.close-overlay:hover{
+background-color: #e0e0e0;
+}
+span.close-overlay img{
+  width: 13.15px;
+  height: 13.15px;
+  margin-top: 9.43px;
+  margin-left: 9.42px;
+   image-rendering: auto;
+}
+div.card-description-overlay h1{
+  font-size: 61px;
+  font-weight: 700;
+  color: #000000;
+
+}
+div.card-description-overlay p{
+  font-size: 20px;
+  font-weight: 400;
+color: #000000;
+margin-top: 20px;
+}
+div.date span{
+font-size: 20px;
+font-weight: 400;
+color: #2A3647;
+}
+span.content-value{
+color: #000000;
+margin-left: 25px;
+}
+div.priority-card span.content-value{
+  padding: 4px 18px 4px 18px;
+  display: inline-flex;
+}
+div.priority-card span.content-value img{
+  width: 17px;
+  height: 6.33px;
+  margin-top: 9px;
+  margin-left: 10px;
+}
+span.assigned-list{
+  font-size: 20px;
+  font-weight: 400;
+  color: #2A3647;
+}
+div.assigned-overlay-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+div.assigned-overlay-card div.content{
+display: flex;
+flex-direction: column;
+gap: 4px;
+}
+div.assigned-content{
+  padding: 7px 16px 7px 16px;
+  display: flex;
+  align-items: center;
+}
+div.assigned-content span.logo{
+  width: 42px;
+  height: 42px;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: green;
+  color: white;
+  font-size: 12px;
+}
+div.assigned-content span.name{
+  font-size: 19px;
+  font-weight: 400;
+  color: #000000;
+  margin-left: 16px;
+}
+span.subtasks-title{
+  font-size: 20px;
+  font-weight: 400;
+  color: #2A3647;
+}
+div.subtasks{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+div.subtasks-input{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  }
+div.subtask-container{
+    padding: 6px 16px 6px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 32px;
+}
+input.checkbox{
+  width: 16px;
+  height: 16px;
+  appearance: none;
+      background-color: #ffffff;
+    border: 2px solid #2a3647;
+    border-radius: 3px;
+    position: relative;
+      transition: all 0.2s ease;
+}
+input.checkbox:checked::after {
+      content: '✔';
+      color: #2A3647;
+      font-size: 16px;
+      position: absolute;
+      top: -5.5px;
+
+}
+div.functionen{
+  display: flex;
+  gap: 8px;
+}
+div.tasks-functionen{
+  display: flex;
+  justify-content: flex-end;
+align-items: center;
+gap: 8px;
+}
+span.delete img{
+width: 16px;
+height: 18px;
+}
+span.delete {
+  font-size: 16px;
+  font-weight: 400;
+  color: #2A3647;
+}
+span.delete,span.edit{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 8px;
+}
+span.split{
+  width: 1px;
+  height: 24px;
+  background-color: #D1D1D1;
+}
