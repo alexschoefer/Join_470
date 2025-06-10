@@ -10,6 +10,6 @@ async function loadComponent(id, path) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  loadComponent(".header", "/html/header.html");
-  loadComponent(".sidebar", "/html/sidebar.html");
+  loadComponent("header", "./header.html");
+  loadComponent("sidebar", "./sidebar.html");
 });
