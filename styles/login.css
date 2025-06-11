@@ -6,21 +6,30 @@
     left: 77px;
 }
 
+.login-wrapper {
+    position: relative;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #F6F7F8;
+}
+
 .login-main-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    position: absolute;
-    top: 287.5px;
-    left: 394px;
     max-width: 652px;
-    height: 449px;
+    height: auto;
     gap: 32px;
-    padding: 48px 115px 48px 115px;
+    padding: 48px 115px;
     box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
     border-radius: 30px;
-}
+    background-color: white;
+  }
 
 .login-underline {
     width: 150px;
@@ -113,6 +122,20 @@
     font-weight: 700;
     font-size: 21px;
     line-height: 120%;
+    cursor: pointer;
+}
+
+#btn-login:hover {
+    background-color: rgb(41, 171, 226);
+    border: 1px solid rgb(41, 171, 226);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: white;
+    transition: ease-in-out;
+    transition-duration: 100ms;
+}
+
+#btn-login:active {
+   background-color: #2A3647;
 }
 
 #btn-login-guest {
@@ -129,18 +152,28 @@
     color: #2A3647;
     line-height: 120%;
     font-weight: 700;
+    cursor: pointer;
+}
+
+#btn-login-guest:hover {
+    border: 2px solid #29ABE2;
+    transition: ease-in-out;
+    transition-duration: 100ms;
+    color: #29ABE2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .footer-login {
-    display: flex;
     position: absolute;
-    justify-content: space-between;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%); 
+    display: flex;
+    justify-content: center;
     align-items: center;
     gap: 8px;
-    width: 246px;
+    width: auto;
     height: 35px;
-    top: 849px;
-    left: 597px;
 }
 
 .nav-login-privacy-legal {
@@ -164,6 +197,8 @@
 }
 
 #login-registration-slogan {
+    width: 153px;
+    height: 24px;
     font-size: 20px;
     font-weight: 400;
     line-height: 120%;
@@ -183,4 +218,13 @@
     font-weight: 700;
     font-size: 16px;
     line-height: 120%;
+}
+
+.btn-sign-up:hover {
+    border: 2px solid #29ABE2;
+    transition: ease-in-out;
+    transition-duration: 100ms;
+    color: white;
+    background-color: #29ABE2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }

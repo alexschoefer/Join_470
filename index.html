@@ -21,34 +21,36 @@
 </head>
 
 <body>
-    <div class="login-registration-container">
-        <span id="login-registration-slogan">Not a Join user?</span>
-        <a class="btn-sign-up" href="./html/sign.html">Sign up</a>
-    </div>
-    <img class="main-logo-img" src="./assets/img/MainLogo.png" alt="">
-    <div class="login-main-container">
-        <div class="login-headline-container">
-            <h1 id="login-headline">Log in</h1>
-            <div class="login-underline"></div>
+    <div class="login-wrapper">
+        <div class="login-registration-container">
+            <span id="login-registration-slogan">Not a Join user?</span>
+            <a class="btn-sign-up" href="./html/sign.html">Sign up</a>
         </div>
-        <div class="user-login-input-container">
-            <div class="user-login-input-email">
-                <input class="input-email-password email-icon" type="email" name="email" placeholder="Email" required>
+        <img class="main-logo-img" src="./assets/img/MainLogo.png" alt="">
+        <div class="login-main-container">
+            <div class="login-headline-container">
+                <h1 id="login-headline">Log in</h1>
+                <div class="login-underline"></div>
             </div>
-            <div class="user-login-input-password">
-                <input class="input-email-password password-icon" type="password" name="password"
-                    placeholder="Password">
+            <div class="user-login-input-container">
+                <div class="user-login-input-email">
+                    <input class="input-email-password email-icon" type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="user-login-input-password">
+                    <input class="input-email-password password-icon" type="password" name="password"
+                        placeholder="Password">
+                </div>
+            </div>
+            <div class="btn-login-container">
+                <button id="btn-login">Log in</button>
+                <button id="btn-login-guest">Guest Log in</button>
             </div>
         </div>
-        <div class="btn-login-container">
-            <button id="btn-login">Log in</button>
-            <button id="btn-login-guest">Guest Log in</button>
-        </div>
+        <footer class="footer-login">
+            <a class="nav-login-privacy-legal" href="">Privacy Police</a>
+            <a class="nav-login-privacy-legal" href="">Legal Notice</a>
+        </footer>
     </div>
-    <footer class="footer-login">
-        <a class="nav-login-privacy-legal" href="">Privacy Police</a>
-        <a class="nav-login-privacy-legal" href="">Legal Notice</a>
-    </footer>
 </body>
 
 </html>

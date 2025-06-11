@@ -37,13 +37,20 @@
     line-height: 120%;
     max-height: calc(100vh - 80px);
     overflow-y: auto;
+    margin-bottom: 40px;
   }
   
   /* Headline-Bereich */
   .help-headline-container {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    width: 1014px;
+    height: 73px;
     gap: 30px;
+  }
+
+  #arrow-icon {
+    position: fixed;
   }
   
   #help-headline {
@@ -104,4 +111,16 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 120%;
+  }
+
+  .help-subtitle-conclusion-h2 {
+    font-weight: 700;
+    font-size: 27px;
+    line-height: 120%;
+  }
+
+  .help-subtitle-conclusion {
+    width: 346px;
+    height: 32px;
+    
   }
