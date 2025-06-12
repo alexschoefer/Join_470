@@ -1,18 +1,23 @@
+.add-task-app-height{
+  height: 100vh;
+}
+
 .add-task {
-  width: calc(100% + 232px);
+  width: 100vw;
   height: calc(100vh - 96px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   background: #F6F7F8;
 }
 
 .add-task-content {
-  width: 976.25px;
+  width: calc(1440px - 327px);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  padding-left: 96px;
 }
 
 .add-task-form {
@@ -155,7 +160,8 @@
   display: flex;
   justify-content: space-between;
   align-items: end;
-  padding-top: 224.24px;
+  padding-top: 160.24px;
+  padding-bottom: 64px;
 }
 
 .label-add-task {
