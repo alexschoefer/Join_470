@@ -9,12 +9,13 @@
     <link rel="stylesheet" href="../styles/standard.css">
     <link rel="stylesheet" href="../styles/fonts.css">
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../styles/summary.css">
     <link rel="stylesheet" href="../styles/add-task.css">
     <script src="../scripts/include.js"></script>
     <script src="../scripts/contacts.js"></script>
 </head>
 
-<body onload="addTaskInit()">
+<body onload="loadContacts()">
 
     <main class="main-content">
         <div id="sidebar"></div>
@@ -22,10 +23,16 @@
             <div id="header">
 
             </div>
-            <div class="add-task">
-                <div class="add-task-content">
-                    <div class="add-task-title">
-                        <h1 class="add-task-h1">Add Task</h1>
+            <div class="contacts">
+                <div class="contacts-left">
+                    <div class="add-new-contact"></div>
+                    <div class="all-contacts"></div>
+                </div>
+                <div class="contacts-right">
+                    <div class="summary-head-content">
+                        <h2>Contacts</h2>
+                        <div class="summary-head-vector"></div>
+                        <p>Better with a team</p>
                     </div>
                 </div>
             </div>
