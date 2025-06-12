@@ -35,7 +35,7 @@
                                     <input type="text" id="add-task-title" class="add-task-input-style add-task-placeholder-style"
                                         placeholder="Enter a Title" required>
                                     <span id="mobile-required-text-no-asterix-title"
-                                        class="mobile-required-text-no-asterix"></span>
+                                        class="mobile-required-text-no-asterix d-none" >This field is required</span>
                                 </div>
                                 <div class="add-task-form-left-description">
                                     <label for="add-task-description" class="label-add-task">Description</label>
@@ -51,13 +51,13 @@
                                     <input name="add-task-due-date" type="date" id="add-task-due-date-input"
                                         class="add-task-input-style add-task-placeholder-style" placeholder="dd/mm/yyyy" required>
                                     <span id="mobile-required-text-no-asterix-due-date"
-                                        class="mobile-required-text-no-asterix"></span>
+                                        class="mobile-required-text-no-asterix d-none">This field is required</span>
                                 </div>
                             </div>
                             <div class="add-task-center-dividor"></div>
                             <div class="add-task-form-right">
                                 <div class="add-task-form-right-priority">
-                                    <label for="add-task-priority" class="label-add-task-black">Priority</label>
+                                    <span class="label-add-task-black">Priority</span>
 
                                     <div class="add-task-priority-buttons">
                                         <button onclick="addTaskPrioButton('urgent')" id="add-task-priority-urgent"
