@@ -1,9 +1,19 @@
 .main-logo-img {
-    width: 100.03px;
-    height: 121.97px;
+    width: 100px;
+    height: auto;
+    z-index: 10;
+    transition: all 1s ease-in-out;
     position: absolute;
     top: 80px;
-    left: 77px;
+    left: 77px; 
+}
+
+.start-logo-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 247px;
+    height: auto;
 }
 
 .login-wrapper {
@@ -61,7 +71,15 @@
     align-items: center;
     gap: 32px;
     width: 422px;
-    max-height: 152px;
+    height: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
 }
 
 .user-login-input-email {
@@ -97,6 +115,22 @@
     border: 1px solid #D1D1D1;
     font-size: 20px;
     font-weight: 400;
+    line-height: 120%;
+}
+
+.input-email-password:focus {
+    border: 1px solid #29ABE2;
+    outline: none;
+}
+
+.input-error-email-passwort {
+    border: 1px solid #FF001F;
+}
+
+.login-validation-message {
+    color: #FF8190;
+    font-weight: 400;
+    font-size: 13px;
     line-height: 120%;
 }
 
@@ -184,24 +218,28 @@
     padding: 8px;
 }
 
+.nav-login-privacy-legal:hover {
+    color: #29ABE2;
+    font-weight: 700;
+}
+
 .login-registration-container {
-    width: 279px;
-    height: 49px;
     position: absolute;
-    top: 67px;
-    left: 1039px;
+    top: 32px;
+    right: 80px;
     display: flex;
     gap: 35px;
-    justify-content: center;
     align-items: center;
+    height: 49px;
+    width: auto;
 }
 
 #login-registration-slogan {
-    width: 153px;
-    height: 24px;
     font-size: 20px;
     font-weight: 400;
     line-height: 120%;
+    white-space: nowrap;
+    width: auto;
 }
 
 .btn-sign-up {
@@ -210,14 +248,15 @@
     align-items: center;
     gap: 10px;
     background-color: #2A3647;
-    width: 91px;
+    min-width: 91px;
     height: 49px;
     border-radius: 8px;
-    padding: 15px 16px 15px 16px;
+    padding: 15px 16px;
     color: white;
     font-weight: 700;
     font-size: 16px;
     line-height: 120%;
+    white-space: nowrap;
 }
 
 .btn-sign-up:hover {
@@ -227,4 +266,32 @@
     color: white;
     background-color: #29ABE2;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+/* Ausgangszustand: Logo zentriert */
+.logo-animation-start {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Zielzustand: Oben links */
+.logo-animation-end {
+    top: 80px;
+    left: 77px;
+    transform: none;
+}
+
+/* Login-Container zuerst verstecken */
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+/* Sichtbar machen */
+.show {
+    opacity: 1;
+    pointer-events: auto;
 }
