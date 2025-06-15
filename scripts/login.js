@@ -31,7 +31,6 @@ function loginUser() {
     }
     let user = users.find(u => u.email === email.value && u.password === password.value);
     if (!user) {
-        loginValidationMessage.textContent = "Check your email and password.";
         loginValidationMessage.classList.remove('d_none');
     } else {
         window.location.href = './html/summary.html';
