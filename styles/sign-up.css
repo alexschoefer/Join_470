@@ -1,106 +1,142 @@
 .main-content-signup {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #F6F7F8;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #f6f7f8;
+  padding-top: 160px;
+  padding-bottom: 40px;
+  gap: 24px;
 }
 
 .sign-up-main-container {
-    width: 598px;
-    height: 630px;
-    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
-    border-radius: 30px;
-    position: absolute;
-    top: 50%;
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 32px;
+  position: relative;
+  width: 598px;
+  box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  padding: 48px 32px;
+  background-color: white;
 }
 
+.sign-up-form-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
 
 #login-headline {
-    font-weight: 700;
-    font-size: 61px;
-    line-height: 120%;
-    text-align: center;
+  font-weight: 700;
+  font-size: 61px;
+  line-height: 120%;
+  text-align: center;
+  line-height: 120%;
 }
 
 .headline-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    width: 422px;
-    height: 89px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 422px;
+  height: auto;
+  margin-bottom: 25px;
 }
 
 .sign-up-headline-container {
-    width: 100%;
-    height: 89px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  max-width: 315px;
+  width: auto;
 }
 
-.user-sign-input-name, .user-sign-input-email {
+.user-sign-input {
     display: flex;
-    align-items: center;
     flex-direction: column;
+    align-items: flex-start;
     width: 422px;
     height: 48px;
-}
+    margin-top: 6px;
+    margin-bottom: 6px;
+    position: relative;
+  }
+
+  .user-sign-input-password {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 422px;
+    height: 70px;
+    position: relative;
+    margin-top: 16px;
+  }
 
 .footer-sign-up {
-    display: flex;
-    position: absolute;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
-    width: 246px;
-    height: 35px;
-    top: 849px;
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  font-size: 14px;
 }
 
 .person-icon {
-    background-image: url(../assets/icons/person-icon.png);
-    background-repeat: no-repeat;
-    background-position: right 10px center;
+  background-image: url(../assets/icons/person-icon.png);
+  background-repeat: no-repeat;
+  background-position: right 10px center;
 }
 
 .sign-up-input-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    width: 422px;
-    height: 326px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: 422px;
 }
 
 .checkbox-privacy-policy-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
 }
 
+
 #acception-privacy-policy {
-    font-size: 16px;
-    line-height: 120%;
-    font-weight: 400;
-    color: #A8A8A8;
-    letter-spacing: 0;
+  font-size: 16px;
+  line-height: 120%;
+  font-weight: 400;
+  color: #a8a8a8;
+  letter-spacing: 0;
 }
 
 #privacy-policy {
-    color: #29ABE2;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 120%;
+  color: #29abe2;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
 }
+
+.arrow-back-link {
+  position: absolute;
+  top: 40px;
+  left: 60px;
+  z-index: 10;
+}
+
+.input-container {
+    width: 100%;
+  }

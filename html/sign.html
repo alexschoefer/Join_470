@@ -21,38 +21,69 @@
 
     <main class="main-content-signup">
         <div class="sign-up-main-container">
-            <div class="sign-up-headline-container">
-                <a href="../index.html"><img src="../assets/icons/arrow-left-line-icon.png" alt="Back Arrow" class="arrow-icon"></a>
-                <div class="headline-wrapper">
-                    <h1 id="login-headline">Sign up</h1>
-                    <div class="login-underline"></div>
+            <a href="../index.html" class="arrow-back-link">
+                <img src="../assets/icons/arrow-left-line-icon.png" alt="Back Arrow" class="arrow-icon">
+            </a>
+            <div class="sign-up-form-content">
+                <div class="sign-up-headline-container">
+                    <div class="headline-wrapper">
+                        <h1 id="login-headline">Sign up</h1>
+                        <div class="login-underline"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="sign-up-input-container">
-                <div class="user-sign-input-name">
-                    <input class="input-email-password person-icon" type="email" name="email" placeholder="Name"
-                        required>
+
+                <!-- input-content -->
+                <form>
+                    <div class="sign-up-input-container">
+                        <div class="user-sign-input">
+                            <div class="input-container">
+                                <input class="input-email-password person-icon" type="email" name="name" placeholder="Name">
+                            </div>
+                            <div class="input-validation-container">
+                                <p class="input-validation-message">This field is required.</p>
+                            </div>
+                        </div>
+                        <div class="user-sign-input">
+                            <div class="input-container">
+                                <input class="input-email-password email-icon" type="email" name="email"
+                                    placeholder="Email">
+                            </div>
+                            <div class="input-validation-container">
+                                <p class="input-validation-message">This field is required.</p>
+                            </div>
+                        </div>
+                        <div class="user-sign-input">
+                            <div class="input-container">
+                                <input class="input-email-password password-icon" type="password" name="password"
+                                    placeholder="Password">
+                            </div>
+                            <div class="input-validation-container">
+                                <p class="input-validation-message">This field is required.</p>
+                            </div>
+                        </div>
+                        <div class="user-sign-input">
+                            <div class="input-container">
+                                <input class="input-email-password password-icon" type="password" name="password"
+                                    placeholder="Confirm Password">
+                            </div>
+                            <div class="input-validation-container">
+                                <p class="input-validation-message">Your passwords don´t match. Please try again.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checkbox-privacy-policy-container">
+                        <input type="checkbox" name="acception-privacy-policy" id="checkbox-privacy-policy" required>
+                        <span id="acception-privacy-policy">I accept the <a id="privacy-policy"
+                                href="./privacy-policy.html">Privacy Policy</a></span>
+                    </div>
+                    <div class="sign-up-registration-container">
+                        <button id="btn-sign-up" class="btn-sign-up" disabled>Sign up</button>
+                    </div>
                 </div>
-                <div class="user-sign-input-email">
-                    <input class="input-email-password email-icon" type="email" name="email" placeholder="Email" required>
-                </div>
-                <div class="user-login-input-password">
-                    <input class="input-email-password password-icon" type="password" name="password"
-                        placeholder="Password">
-                </div>
-                <div class="user-login-input-password">
-                    <input class="input-email-password password-icon" type="password" name="password"
-                        placeholder="Confirm Password">
-                </div>
-                <div class="checkbox-privacy-policy-container">
-                    <input type="checkbox" name="" id="checkbox-privacy-policy" required>
-                    <span id="acception-privacy-policy">I accept the <a id="privacy-policy" href="./privacy-policy.html">Privacy Policy</a></span>
-                </div>
-                <div class="sign-up-registration-container">
-                    <a class="btn-sign-up" href="">Sign up</a>
-                </div>
-            </div>
+            </form>
         </div>
+
+        <!-- footer-content -->
         <footer class="footer-sign-up">
             <a class="nav-login-privacy-legal" href="./privacy-policy.html">Privacy Police</a>
             <a class="nav-login-privacy-legal" href="./legal-notice.html">Legal Notice</a>

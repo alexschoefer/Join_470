@@ -24,7 +24,8 @@
             <span id="login-registration-slogan">Not a Join user?</span>
             <a class="btn-sign-up" href="./html/sign.html">Sign up</a>
         </div>
-        <img id="start-logo-img" class="tart-logo-img logo-animation-start" src="./assets/img/MainLogo.png" alt="">
+        <img id="start-logo-img" class="start-logo-img logo-animation-start" src="./assets/img/MainLogo.png" alt="">
+
         <div id="login-main-container" class="login-main-container hidden">
             <div class="login-headline-container">
                 <h1 id="login-headline">Log in</h1>
@@ -33,29 +34,43 @@
             <form onsubmit="loginUser(); return false;">
                 <div class="user-login-input-container">
                     <div class="user-login-input-email">
-                        <input id="email" class="input-email-password email-icon" type="email" name="email" placeholder="Email"
-                            required>
+                        <div class="input-container">
+                            <input id="email" class="input-email-password email-icon" type="email" name="email"
+                                placeholder="Email">
+                        </div>
+                        <div class="input-validation-container">
+                            <p id="login-email-verification" class="input-validation-message d_none">This field is
+                                required.</p>
+                        </div>
                     </div>
                     <div class="user-login-input-password">
-                        <input id="password" class="input-email-password password-icon" type="password" name="password"
-                            placeholder="Password">
-                        <div id="login-password-verification" class="d_none">This field is required</div>
+                        <div class="input-container">
+                            <input id="password" class="input-email-password password-icon" type="password"
+                                name="password" placeholder="Password">
+                        </div>
+                        <div class="input-validation-container">
+                            <p id="input-validation-message" class="input-validation-message d_none">Check your email
+                                and password.</p>
+                        </div>
                     </div>
-                        <p id="login-validation-message" class="login-validation-message d_none">Check your email and password</p>
                 </div>
+
                 <div class="btn-login-container">
                     <button id="btn-login">Log in</button>
                     <a id="btn-login-guest" href="./html/summary.html">Guest Log in</a>
                 </div>
             </form>
-  
         </div>
+
+        <!-- footer-content -->
         <footer class="footer-login">
             <a class="nav-login-privacy-legal" href="./html/privacy-policy.html">Privacy Police</a>
             <a class="nav-login-privacy-legal" href="./html/legal-notice.html">Legal Notice</a>
         </footer>
+
     </div>
 </body>
-    <script src="./script.js"></script>
-    <script src="./scripts/login.js"></script>
+<script src="./script.js"></script>
+<script src="./scripts/login.js"></script>
+
 </html>

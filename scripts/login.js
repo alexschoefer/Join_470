@@ -1,5 +1,5 @@
 let users = [
-    {'email':'alex@test.de', 'passwort': 'test123'}
+    {'email':'alex@test.de', 'password': 'test123', 'name': 'Alex Test'}
 ]
 
 function startLogoAnimation()
@@ -20,11 +20,20 @@ function startLogoAnimation()
 
 function loginUser() {
     let email = document.getElementById('email');
-    let passwort = document.getElementById('password');
-    let loginValidationMessage = document.getElementById('login-validation-message');
-    let user = users.find(u => u.email == email.value && u.passwort == passwort.value);
-    console.log(user);
-    if(!user) {
+    let password = document.getElementById('password');
+    let loginValidationMessage = document.getElementById('input-validation-message');
+    let emailValidationMessage = document.getElementById('login-email-verification');
+    loginValidationMessage.classList.add('d_none');
+    emailValidationMessage.classList.add('d_none');
+    if (email.value.trim() === '') {
+        emailValidationMessage.classList.remove('d_none');
+        return;
+    }
+    let user = users.find(u => u.email === email.value && u.password === password.value);
+    if (!user) {
+        loginValidationMessage.textContent = "Check your email and password.";
         loginValidationMessage.classList.remove('d_none');
-    } 
+    } else {
+        window.location.href = './html/summary.html';
+    }
 }

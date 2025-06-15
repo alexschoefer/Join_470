@@ -43,7 +43,6 @@
 
 .login-underline {
     width: 150px;
-    height: 3px;
     border: 3px solid #29ABE2;
 }
 
@@ -62,6 +61,9 @@
     font-family: "Inter", sans-serif;
     text-align: center;
     font-weight: 700;
+    line-height: 120%;
+    color: #000000;
+    text-align: center;
 }
 
 .user-login-input-container {
@@ -84,11 +86,32 @@ form {
 
 .user-login-input-email {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
     width: 422px;
     height: 48px;
     gap: 8px;
+}
+
+.user-login-input-password {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 422px;
+    height: 68px;
+    display: flex;
+    gap: 10px;
+}
+
+#email, #password {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 422px;
+    height: 48px;
+    border: 1px solid #D1D1D1;
+    padding: 12px 21px 12px 21px;
+    gap: 10px;
 }
 
 .email-icon {
@@ -118,7 +141,7 @@ form {
     line-height: 120%;
 }
 
-.input-email-password:focus {
+.input-container:focus {
     border: 1px solid #29ABE2;
     outline: none;
 }
@@ -127,12 +150,21 @@ form {
     border: 1px solid #FF001F;
 }
 
-.login-validation-message {
+.input-validation-message {
     color: #FF8190;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 12px;
     line-height: 120%;
+    text-align: left;
+    width: 100%;
+    padding-left: 4px;
+    margin: 0px;
+    margin-top: 6px;
 }
+
+.input-validation-container {
+    width: 100%;
+  }
 
 .btn-login-container {
     display: flex;
