@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../styles/assets.css" />
     <link rel="stylesheet" href="../styles/board.css" />
     <link rel="stylesheet" href="../styles/media.css" />
-    <link rel="stylesheet" href="../styles/" />
     <link rel="stylesheet" href="../styles/fonts.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,62 +16,14 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../style.css" />
+    <script src="../scripts/include.js"></script>
   </head>
   <body>
     <main class="main-content">
-      <aside class="aside-content">
-        <div class="menuLogo-container">
-          <img src="../assets/img/MenuLogo.png" alt="" />
-        </div>
-        <div class="menu-container">
-          <div class="menu-selection-button">
-            <img
-              class="menu-selection-icons"
-              src="../assets/icons/summary-icon.png"
-            />
-            <a href="">Summary</a>
-          </div>
-          <div class="menu-selection-button">
-            <img
-              class="menu-selection-icons"
-              src="../assets/icons/add-task-icon.png"
-            />
-            <a href="">Add Task</a>
-          </div>
-          <div class="menu-selection-button">
-            <img
-              class="menu-selection-icons"
-              src="../assets/icons/board-icon.png"
-            />
-            <a href="">Board</a>
-          </div>
-          <div class="menu-selection-button">
-            <img
-              class="menu-selection-icons"
-              src="../assets/icons/contacts-icon.png"
-            />
-            <a href="">Contacts</a>
-          </div>
-        </div>
-        <div class="legal-information-container">
-          <div class="legal-information-button">
-            <a href="">Privacy Policy</a>
-          </div>
-          <div class="legal-information-button">
-            <a href="">Legal notice</a>
-          </div>
-        </div>
-      </aside>
+      <div id="shadow-container"></div>
+      <div id="sidebar"></div>
       <section id="board-content">
-        <header>
-          <div class="header-content">
-            <h1>Kanban Project Management Tool</h1>
-            <div class="header-user-content">
-              <img id="help-icon" src="../assets/icons/help.png" />
-              <img id="guest-icon" src="../assets/icons/guest-icon.png" />
-            </div>
-          </div>
-        </header>
+        <div id="header"></div>
         <div class="board-container">
           <div class="board-find-task">
             <h1>Board</h1>
@@ -250,11 +201,13 @@
             <div class="tasks-functionen">
               <div class="functionen">
                 <span class="delete"
-                  ><img src="../assets/icons/delete.png" /> Delete</span
+                  ><div class="icon-delete"></div>
+                  Delete</span
                 >
                 <span class="split"></span>
                 <span class="edit"
-                  ><img src="../assets/icons/edit.png" /> Edit</span
+                  ><div class="icon-edit"></div>
+                  Edit</span
                 >
               </div>
             </div>
