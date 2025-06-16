@@ -21,7 +21,7 @@ function startLogoAnimation()
 function loginUser() {
     let email = document.getElementById('email');
     let password = document.getElementById('password');
-    let loginValidationMessage = document.getElementById('input-validation-message');
+    let loginValidationMessage = document.getElementById('input-loginData-validation-message');
     let emailValidationMessage = document.getElementById('login-email-verification');
     loginValidationMessage.classList.add('d_none');
     emailValidationMessage.classList.add('d_none');

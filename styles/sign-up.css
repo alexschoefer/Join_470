@@ -24,6 +24,15 @@
   background-color: white;
 }
 
+.sign-up-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: 422px;
+}
+
 .sign-up-form-content {
   display: flex;
   flex-direction: column;
@@ -62,26 +71,29 @@
   width: auto;
 }
 
-.user-sign-input {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 422px;
-    height: 48px;
-    margin-top: 6px;
-    margin-bottom: 6px;
-    position: relative;
-  }
+.user-input-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 422px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #D1D1D1;
+  height: 48px;
+  position: relative;
+  gap: 10px;
+  padding: 12px 21px 12px 21px;
+}
 
-  .user-sign-input-password {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 422px;
-    height: 70px;
-    position: relative;
-    margin-top: 16px;
-  }
+.user-sign-input-password {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 422px;
+  height: 70px;
+  position: relative;
+  margin-top: 16px;
+}
 
 .footer-sign-up {
   margin-top: 100px;
@@ -91,20 +103,11 @@
   font-size: 14px;
 }
 
-.person-icon {
+/* .person-icon {
   background-image: url(../assets/icons/person-icon.png);
   background-repeat: no-repeat;
   background-position: right 10px center;
-}
-
-.sign-up-input-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  width: 422px;
-}
+} */
 
 .checkbox-privacy-policy-container {
   display: flex;
@@ -113,7 +116,6 @@
   gap: 8px;
   margin-top: 10px;
 }
-
 
 #acception-privacy-policy {
   font-size: 16px;
@@ -138,5 +140,9 @@
 }
 
 .input-container {
-    width: 100%;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 422px;
+  gap: 10px;
+}

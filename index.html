@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="../styles/fonts.css">
     <link rel="stylesheet" href="../styles/media.css">
     <link rel="stylesheet" href="../styles/login.css">
+    <link rel="stylesheet" href="./styles/sign-up.css">
 </head>
 
 <body onload="startLogoAnimation()">
@@ -33,23 +34,32 @@
             </div>
             <form onsubmit="loginUser(); return false;">
                 <div class="user-login-input-container">
-                    <div class="user-login-input-email">
-                        <div class="input-container">
-                            <input id="email" class="input-email-password email-icon" type="email" name="email"
-                                placeholder="Email">
+                    <!-- E-mail-Input -->
+                    <div class="input-wrapper">
+                        <div class="user-input-wrapper">
+                            <div class="input-container">
+                                <input id="email" class="user-input" type="email" name="email" placeholder="Email">
+                                <div>
+                                    <img src="../assets/icons/mail-icon.png" alt="person-icon">
+                                </div>
+                            </div>
                         </div>
                         <div class="input-validation-container">
                             <p id="login-email-verification" class="input-validation-message d_none">This field is required.</p>
                         </div>
                     </div>
-                    <div class="user-login-input-password">
-                        <div class="input-container">
-                            <input id="password" class="input-email-password password-icon" type="password"
-                                name="password" placeholder="Password">
+                    <!-- Password-Input -->
+                    <div class="input-wrapper">
+                        <div class="user-input-wrapper">
+                            <div class="input-container">
+                                <input id="password" class="user-input" type="password" name="password" placeholder="Password">
+                                <div>
+                                    <img src="../assets/icons/lock-icon.png" alt="person-icon">
+                                </div>
+                            </div>
                         </div>
                         <div class="input-validation-container">
-                            <p id="input-validation-message" class="input-validation-message d_none">Check your email
-                                and password.</p>
+                            <p id="input-loginData-validation-message" class="input-validation-message d_none">Check your email and password. Please try again.</p>
                         </div>
                     </div>
                 </div>
