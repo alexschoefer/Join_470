@@ -39,63 +39,62 @@
                         <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
-                                    <input class="user-input" type="text" name="name" placeholder="Name">
+                                    <input id="username-input" class="user-input" type="text" name="name" placeholder="Name" autocomplete="off"  onfocus="clearErrorMessage(this)" onblur="checkRequiredInput(this)">
                                     <div>
                                         <img class="person-icon" src="../assets/icons/person-icon.png" alt="person-icon">
                                     </div>
                                 </div>
                             </div>
                             <div class="input-validation-container">
-                                <p class="input-validation-message">This field is required.</p>
+                                <p id="username-input-validation-message" class="input-validation-message d_none">This field is required.</p>
                             </div>
                         </div>
                         <!-- E-Mail-Input -->
                         <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
-                                    <input class="user-input" type="email" name="email" placeholder="Email">
+                                    <input id="usermail-input" class="user-input" type="email" name="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" placeholder="Email" autocomplete="off" onfocus="clearErrorMessage(this)" onblur="checkRequiredInputEmail(this)">
                                     <div>
                                         <img class="email-icon" src="../assets/icons/mail-icon.png" alt="email-icon">
                                     </div>
                                 </div>
                             </div>
                             <div class="input-validation-container">
-                                <p class="input-validation-message">This field is required.</p>
+                                <p id="usermail-input-validation-message" class="input-validation-message d_none">Please enter a valid email adress.</p>
                             </div>
                         </div>
                         <!-- Password-Input -->
                         <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
-                                    <input class="user-input" type="password" name="password" placeholder="Password">
+                                    <input id="userpassword-input" oninput="changePasswordIcon()" class="user-input" type="password" name="password" placeholder="Password" onfocus="clearErrorMessage(this)" onblur="checkRequiredInput(this)">
                                     <div>
-                                        <img class="password-icon" src="../assets/icons/lock-icon.png" alt="password-icon">
+                                        <img onclick="toggleInputTypePassword()" id="password-icon" class="password-icon" src="../assets/icons/lock-icon.png" alt="password-icon">
                                     </div>
                                 </div>
                             </div>
                             <div class="input-validation-container">
-                                <p class="input-validation-message">This field is required.</p>
+                                <p id="userpassword-input-validation-message" class="input-validation-message d_none">This field is required.</p>
                             </div>
                         </div>
                         <!-- Password-Confirm-Input -->
                         <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
-                                    <input class="user-input" type="password" name="password" placeholder="Password">
+                                    <input id="confirm-userpassword-input" class="user-input" type="password" name="password" placeholder="Confirm Password" onfocus="clearErrorMessage(this)" onblur="checkRequiredInput(this)">
                                     <div>
-                                        <img class="password-icon" src="../assets/icons/lock-icon.png" alt="password-icon">
+                                        <img onclick="toggleInputTypePassword()" class="password-icon" src="../assets/icons/lock-icon.png" alt="password-icon">
                                     </div>
                                 </div>
                             </div>
                             <div class="input-validation-container">
-                                <p class="input-validation-message">Your passwords don´t match. Please try again.</p>
+                                <p id="confirm-userpassword-input-validation-message" class="input-validation-message d_none">Your passwords don´t match. Please try again.</p>
                             </div>
                         </div>
                     </div>
                     <div class="checkbox-privacy-policy-container">
-                        <input type="checkbox" name="acception-privacy-policy" id="checkbox-privacy-policy" required>
-                        <span id="acception-privacy-policy">I accept the <a id="privacy-policy"
-                                href="./privacy-policy.html">Privacy Policy</a></span>
+                        <input onclick="acceptedPrivacyPolice()"  type="checkbox" name="acception-privacy-policy" id="checkbox-privacy-policy" required>
+                        <span id="acception-privacy-policy">I accept the <a id="privacy-policy" href="./privacy-policy.html">Privacy Policy</a></span>
                     </div>
                     <div class="sign-up-registration-container">
                         <button id="btn-sign-up" class="btn-sign-up" disabled>Sign up</button>
@@ -112,5 +111,7 @@
     </main>
 
 </body>
+
+    <script src="../scripts/signup.js"></script>
 
 </html>

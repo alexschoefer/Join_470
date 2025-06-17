@@ -176,6 +176,11 @@ textarea::placeholder {
     margin-top: 2px;
 }
 
+.input-error {
+    border: 1px solid #FF8190 !important;
+    border-radius: 10px;
+  }
+
 .input-validation-container {
     width: 100%;
   }
