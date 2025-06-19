@@ -19,7 +19,7 @@
 <body>
     <img class="main-logo-img" src="../assets/img/MainLogo.png" alt="main-logo-img">
 
-    <main class="main-content-signup">
+    <main id="main-content-signup" class="main-content-signup">
         <div class="sign-up-main-container">
             <a href="../index.html" class="arrow-back-link">
                 <img src="../assets/icons/arrow-left-line-icon.png" alt="Back Arrow" class="arrow-icon">
@@ -81,7 +81,7 @@
                         <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
-                                    <input id="confirm-userpassword-input" class="user-input" type="password" name="password" placeholder="Confirm Password" onfocus="clearErrorMessage(this)" onblur="checkRequiredInput(this)">
+                                    <input id="confirm-userpassword-input" class="user-input" type="password" name="password" placeholder="Confirm Password" onfocus="clearErrorMessage(this)" onblur="checkRequiredInput(this), checkConfirmPassword()">
                                     <div>
                                         <img onclick="toggleInputTypePassword()" class="password-icon" src="../assets/icons/lock-icon.png" alt="password-icon">
                                     </div>
@@ -93,11 +93,11 @@
                         </div>
                     </div>
                     <div class="checkbox-privacy-policy-container">
-                        <input onclick="acceptedPrivacyPolice()"  type="checkbox" name="acception-privacy-policy" id="checkbox-privacy-policy" required>
+                        <input onclick="validateSignUpForm()"  type="checkbox" name="acception-privacy-policy" id="checkbox-privacy-policy" required>
                         <span id="acception-privacy-policy">I accept the <a id="privacy-policy" href="./privacy-policy.html">Privacy Policy</a></span>
                     </div>
                     <div class="sign-up-registration-container">
-                        <button id="btn-sign-up" class="btn-sign-up" disabled>Sign up</button>
+                        <button onclick="saveUserInputsForRemoteStorage(event)" id="btn-sign-up" class="btn-sign-up" disabled>Sign up</button>
                     </div>
                 </div>
             </form>

@@ -133,7 +133,7 @@ form {
 .user-input {
     display: flex;
     justify-content: space-between;
-    color: #D1D1D1;
+    color: #000000;
     max-width: 380px;
     width: 100%;
     font-size: 20px;

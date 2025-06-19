@@ -1,19 +1,4 @@
-// document.addEventListener('DOMContentLoaded', function () {
-//     const inputs = document.querySelectorAll('.user-input');
-
-//     inputs.forEach((input) => {
-//       input.addEventListener('blur', () => {
-//         const message = input.closest('.input-wrapper').querySelector('.input-validation-message');
-
-//         if (input.value.trim() === '') {
-//           message.classList.remove('d_none'); // Fehler zeigen
-//         } else {
-//           message.classList.add('d_none'); // Fehler ausblenden
-//         }
-//       });
-//     });
-//   });
-
+let fetchURLDataBase = "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/"
 
 function checkRequiredInput(input) {
     let errorMessage = document.getElementById(input.id + '-validation-message');
@@ -25,6 +10,7 @@ function checkRequiredInput(input) {
         errorMessage.classList.add('d_none');
         wrapper.classList.remove('input-error');
     }
+    validateSignUpForm();
 }
 
 function checkRequiredInputEmail(input) {
@@ -82,15 +68,92 @@ function toggleInputTypePassword() {
     }
 }
 
-function acceptedPrivacyPolice() {
-    let privacyPoliceCheckbox = document.getElementById('checkbox-privacy-policy');
-    let signUpButton = document.getElementById('btn-sign-up');
-    if (privacyPoliceCheckbox.checked) {
-        signUpButton.disabled = false;
-    } else {
-        signUpButton.disabled = true;
+// prüft alle Inputfelder, ob sie gefüllt sind => Antwort true or false
+function areAllInputsFilled() {
+    const inputs = document.querySelectorAll('.user-input');
+    for (let input of inputs) {
+        if (input.value.trim() === '') {
+            return false;
+        }
     }
-
-    // signUpInputDataValidation();
+    return true;
 }
 
+// Hilfsfunktion: prüft, ob die Privacy Police aktiv ist
+function isPrivacyPolicyChecked() {
+    return document.getElementById('checkbox-privacy-policy').checked;
+}
+
+// wiederkehrende Prüfung, ob alle Vorgaben erfüllt sind, damit der Button aktiv ist
+function validateSignUpForm() {
+    const filled = areAllInputsFilled();
+    const emailInput = document.getElementById('usermail-input');
+    const emailOK = isValidEmail(emailInput.value);
+    const checkboxOK = isPrivacyPolicyChecked();
+    const formValid = filled && emailOK && checkboxOK;
+    setSignUpButtonState(formValid);
+}
+
+// finale Sign Up Button Freigabe
+function setSignUpButtonState(enabled) {
+    const button = document.getElementById('btn-sign-up');
+    button.disabled = !enabled;
+}
+
+// Überprüfung, ob die beiden eingegebenen Passwörter übereinstimmen
+function checkConfirmPassword() {
+    const password = document.getElementById('userpassword-input');
+    const confirmpassword = document.getElementById('confirm-userpassword-input');
+    const passwordMessage = document.getElementById('confirm-userpassword-input-validation-message');
+
+    if(password.value !== confirmpassword.value) {
+        passwordMessage.classList.remove('d_none');
+    }else {
+        passwordMessage.classList.add('d_none');
+    }
+}
+
+// Speichert die Inputs des Users kurz für die Weitergabe an Firebase
+function saveUserInputsForRemoteStorage(event) {
+    event.preventDefault();
+    let username = document.getElementById('username-input');
+    let usermail = document.getElementById('usermail-input');
+    let userpassword = document.getElementById('userpassword-input');
+    postUserDataToRemoteStorage(username,usermail,userpassword);
+}
+
+// Übernahme der Userdaten und schickt sie in Richtung firebase 
+async function postUserDataToRemoteStorage(username,usermail,userpassword) {
+    let response = await fetch(fetchURLDataBase + '/users' + ".json", {
+        method: "POST",
+        headers: {
+            "Content-Type" : "application/json",
+        },
+        body: JSON.stringify(
+            {
+                "name": username.value,
+                "email": usermail.value,
+                "password": userpassword.value
+            }
+        )
+    });
+    forwardingToLoginPage();
+    resetRegistration();
+    return responseToJson = await response.json();
+   
+}
+
+//Zurücksetzen Registrierung
+function resetRegistration() {
+    document.getElementById('username-input').value = '';
+    document.getElementById('usermail-input').value = '';
+    document.getElementById('userpassword-input').value = '';
+    document.getElementById('confirm-userpassword-input').value = '';
+    document.getElementById('checkbox-privacy-policy').checked = false;
+    setSignUpButtonState(false);
+}
+
+//Rückmeldung an den User + Weiterleitung an die Login Seite
+function forwardingToLoginPage() {
+    window.location.href = '../index.html';
+}
