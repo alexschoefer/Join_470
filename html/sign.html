@@ -39,7 +39,7 @@
                         <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
-                                    <input id="username-input" class="user-input" type="text" name="name" placeholder="Name" autocomplete="off"  onfocus="clearErrorMessage(this)" onblur="checkRequiredInput(this)">
+                                    <input id="username-input" class="user-input" type="text" name="name" placeholder="Name" autocomplete="off"  onfocus="clearErrorMessage(this)" onblur="validateSignupInput(this)">
                                     <div>
                                         <img class="person-icon" src="../assets/icons/person-icon.png" alt="person-icon">
                                     </div>
@@ -53,7 +53,7 @@
                         <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
-                                    <input id="usermail-input" class="user-input" type="email" name="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" placeholder="Email" autocomplete="off" onfocus="clearErrorMessage(this)" onblur="checkRequiredInputEmail(this)">
+                                    <input id="usermail-input" class="user-input" type="email" name="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" placeholder="Email" autocomplete="off" onfocus="clearErrorMessage(this)" onblur="validateSignupInput(this), checkRequiredInputEmail(this)">
                                     <div>
                                         <img class="email-icon" src="../assets/icons/mail-icon.png" alt="email-icon">
                                     </div>
@@ -67,7 +67,7 @@
                         <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
-                                    <input id="userpassword-input" oninput="changePasswordIcon()" class="user-input" type="password" name="password" placeholder="Password" onfocus="clearErrorMessage(this)" onblur="checkRequiredInput(this)">
+                                    <input id="userpassword-input" oninput="changePasswordIcon()" class="user-input" type="password" name="password" placeholder="Password" onfocus="clearErrorMessage(this)" onblur="validateSignupInput(this)">
                                     <div>
                                         <img onclick="toggleInputTypePassword()" id="password-icon" class="password-icon" src="../assets/icons/lock-icon.png" alt="password-icon">
                                     </div>
@@ -81,7 +81,7 @@
                         <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
-                                    <input id="confirm-userpassword-input" class="user-input" type="password" name="password" placeholder="Confirm Password" onfocus="clearErrorMessage(this)" onblur="checkRequiredInput(this), checkConfirmPassword()">
+                                    <input id="confirm-userpassword-input" class="user-input" type="password" name="password" placeholder="Confirm Password" onfocus="clearErrorMessage(this)" onblur="validateSignupInput(this), checkConfirmPassword()">
                                     <div>
                                         <img onclick="toggleInputTypePassword()" class="password-icon" src="../assets/icons/lock-icon.png" alt="password-icon">
                                     </div>
@@ -101,6 +101,12 @@
                     </div>
                 </div>
             </form>
+        </div>
+        <!-- sign-up-Overlay-Success -->
+        <div id="sign-up-success-overlay" class="sign-up-success-overlay d_none">
+            <div class="sign-up-success-container slide-in">
+                <p class="sign-up-success-message">You signed up successfully!</p>
+            </div>
         </div>
 
         <!-- footer-content -->

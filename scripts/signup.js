@@ -1,14 +1,16 @@
-let fetchURLDataBase = "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/"
+const fetchURLDataBase = "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/"
 
-function checkRequiredInput(input) {
-    let errorMessage = document.getElementById(input.id + '-validation-message');
-    let wrapper = input.closest('.user-input-wrapper');
-    if (input.value.trim() === '') {
-        errorMessage.classList.remove('d_none');
-        wrapper.classList.add('input-error');
-    } else {
-        errorMessage.classList.add('d_none');
-        wrapper.classList.remove('input-error');
+function validateSignupInput(input) {
+    const errorMessage = document.getElementById(input.id + '-validation-message');
+    const wrapper = input.closest('.user-input-wrapper');
+    if (errorMessage && wrapper) {
+        if (input.value.trim() === '') {
+            errorMessage.classList.remove('d_none');
+            wrapper.classList.add('input-error');
+        } else {
+            errorMessage.classList.add('d_none');
+            wrapper.classList.remove('input-error');
+        }
     }
     validateSignUpForm();
 }
@@ -106,9 +108,9 @@ function checkConfirmPassword() {
     const confirmpassword = document.getElementById('confirm-userpassword-input');
     const passwordMessage = document.getElementById('confirm-userpassword-input-validation-message');
 
-    if(password.value !== confirmpassword.value) {
+    if (password.value !== confirmpassword.value) {
         passwordMessage.classList.remove('d_none');
-    }else {
+    } else {
         passwordMessage.classList.add('d_none');
     }
 }
@@ -119,15 +121,15 @@ function saveUserInputsForRemoteStorage(event) {
     let username = document.getElementById('username-input');
     let usermail = document.getElementById('usermail-input');
     let userpassword = document.getElementById('userpassword-input');
-    postUserDataToRemoteStorage(username,usermail,userpassword);
+    postUserDataToRemoteStorage(username, usermail, userpassword);
 }
 
 // Übernahme der Userdaten und schickt sie in Richtung firebase 
-async function postUserDataToRemoteStorage(username,usermail,userpassword) {
+async function postUserDataToRemoteStorage(username, usermail, userpassword) {
     let response = await fetch(fetchURLDataBase + '/users' + ".json", {
         method: "POST",
         headers: {
-            "Content-Type" : "application/json",
+            "Content-Type": "application/json",
         },
         body: JSON.stringify(
             {
@@ -140,7 +142,7 @@ async function postUserDataToRemoteStorage(username,usermail,userpassword) {
     forwardingToLoginPage();
     resetRegistration();
     return responseToJson = await response.json();
-   
+
 }
 
 //Zurücksetzen Registrierung
@@ -155,5 +157,11 @@ function resetRegistration() {
 
 //Rückmeldung an den User + Weiterleitung an die Login Seite
 function forwardingToLoginPage() {
-    window.location.href = '../index.html';
+    const overlay = document.getElementById('sign-up-success-overlay');
+    overlay.classList.remove('d_none');
+    overlay.classList.add('show');
+
+    setTimeout(() => {
+        window.location.href = '../index.html';
+    }, 800);
 }
