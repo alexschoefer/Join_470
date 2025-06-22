@@ -10,6 +10,7 @@ div#shadow-container{
   height: 100vh;
   background-color: rgb(0 0 0 / 18%);
   z-index: 5;
+  display: none;
 }
  header {
       width: auto;
@@ -250,28 +251,36 @@ div#shadow-container{
      div.assignees span{
       font-size: 12px;
      }
-div#task-overlay{ width: 525px;
-  height: auto; 
-  padding: 48px 40px 48px 40px; 
-  display: flex;
-   flex-direction: column; 
-   gap: 24px; 
-   background-color: #fff; 
-   border-radius: 30px;
-    -webkit-border-radius: 30px; 
-    -moz-border-radius: 30px; 
-    -ms-border-radius: 30px;
-     -o-border-radius: 30px;
-      max-height: 90vh;
-      overflow: auto;
-     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-     position: fixed;
-    top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-
+div#task-overlay{
+   width: 525px;
+   height: auto;
+   padding: 48px 40px 48px 40px;
+   display: flex;
+   flex-direction: column;
+   gap: 24px;
+   background-color: #fff;
 }
+div#task-card-container{
+       max-height: 90vh;
+       overflow: auto;
+       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+       position: fixed;
+       top: 50%;
+       left: 100%;
+       transform: translate(100%, -50%);
+       z-index: 10;
+       border-radius: 30px;
+       -webkit-border-radius: 30px;
+       -moz-border-radius: 30px;
+       -ms-border-radius: 30px;
+       -o-border-radius: 30px;
+       transition:0.6s;
+       -webkit-transition:0.6s;
+       -moz-transition:0.6s;
+       -ms-transition:0.6s;
+       -o-transition:0.6s;
+}
+
 div.card-name-overlay{
   display: flex;
   justify-content: space-between;
@@ -469,4 +478,25 @@ span.split{
   width: 1px;
   height: 24px;
   background-color: #D1D1D1;
+}
+ .show-from-right {
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  -webkit-transform: translate(-50%, -50%) ;
+  -moz-transform: translate(-50%, -50%) ;
+  -ms-transform: translate(-50%, -50%) ;
+  -o-transform: translate(-50%, -50%) ;
+}
+div.card-drag-drop-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.tilt-on-drag {
+  transform: rotate(20deg);
+  z-index: 1000;
+  -webkit-transform: rotate(20deg);
+  -moz-transform: rotate(20deg);
+  -ms-transform: rotate(20deg);
+  -o-transform: rotate(20deg);
 }
