@@ -1,3 +1,4 @@
+/* Logo-Animation */
 .main-logo-img {
     width: 100px;
     height: auto;
@@ -14,6 +15,30 @@
     left: 50%;
     width: 247px;
     height: auto;
+}
+
+.logo-animation-start {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.logo-animation-end {
+    top: 80px;
+    left: 77px;
+    transform: none;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.show {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .login-wrapper {
@@ -81,7 +106,7 @@ form {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    gap: 20px;
+    gap: 32px;
 }
 
 .user-login-input-email {
@@ -100,54 +125,43 @@ form {
     width: 422px;
     height: 68px;
     display: flex;
-    gap: 10px;
+    gap: 8px;
 }
 
-#email, #password {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 422px;
-    height: 48px;
-    border: 1px solid #D1D1D1;
-    padding: 12px 21px 12px 21px;
-    gap: 10px;
-}
+/* Input-Felder */
 
-.email-icon {
-    background-image: url(../assets/icons/mail-icon.png);
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    padding-left: 40px;
-}
-
-.password-icon {
-    background-image: url(../assets/icons/lock-icon.png);
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    padding-left: 40px;
-}
-
-.input-email-password {
+.user-input {
     display: flex;
     justify-content: space-between;
-    width: 380px;
-    padding: 12px 21px 12px 21px;
-    border-radius: 10px;
-    gap: 10px;
-    border: 1px solid #D1D1D1;
+    color: #000000;
+    max-width: 380px;
+    width: 100%;
     font-size: 20px;
     font-weight: 400;
     line-height: 120%;
+    border: none;
 }
 
-.input-container:focus {
-    border: 1px solid #29ABE2;
+.user-input:focus {
     outline: none;
+}
+
+.user-input-wrapper:focus-within {
+    border: 1px solid #29ABE2;
+    border-radius: 10px;
 }
 
 .input-error-email-passwort {
     border: 1px solid #FF001F;
+}
+
+input::placeholder,
+textarea::placeholder {
+  font-family: 'Inter', sans-serif; 
+  font-size: 20px;
+  color: #D1D1D1;
+  line-height: 120%;
+  font-weight: 400;
 }
 
 .input-validation-message {
@@ -159,8 +173,13 @@ form {
     width: 100%;
     padding-left: 4px;
     margin: 0px;
-    margin-top: 6px;
+    margin-top: 2px;
 }
+
+.input-error {
+    border: 1px solid #FF8190 !important;
+    border-radius: 10px;
+  }
 
 .input-validation-container {
     width: 100%;
@@ -300,30 +319,3 @@ form {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-/* Ausgangszustand: Logo zentriert */
-.logo-animation-start {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-/* Zielzustand: Oben links */
-.logo-animation-end {
-    top: 80px;
-    left: 77px;
-    transform: none;
-}
-
-/* Login-Container zuerst verstecken */
-.hidden {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease;
-}
-
-/* Sichtbar machen */
-.show {
-    opacity: 1;
-    pointer-events: auto;
-}
