@@ -7,6 +7,7 @@
     <title>join-contacts</title>
 
     <link rel="stylesheet" href="../styles/standard.css">
+    <link rel="stylesheet" href="../styles/contacts.css">
     <link rel="stylesheet" href="../styles/fonts.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../styles/summary.css">
@@ -25,14 +26,19 @@
             </div>
             <div class="contacts">
                 <div class="contacts-left">
-                    <div class="add-new-contact"></div>
+                    <div class="add-new-contact">
+                         <button onclick="functionLoadAddContactTemplate()" type="button" class="contacts-button-add-new-contact"><span
+                                        class="add-task-button-create-text">Create Task</span><img
+                                        class="add-task-button-create-icon"
+                                        src="../assets/icons/add-contact-person_add.svg" alt="nike"></button>
+                    </div>
                     <div class="all-contacts"></div>
                 </div>
                 <div class="contacts-right">
-                    <div class="summary-head-content">
-                        <h2>Contacts</h2>
-                        <div class="summary-head-vector"></div>
-                        <p>Better with a team</p>
+                    <div class="contacts-right-container">
+                        <h2 class="contacts-right-title">Contacts</h2>
+                        <div class="contacts-right-vector"></div>
+                        <p class="contacts-right-credo">Better with a team</p>
                     </div>
                 </div>
             </div>
