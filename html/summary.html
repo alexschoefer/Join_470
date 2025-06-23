@@ -19,11 +19,12 @@
 
 
     <script src="../scripts/include.js"></script>
+    <script src="../scripts/summary.js"></script>
 
 
 </head>
 
-<body>
+<body onload=" render()">
 
 
     <main class="main-content">
@@ -38,7 +39,7 @@
             </div>
         </div>
         <div class="summary-greating-user">
-            <h2>Good morning,</h2>
+            <h2 id="dategreating">Good morning,</h2>
             <p>Sofia Müller</p>
         </div>
         <div class="summary-overview">
