@@ -12,60 +12,6 @@
   --asterix: #ff8190;
 }
 
-.menuLogo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 100px;
-  width: 100.03px;
-  height: 121.97px;
-}
-
-.menu-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 15px;
-  height: 229px;
-}
-
-.menu-selection-button {
-  display: flex;
-  align-items: center;
-  height: 46px;
-  width: 232px;
-  padding: 8px 56px 8px 56px;
-  gap: 8px;
-}
-
-.menu-selection-icons {
-  height: 30px;
-  width: 30px;
-}
-
-.legal-information-container {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding-top: 243px;
-}
-
-.legal-information-button {
-  display: flex;
-  align-items: center;
-
-  padding: 8px;
-  gap: 8px;
-}
-
-.header-user-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-}
-
 #help-icon {
   width: 32px;
   height: 32px;
@@ -74,4 +20,35 @@
 #guest-icon {
   height: 56px;
   width: 56px;
+}
+
+.app-layout{
+display: grid;
+grid-template-columns: 232px 1fr;
+grid-template-rows: 96px 1fr;
+grid-template-areas:  "sidebar header"
+    "sidebar content";
+     height: 100vh;
+     max-width: 1920px;
+     
+}
+
+#sidebar{
+  grid-area: sidebar;
+  background-color: #2a3647;
+  color: white;
+}
+
+#header {
+  grid-area: header;
+  background-color: white;
+  box-shadow: 0 4px 4px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  grid-area: content;
+  background-color: #f4f4f4;
+  overflow-y: auto;
 }
