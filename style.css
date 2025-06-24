@@ -29,7 +29,7 @@ grid-template-rows: 96px 1fr;
 grid-template-areas:  "sidebar header"
     "sidebar content";
      height: 100vh;
-     max-width: 1920px;
+     
      
 }
 
