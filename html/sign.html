@@ -67,9 +67,9 @@
                         <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
-                                    <input id="userpassword-input" oninput="changePasswordIcon()" class="user-input" type="password" name="password" placeholder="Password" onfocus="clearErrorMessage(this)" onblur="validateSignupInput(this)">
+                                    <input id="userpassword-input" oninput="changePasswordIcon(this)" class="user-input" type="password" name="password" placeholder="Password" onfocus="clearErrorMessage(this)" onblur="validateSignupInput(this)">
                                     <div>
-                                        <img onclick="toggleInputTypePassword()" id="password-icon" class="password-icon" src="../assets/icons/lock-icon.png" alt="password-icon">
+                                        <img onclick="toggleInputTypePassword(this)" id="password-icon" class="password-icon" src="../assets/icons/lock-icon.png" alt="password-icon">
                                     </div>
                                 </div>
                             </div>
@@ -81,9 +81,9 @@
                         <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
-                                    <input id="confirm-userpassword-input" class="user-input" type="password" name="password" placeholder="Confirm Password" onfocus="clearErrorMessage(this)" onblur="validateSignupInput(this), checkConfirmPassword()">
+                                    <input id="confirm-userpassword-input" oninput="changePasswordIcon(this)" class="user-input" type="password" name="password" placeholder="Confirm Password" onfocus="clearErrorMessage(this)" onblur="validateSignupInput(this), checkConfirmPassword()">
                                     <div>
-                                        <img onclick="toggleInputTypePassword()" class="password-icon" src="../assets/icons/lock-icon.png" alt="password-icon">
+                                        <img onclick="toggleInputTypePassword(this)" id="confirm-password-icon" class="password-icon" src="../assets/icons/lock-icon.png" alt="password-icon">
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +93,10 @@
                         </div>
                     </div>
                     <div class="checkbox-privacy-policy-container">
-                        <input onclick="validateSignUpForm()"  type="checkbox" name="acception-privacy-policy" id="checkbox-privacy-policy" required>
+                        <div class="checkbox-wrapper">
+                            <input onchange="handlePrivacyPolicyChange()" class="checkbox-privacy-policy" type="checkbox" name="acception-privacy-policy" id="checkbox-privacy-policy" required>
+                            <img onclick="resetCheckbox()" id="checkbox-privacy-police-icon-check" class="checkbox-privacy-police-icon-check d_none" src="../assets/icons/checkbox-privacy-police-icon-check.png" alt="checkbox-privacy-police-icon-check">
+                        </div>
                         <span id="acception-privacy-policy">I accept the <a id="privacy-policy" href="./privacy-policy.html">Privacy Policy</a></span>
                     </div>
                     <div class="sign-up-registration-container">

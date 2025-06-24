@@ -106,10 +106,14 @@
 
 .checkbox-privacy-policy-container {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   margin-top: 10px;
+}
+
+.checkbox-privacy-policy:checked {
+  visibility: hidden;
 }
 
 #acception-privacy-policy {
@@ -190,4 +194,37 @@
 .sign-up-success-overlay.show .sign-up-success-container {
   transform: translateY(0);
   opacity: 1;
+}
+
+.checkbox-privacy-policy {
+  appearance: none;
+  border: 2px solid #2A3647;
+  border-radius: 3px;
+  background: white;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+.checkbox-privacy-police-icon-check {
+  cursor: pointer;
+}
+
+.checkbox-wrapper {
+  position: relative;
+  width: 16px;
+  height: 16px;
+}
+
+.checkbox-wrapper input,
+.checkbox-wrapper img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
 }

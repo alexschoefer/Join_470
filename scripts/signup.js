@@ -41,32 +41,29 @@ function clearErrorMessage(input) {
     wrapper.classList.remove('input-error');
 }
 
-function changePasswordIcon() {
-    let passwordInput = document.getElementById("userpassword-input");
-    let passwordIcon = document.getElementById("password-icon");
+function changePasswordIcon(input) {
+    const container = input.closest('.input-container');
+    const icon = container.querySelector('.password-icon');
 
-    if (passwordInput.value.trim().length > 0) {
-        passwordIcon.src = "../assets/icons/visibility-off-icon.png";
-        passwordIcon.classList.add('visibility-off-icon');
+    if (input.value.trim().length > 0) {
+        icon.src = "../assets/icons/visibility-off-icon.png";
+        icon.classList.add('visibility-off-icon');
     } else {
-        passwordIcon.src = "../assets/icons/lock-icon.png";
-        passwordIcon.classList.remove('visibility-off-icon');
+        icon.src = "../assets/icons/lock-icon.png";
+        icon.classList.remove('visibility-off-icon');
     }
 }
 
-function toggleInputTypePassword() {
-    let input = document.getElementById('userpassword-input');
-    let passwordIcon = document.getElementById('password-icon');
-    let passwordInput = document.getElementById('userpassword-input');
-    if (input.type === 'password' && passwordInput.value.trim().length > 0) {
+function toggleInputTypePassword(iconElement) {
+    const container = iconElement.closest('.input-container');
+    const input = container.querySelector('input');
+
+    if (input.type === 'password' && input.value.trim().length > 0) {
         input.type = 'text';
-        passwordIcon.src = "../assets/icons/visibility-icon.png";
-    } else if (input.type === 'text' && passwordInput.value.trim().length > 0) {
+        iconElement.src = "../assets/icons/visibility-icon.png";
+    } else if (input.type === 'text' && input.value.trim().length > 0) {
         input.type = 'password';
-        passwordIcon.src = "../assets/icons/visibility-off-icon.png";
-        passwordIcon.classList.add('visibility-off-icon');
-    } else {
-        return;
+        iconElement.src = "../assets/icons/visibility-off-icon.png";
     }
 }
 
@@ -164,4 +161,16 @@ function forwardingToLoginPage() {
     setTimeout(() => {
         window.location.href = '../index.html';
     }, 800);
+}
+
+function handlePrivacyPolicyChange() {
+    const isChecked = isPrivacyPolicyChecked();
+    const checkIcon = document.getElementById('checkbox-privacy-police-icon-check');
+    checkIcon.classList.toggle('d_none', !isChecked);
+    validateSignUpForm();
+}
+
+function resetCheckbox() {
+    document.getElementById('checkbox-privacy-policy').checked = false;
+    document.getElementById('checkbox-privacy-police-icon-check').classList.add('d_none');
 }
