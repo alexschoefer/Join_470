@@ -4,6 +4,14 @@
   height: 100vh;
   overflow: auto;
 }
+div#shadow-container{
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(0 0 0 / 18%);
+  z-index: 5;
+  display: none;
+}
  header {
       width: auto;
       background-color: #fff;
@@ -123,6 +131,7 @@
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
+      gap: 20px;
      }
      section#all-task{
       display: flex;
@@ -135,7 +144,6 @@
       display: flex;
       justify-content: space-between;
       color: #42526E;
-      margin-bottom: 20px;
      }
      div.task-title h2{
       font-size: 20px;
@@ -243,28 +251,36 @@
      div.assignees span{
       font-size: 12px;
      }
-div#task-overlay{ width: 525px;
-  height: auto; 
-  padding: 48px 40px 48px 40px; 
-  display: flex;
-   flex-direction: column; 
-   gap: 24px; 
-   background-color: #fff; 
-   border-radius: 30px;
-    -webkit-border-radius: 30px; 
-    -moz-border-radius: 30px; 
-    -ms-border-radius: 30px;
-     -o-border-radius: 30px;
-      max-height: 90vh;
-      overflow: auto;
-     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-     position: fixed;
-    top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-
+div#task-overlay{
+   width: 525px;
+   height: auto;
+   padding: 48px 40px 48px 40px;
+   display: flex;
+   flex-direction: column;
+   gap: 24px;
+   background-color: #fff;
 }
+div#task-card-container{
+       max-height: 90vh;
+       overflow: auto;
+       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+       position: fixed;
+       top: 50%;
+       left: 100%;
+       transform: translate(100%, -50%);
+       z-index: 10;
+       border-radius: 30px;
+       -webkit-border-radius: 30px;
+       -moz-border-radius: 30px;
+       -ms-border-radius: 30px;
+       -o-border-radius: 30px;
+       transition:0.6s;
+       -webkit-transition:0.6s;
+       -moz-transition:0.6s;
+       -ms-transition:0.6s;
+       -o-transition:0.6s;
+}
+
 div.card-name-overlay{
   display: flex;
   justify-content: space-between;
@@ -282,6 +298,7 @@ span.close-overlay{
   width: 32px;
   height: 32px;
   display: block;
+  cursor: pointer;
   border-radius: 50px;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
@@ -425,14 +442,31 @@ div.tasks-functionen{
 align-items: center;
 gap: 8px;
 }
-span.delete img{
+span.delete div.icon-delete,span.edit div.icon-edit{
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: inline-block;
 width: 16px;
 height: 18px;
+}
+span.delete div.icon-delete{
+  background-image: url(../assets/icons/delete.png);
+}
+span.edit div.icon-edit{
+  background-image: url(../assets/icons/edit.png);
+}
+span.delete:hover div.icon-delete{
+  background-image: url(../assets/icons/delete-hover.png);
+}
+span.edit:hover div.icon-edit{
+  background-image: url(../assets/icons/edit-hover.png);
+}
+span.delete:hover,span.edit:hover{
+  color: #29abe3;
 }
 span.delete {
   font-size: 16px;
   font-weight: 400;
-  color: #2A3647;
 }
 span.delete,span.edit{
   display: flex;
@@ -444,4 +478,25 @@ span.split{
   width: 1px;
   height: 24px;
   background-color: #D1D1D1;
+}
+ .show-from-right {
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  -webkit-transform: translate(-50%, -50%) ;
+  -moz-transform: translate(-50%, -50%) ;
+  -ms-transform: translate(-50%, -50%) ;
+  -o-transform: translate(-50%, -50%) ;
+}
+div.card-drag-drop-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.tilt-on-drag {
+  transform: rotate(20deg);
+  z-index: 1000;
+  -webkit-transform: rotate(20deg);
+  -moz-transform: rotate(20deg);
+  -ms-transform: rotate(20deg);
+  -o-transform: rotate(20deg);
 }

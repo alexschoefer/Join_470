@@ -37,3 +37,8 @@ a {
   text-decoration: none;
   color: white;
 }
+
+.d_none {
+  display: none;
+}
+
