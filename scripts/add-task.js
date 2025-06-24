@@ -96,16 +96,24 @@ async function postAddTaskDataToFirebase(id, title, description, date, priority,
 
 function resetAddTaskForm() {
     document.getElementById('add-task-title').value = '';
-    document.getElementById('add-task-description').value = '';
-    document.getElementById('add-task-due-date').value = '';
-    document.getElementById('add-task-assign-to').value = '';
+    document.getElementById('add-task-description-textarea').value = '';
+    document.getElementById('add-task-due-date-input').value = '';
+    // document.getElementById('add-task-assign-to').value = '';
     document.getElementById('add-task-category').value = '';
-    document.getElementById('add-task-subtasks').value = '';
-    ATButtonPrioButtonUrgentRef.classList.remove("add-task-priority-button-urgent-active");
-    ATButtonPrioButtonMediumRef.classList.remove("add-task-priority-button-medium-active");
-    ATButtonPrioButtonLowRef.classList.remove("add-task-priority-button-low-active");
+    document.getElementById('add-task-subtasks-input').value = '';
+    // ATButtonPrioButtonUrgentRef.classList.remove("add-task-priority-button-urgent-active");
+    // ATButtonPrioButtonMediumRef.classList.remove("add-task-priority-button-medium-active");
+    // ATButtonPrioButtonLowRef.classList.remove("add-task-priority-button-low-active");
 }
 
 function addTaskPrioButtonClick(state) {
     prioButtonState = state;
+}
+
+
+function clearErrorMessageAT(input) {
+    let errorMessage = document.getElementById(input.id + '-validation-message');
+    let wrapper = input.closest('.user-input-wrapper');
+    errorMessage.classList.add('d_none');
+    wrapper.classList.remove('input-error');
 }

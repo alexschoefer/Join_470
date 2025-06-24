@@ -58,6 +58,26 @@
   gap: 8px;
 }
 
+.add-task-due-date-wraper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 440px;
+  height: 48px;
+  border-width: 1px;
+  border-radius: 10px;
+
+
+}
+
+.add-task-due-date-input {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  cursor: pointer;
+  color: #D1D1D1;
+}
+
 
 .add-task-form-right {
   display: flex;
@@ -219,20 +239,40 @@
 }
 
 .add-task-input-style {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
   height: 48px;
   padding-top: 12px;
-  padding-right: 21px;
+  padding-right: 16px;
   padding-bottom: 12px;
-  padding-left: 21px;
+  padding-left: 16px;
   gap: 10px;
   border-width: 1px;
   border-radius: 10px;
-  border: 1px solid var(--style);
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  border: 1px solid #D1D1D1;
+}
 
+.add-task-input-style:active{
+border: 1px solid var(--light-blue);
 }
 
 .add-task-input-style:hover {
   cursor: pointer;
+}
+
+.add-task-placeholder-style {
+  width: 100%;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0%;
 }
 
 .add-task-placeholder-style::placeholder {
@@ -241,6 +281,19 @@
   font-size: 20px;
   line-height: 120%;
   letter-spacing: 0%;
+}
+
+.add-task-input-placeholder-style {
+  border: #fff;
+  outline: none;
+  box-shadow: none;
+  border-color: transparent;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0%;
+
 }
 
 .add-task-placeholder-black::placeholder {
@@ -266,10 +319,6 @@
 }
 
 .add-task-input-textarea-style:hover {
-  cursor: pointer;
-}
-
-.add-task-due-date-input {
   cursor: pointer;
 }
 
@@ -423,6 +472,18 @@
   width: 440px;
   height: 80px;
   gap: 8px;
+}
+
+.add-task-subtask-input-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 440px;
+  border-radius: 10px;
+  border: 1px solid #D1D1D1;
+  background-color: #fff;
+  height: 48px;
+  position: relative;
 }
 
 .add-task-subtasks-icons {

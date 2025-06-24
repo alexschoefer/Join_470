@@ -34,7 +34,7 @@
                                             class="red-asterix-required">*</span></label>
                                     <input type="text" id="add-task-title"
                                         class="add-task-input-style add-task-placeholder-style"
-                                        placeholder="Enter a Title" required>
+                                        placeholder="Enter a Title" required onfocus="clearErrorMessageAT(this)" onblur="validateSignupInputAT(this)">
                                     <span id="mobile-required-text-no-asterix-title"
                                         class="mobile-required-text-no-asterix d-none">This field is required</span>
                                 </div>
@@ -47,13 +47,14 @@
                                         class="mobile-required-text-no-asterix"></span>
                                 </div>
                                 <div class="add-task-form-left-title">
-                                    <label for="add-task-due-date" class="label-add-task">Due Date<span
-                                            class="red-asterix-required">*</span></label>
-                                    <input name="add-task-due-date" type="date" id="add-task-due-date-input"
-                                        class="add-task-input-style add-task-placeholder-style" placeholder="dd/mm/yyyy"
-                                        required>
-                                    <span id="mobile-required-text-no-asterix-due-date"
-                                        class="mobile-required-text-no-asterix d-none">This field is required</span>
+                                    <p class="label-add-task">Due Date<span class="red-asterix-required">*</span></p>
+                                    <div class="add-task-due-date-wraper">
+                                        <input name="add-task-due-date" type="date" id="add-task-due-date-input"
+                                            class="add-task-input-style add-task-due-date-input"
+                                            placeholder="dd/mm/yyyy" required>
+                                        <span id="mobile-required-text-no-asterix-due-date"
+                                            class="mobile-required-text-no-asterix d-none">This field is required</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="add-task-center-dividor"></div>
@@ -103,10 +104,19 @@
                                     </select>
                                 </div>
                                 <div class="add-task-form-right-subtasks">
-                                    <label for="add-task-due-date" class="label-add-task">Subtasks</label>
-                                    <input type="text"
-                                        class="label-add-task add-task-input-style add-task-placeholder-style"
-                                        id="add-task-subtasks" placeholder="Add new subtask">
+                                    <p class="label-add-task">Subtasks</p>
+                                    <div class="add-task-subtask-input-wrapper">
+                                        <div class="add-task-input-style">
+                                            <input type="text"
+                                                class="add-task-placeholder-style add-task-input-placeholder-style"
+                                                id="add-task-subtasks-input" placeholder="Add new subtask">
+                                            <div id="add-task-subtasks-icon-add" class="add-task-subtasks-icon-add">
+                                                <img src="../assets/icons/add-task-subtasks-add.svg" alt="icon-add">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
                                     <div class="add-task-subtasks-icons" id="add-task-subtasks-icons">
                                         <div id="add-task-subtasks-icon-delete" class="add-task-subtasks-icon-delete">
                                         </div>
@@ -115,7 +125,7 @@
                                         <div id="add-task-subtasks-icon-add" class="add-task-subtasks-icon-add"></div>
                                     </div>
                                     <div id="allSubtasks" class="allSubtasks"></div>
-                                </input>
+
                                 </div>
                             </div>
 
@@ -131,7 +141,7 @@
                                 </span>
                             </div>
                             <div class="add-task-buttons-create-and-clear">
-                                <button type="button" id="label-add-task add-task-button-clear"
+                                <button onclick="resetAddTaskForm()" type="button" id="label-add-task add-task-button-clear"
                                     class="label-add-task add-task-button-clear"><span
                                         class="add-task-button-clear-text">Clear</span><img
                                         class="add-task-button-clear-icon"
