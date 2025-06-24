@@ -423,5 +423,14 @@
   width: 440px;
   height: 80px;
   gap: 8px;
+}
 
+.add-task-subtasks-icons {
+  background-color: aqua;
+  width: 56px;
+  height: 24px;
+  gap: 4px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
 }

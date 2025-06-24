@@ -46,6 +46,7 @@ async function sendAddTaskData() {
 }
 
 async function checkIdAmount() {
+    
     let response = await fetch(fetchURLDataBase + '/taskData' + ".json");
     let data = await response.json();
     let id = Object.keys(data).length + 1;
