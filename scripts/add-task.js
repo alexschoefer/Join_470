@@ -1,35 +1,38 @@
-let addTaskPrioButtonState = "";
+const ATTitleRef = document.getElementById('add-task-title');
+const ATDescriptionRef = document.getElementById('add-task-description');
+const ATDueDateRef = document.getElementById('add-task-due-date');
+const ATButtonPrioButtonUrgentRef = document.getElementById('add-task-prio-button-urgent');
+const ATButtonPrioButtonMediumRef = document.getElementById('add-task-prio-button-medium');
+const ATButtonPrioButtonLowRef = document.getElementById('add-task-prio-button-low');
+const ATAssignToRef = document.getElementById('add-task-assign-to');
+const ATCategoryRef = document.getElementById('add-task-category');
+const ATSubtasksRef = document.getElementById('add-task-subtasks');
+const ATButtonAddTaskRef = document.getElementById('add-task-button-create-task');
+const ATButtonCancelRef = document.getElementById('add-task-cancel-button');
 
-const atButtonPriorityUrgentRef = document.getElementById('add-task-priority-urgent');
-const atButtonPriorityMediumRef = document.getElementById('add-task-priority-medium');
-const atButtonPriorityLowRef = document.getElementById('add-task-priority-low');
 
-
-function addTaskInit() {
-
+function addTaskPrioButtonClick(buttonState) {
+//   ATPrioButtonDefaultState(); 
+  console.log(buttonState);
+  
+    switch (buttonState) {
+        case 'urgent':
+        ATButtonPrioButtonUrgentRef.classList.add("add-task-priority-button-urgent-active");
+        break;
+        case 'medium':
+        ATButtonPrioButtonMediumRef.classList.add("add-task-priority-button-medium-active");
+        break;
+        case 'low':
+        ATButtonPrioButtonLowRef.classList.add("add-task-priority-button-low-active");
+        break;
+        default:
+        return;
+    }
+ 
 }
-// die buttons müssen dynamisch aus dem Template geladen werden !!!!
-function addTaskPrioButton(buttonType) {
-    if (!atButtonPriorityUrgentRef || !atButtonPriorityMediumRef || !atButtonPriorityLowRef) return;
 
-    if (buttonType === "urgent") {
-        atButtonPriorityUrgentRef.style.backgroundColor = "var(--button-urgent)";
-        atButtonPriorityMediumRef.style.backgroundColor = "var(--white)";
-        atButtonPriorityLowRef.style.backgroundColor = "var(--white)";
-        addTaskPrioButtonState = buttonType;
-    }
-    if (buttonType === "medium") {
-        atButtonPriorityUrgentRef.style.backgroundColor = "var(--white)";
-        atButtonPriorityMediumRef.style.backgroundColor = "var(--button-medium)";
-        atButtonPriorityLowRef.style.backgroundColor = "var(--white)";
-        addTaskPrioButtonState = buttonType;
-    }
-    if (buttonType === "low") {
-        atButtonPriorityUrgentRef.style.backgroundColor = "var(--white)";
-        atButtonPriorityMediumRef.style.backgroundColor = "var(--white)";
-        atButtonPriorityLowRef.style.backgroundColor = "var(--button-low)";
-        addTaskPrioButtonState = buttonType;
-    }
-    console.log(buttonType);
-    
+function ATPrioButtonDefaultState() {
+    ATButtonPrioButtonUrgentRef.classList.remove("add-task-priority-button-urgent-active");
+    ATButtonPrioButtonMediumRef.classList.remove("add-task-priority-button-medium-active");
+    ATButtonPrioButtonLowRef.classList.remove("add-task-priority-button-low-active");
 }

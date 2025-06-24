@@ -110,16 +110,47 @@
   box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.25);
 }
 
+.add-task-priority-button-urgent {
+  background-color: var(--white);
+}
+
+.add-task-priority-button-medium {
+  background-color: var(--white);
+}
+
+.add-task-priority-button-low {
+  background-color: var(--white);
+}
+
+
 .add-task-priority-button-urgent:hover {
   background-color: var(--button-urgent);
+  color: #fff;
 }
 
 .add-task-priority-button-medium:hover {
   background-color: var(--button-medium);
+  color: #fff;
 }
 
 .add-task-priority-button-low:hover {
   background-color: var(--button-low);
+  color: #fff;
+}
+
+.add-task-priority-button-urgent-active {
+  background-color: var(--button-urgent);
+  color: #fff;
+}
+
+.add-task-priority-button-medium-active {
+  background-color: var(--button-medium);
+  color: #fff;
+}
+
+.add-task-priority-button-low-active {
+  background-color: var(--button-low);
+  color: #fff;
 }
 
 .add-task-priority-button-image {
@@ -157,7 +188,7 @@
   line-height: 120%;
   letter-spacing: 0%;
   color: var(--asterix);
-  20px;
+  /* 20px; */
 }
 
 .add-task-form-buttons {
