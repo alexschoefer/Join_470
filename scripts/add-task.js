@@ -1,7 +1,7 @@
 const fetchURLDataBase = "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/"
-const ATTitleRef = document.getElementById('add-task-title');
-const ATDescriptionRef = document.getElementById('add-task-description');
-const ATDueDateRef = document.getElementById('add-task-due-date');
+const ATTitleRef = document.getElementById('add-task-title-input');
+const ATDescriptionRef = document.getElementById('add-task-description-textarea');
+const ATDueDateRef = document.getElementById('add-task-due-date-input');
 const ATButtonPrioButtonUrgentRef = document.getElementById('add-task-prio-button-urgent');
 const ATButtonPrioButtonMediumRef = document.getElementById('add-task-prio-button-medium');
 const ATButtonPrioButtonLowRef = document.getElementById('add-task-prio-button-low');
@@ -41,7 +41,7 @@ let prioButtonState = 0;
 // }'
 
 async function sendAddTaskData() {
-    postAddTaskDataToFirebase();
+   saveUserInputsForFirebase();
 
 }
 
@@ -53,9 +53,9 @@ async function checkIdAmount() {
     return id;
 }
 
-function saveUserInputsForFirebase(event) {
-    event.preventDefault();
-    let id = checkIdAmount();
+function saveUserInputsForFirebase() {
+    // event.preventDefault();
+    // let id = checkIdAmount();
     let title = ATTitleRef.value;
     let description = ATDescriptionRef.value;
     let date = ATDueDateRef.value;
@@ -63,11 +63,19 @@ function saveUserInputsForFirebase(event) {
     let assignTo = ATAssignToRef.value;
     let category = ATCategoryRef.value;
     let subtasks = ATSubtasksRef.value;
-    postAddTaskDataToFirebase(id, title, description, date, priority, assignTo, category, subtasks);
+    console.log("Title:", title);
+    console.log("Description:", description);
+    console.log("Date:", date);
+    console.log("Priority:", priority);
+    console.log("Assign To:", assignTo);
+    console.log("Category:", category);
+    console.log("Subtasks:", subtasks);
+
+    postAddTaskDataToFirebase(title, description, date, priority, assignTo, category, subtasks);
 }
 
 
-async function postAddTaskDataToFirebase(id, title, description, date, priority, assignTo, category, subtasks) {
+async function postAddTaskDataToFirebase(title, description, date, priority, assignTo, category, subtasks) {
     let response = await fetch(fetchURLDataBase + '/taskData' + ".json", {
         method: "POST",
         headers: {
@@ -75,7 +83,7 @@ async function postAddTaskDataToFirebase(id, title, description, date, priority,
         },
         body: JSON.stringify(
             {
-                "id": id,
+                // "id": id,
                 "title": title,
                 "description": description,
                 "date": date,
@@ -85,10 +93,9 @@ async function postAddTaskDataToFirebase(id, title, description, date, priority,
                 "subtasks": subtasks
             }
         )
-    });
-    // resetAddTaskForm();
+    });   
+    resetAddTaskForm();
     return responseToJson = await response.json();
-
 }
 
 
@@ -110,10 +117,3 @@ function addTaskPrioButtonClick(state) {
     prioButtonState = state;
 }
 
-
-function clearErrorMessageAT(input) {
-    let errorMessage = document.getElementById(input.id + '-validation-message');
-    let wrapper = input.closest('.user-input-wrapper');
-    errorMessage.classList.add('d_none');
-    wrapper.classList.remove('input-error');
-}
