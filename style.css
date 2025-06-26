@@ -39,4 +39,5 @@
   grid-area: content;
   background-color: white;
   overflow-y: auto;
+  display: flex;
 }
