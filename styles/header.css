@@ -1,0 +1,74 @@
+.content-limit{
+max-width: 1920px;
+width: 100%;
+position: relative;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1920px;
+  padding-top: 20px;
+  padding-right: 40px;
+  padding-bottom: 20px;
+  padding-left: 116px;;
+  box-sizing: border-box;
+}
+.header-user-content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:16px;
+}
+
+#help-icon {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+#help-icon:hover {
+  scale: 1.1;
+}
+
+#guest-icon {
+  display: flex;
+  height: 56px;
+  width: 56px;
+  cursor: pointer;
+}
+
+.burger-menu{
+  display: flex;
+  flex-direction: column;
+ justify-content: center;
+ align-items: center;
+  height: 158px;
+  width:150px;
+  background-color: #2A3647;
+  position:absolute;
+  right: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #CDCDCD;
+  padding:10px
+}
+.burger-menu-button{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 46px;
+  width: 100%;
+  color: #CDCDCD;
+  text-decoration: none;
+  font-family: "Inter", sans-serif;
+  text-align: left;
+  border-radius: 10px;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease;
+}
