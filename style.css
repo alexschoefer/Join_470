@@ -1,7 +1,7 @@
 :root {
   --main-color: #2a3647;
   --icon: #a8a8a8;
-  --style: #D1D1D1;
+  --style: #d1d1d1;
   --bottom-gradient: #f4f4f4;
   --black: #000000;
   --white: #ffffff;
@@ -12,28 +12,17 @@
   --asterix: #ff8190;
 }
 
-#help-icon {
-  width: 32px;
-  height: 32px;
-}
-
-#guest-icon {
-  height: 56px;
-  width: 56px;
-}
-
-.app-layout{
-display: grid;
-grid-template-columns: 232px 1fr;
-grid-template-rows: 96px 1fr;
-grid-template-areas:  "sidebar header"
+.app-layout {
+  display: grid;
+  grid-template-columns: 232px 1fr;
+  grid-template-rows: 96px 1fr;
+  grid-template-areas:
+    "sidebar header"
     "sidebar content";
-     height: 100vh;
-     
-     
+  height: 100vh;
 }
 
-#sidebar{
+#sidebar {
   grid-area: sidebar;
   background-color: #2a3647;
   color: white;
@@ -42,11 +31,12 @@ grid-template-areas:  "sidebar header"
 #header {
   grid-area: header;
   background-color: white;
-  box-shadow: 0 4px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  z-index: 10;
 }
 
-.content {
+.main-content {
   grid-area: content;
-  background-color: #f4f4f4;
+  background-color: white;
   overflow-y: auto;
 }
