@@ -1,65 +1,29 @@
-// const BASE_URL = "https://join-470-default-rtdb.firebaseio.com";
-
-// let card = {
-//   tasks: [
-//     {
-//       name: "Kochwelt Page & Recipe Recommender",
-//       description: "Build start page with recipe recommendation.",
-//       due_date: "2025-06-25",
-//       priority: "normal",
-//       assigned: ["Ana Popescu", "Ion Ionescu"],
-//       category: "Technical Task",
-//       subtasks: [
-//         { title: "Add login Formular", done: false },
-//         { title: "Validation", done: false },
-//       ],
-//     },
-//     {
-//       name: "Design the Homepage",
-//       description: "Create a wireframe for the main landing page",
-//       due_date: "2025-07-01",
-//       priority: "medium",
-//       assigned: ["Maria Georgescu"],
-//       category: "Technical Task ",
-//       subtasks: [
-//         { title: "Wireframe", done: true },
-//         { title: "Prototip", done: false },
-//       ],
-//     },
-//   ],
-// };
-
-// function onloadFunc() {
-//   postCard("/card", card);
-// }
-// onloadFunc();
-
-// async function loadData(path = "") {
-//   let response = await fetch(BASE_URL + path + ".json");
-//   let responseToJson = await response.json();
-//   return responseToJson;
-// }
-
-// async function postCard(path = "", data = {}) {
-//   let response = await fetch(BASE_URL + path + ".json", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(data),
-//   });
-//   return (responseToJson = await response.json());
-// }
-let currentDraggedElement;
 let container = document.getElementById("task-card-container");
 let shadow = document.getElementById("shadow-container");
+let tasks = [];
+let currentDraggedElement = null;
 
-function containerOverlay() {
-  shadow.style.display = "block";
-  container.classList.remove("hide-to-right");
-  container.innerHTML = boardTaskOverlay();
-  container.classList.add("show-from-right");
+function openTaskDetails(task) {
+  let tasksCards = document.querySelectorAll(".card");
+  if (!tasksCards.length) return;
+  tasksCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      let taskData = card.dataset.task;
+      if (!taskData) return;
+      try {
+        let task = JSON.parse(taskData);
+
+        shadow.style.display = "block";
+        container.classList.remove("hide-to-right");
+        container.innerHTML = boardTaskOverlay(task);
+        container.classList.add("show-from-right");
+      } catch (error) {
+        console.error("Error parsing task data:", error);
+      }
+    });
+  });
 }
+
 function closeContainerOverlay() {
   shadow.style.display = "none";
   container.classList.remove("show-from-right");
@@ -68,50 +32,56 @@ function closeContainerOverlay() {
   }, 200);
 }
 
-let todos = [
-  {
-    id: 0,
-    name: "Kochwelt Page & Recipe Recommender",
-    category: "toDo",
-  },
-  {
-    id: 1,
-    name: "Kochwelt Page & Recipe Recommender",
-    category: "toDo",
-  },
-  {
-    id: 2,
-    name: "Design the Homepage",
-    category: "inProgress",
-  },
-  {
-    id: 3,
-    name: "Implement User Authentication",
-    category: "awaitFeedback",
-  },
-  {
-    id: 4,
-    name: "Implement User Authentication",
-    category: "done",
-  },
-];
-
-function updateTask() {
-  let categories = ["toDo", "inProgress", "awaitFeedback", "done"];
-
-  for (let i = 0; i < categories.length; i++) {
-    let category = categories[i];
-    let tasks = todos.filter((t) => t.category == category);
-    let container = document.getElementById(category);
-    container.innerHTML = "";
-    for (let j = 0; j < tasks.length; j++) {
-      let element = tasks[j];
-      container.innerHTML += generateTodoHTML(element);
-    }
+async function init() {
+  tasks = await getTasksFromRemoteStorage("/tasks");
+  if (tasks.length === 0) {
+    tasks = standartTasks;
+    await saveTasksToRemoteStorage("/tasks", tasks);
   }
+  updateTask();
+  openTaskDetails();
+}
+
+async function updateTask() {
+  let columns = ["toDo", "inProgress", "awaitFeedback", "done"];
+  columns.forEach((col) => {
+    let filtered = tasks.filter((t) => t.status === col);
+    let container = document.getElementById(col);
+    container.innerHTML = "";
+    filtered.forEach((task) => {
+      container.innerHTML += generateTodoHTML(task);
+      openTaskDetails(task);
+    });
+  });
   enableTiltOnDrag(".task");
   insertTemplateIfEmpty();
 }
+
+function startDragging(id) {
+  currentDraggedElement = parseInt(id);
+}
+
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+async function moveTo(category) {
+  let taskIndex = tasks.findIndex((task) => task.id === currentDraggedElement);
+  if (taskIndex !== -1) {
+    tasks[taskIndex].status = category;
+    await saveTasksToRemoteStorage("/tasks", tasks);
+    updateTask();
+  }
+}
+
+function highlight(id) {
+  document.getElementById(id).classList.add("drag-area-highlight");
+}
+
+function removeHighlight(id) {
+  document.getElementById(id).classList.remove("drag-area-highlight");
+}
+
 function insertTemplateIfEmpty() {
   let dragAreas = document.querySelectorAll(".drag-area");
   dragAreas.forEach((area) => {
@@ -120,6 +90,7 @@ function insertTemplateIfEmpty() {
     }
   });
 }
+
 function formatName(name) {
   let map = {
     toDo: "To Do",
@@ -130,34 +101,15 @@ function formatName(name) {
   return map[name] || name;
 }
 
-function startDragging(id) {
-  currentDraggedElement = id;
-}
-function allowDrop(ev) {
-  ev.preventDefault();
-}
-function moveTo(category) {
-  todos[currentDraggedElement]["category"] = category;
-  updateTask();
-}
-
-function highlight(id) {
-  document.getElementById(id).classList.add("drag-area-highlight");
-}
-
-function removeHighlight(id) {
-  document.getElementById(id).classList.remove("drag-area-highlight");
-}
 function enableTiltOnDrag(selector) {
-  const elements = document.querySelectorAll(selector);
-
+  let elements = document.querySelectorAll(selector);
   elements.forEach((el) => {
     el.addEventListener("dragstart", () => {
       el.classList.add("tilt-on-drag");
     });
-
     el.addEventListener("dragend", () => {
       el.classList.remove("tilt-on-drag");
     });
   });
 }
+// ----------------------------------------------------

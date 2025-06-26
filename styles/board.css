@@ -190,7 +190,8 @@ div#shadow-container{
       gap: 24px;
      }
      span.card-name{
-      width: 113px;
+      display: inline-block;
+      width: fit-content;
       height: 27px;
       border-radius: 8px;
       padding: 4px 16px 4px 16px;
@@ -287,7 +288,6 @@ div.card-name-overlay{
 
 }
 div.card-name-overlay span.card-name{
-  width: 164px;
   height: 36px;
   padding: 4px 24px 4px 24px;
   font-size: 23px;

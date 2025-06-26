@@ -1,19 +1,19 @@
-function boardTaskOverlay() {
+function boardTaskOverlay(task) {
   return `
   <div id="task-overlay">
               <div class="card-name-overlay">
-                <span class="card-name"> User Story </span>
+                <span class="card-name">${task.category}</span>
                 <span class="close-overlay" onclick="closeContainerOverlay()"
                   ><img src="../assets/icons/close.png"
                 /></span>
               </div>
               <div class="card-description card-description-overlay">
-                <h1>Kochwelt Page & Recipe Recommender</h1>
-                <p>Build start page with recipe recommendation.</p>
+                <h1>${task.title}</h1>
+                <p>${task.description}</p>
               </div>
               <div class="date">
                 <span
-                  >Due date: <span class="content-value">23/10/2015</span></span
+                  >Due date: <span class="content-value">${task.dueDate}</span></span
                 >
               </div>
               <div class="priority-card date">
@@ -87,14 +87,16 @@ function boardTaskOverlay() {
               </div>
             </div>`;
 }
-function generateTodoHTML(element) {
+function generateTodoHTML(task) {
   return `
-         <div class="card todo task" onclick="containerOverlay()" draggable="true" ondragstart="startDragging(${element["id"]})">
+         <div class="card todo task" draggable="true" data-task='${JSON.stringify(
+           task
+         )}' ondragstart="startDragging(${task.id})">
                 <div class="card-content">
-                  <span class="card-name"> User Story </span>
+                  <span class="card-name"> ${task.category}</span>
                   <div class="card-description">
-                    <h4>Kochwelt Page & Recipe Recommender</h4>
-                    <p>Build start page with recipe recommendation...</p>
+                    <h4>${task.title}</h4>
+                    <p>${task.description}</p>
                   </div>
                   <div class="progress-bar">
                     <div class="bar"><span class="col-bar"></span></div>
