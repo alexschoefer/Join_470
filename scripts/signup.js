@@ -1,4 +1,5 @@
 const fetchURLDataBase = "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/"
+let isEmailAlreadyUsed = false;
 
 function validateSignupInput(input) {
     const errorMessage = document.getElementById(input.id + '-validation-message');
@@ -29,6 +30,24 @@ function checkRequiredInputEmail(input) {
     }
 }
 
+async function checkEmailAlreadyExist(input) {
+    let email = document.getElementById('usermail-input').value.trim();
+    let response = await fetch(fetchURLDataBase + '/users.json');
+    let useremails = await response.json();
+    let signupEmail = useremails && Object.values(useremails).find(
+        user => user.email === email);
+        signupEmail ? (isEmailAlreadyUsed = true, showEmailAlreadyExistError(input)) : (isEmailAlreadyUsed = false, clearErrorMessage(input));
+        validateSignUpForm();
+}
+
+function showEmailAlreadyExistError(input) {
+    let errorMessage = document.getElementById('usermail-input-validation-message');
+    let wrapper = input.closest('.user-input-wrapper');
+    errorMessage.innerHTML = 'An account already exists for this e-mail address. Please check.';
+    errorMessage.classList.remove('d_none');
+    wrapper.classList.add('input-error');
+}
+
 function isValidEmail(email) {
     let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     return emailRegex.test(email.trim());
@@ -39,6 +58,7 @@ function clearErrorMessage(input) {
     let wrapper = input.closest('.user-input-wrapper');
     errorMessage.classList.add('d_none');
     wrapper.classList.remove('input-error');
+    errorMessage.innerHTML = '';
 }
 
 function changePasswordIcon(input) {
@@ -89,7 +109,7 @@ function validateSignUpForm() {
     const emailInput = document.getElementById('usermail-input');
     const emailOK = isValidEmail(emailInput.value);
     const checkboxOK = isPrivacyPolicyChecked();
-    const formValid = filled && emailOK && checkboxOK;
+    const formValid = filled && emailOK && checkboxOK && !isEmailAlreadyUsed;
     setSignUpButtonState(formValid);
 }
 
