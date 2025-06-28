@@ -8,6 +8,7 @@ const ATButtonPrioButtonLowRef = document.getElementById('add-task-prio-button-l
 const ATAssignToRef = document.getElementById('add-task-assign-to');
 const ATCategoryRef = document.getElementById('add-task-category');
 const ATSubtasksRef = document.getElementById('add-task-subtasks');
+const ATSubtaskInput = document.getElementById('add-task-subtasks-input');
 const ATButtonAddTaskRef = document.getElementById('add-task-button-create-task');
 const ATButtonCancelRef = document.getElementById('add-task-cancel-button');
 const allSubtasks = document.getElementById('allSubtasks');
@@ -71,15 +72,7 @@ async function postAddTaskDataToFirebase(title, description, date, priority, sta
 
 
 function resetAddTaskForm() {
-    document.getElementById('add-task-title').value = '';
-    document.getElementById('add-task-description-textarea').value = '';
-    document.getElementById('add-task-due-date-input').value = '';
-    // document.getElementById('add-task-assign-to').value = '';
-    document.getElementById('add-task-category').value = '';
-    document.getElementById('add-task-subtasks-input').value = '';
-    // ATButtonPrioButtonUrgentRef.classList.remove("add-task-priority-button-urgent-active");
-    // ATButtonPrioButtonMediumRef.classList.remove("add-task-priority-button-medium-active");
-    // ATButtonPrioButtonLowRef.classList.remove("add-task-priority-button-low-active");
+    ATSubtaskInput.value = "";
 }
 
 function addTaskPrioButtonClick(state) {
@@ -92,39 +85,44 @@ function getAddTaskCategory() {
 }
 
 function subtasksToArray() {
-const inputData = document.getElementById('add-task-subtasks-input').value;
-subtasks.push(inputData);
-console.log(inputData);
-console.log(subtasks);
-return inputData;
+    const inputData = document.getElementById('add-task-subtasks-input').value;
+    subtasks.push(inputData);
+    return inputData;
 }
 
 
 function addTaskAddSubtask() {
     subtasksToArray();
+    subtaskRander();
+    resetAddTaskForm();
+}
+
+function subtaskRander() {
     allSubtasks.innerHTML = "";
     for (let i = 0; i < subtasks.length; i++) {
         let subtaski = subtasks[i];
         allSubtasks.innerHTML += `<div id="add-task-subtask-template" class="add-task-subtask-style">
-                 <input id="ATSubtask-container" type="text" title="ATSubtask-container" class="ATSubtask-container"
+                 <input id="ATSubtask-container-${i}" type="text" title="ATSubtask-container" class="ATSubtask-container"
                      value="${subtaski}">
-                 <div class="add-task-subtasks-icons" id="add-task-subtasks-icons">
-                     <div id="add-task-subtasks-icon-edit" class="add-task-subtasks-icon-edit" onclick="editAddTaskSubtask()">
+                 <div class="add-task-subtasks-icons" id="add-task-subtasks-icons-${i}">
+                     <div id="add-task-subtasks-icon-edit-${i}" class="add-task-subtasks-icon-edit" onclick="editAddTaskSubtask(${i})">
                      </div>
                      <div id="add-task-subtasks-icons-divider" class="add-task-subtasks-icons-divider">
                      </div>
-                     <div id="add-task-subtasks-icon-delete" class="add-task-subtasks-icon-delete" onclick="deleteAddTaskSubtask()">
+                     <div id="add-task-subtasks-icon-delete-${i}" class="add-task-subtasks-icon-delete" onclick="deleteAddTaskSubtask(${i})">
                      </div>
                  </div>
              </div>`
-    
-}}
-  
+
+    }
+}
 
 function editAddTaskSubtask() {
     // Logic to edit a subtask
 }
 
-function deleteAddTaskSubtask() {
+function deleteAddTaskSubtask(index) {
+    subtasks.splice(index, 1);
+    subtaskRander();
     // Logic to delete a subtask
 }
