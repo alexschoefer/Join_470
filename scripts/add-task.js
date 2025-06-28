@@ -53,6 +53,21 @@ async function checkIdAmount() {
     return id;
 }
 
+function subtasksToArray() {
+
+let subtasks = [
+      { title: "Save selected theme in localStorage", done: true },
+      { title: "Save selected theme in localStorage", done: false },
+      { title: "Load and apply theme on page load", done: false },
+    ];
+
+}
+
+function assignedToArray() {
+    let assigned = ["Alan Turing", "Shafi Goldwasser"];
+   return assigned;
+}
+
 function saveUserInputsForFirebase() {
     // event.preventDefault();
     // let id = checkIdAmount();
@@ -60,22 +75,15 @@ function saveUserInputsForFirebase() {
     let description = ATDescriptionRef.value;
     let date = ATDueDateRef.value;
     let priority = prioButtonState;
+    let status = "toDo";
     let assignTo = ATAssignToRef.value;
     let category = ATCategoryRef.value;
     let subtasks = ATSubtasksRef.value;
-    console.log("Title:", title);
-    console.log("Description:", description);
-    console.log("Date:", date);
-    console.log("Priority:", priority);
-    console.log("Assign To:", assignTo);
-    console.log("Category:", category);
-    console.log("Subtasks:", subtasks);
-
-    postAddTaskDataToFirebase(title, description, date, priority, assignTo, category, subtasks);
+    postAddTaskDataToFirebase(title, description, date, priority, status, assignTo, category, subtasks);
 }
 
 
-async function postAddTaskDataToFirebase(title, description, date, priority, assignTo, category, subtasks) {
+async function postAddTaskDataToFirebase(title, description, date, priority, status, assignTo, category, subtasks) {
     let response = await fetch(fetchURLDataBase + '/taskData' + ".json", {
         method: "POST",
         headers: {
@@ -83,14 +91,15 @@ async function postAddTaskDataToFirebase(title, description, date, priority, ass
         },
         body: JSON.stringify(
             {
-                // "id": id,
+                "id": await checkIdAmount(),
                 "title": title,
                 "description": description,
-                "date": date,
                 "priority": priority,
-                "assignTo": assignTo,
-                "category": category,
-                "subtasks": subtasks
+                "status": status,
+                "dueDate": date,
+                "subtasks": subtasks,
+                "assigned": assignTo,
+                "category": getAddTaskCategory()
             }
         )
     });   
@@ -117,3 +126,7 @@ function addTaskPrioButtonClick(state) {
     prioButtonState = state;
 }
 
+function getAddTaskCategory() {
+    let category = ATCategoryRef.value;
+    return category;
+}

@@ -211,11 +211,10 @@
 
 .add-task-form-buttons {
   width: 976.25px;
+  height: 200px;
   display: flex;
   justify-content: space-between;
   align-items: end;
-  padding-top: 160.24px;
-  padding-bottom: 64px;
 }
 
 .label-add-task {
@@ -256,12 +255,86 @@
   border: 1px solid #D1D1D1;
 }
 
-.add-task-input-style:active{
-border: 1px solid var(--light-blue);
+.add-task-input-style:active {
+  border: 1px solid var(--light-blue);
 }
 
 .add-task-input-style:hover {
   cursor: pointer;
+}
+
+.add-task-subtask-style {
+  width: 440px;
+  height: 32px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 6px;
+  padding-right: 16px;
+  padding-bottom: 6px;
+  padding-left: 16px;
+  gap: 10px;
+  border-width: 1px;
+  border-radius: 10px;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  cursor: pointer;
+
+
+}
+
+.add-task-subtask-style:hover {
+  background-color: #f1f1f1;
+  animation-timing-function: ease-out;
+  animation-duration: 100ms;
+}
+
+.add-task-subtask-style:hover .ATSubtask-container {
+  background-color: #f1f1f1;
+  animation-timing-function: ease-out;
+  animation-duration: 100ms;
+}
+
+.add-task-subtasks-icon-add {
+  background-image: url(../assets/icons/add-task-add.png);
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.add-task-subtasks-icon-add:hover {
+  background-image: url(../assets/icons/add-task-add-hover.png);
+}
+
+
+.ATSubtask-container {
+  border: none;
+  background: #F6F7F8;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  letter-spacing: 0%;
+}
+
+.ATSubtask-container:hover {
+  border: none;
+  background: #D1D1D1;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  letter-spacing: 0%;
+}
+
+.allSubtasks {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .add-task-placeholder-style {
@@ -485,11 +558,67 @@ border: 1px solid var(--light-blue);
 }
 
 .add-task-subtasks-icons {
-  background-color: aqua;
   width: 56px;
   height: 24px;
   gap: 4px;
   display: flex;
   justify-content: end;
   align-items: center;
+}
+
+.add-task-subtasks-icon-delete {
+  background-image: url(../assets/icons/add-task-delete.png);
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.add-task-subtasks-icon-delete:hover {
+  background-image: url(../assets/icons/add-task-delete-hover.png);
+}
+
+.add-task-subtasks-icon-edit {
+  background-image: url(../assets/icons/add-task-edit.png);
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.add-task-subtasks-icon-edit:hover {
+  background-image: url(../assets/icons/add-task-edit-hover.png);
+}
+
+#add-task-category:focus,
+#add-task-category:active {
+  outline: none;
+  border: 1px solid var(--light-blue);
+  box-shadow: none;
+}
+
+#add-task-title-input:focus,
+#add-task-title-input:active {
+  outline: none;
+  border: 1px solid var(--light-blue);
+  box-shadow: none;
+}
+
+#add-task-description-input:focus,
+#add-task-description-input:active {
+  outline: none;
+  border: 1px solid var(--light-blue);
+  box-shadow: none;
+}
+
+#add-task-description-textarea:focus,
+#add-task-description-textarea:active {
+  outline: none;
+  border: 1px solid var(--light-blue);
+  box-shadow: none;
+}
+
+#add-task-due-date-input:focus,
+#add-task-due-date-input:active {
+  outline: none;
+  border: 1px solid var(--light-blue);
+  box-shadow: none;
 }
