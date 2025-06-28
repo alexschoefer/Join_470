@@ -1,17 +1,18 @@
 <head>
   <link rel="stylesheet" href="../styles/header.css" />
+  <link rel="stylesheet" href="../styles/standard.css">
 </head>
-<body>
+<body onload="render()">
   <header>
     <div class="content-limit">
       <div class="header-content">
         <h1>Kanban Project Management Tool</h1>
         <div class="header-user-content">
           <img id="help-icon" src="../assets/icons/help.png" alt="" />
-          <img id="guest-icon" src="../assets/icons/guest-icon.png" alt="" />
+          <img onclick="ShowBurgerMenu()" id="guest-icon" src="../assets/icons/guest-icon.png" alt="" />
         </div>
       </div>
-      <div id="burger-menu" class="burger-menu">
+      <div id="burger-menu" class="burger-menu d_none">
         <a class="burger-menu-button" href="#">Legal Notice</a>
         <a class="burger-menu-button" href="#">Privacy Policy</a>
         <a class="burger-menu-button" href="#">Log out</a>
