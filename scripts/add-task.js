@@ -86,6 +86,9 @@ function getAddTaskCategory() {
 
 function subtasksToArray() {
     const inputData = document.getElementById('add-task-subtasks-input').value;
+    if(inputData == ""){
+        return;
+    }
     subtasks.push(inputData);
     return inputData;
 }
