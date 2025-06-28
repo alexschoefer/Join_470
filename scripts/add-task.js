@@ -10,62 +10,22 @@ const ATCategoryRef = document.getElementById('add-task-category');
 const ATSubtasksRef = document.getElementById('add-task-subtasks');
 const ATButtonAddTaskRef = document.getElementById('add-task-button-create-task');
 const ATButtonCancelRef = document.getElementById('add-task-cancel-button');
+const allSubtasks = document.getElementById('allSubtasks');
 let prioButtonState = 0;
-
-// 'function addTaskPrioButtonClick(buttonState) {
-//     ATPrioButtonDefaultState();
-//   console.log(buttonState);
-
-//     switch (buttonState) {
-//         case 'urgent':
-//         ATButtonPrioButtonUrgentRef.classList.add("add-task-priority-button-urgent-active");
-//         break;
-//         case 'medium':
-//         ATButtonPrioButtonMediumRef.classList.add("add-task-priority-button-medium-active");
-//         break;
-//         case 'low':
-//         ATButtonPrioButtonLowRef.classList.add("add-task-priority-button-low-active");
-//         break;
-//         default:
-//         return;
-//     }
-
-// }
-
-// function ATPrioButtonDefaultState() {
-//     ATButtonPrioButtonUrgentRef.classList = "add-task-priority-button-urgent-active" ?  ATButtonPrioButtonUrgentRef.classList.remove("add-task-priority-button-urgent-active") : 
-//     ATButtonPrioButtonMediumRef.classList = ("add-task-priority-button-medium-active") ;
-
-//     ATButtonPrioButtonMediumRef.classList.remove("add-task-priority-button-medium-active");
-//     ATButtonPrioButtonLowRef.classList.remove("add-task-priority-button-low-active");
-// }'
+let subtasks = [];
+let subtasksObject = {};
+let arrayOFsubtasksObjects = [];
 
 async function sendAddTaskData() {
-   saveUserInputsForFirebase();
+    saveUserInputsForFirebase();
 
 }
 
 async function checkIdAmount() {
-    
     let response = await fetch(fetchURLDataBase + '/taskData' + ".json");
     let data = await response.json();
     let id = Object.keys(data).length + 1;
     return id;
-}
-
-function subtasksToArray() {
-
-let subtasks = [
-      { title: "Save selected theme in localStorage", done: true },
-      { title: "Save selected theme in localStorage", done: false },
-      { title: "Load and apply theme on page load", done: false },
-    ];
-
-}
-
-function assignedToArray() {
-    let assigned = ["Alan Turing", "Shafi Goldwasser"];
-   return assigned;
 }
 
 function saveUserInputsForFirebase() {
@@ -77,8 +37,8 @@ function saveUserInputsForFirebase() {
     let priority = prioButtonState;
     let status = "toDo";
     let assignTo = ATAssignToRef.value;
-    let category = ATCategoryRef.value;
-    let subtasks = ATSubtasksRef.value;
+    let category = getAddTaskCategory();
+    let subtasks = subtasksToArray();
     postAddTaskDataToFirebase(title, description, date, priority, status, assignTo, category, subtasks);
 }
 
@@ -99,10 +59,10 @@ async function postAddTaskDataToFirebase(title, description, date, priority, sta
                 "dueDate": date,
                 "subtasks": subtasks,
                 "assigned": assignTo,
-                "category": getAddTaskCategory()
+                "category": category,
             }
         )
-    });   
+    });
     resetAddTaskForm();
     return responseToJson = await response.json();
 }
@@ -129,4 +89,42 @@ function addTaskPrioButtonClick(state) {
 function getAddTaskCategory() {
     let category = ATCategoryRef.value;
     return category;
+}
+
+function subtasksToArray() {
+const inputData = document.getElementById('add-task-subtasks-input').value;
+subtasks.push(inputData);
+console.log(inputData);
+console.log(subtasks);
+return inputData;
+}
+
+
+function addTaskAddSubtask() {
+    subtasksToArray();
+    allSubtasks.innerHTML = "";
+    for (let i = 0; i < subtasks.length; i++) {
+        let subtaski = subtasks[i];
+        allSubtasks.innerHTML += `<div id="add-task-subtask-template" class="add-task-subtask-style">
+                 <input id="ATSubtask-container" type="text" title="ATSubtask-container" class="ATSubtask-container"
+                     value="${subtaski}">
+                 <div class="add-task-subtasks-icons" id="add-task-subtasks-icons">
+                     <div id="add-task-subtasks-icon-edit" class="add-task-subtasks-icon-edit" onclick="editAddTaskSubtask()">
+                     </div>
+                     <div id="add-task-subtasks-icons-divider" class="add-task-subtasks-icons-divider">
+                     </div>
+                     <div id="add-task-subtasks-icon-delete" class="add-task-subtasks-icon-delete" onclick="deleteAddTaskSubtask()">
+                     </div>
+                 </div>
+             </div>`
+    
+}}
+  
+
+function editAddTaskSubtask() {
+    // Logic to edit a subtask
+}
+
+function deleteAddTaskSubtask() {
+    // Logic to delete a subtask
 }

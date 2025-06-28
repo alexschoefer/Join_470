@@ -239,7 +239,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 48px;
+  height: 49px;
   padding-top: 12px;
   padding-right: 16px;
   padding-bottom: 12px;
@@ -335,6 +335,8 @@
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .add-task-placeholder-style {
@@ -346,13 +348,7 @@
   letter-spacing: 0%;
 }
 
-.add-task-placeholder-style::placeholder {
-  color: var(--style);
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 120%;
-  letter-spacing: 0%;
-}
+
 
 .add-task-input-placeholder-style {
   border: #fff;
@@ -550,10 +546,10 @@
   justify-content: space-between;
   align-items: center;
   width: 440px;
+  height: 48px;
   border-radius: 10px;
   border: 1px solid #D1D1D1;
   background-color: #fff;
-  height: 48px;
   position: relative;
 }
 
