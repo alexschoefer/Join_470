@@ -147,3 +147,11 @@ function deleteAddTaskSubtask(index) {
     subtasks.splice(index, 1);
     subtaskRender();
 }
+
+function startTaskAddedFinishAnimation(){
+    const logo = document.getElementById("add-task-finish-animation");
+    setTimeout(() => {
+        logo.classList.add("add-task-start-overlay-animation");
+        logo.classList.add("add-task-finish-overlay-animation");
+    }, 100);
+}

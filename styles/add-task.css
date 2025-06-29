@@ -618,8 +618,20 @@
   box-shadow: none;
 }
 
+.add-task-start-overlay-animation{
+   position: absolute;
+    top: 90%;
+    left: 50%;
+    width: 247px;
+    height: auto;
+}
+
 .add-task-finish-overlay-animation{
-  
+   position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 247px;
+    height: auto;
 }
 
 .add-task-finish-ovelay {
@@ -639,7 +651,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 123px;
+  width: 200px;
   height: 24px;
   font-weight: 300;
   font-size: 20px;
