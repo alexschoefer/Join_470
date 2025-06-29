@@ -32,7 +32,7 @@ async function saveUserInputsForFirebase() {
     let priority = prioButtonState;
     let status = "toDo";
     let assignTo = "Branislav"; // assignedTo is a part of code, that has to be changed by dynamic version of contacts
-        // let assignTo = ATAssignToRef.value;
+    // let assignTo = ATAssignToRef.value;
     let category = ATCategoryRef.value;
     let subtasks = getSubtasksArray();;
     postAddTaskDataToFirebase(title, description, date, priority, status, assignTo, category, subtasks);
@@ -47,7 +47,7 @@ async function checkIdAmount() {
 
 async function subtasksToArray() {
     const inputData = document.getElementById('add-task-subtasks-input').value;
-    if(inputData == ""){
+    if (inputData == "") {
         return;
     }
     subtasks.push(inputData);
@@ -97,7 +97,7 @@ function resetAddTaskForm() {
     ATSubtaskInput.value = "";
     const subtaskInputs = document.querySelectorAll('.ATSubtask-container');
     subtasks = [];
-    subtaskInputs.forEach(input =>  input.value = "" );
+    subtaskInputs.forEach(input => input.value = "");
 }
 
 function addTaskPrioButtonClick(state) {
@@ -105,8 +105,8 @@ function addTaskPrioButtonClick(state) {
 }
 
 
-function resetAddTaskSubtaskInput(){
-       ATSubtaskInput.value = "";
+function resetAddTaskSubtaskInput() {
+    ATSubtaskInput.value = "";
 }
 
 
@@ -148,10 +148,14 @@ function deleteAddTaskSubtask(index) {
     subtaskRender();
 }
 
-function startTaskAddedFinishAnimation(){
-    const logo = document.getElementById("add-task-finish-animation");
-    setTimeout(() => {
-        logo.classList.add("add-task-start-overlay-animation");
-        logo.classList.add("add-task-finish-overlay-animation");
-    }, 100);
-}
+// function startTaskAddedFinishAnimation() {
+//     const logo = document.getElementById("add-task-finish-animation");
+//     logo.classList.remove("d_none");
+//     logo.classList.remove("add-task-finish-overlay-animation");
+//     void logo.offsetWidth;
+//     logo.classList.add("add-task-finish-overlay-animation");
+//     setTimeout(() => {
+//         logo.classList.add("d_none");
+//         logo.classList.remove("add-task-finish-overlay-animation");
+//     }, 1000);
+// }
