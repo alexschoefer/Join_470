@@ -17,35 +17,39 @@ let subtasks = [];
 let subtasksObject = {};
 let arrayOFsubtasksObjects = [];
 
+// assignedTo is a part of code, that has to be changed by dynamic version of contacts
+let assignTo = "Branislav";
+
 async function sendAddTaskData() {
     saveUserInputsForFirebase();
 
 }
 
 async function checkIdAmount() {
-    let response = await fetch(fetchURLDataBase + '/taskData' + ".json");
+    let response = await fetch(fetchURLDataBase + '/tasks' + ".json");
     let data = await response.json();
+    console.log(data);
+    
     let id = Object.keys(data).length + 1;
     return id;
 }
 
-function saveUserInputsForFirebase() {
-    // event.preventDefault();
-    // let id = checkIdAmount();
+async function saveUserInputsForFirebase(id) {
+    id = await checkIdAmount();
     let title = ATTitleRef.value;
     let description = ATDescriptionRef.value;
     let date = ATDueDateRef.value;
     let priority = prioButtonState;
     let status = "toDo";
-    let assignTo = ATAssignToRef.value;
+    // let assignTo = ATAssignToRef.value;
     let category = getAddTaskCategory();
-    let subtasks = subtasksToArray();
+    let subtasks = await subtasksToArray();
     postAddTaskDataToFirebase(title, description, date, priority, status, assignTo, category, subtasks);
 }
 
 
 async function postAddTaskDataToFirebase(title, description, date, priority, status, assignTo, category, subtasks) {
-    let response = await fetch(fetchURLDataBase + '/taskData' + ".json", {
+    let response = await fetch(fetchURLDataBase + '/tasks' + ".json", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -84,23 +88,25 @@ function getAddTaskCategory() {
     return category;
 }
 
-function subtasksToArray() {
+async function subtasksToArray() {
     const inputData = document.getElementById('add-task-subtasks-input').value;
     if(inputData == ""){
         return;
     }
     subtasks.push(inputData);
+    console.log(subtasks);
+    
     return inputData;
 }
 
 
 function addTaskAddSubtask() {
     subtasksToArray();
-    subtaskRander();
+    subtaskRender();
     resetAddTaskForm();
 }
 
-function subtaskRander() {
+function subtaskRender() {
     allSubtasks.innerHTML = "";
     for (let i = 0; i < subtasks.length; i++) {
         let subtaski = subtasks[i];
@@ -126,6 +132,5 @@ function editAddTaskSubtask() {
 
 function deleteAddTaskSubtask(index) {
     subtasks.splice(index, 1);
-    subtaskRander();
-    // Logic to delete a subtask
+    subtaskRender();
 }
