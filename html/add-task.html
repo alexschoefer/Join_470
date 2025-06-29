@@ -11,16 +11,21 @@
     <link rel="stylesheet" href="../styles/fonts.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../styles/add-task.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&family=Teko:wght@300..700&display=swap"
+        rel="stylesheet" />
+
     <script src="../scripts/include.js"></script>
-    
+
 </head>
 
 <body>
-
-    <main class="main-content">
+    <div class="app-layout">
         <div id="sidebar"></div>
-        <div class="add-task-app-height">
-            <div id="header"></div>
+        <div id="header"></div>
+        <main id="add-task-main-content" class="main-content">
             <div class="add-task">
                 <div class="add-task-content">
                     <div class="add-task-title">
@@ -47,13 +52,15 @@
                                         class="mobile-required-text-no-asterix"></span>
                                 </div>
                                 <div class="add-task-form-left-title">
-                                    <p class="label-add-task">Due Date<span class="red-asterix-required">*</span></p>
+                                    <p class="label-add-task">Due Date<span class="red-asterix-required">*</span>
+                                    </p>
                                     <div class="add-task-due-date-wraper">
                                         <input name="add-task-due-date" type="date" id="add-task-due-date-input"
                                             class="add-task-input-style add-task-due-date-input"
                                             placeholder="dd/mm/yyyy" required>
                                         <span id="mobile-required-text-no-asterix-due-date"
-                                            class="mobile-required-text-no-asterix d-none">This field is required</span>
+                                            class="mobile-required-text-no-asterix d-none">This field is
+                                            required</span>
                                     </div>
                                 </div>
                             </div>
@@ -83,24 +90,26 @@
                                 </div>
                                 <div class="add-task-form-right-select-contacts">
                                     <p class="label-add-task">Assigned to</p>
-                                    <select name="add-task-assigned-to" 
-                                        class="add-task-input-style add-task-placeholder-black"
-                                        placeholder="Select contacts to assign">
-                                        <option id="add-task-assigned-to" value="contactToChoose"
-                                            class="label-add-task add-task-placeholder-black">Select contacts to assign
+                                    <select id="add-task-assigned-to-select" title="add-task-assigned-to"
+                                        name="add-task-assigned-to"
+                                        class="add-task-input-style add-task-placeholder-black">
+                                        <option id="add-task-assigned-to" value=""
+                                            class="label-add-task add-task-placeholder-black">Select contacts to
+                                            assign
                                         </option>
-                                        <option value="saab" class="label-add-task add-task-placeholder-black">dynamic
-                                            data</option>
+                                        <option value="saab" class="label-add-task add-task-placeholder-black">
+                                            dynamic
+                                            data of contacts</option>
                                     </select>
                                 </div>
                                 <div class="add-task-form-right-category">
-                                    <label class="label-add-task">Category<span
-                                            class="red-asterix-required">*</span></label>
-                                    <select name="add-task-category" type="text"
+                                    <p class="label-add-task">Category<span class="red-asterix-required">*</span></p>
+                                    <select title="add-task-category" name="add-task-category" type="text"
                                         class="label-add-task add-task-input-style" id="add-task-category"
-                                        class="add-task-placeholder-black" placeholder="Select task category" required>
-                                        <option value="technicalTask" class="label-add-task">Technical Task</option>
-                                        <option value="userStory" class="label-add-task">User Story</option>
+                                        class="add-task-placeholder-black" required>
+                                        <option value="" class="label-add-task">Select Task Category</option>
+                                        <option value="Technical Task" class="label-add-task">Technical Task</option>
+                                        <option value="User Story" class="label-add-task">User Story</option>
                                     </select>
                                 </div>
                                 <div class="add-task-form-right-subtasks">
@@ -110,38 +119,51 @@
                                             <input type="text"
                                                 class="add-task-placeholder-style add-task-input-placeholder-style"
                                                 id="add-task-subtasks-input" placeholder="Add new subtask">
-                                            <div id="add-task-subtasks-icon-add" class="add-task-subtasks-icon-add">
-                                                <img src="../assets/icons/add-task-subtasks-add.svg" alt="icon-add">
+                                            <div id="add-task-subtasks-icon-add" class="add-task-subtasks-icon-add"
+                                                onclick="addTaskAddSubtask()">
+
                                             </div>
                                         </div>
-
                                     </div>
-
-                                    <div class="add-task-subtasks-icons" id="add-task-subtasks-icons">
-                                        <div id="add-task-subtasks-icon-delete" class="add-task-subtasks-icon-delete">
-                                        </div>
-                                        <div id="add-task-subtasks-icons-divider"
-                                            class="add-task-subtasks-icons-divider"></div>
-                                        <div id="add-task-subtasks-icon-add" class="add-task-subtasks-icon-add"></div>
-                                    </div>
-                                    <div id="allSubtasks" class="allSubtasks"></div>
-
                                 </div>
                             </div>
-
-
-
-
-
+                        </div>
+                        <div id="allSubtasks" class="allSubtasks">
+                            <div id="add-task-subtask-template" class="add-task-subtask-style">
+                                <input id="ATSubtask-container" type="text" title="ATSubtask-container"
+                                    class="ATSubtask-container" value="what ever you say!">
+                                <div class="add-task-subtasks-icons" id="add-task-subtasks-icons">
+                                    <div id="add-task-subtasks-icon-edit" class="add-task-subtasks-icon-edit"
+                                        onclick="editAddTaskSubtask()">
+                                    </div>
+                                    <div id="add-task-subtasks-icons-divider" class="add-task-subtasks-icons-divider">
+                                    </div>
+                                    <div id="add-task-subtasks-icon-delete" class="add-task-subtasks-icon-delete"
+                                        onclick="deleteAddTaskSubtask()">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="add-task-form-buttons">
                             <div>
-                                <span class="label-add-task"><span class="red-asterix-required">*</span>This field is
+                                <span class="label-add-task"><span class="red-asterix-required">*</span>This field
+                                    is
                                     required
                                 </span>
                             </div>
+                            <div id="add-task-finish-animation" class="add-task-finish-animation d_none">
+                                <div id="add-task-finish-animation" class="add-task-start-overlay-animation">
+                                    <div class="add-task-finish-ovelay">
+                                        <span class="add-task-finish-ovelay-text">Task Added to Board</span>
+                                        <img class="add-task-finish-ovelay-img" src="../assets/icons/board-icon.png"
+                                            alt="">
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="add-task-buttons-create-and-clear">
-                                <button onclick="resetAddTaskForm()" type="button" id="label-add-task add-task-button-clear"
+                                <button onclick="resetAddTaskForm()" type="button"
+                                    id="label-add-task add-task-button-clear"
                                     class="label-add-task add-task-button-clear"><span
                                         class="add-task-button-clear-text">Clear</span><img
                                         class="add-task-button-clear-icon"
@@ -159,9 +181,9 @@
                     </form>
                 </div>
             </div>
-        </div>
 
-    </main>
+        </main>
+    </div>
     <script src="../scripts/add-task.js" defer></script>
 </body>
 

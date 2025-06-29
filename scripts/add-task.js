@@ -8,112 +8,154 @@ const ATButtonPrioButtonLowRef = document.getElementById('add-task-prio-button-l
 const ATAssignToRef = document.getElementById('add-task-assign-to');
 const ATCategoryRef = document.getElementById('add-task-category');
 const ATSubtasksRef = document.getElementById('add-task-subtasks');
+const ATSubtaskInput = document.getElementById('add-task-subtasks-input');
 const ATButtonAddTaskRef = document.getElementById('add-task-button-create-task');
 const ATButtonCancelRef = document.getElementById('add-task-cancel-button');
+const allSubtasks = document.getElementById('allSubtasks');
 let prioButtonState = 0;
+let subtasks = [];
+let subtasksObject = {};
+let arrayOFsubtasksObjects = [];
 
-// 'function addTaskPrioButtonClick(buttonState) {
-//     ATPrioButtonDefaultState();
-//   console.log(buttonState);
 
-//     switch (buttonState) {
-//         case 'urgent':
-//         ATButtonPrioButtonUrgentRef.classList.add("add-task-priority-button-urgent-active");
-//         break;
-//         case 'medium':
-//         ATButtonPrioButtonMediumRef.classList.add("add-task-priority-button-medium-active");
-//         break;
-//         case 'low':
-//         ATButtonPrioButtonLowRef.classList.add("add-task-priority-button-low-active");
-//         break;
-//         default:
-//         return;
-//     }
 
-// }
-
-// function ATPrioButtonDefaultState() {
-//     ATButtonPrioButtonUrgentRef.classList = "add-task-priority-button-urgent-active" ?  ATButtonPrioButtonUrgentRef.classList.remove("add-task-priority-button-urgent-active") : 
-//     ATButtonPrioButtonMediumRef.classList = ("add-task-priority-button-medium-active") ;
-
-//     ATButtonPrioButtonMediumRef.classList.remove("add-task-priority-button-medium-active");
-//     ATButtonPrioButtonLowRef.classList.remove("add-task-priority-button-low-active");
-// }'
 
 async function sendAddTaskData() {
-   saveUserInputsForFirebase();
+    saveUserInputsForFirebase();
+    resetAddTaskForm();
+}
 
+async function saveUserInputsForFirebase() {
+    let title = ATTitleRef.value;
+    let description = ATDescriptionRef.value;
+    let date = ATDueDateRef.value;
+    let priority = prioButtonState;
+    let status = "toDo";
+    let assignTo = "Branislav"; // assignedTo is a part of code, that has to be changed by dynamic version of contacts
+    // let assignTo = ATAssignToRef.value;
+    let category = ATCategoryRef.value;
+    let subtasks = getSubtasksArray();;
+    postAddTaskDataToFirebase(title, description, date, priority, status, assignTo, category, subtasks);
 }
 
 async function checkIdAmount() {
-    
-    let response = await fetch(fetchURLDataBase + '/taskData' + ".json");
+    let response = await fetch(fetchURLDataBase + '/tasks' + ".json");
     let data = await response.json();
     let id = Object.keys(data).length + 1;
     return id;
 }
 
-function saveUserInputsForFirebase() {
-    // event.preventDefault();
-    // let id = checkIdAmount();
-    let title = ATTitleRef.value;
-    let description = ATDescriptionRef.value;
-    let date = ATDueDateRef.value;
-    let priority = prioButtonState;
-    let assignTo = ATAssignToRef.value;
-    let category = ATCategoryRef.value;
-    let subtasks = ATSubtasksRef.value;
-    console.log("Title:", title);
-    console.log("Description:", description);
-    console.log("Date:", date);
-    console.log("Priority:", priority);
-    console.log("Assign To:", assignTo);
-    console.log("Category:", category);
-    console.log("Subtasks:", subtasks);
-
-    postAddTaskDataToFirebase(title, description, date, priority, assignTo, category, subtasks);
+async function subtasksToArray() {
+    const inputData = document.getElementById('add-task-subtasks-input').value;
+    if (inputData == "") {
+        return;
+    }
+    subtasks.push(inputData);
 }
 
-
-async function postAddTaskDataToFirebase(title, description, date, priority, assignTo, category, subtasks) {
-    let response = await fetch(fetchURLDataBase + '/taskData' + ".json", {
+async function postAddTaskDataToFirebase(title, description, date, priority, status, assignTo, category, subtasks) {
+    let response = await fetch(fetchURLDataBase + '/tasks' + ".json", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(
             {
-                // "id": id,
+                "id": await checkIdAmount(),
                 "title": title,
                 "description": description,
-                "date": date,
                 "priority": priority,
-                "assignTo": assignTo,
+                "status": status,
+                "dueDate": date,
+                "subtasks": subtasks,
+                "assigned": assignTo,
                 "category": category,
-                "subtasks": subtasks
             }
         )
-    });   
-    resetAddTaskForm();
+    });
     return responseToJson = await response.json();
 }
 
-
+function getSubtasksArray() {
+    const subtaskInputs = document.querySelectorAll('.ATSubtask-container');
+    subtasks = [];
+    subtaskInputs.forEach(input => {
+        const value = input.value.trim();
+        if (value) {
+            subtasks.push({ title: value, done: false });
+        }
+    });
+    return subtasks;
+}
 
 
 function resetAddTaskForm() {
-    document.getElementById('add-task-title').value = '';
-    document.getElementById('add-task-description-textarea').value = '';
-    document.getElementById('add-task-due-date-input').value = '';
-    // document.getElementById('add-task-assign-to').value = '';
-    document.getElementById('add-task-category').value = '';
-    document.getElementById('add-task-subtasks-input').value = '';
-    // ATButtonPrioButtonUrgentRef.classList.remove("add-task-priority-button-urgent-active");
-    // ATButtonPrioButtonMediumRef.classList.remove("add-task-priority-button-medium-active");
-    // ATButtonPrioButtonLowRef.classList.remove("add-task-priority-button-low-active");
+    ATTitleRef.value = "";
+    ATDescriptionRef.value = "";
+    ATDueDateRef.value = "";
+
+    ATSubtaskInput.value = "";
+    const subtaskInputs = document.querySelectorAll('.ATSubtask-container');
+    subtasks = [];
+    subtaskInputs.forEach(input => input.value = "");
 }
 
 function addTaskPrioButtonClick(state) {
     prioButtonState = state;
 }
 
+
+function resetAddTaskSubtaskInput() {
+    ATSubtaskInput.value = "";
+}
+
+
+
+
+
+function addTaskAddSubtask() {
+    subtasksToArray();
+    subtaskRender();
+    resetAddTaskSubtaskInput();
+}
+
+function subtaskRender() {
+    allSubtasks.innerHTML = "";
+    for (let i = 0; i < subtasks.length; i++) {
+        let subtaski = subtasks[i];
+        allSubtasks.innerHTML += `<div id="add-task-subtask-template" class="add-task-subtask-style">
+                 <input id="ATSubtask-container-${i}" type="text" title="ATSubtask-container" class="ATSubtask-container"
+                     value="${subtaski}">
+                 <div class="add-task-subtasks-icons" id="add-task-subtasks-icons-${i}">
+                     <div id="add-task-subtasks-icon-edit-${i}" class="add-task-subtasks-icon-edit" onclick="editAddTaskSubtask(${i})">
+                     </div>
+                     <div id="add-task-subtasks-icons-divider" class="add-task-subtasks-icons-divider">
+                     </div>
+                     <div id="add-task-subtasks-icon-delete-${i}" class="add-task-subtasks-icon-delete" onclick="deleteAddTaskSubtask(${i})">
+                     </div>
+                 </div>
+             </div>`
+
+    }
+}
+
+function editAddTaskSubtask() {
+    // Logic to edit a subtask
+}
+
+function deleteAddTaskSubtask(index) {
+    subtasks.splice(index, 1);
+    subtaskRender();
+}
+
+// function startTaskAddedFinishAnimation() {
+//     const logo = document.getElementById("add-task-finish-animation");
+//     logo.classList.remove("d_none");
+//     logo.classList.remove("add-task-finish-overlay-animation");
+//     void logo.offsetWidth;
+//     logo.classList.add("add-task-finish-overlay-animation");
+//     setTimeout(() => {
+//         logo.classList.add("d_none");
+//         logo.classList.remove("add-task-finish-overlay-animation");
+//     }, 1000);
+// }
