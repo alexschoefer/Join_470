@@ -17,9 +17,6 @@ let subtasks = [];
 let subtasksObject = {};
 let arrayOFsubtasksObjects = [];
 
-
-
-
 async function sendAddTaskData() {
     saveUserInputsForFirebase();
     resetAddTaskForm();
@@ -88,7 +85,6 @@ function getSubtasksArray() {
     return subtasks;
 }
 
-
 function resetAddTaskForm() {
     ATTitleRef.value = "";
     ATDescriptionRef.value = "";
@@ -104,14 +100,9 @@ function addTaskPrioButtonClick(state) {
     prioButtonState = state;
 }
 
-
 function resetAddTaskSubtaskInput() {
     ATSubtaskInput.value = "";
 }
-
-
-
-
 
 function addTaskAddSubtask() {
     subtasksToArray();
