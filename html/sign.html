@@ -46,21 +46,21 @@
                                 </div>
                             </div>
                             <div class="input-validation-container">
-                                <p id="username-input-validation-message" class="input-validation-message d_none">This field is required.</p>
+                                <p id="username-input-validation-message" class="input-validation-message d_none" data-default-message="This field is required.">This field is required.</p>
                             </div>
                         </div>
                         <!-- E-Mail-Input -->
                         <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
-                                    <input id="usermail-input" class="user-input" type="email" name="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" placeholder="Email" autocomplete="off" onfocus="clearErrorMessage(this)" onblur="validateSignupInput(this), checkRequiredInputEmail(this)">
+                                    <input id="usermail-input" class="user-input" type="email" name="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" placeholder="Email" autocomplete="off" onfocus="clearErrorMessage(this)" onblur="validateSignupInput(this), checkRequiredInputEmail(this), checkEmailAlreadyExist(this)">
                                     <div>
                                         <img class="email-icon" src="../assets/icons/mail-icon.png" alt="email-icon">
                                     </div>
                                 </div>
                             </div>
                             <div class="input-validation-container">
-                                <p id="usermail-input-validation-message" class="input-validation-message d_none">Please enter a valid email adress.</p>
+                                <p id="usermail-input-validation-message" class="input-validation-message d_none" data-default-message="Please enter a valid email address.">Please enter a valid email adress.</p>
                             </div>
                         </div>
                         <!-- Password-Input -->
@@ -74,7 +74,7 @@
                                 </div>
                             </div>
                             <div class="input-validation-container">
-                                <p id="userpassword-input-validation-message" class="input-validation-message d_none">This field is required.</p>
+                                <p id="userpassword-input-validation-message" class="input-validation-message d_none" data-default-message="This field is required.">This field is required.</p>
                             </div>
                         </div>
                         <!-- Password-Confirm-Input -->
