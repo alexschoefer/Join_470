@@ -90,7 +90,8 @@
                                 </div>
                                 <div class="add-task-form-right-select-contacts">
                                     <p class="label-add-task">Assigned to</p>
-                                    <select id="add-task-assigned-to-select" title="add-task-assigned-to" name="add-task-assigned-to"
+                                    <select id="add-task-assigned-to-select" title="add-task-assigned-to"
+                                        name="add-task-assigned-to"
                                         class="add-task-input-style add-task-placeholder-black">
                                         <option id="add-task-assigned-to" value=""
                                             class="label-add-task add-task-placeholder-black">Select contacts to
@@ -102,8 +103,7 @@
                                     </select>
                                 </div>
                                 <div class="add-task-form-right-category">
-                                    <p class="label-add-task">Category<span
-                                            class="red-asterix-required">*</span></p>
+                                    <p class="label-add-task">Category<span class="red-asterix-required">*</span></p>
                                     <select title="add-task-category" name="add-task-category" type="text"
                                         class="label-add-task add-task-input-style" id="add-task-category"
                                         class="add-task-placeholder-black" required>
@@ -119,7 +119,8 @@
                                             <input type="text"
                                                 class="add-task-placeholder-style add-task-input-placeholder-style"
                                                 id="add-task-subtasks-input" placeholder="Add new subtask">
-                                            <div id="add-task-subtasks-icon-add" class="add-task-subtasks-icon-add" onclick="addTaskAddSubtask()">
+                                            <div id="add-task-subtasks-icon-add" class="add-task-subtasks-icon-add"
+                                                onclick="addTaskAddSubtask()">
 
                                             </div>
                                         </div>
@@ -129,14 +130,16 @@
                         </div>
                         <div id="allSubtasks" class="allSubtasks">
                             <div id="add-task-subtask-template" class="add-task-subtask-style">
-                                <input id="ATSubtask-container" type="text" title="ATSubtask-container" class="ATSubtask-container"
-                                    value="what ever you say!">
+                                <input id="ATSubtask-container" type="text" title="ATSubtask-container"
+                                    class="ATSubtask-container" value="what ever you say!">
                                 <div class="add-task-subtasks-icons" id="add-task-subtasks-icons">
-                                    <div id="add-task-subtasks-icon-edit" class="add-task-subtasks-icon-edit" onclick="editAddTaskSubtask()">
+                                    <div id="add-task-subtasks-icon-edit" class="add-task-subtasks-icon-edit"
+                                        onclick="editAddTaskSubtask()">
                                     </div>
                                     <div id="add-task-subtasks-icons-divider" class="add-task-subtasks-icons-divider">
                                     </div>
-                                    <div id="add-task-subtasks-icon-delete" class="add-task-subtasks-icon-delete" onclick="deleteAddTaskSubtask()">
+                                    <div id="add-task-subtasks-icon-delete" class="add-task-subtasks-icon-delete"
+                                        onclick="deleteAddTaskSubtask()">
                                     </div>
                                 </div>
                             </div>
@@ -147,6 +150,12 @@
                                     is
                                     required
                                 </span>
+                            </div>
+                            <div class="add-task-finish-overlay-animation">
+                                <div class="add-task-finish-ovelay">
+                                    <span class="add-task-finish-ovelay-text">Task Added to Board</span>
+                                    <img class="add-task-finish-ovelay-img" src="../assets/icons/board-icon.png" alt="">
+                                </div>
                             </div>
                             <div class="add-task-buttons-create-and-clear">
                                 <button onclick="resetAddTaskForm()" type="button"
