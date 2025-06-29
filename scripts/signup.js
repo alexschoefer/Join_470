@@ -1,6 +1,14 @@
 const fetchURLDataBase = "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/"
 let isEmailAlreadyUsed = false;
 
+/**
+ * Validates a single input field in the signup form.
+ * 
+ * Displays an error message if the field is empty, and removes it if the input is valid.
+ * Also triggers re-validation of the entire signup form to update the submit button state.
+ *
+ * @param {HTMLInputElement} input - The input field to be validated.
+ */
 function validateSignupInput(input) {
     const errorMessage = document.getElementById(input.id + '-validation-message');
     const wrapper = input.closest('.user-input-wrapper');
@@ -16,6 +24,14 @@ function validateSignupInput(input) {
     validateSignUpForm();
 }
 
+/**
+ * Help-function - Checking the required input email
+ * 
+ * Displays an error message if the email is not valid by the function isValidEmail
+ * Also triggers re-validation of the entire signup form to update the submit button state.
+ * 
+ * @param {HTMLInputElement} input - The input field to be validated.
+ */
 function checkRequiredInputEmail(input) {
     let errorMessage = document.getElementById(input.id + '-validation-message');
     let wrapper = input.closest('.user-input-wrapper');
@@ -30,6 +46,13 @@ function checkRequiredInputEmail(input) {
     }
 }
 
+/** Help-function - Checking the given email adress for the sign up in the database.
+ * 
+ * If the given email adress is already by a user in the database an error message by the calling function showEmailAlreadyExistError
+ * Otherwise the error is cleared. The overall form validation is updated.
+ * 
+ * @param {HTMLInputElement} input - The email input field that is checking in the database. 
+ */
 async function checkEmailAlreadyExist(input) {
     let email = document.getElementById('usermail-input').value.trim();
     let response = await fetch(fetchURLDataBase + '/users.json');
@@ -40,6 +63,14 @@ async function checkEmailAlreadyExist(input) {
         validateSignUpForm();
 }
 
+/**
+ * Help-function - Displays an error message when the entered email address already exists in the database.
+ *
+ * Updates the validation message element with an appropriate error text,
+ * makes it visible, and applies a visual error style to the input wrapper.
+ *
+ * @param {HTMLInputElement} input - The email input field that triggered the error.
+ */
 function showEmailAlreadyExistError(input) {
     let errorMessage = document.getElementById('usermail-input-validation-message');
     let wrapper = input.closest('.user-input-wrapper');
@@ -48,11 +79,25 @@ function showEmailAlreadyExistError(input) {
     wrapper.classList.add('input-error');
 }
 
+/**
+ * Help-function - Validates a given user-email 
+ * 
+ * Trims the input and checks it against a regular expression pattern for basic email structure.
+ * 
+ * @param {string} email - The email adress to validate.
+ * @returns Returns true if the email is valid, otherwise false.
+ */
+
 function isValidEmail(email) {
     let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     return emailRegex.test(email.trim());
 }
 
+/** 
+ * Help-function - Clears all error messages by the input fields
+ * 
+ * @param {HTMLInputElement} input - 
+ */
 function clearErrorMessage(input) {
     let errorMessage = document.getElementById(input.id + '-validation-message');
     let wrapper = input.closest('.user-input-wrapper');
@@ -61,6 +106,14 @@ function clearErrorMessage(input) {
     errorMessage.innerHTML = '';
 }
 
+/**
+ * Changes the icon in the input field for password
+ * 
+ * If the length of the input is bigger than 0 then a new icon will be placed in the input field
+ * Otherwise if the field is empty, it shows a default lock icon.
+ * 
+ * @param {HTMLInputElement} input 
+ */
 function changePasswordIcon(input) {
     const container = input.closest('.input-container');
     const icon = container.querySelector('.password-icon');
@@ -74,6 +127,16 @@ function changePasswordIcon(input) {
     }
 }
 
+/**
+ * Toggles the visibility of a password input field.
+ * 
+ * Switches the input type between "password" and "text" based on its current state,
+ * allowing the user to show or hide the entered password. Also updates the icon accordingly.
+ *
+ * This function only toggles the input if it contains a non-empty value.
+ *
+ * @param {HTMLImageElement} iconElement - The eye icon element that was clicked to toggle visibility.
+ */
 function toggleInputTypePassword(iconElement) {
     const container = iconElement.closest('.input-container');
     const input = container.querySelector('input');
@@ -87,7 +150,14 @@ function toggleInputTypePassword(iconElement) {
     }
 }
 
-// prüft alle Inputfelder, ob sie gefüllt sind => Antwort true or false
+/**
+ * Help function - Checks whether all input fields with the class "user-input" have been filled out.
+ * 
+ * Iterates through all relevant input fields and returns false if any of them are empty
+ * (after trimming whitespace). Returns true only if all fields contain a value.
+ * 
+ * @returns {boolean} Returns true if all input fields are filled, otherwise false.
+ */
 function areAllInputsFilled() {
     const inputs = document.querySelectorAll('.user-input');
     for (let input of inputs) {
@@ -98,7 +168,11 @@ function areAllInputsFilled() {
     return true;
 }
 
-// Hilfsfunktion: prüft, ob die Privacy Police aktiv ist
+/**
+ * Help-functions - Checks if the button for privacy police is clicked
+ * 
+ * @returns {boolean} Returns true if the privacy policy checkbox is checked, otherwise false.
+ */
 function isPrivacyPolicyChecked() {
     return document.getElementById('checkbox-privacy-policy').checked;
 }
@@ -113,13 +187,22 @@ function validateSignUpForm() {
     setSignUpButtonState(formValid);
 }
 
-// finale Sign Up Button Freigabe
+/**
+ * Help-function - Enables or disables the sign-up button based on the provided state.
+ *
+ * @param {boolean} enabled - If true, the sign-up button is enabled; if false, it is disabled.
+ */
 function setSignUpButtonState(enabled) {
     const button = document.getElementById('btn-sign-up');
     button.disabled = !enabled;
 }
 
-// Überprüfung, ob die beiden eingegebenen Passwörter übereinstimmen
+/**
+ * Validates if the password and confirm password inputs match.
+ *
+ * If the values do not match, a validation message is shown.
+ * If they match, the validation message is hidden.
+ */
 function checkConfirmPassword() {
     const password = document.getElementById('userpassword-input');
     const confirmpassword = document.getElementById('confirm-userpassword-input');
@@ -162,7 +245,13 @@ async function postUserDataToRemoteStorage(username, usermail, userpassword) {
 
 }
 
-//Zurücksetzen Registrierung
+/**
+ * Help-function - Reset all input fields
+ * 
+ * After a successfull registration all input fields are reseted. 
+ * The sign up button also disabled again. 
+ * 
+ */
 function resetRegistration() {
     document.getElementById('username-input').value = '';
     document.getElementById('usermail-input').value = '';
@@ -172,7 +261,12 @@ function resetRegistration() {
     setSignUpButtonState(false);
 }
 
-//Rückmeldung an den User + Weiterleitung an die Login Seite
+/**
+ * Displays a success overlay and redirects the user to the login page after a short delay.
+ *
+ * Shows the success message about the registration
+ * Then, after 800 milliseconds, navigates the user to the login page.
+ */
 function forwardingToLoginPage() {
     const overlay = document.getElementById('sign-up-success-overlay');
     overlay.classList.remove('d_none');
@@ -190,6 +284,11 @@ function handlePrivacyPolicyChange() {
     validateSignUpForm();
 }
 
+/**
+ * Help-function - Reset the privacy police checkbox
+ * 
+ * Unchecks the checkbox input and adds the "d_none" class to the icon element
+ */
 function resetCheckbox() {
     document.getElementById('checkbox-privacy-policy').checked = false;
     document.getElementById('checkbox-privacy-police-icon-check').classList.add('d_none');
