@@ -54,13 +54,15 @@ function checkRequiredInputEmail(input) {
  * @param {HTMLInputElement} input - The email input field that is checking in the database. 
  */
 async function checkEmailAlreadyExist(input) {
-    let email = document.getElementById('usermail-input').value.trim();
-    let response = await fetch(fetchURLDataBase + '/users.json');
-    let useremails = await response.json();
-    let signupEmail = useremails && Object.values(useremails).find(
-        user => user.email === email);
-        signupEmail ? (isEmailAlreadyUsed = true, showEmailAlreadyExistError(input)) : (isEmailAlreadyUsed = false, clearErrorMessage(input));
-        validateSignUpForm();
+    if(input.value.trim().length > 0){
+        let email = document.getElementById('usermail-input').value.trim();
+        let response = await fetch(fetchURLDataBase + '/users.json');
+        let useremails = await response.json();
+        let signupEmail = useremails && Object.values(useremails).find(
+            user => user.email === email);
+            signupEmail ? (isEmailAlreadyUsed = true, showEmailAlreadyExistError(input)) : (isEmailAlreadyUsed = false, clearErrorMessage(input));
+            validateSignUpForm();
+    }
 }
 
 /**
@@ -103,7 +105,10 @@ function clearErrorMessage(input) {
     let wrapper = input.closest('.user-input-wrapper');
     errorMessage.classList.add('d_none');
     wrapper.classList.remove('input-error');
-    errorMessage.innerHTML = '';
+    const defaultText = errorMessage.getAttribute('data-default-message');
+    if (defaultText && errorMessage.innerHTML !== defaultText) {
+        errorMessage.innerHTML = defaultText;
+    }
 }
 
 /**
