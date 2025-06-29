@@ -105,3 +105,37 @@ async function saveTasksToRemoteStorage(path, data) {
 }
 
 // standartTasksToRemoteStorage("/tasks", standartTasks);
+
+// Dummy Kontakte 
+
+let contactsDummy = [
+    {
+        "name": "Thomas Müller",
+        "email": "thomas@mueller.de",
+        "phone": "+49 111 222 333",
+    },
+    {
+        "name": "Max Mustermann",
+        "email": "max@mustermann.de",
+        "phone": "+49 111 222 334",
+    },
+    {
+        "name": "Marianne Musterfrau",
+        "email": "marianne@musterfrau.de",
+        "phone": "+49 111 222 335",
+    },
+    {
+        "name": "Mark Zuckerberg",
+        "email": "mark@zuckerberg.com",
+        "phone": "+1 111 222 336",
+    },
+    {
+        "name": "Bill Gates",
+        "email": "bill@gates",
+        "phone": "+1 111 222 337",
+    },
+    {
+        "name": "Developer Akademie",
+        "email": "info@developerakademie.com",
+    },
+];

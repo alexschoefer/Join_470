@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>join-contacts</title>
+    <title>Contacts</title>
 
+    <link rel="shortcut icon" href="../assets/img/MenuLogo.png" type="image/x-icon">
     <link rel="stylesheet" href="../styles/standard.css">
     <link rel="stylesheet" href="../styles/contacts.css">
     <link rel="stylesheet" href="../styles/fonts.css">
@@ -17,22 +18,20 @@
 </head>
 
 <body onload="loadContacts()">
-
-    <main class="main-content">
+    <div class="app-layout">
         <div id="sidebar"></div>
-        <div>
-            <div id="header">
-
-            </div>
+        <div id="header"></div>
+        <main class="main-content">
+            <!-- Contacts -->
             <div class="contacts">
-                <div class="contacts-left">
+                <div class="contacts-left-container">
                     <div class="add-new-contact">
-                         <button onclick="functionLoadAddContactTemplate()" type="button" class="contacts-button-add-new-contact"><span
-                                        class="add-task-button-create-text">Create Task</span><img
-                                        class="add-task-button-create-icon"
-                                        src="../assets/icons/add-contact-person_add.svg" alt="nike"></button>
+                         <button onclick="functionLoadAddContactTemplate()" type="button" class="contacts-button-add-new-contact">
+                            Add new Contact
+                            <img class="add-task-button-create-icon" src="../assets/icons/person-add-icon.png" alt="person-add-icon">
+                        </button>
                     </div>
-                    <div class="all-contacts"></div>
+                    <div class="all-contacts" id="all-contacts"></div>
                 </div>
                 <div class="contacts-right">
                     <div class="contacts-right-container">
@@ -42,9 +41,7 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-    </main>
 </body>
 
 </html>
