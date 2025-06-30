@@ -15,7 +15,7 @@ const allSubtasks = document.getElementById('allSubtasks');
 let prioButtonState = 0;
 let subtasks = [];
 let subtasksObject = {};
-let arrayOFsubtasksObjects = [];
+let status = "toDo";
 
 async function sendAddTaskData() {
     saveUserInputsForFirebase();
@@ -27,12 +27,13 @@ async function saveUserInputsForFirebase() {
     let description = ATDescriptionRef.value;
     let date = ATDueDateRef.value;
     let priority = prioButtonState;
-    let status = "toDo";
     let assignTo = "Branislav"; // assignedTo is a part of code, that has to be changed by dynamic version of contacts
     // let assignTo = ATAssignToRef.value;
     let category = ATCategoryRef.value;
-    let subtasks = getSubtasksArray();;
-    postAddTaskDataToFirebase(title, description, date, priority, status, assignTo, category, subtasks);
+    let subtasks = getSubtasksArray();
+    saveUserInputsForFirebase(title, description, date, priority, assignTo, category, subtasks);
+    let responseData = await postAddTaskDataToFirebase(title, description, date, priority, assignTo, category, subtasks);
+    console.log(responseData);
 }
 
 async function checkIdAmount() {
@@ -56,21 +57,19 @@ async function postAddTaskDataToFirebase(title, description, date, priority, sta
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(
-            {
-                "id": await checkIdAmount(),
-                "title": title,
-                "description": description,
-                "priority": priority,
-                "status": status,
-                "dueDate": date,
-                "subtasks": subtasks,
-                "assigned": assignTo,
-                "category": category,
-            }
-        )
+        body: JSON.stringify({
+            "title": title,
+            "description": description,
+            "priority": priority,
+            "status": status,
+            "dueDate": date,
+            "subtasks": subtasks,
+            "assigned": assignTo,
+            "category": category,
+        })
     });
-    return responseToJson = await response.json();
+    const responseData = await response.json();
+    return responseData;
 }
 
 function getSubtasksArray() {
@@ -89,11 +88,8 @@ function resetAddTaskForm() {
     ATTitleRef.value = "";
     ATDescriptionRef.value = "";
     ATDueDateRef.value = "";
-
+    allSubtasks.innerHTML = "";
     ATSubtaskInput.value = "";
-    const subtaskInputs = document.querySelectorAll('.ATSubtask-container');
-    subtasks = [];
-    subtaskInputs.forEach(input => input.value = "");
 }
 
 function addTaskPrioButtonClick(state) {
