@@ -29,24 +29,26 @@ function validateSignupInput(input) {
  * 
  * Displays an error message if the email is not valid by the function isValidEmail
  * Also triggers re-validation of the entire signup form to update the submit button state.
+ * Triggers an asynchronous check to see if the email already exists in the database.
  * 
  * @param {HTMLInputElement} input - The input field to be validated.
  */
 function checkRequiredInputEmail(input) {
-    let errorMessage = document.getElementById(input.id + '-validation-message');
+    let email = input.value.trim();
+    let errorMessage = document.getElementById('usermail-input-validation-message');
     let wrapper = input.closest('.user-input-wrapper');
-    if (input.type === 'email') {
-        if (!isValidEmail(input.value)) {
+        if (!isValidEmail(email)) {
             errorMessage.classList.remove('d_none');
             wrapper.classList.add('input-error');
         } else {
             errorMessage.classList.add('d_none');
             wrapper.classList.remove('input-error');
         }
-    }
+        checkEmailAlreadyExist(input);
 }
 
-/** Help-function - Checking the given email adress for the sign up in the database.
+/** 
+ * Help-function - Checking the given email adress for the sign up in the database.
  * 
  * If the given email adress is already by a user in the database an error message by the calling function showEmailAlreadyExistError
  * Otherwise the error is cleared. The overall form validation is updated.
@@ -56,7 +58,7 @@ function checkRequiredInputEmail(input) {
 async function checkEmailAlreadyExist(input) {
     if(input.value.trim().length > 0){
         let email = document.getElementById('usermail-input').value.trim();
-        let response = await fetch(fetchURLDataBase + '/users.json');
+        let response = await fetch(fetchURLDataBase + '/users' + '.json');
         let useremails = await response.json();
         let signupEmail = useremails && Object.values(useremails).find(
             user => user.email === email);
@@ -98,6 +100,8 @@ function isValidEmail(email) {
 /** 
  * Help-function - Clears all error messages by the input fields
  * 
+ * Hides the associated validation message element. Removes the error styling from the input wrapper.
+ *  
  * @param {HTMLInputElement} input - 
  */
 function clearErrorMessage(input) {
@@ -182,7 +186,14 @@ function isPrivacyPolicyChecked() {
     return document.getElementById('checkbox-privacy-policy').checked;
 }
 
-// wiederkehrende Prüfung, ob alle Vorgaben erfüllt sind, damit der Button aktiv ist
+/**
+ * Validates the entire sign-up form to determine if the "Sign Up" button should be enabled.
+ * 
+ * Checking: All input fields are filled out, the email input has a valid format, the privacy policy checkbox is checked.
+ * At least => The email is not already used (based on the `isEmailAlreadyUsed` flag).
+ * 
+ * Based on these conditions, it enables or disables the sign-up button.
+ */
 function validateSignUpForm() {
     const filled = areAllInputsFilled();
     const emailInput = document.getElementById('usermail-input');
@@ -220,7 +231,14 @@ function checkConfirmPassword() {
     }
 }
 
-// Speichert die Inputs des Users kurz für die Weitergabe an Firebase
+/**
+ * Help-function: Handle the user inputs username, useremail and password
+ * 
+ * Prevents the default form submission
+ * Triggers the function to post the input values into firebase database.
+ * 
+ * @param {Event} event - The form submission event. 
+ */
 function saveUserInputsForRemoteStorage(event) {
     event.preventDefault();
     let username = document.getElementById('username-input');
@@ -229,7 +247,18 @@ function saveUserInputsForRemoteStorage(event) {
     postUserDataToRemoteStorage(username, usermail, userpassword);
 }
 
-// Übernahme der Userdaten und schickt sie in Richtung firebase 
+/**
+ * Sends the user's registration data to the remote firebase database
+ * 
+ * Performs a POST request to store a new user object containing name, email, and password.
+ * After the request is complete, it triggers the registration success overlay and resets the registration form
+ * 
+ * @async
+ * @param {HTMLInputElement} username - The input element containing the user's name.
+ * @param {HTMLInputElement} usermail - The input element containing the user's email.
+ * @param {HTMLInputElement} userpassword - The input element containing the user's password.
+ * @returns {Promise<Object>} The JSON response returned by the Firebase server.
+ */
 async function postUserDataToRemoteStorage(username, usermail, userpassword) {
     let response = await fetch(fetchURLDataBase + '/users' + ".json", {
         method: "POST",
@@ -247,7 +276,6 @@ async function postUserDataToRemoteStorage(username, usermail, userpassword) {
     forwardingToLoginPage();
     resetRegistration();
     return responseToJson = await response.json();
-
 }
 
 /**
@@ -282,6 +310,12 @@ function forwardingToLoginPage() {
     }, 800);
 }
 
+/**
+ * Handles the change event for the privacy policy checkbox.
+ * 
+ * Toggles the visibility of the checkmark icon based on whether the checkbox is selected.
+ * Triggers a re-validation of the signup form to update the state of the sign-up button.
+ */
 function handlePrivacyPolicyChange() {
     const isChecked = isPrivacyPolicyChecked();
     const checkIcon = document.getElementById('checkbox-privacy-police-icon-check');
