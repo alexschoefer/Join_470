@@ -20,6 +20,7 @@ let status = "toDo";
 async function sendAddTaskData() {
     saveUserInputsForFirebase();
     resetAddTaskForm();
+    startTaskAddedFinishAnimation();
 }
 
 async function saveUserInputsForFirebase() {
@@ -42,7 +43,7 @@ async function checkIdAmount() {
     return id;
 }
 
-async function subtasksToArray() {
+function subtasksToArray() {
     const inputData = document.getElementById('add-task-subtasks-input').value;
     if (inputData == "") {
         return;
@@ -134,14 +135,10 @@ function deleteAddTaskSubtask(index) {
     subtaskRender();
 }
 
-// function startTaskAddedFinishAnimation() {
-//     const logo = document.getElementById("add-task-finish-animation");
-//     logo.classList.remove("d_none");
-//     logo.classList.remove("add-task-finish-overlay-animation");
-//     void logo.offsetWidth;
-//     logo.classList.add("add-task-finish-overlay-animation");
-//     setTimeout(() => {
-//         logo.classList.add("d_none");
-//         logo.classList.remove("add-task-finish-overlay-animation");
-//     }, 1000);
-// }
+function startTaskAddedFinishAnimation() {
+    const animationContainer = document.getElementById("add-task-finish-animation");
+    animationContainer.classList.remove('d_none');
+     setTimeout(() => {
+      window.location.href = "./board.html";
+    }, 1000);
+}
