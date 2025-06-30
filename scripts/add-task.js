@@ -31,7 +31,6 @@ async function saveUserInputsForFirebase() {
     // let assignTo = ATAssignToRef.value;
     let category = ATCategoryRef.value;
     let subtasks = getSubtasksArray();
-    saveUserInputsForFirebase(title, description, date, priority, assignTo, category, subtasks);
     let responseData = await postAddTaskDataToFirebase(title, description, date, priority, assignTo, category, subtasks);
     console.log(responseData);
 }
