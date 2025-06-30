@@ -1,6 +1,7 @@
 let container = document.getElementById("task-card-container");
 let shadow = document.getElementById("shadow-container");
 let tasks = [];
+let updateTasks;
 let currentDraggedElement = null;
 
 function openTaskDetails(task) {
@@ -12,11 +13,12 @@ function openTaskDetails(task) {
       if (!taskData) return;
       try {
         let task = JSON.parse(taskData);
-
         shadow.style.display = "block";
         container.classList.remove("hide-to-right");
         container.innerHTML = boardTaskOverlay(task);
         container.classList.add("show-from-right");
+        deleteTasksOfOverlay(task.id);
+        editTaskOfOverlay(task.id);
       } catch (error) {
         console.error("Error parsing task data:", error);
       }
@@ -34,7 +36,7 @@ function closeContainerOverlay() {
 
 async function init() {
   tasks = await getTasksFromRemoteStorage("/tasks");
-  if (tasks.length === 0) {
+  if (tasks === undefined) {
     tasks = standartTasks;
     await saveTasksToRemoteStorage("/tasks", tasks);
   }
@@ -45,7 +47,7 @@ async function init() {
 async function updateTask() {
   let columns = ["toDo", "inProgress", "awaitFeedback", "done"];
   columns.forEach((col) => {
-    let filtered = tasks.filter((t) => t.status === col);
+    let filtered = tasks.filter((t) => t && t.status === col);
     let container = document.getElementById(col);
     container.innerHTML = "";
     filtered.forEach((task) => {
@@ -66,7 +68,9 @@ function allowDrop(ev) {
 }
 
 async function moveTo(category) {
-  let taskIndex = tasks.findIndex((task) => task.id === currentDraggedElement);
+  let taskIndex = tasks.findIndex(
+    (task) => task && task.id === currentDraggedElement
+  );
   if (taskIndex !== -1) {
     tasks[taskIndex].status = category;
     await saveTasksToRemoteStorage("/tasks", tasks);
@@ -112,4 +116,43 @@ function enableTiltOnDrag(selector) {
     });
   });
 }
-// ----------------------------------------------------
+// --------------------------------------------------
+function deleteTasksOfOverlay(id) {
+  let taskCardContainer = document.getElementById("task-overlay");
+  let deleteButton = document.getElementsByClassName("delete")[0];
+  if (taskCardContainer) {
+    deleteButton.addEventListener("click", () => {
+      closeContainerOverlay();
+      setTimeout(() => {
+        deleteTasksToRemoteStorage(`/tasks/${id}`);
+      }, 100);
+    });
+  }
+}
+function editTaskOfOverlay(id) {
+  let taskOverlay = document.getElementById("task-card-container");
+  let taskCardContainer = document.getElementById("task-overlay");
+  let editButton = document.getElementsByClassName("edit")[0];
+  if (taskCardContainer) {
+    editButton.addEventListener("click", () => {
+      taskOverlay.innerHTML = "";
+      taskOverlay.innerHTML = editTasksOfBoard(id);
+    });
+  }
+}
+async function valueTasksToEditTasks(id) {
+  let title = document.getElementById("add-task-title-input").value;
+  let description = document.getElementById(
+    "add-task-description-textarea"
+  ).value;
+  let date = document.getElementById("add-task-due-date-input").value;
+  let subtasks = document.getElementById("add-task-subtasks-input").value;
+  updateTasks = {
+    title: title,
+    description: description,
+    date: date,
+    subtasks: subtasks,
+  };
+  await editTasksToRemoteStorage(`/tasks/${id}`, updateTasks);
+  closeContainerOverlay();
+}
