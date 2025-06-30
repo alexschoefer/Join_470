@@ -103,5 +103,22 @@ async function saveTasksToRemoteStorage(path, data) {
     body: JSON.stringify(data),
   });
 }
+async function deleteTasksToRemoteStorage(path) {
+  let response = await fetch(fetchURLDataBase + path + ".json", {
+    method: "DELETE",
+  });
+  return (response = await response.json());
+}
 
+async function editTasksToRemoteStorage(path, data) {
+  let response = await fetch(fetchURLDataBase + path + ".json", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return (response = await response.json());
+}
+// deleteTasksToRemoteStorage("/tasks/0");
 // standartTasksToRemoteStorage("/tasks", standartTasks);

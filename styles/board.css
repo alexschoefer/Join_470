@@ -90,11 +90,13 @@ div#shadow-container{
     }
     button.add-task{
       height: 48px;
+      width: auto !important;
       padding: 8px 16px 8px 16px;
       background-color: #2A3647;
       border-radius: 10px;
       border: 1px solid transparent;
-      display: flex;
+      display: flex !important;
+      flex-direction: row !important;
       gap: 4px;
       justify-content: center;
       align-items: center;
@@ -268,6 +270,7 @@ div#task-card-container{
        position: fixed;
        top: 50%;
        left: 100%;
+       background-color: #fff;
        transform: translate(100%, -50%);
        z-index: 10;
        border-radius: 30px;
@@ -280,6 +283,7 @@ div#task-card-container{
        -moz-transition:0.6s;
        -ms-transition:0.6s;
        -o-transition:0.6s;
+       padding: 48px 40px 48px 40px; /* trebuie sa sterg de aici  si sa gasesc cumva sa adaug pentru editContainer*/
 }
 
 div.card-name-overlay{
@@ -499,4 +503,34 @@ div.card-drag-drop-container {
   -moz-transform: rotate(20deg);
   -ms-transform: rotate(20deg);
   -o-transform: rotate(20deg);
+}
+div.add-task-form-div{
+  display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    background-color: #fff;
+    overflow: auto;
+    max-height: 685px;
+    margin-top: 24px;
+}
+div.add-task-form-left{
+  height: auto;
+  margin-top: 24px;
+}
+div.add-task-form-div span.close-overlay{
+  position: absolute;
+  right: 24px;
+  top: 24px;
+}
+div.task-button-overlay{
+  display: flex;
+  justify-content: end;
+ padding: 40px 0px 0px 40px;
+}
+span.add-task-button-create-text{
+  width: auto;
+}
+button#add-task-button-create-task{
+  width: auto;
 }
