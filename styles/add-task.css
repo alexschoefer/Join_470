@@ -127,16 +127,44 @@
 
 .add-task-priority-button-urgent {
   background-color: var(--white);
+ 
+}
+
+.add-task-priority-button-urgent-image{
+  width: 20px;
+  height: 14.5px;
+  background-image: url(../assets/icons/add-task-prio-capa-2-urgent-default.svg);
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .add-task-priority-button-medium {
   background-color: var(--white);
 }
 
+.add-task-priority-button-medium-image{
+  width: 20px;
+  height: 14.5px;
+  background-image: url(../assets/icons/add-task-prio-capa-2-medium-default.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .add-task-priority-button-low {
   background-color: var(--white);
 }
 
+.add-task-priority-button-low-image{
+  width: 20px;
+  height: 14.5px;
+  background-image: url(../assets/icons/add-task-prio-capa-2-low-default.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.add-task-priority-button-low-image:hover{
+  background-image: url(../assets/icons/Prio-urgent-white.svg);
+}
 
 .add-task-priority-button-urgent:hover {
   background-color: var(--button-urgent);
