@@ -19,7 +19,7 @@
 
 </head>
 
-<body>
+<body onload="initContacts()">
     <div class="app-layout">
         <div id="sidebar"></div>
         <div id="header"></div>
@@ -33,7 +33,9 @@
                             <img class="add-task-button-create-icon" src="../assets/icons/person-add-icon.png" alt="person-add-icon">
                         </button>
                     </div>
-                    <div class="all-contacts" id="all-contacts"></div>
+                    <div class="contact-list">
+                        <ol id="contact-list"></ol>
+                    </div>
                 </div>
                 <div class="contacts-right">
                     <div class="contacts-right-container">

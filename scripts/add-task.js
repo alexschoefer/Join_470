@@ -27,6 +27,7 @@ let prioButtonState = 0;
 let subtasks = [];
 let subtasksObject = {};
 
+
 async function sendAddTaskData() {
   saveUserInputsForFirebase();
   resetAddTaskForm();
@@ -54,6 +55,7 @@ async function saveUserInputsForFirebase() {
     category,
     subtasks
   );
+
 }
 
 async function checkIdAmount() {
@@ -64,6 +66,7 @@ async function checkIdAmount() {
 }
 
 function subtasksToArray() {
+
   const inputData = document.getElementById("add-task-subtasks-input").value;
   if (inputData == "") {
     return;
@@ -108,6 +111,7 @@ async function postAddTaskDataToFirebase(
   });
   const responseData = await response.json();
   return responseData;
+
 }
 
 function getSubtasksArray() {
@@ -128,6 +132,7 @@ function resetAddTaskForm() {
   ATDueDateRef.value = "";
   allSubtasks.innerHTML = "";
   ATSubtaskInput.value = "";
+
 }
 
 function addTaskPrioButtonClick(state) {
@@ -173,11 +178,9 @@ function deleteAddTaskSubtask(index) {
 }
 
 function startTaskAddedFinishAnimation() {
-  const animationContainer = document.getElementById(
-    "add-task-finish-animation"
-  );
-  animationContainer.classList.remove("d_none");
-  setTimeout(() => {
-    window.location.href = "./board.html";
-  }, 1000);
+    const animationContainer = document.getElementById("add-task-finish-animation");
+    animationContainer.classList.remove('d_none');
+     setTimeout(() => {
+      window.location.href = "./board.html";
+    }, 1000);
 }
