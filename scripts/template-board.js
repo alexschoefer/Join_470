@@ -1,4 +1,4 @@
-function boardTaskOverlay(task, imageUrl) {
+function boardTaskOverlay(task) {
   return `
   <div id="task-overlay">
               <div class="card-name-overlay">
@@ -20,7 +20,7 @@ function boardTaskOverlay(task, imageUrl) {
                 <span>
                   Priority:
                   <span class="content-value"
-                    >${task.priority} <img src="${imageUrl}"
+                    >Medium <img src="../assets/icons/priority-medium.png"
                   /></span>
                 </span>
               </div>
@@ -87,7 +87,7 @@ function boardTaskOverlay(task, imageUrl) {
               </div>
             </div>`;
 }
-function generateTodoHTML(task, imageUrl) {
+function generateTodoHTML(task) {
   return `
          <div class="card todo task" draggable="true" data-task='${JSON.stringify(
            task
@@ -107,7 +107,7 @@ function generateTodoHTML(task, imageUrl) {
                       <span class="exemplu">MN</span>
                     </div>
                     <div class="prioriti">
-                      <img src="${imageUrl}" />
+                      <img src="../assets/icons/priority-medium.png" />
                     </div>
                   </div>
                 </div>
@@ -215,7 +215,7 @@ function editTasksOfBoard(id) {
                                         </div>
                                         <div id="add-task-subtasks-icons-divider"
                                             class="add-task-subtasks-icons-divider"></div>
-                                        <div id="add-task-subtasks-icon-add" onclick="addTaskAddSubtask()" class="add-task-subtasks-icon-add"></div>
+                                        <div id="add-task-subtasks-icon-add" class="add-task-subtasks-icon-add"></div>
                                     </div>
                                     <div id="allSubtasks" class="allSubtasks"></div>
 

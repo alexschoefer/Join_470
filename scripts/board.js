@@ -15,8 +15,7 @@ function openTaskDetails(task) {
         let task = JSON.parse(taskData);
         shadow.style.display = "block";
         container.classList.remove("hide-to-right");
-        let imageUrl = getPriorityImage(task.priority);
-        container.innerHTML = boardTaskOverlay(task, imageUrl);
+        container.innerHTML = boardTaskOverlay(task);
         container.classList.add("show-from-right");
         deleteTasksOfOverlay(task.id);
         editTaskOfOverlay(task.id);
@@ -27,24 +26,12 @@ function openTaskDetails(task) {
   });
 }
 
-function getPriorityImage(priority) {
-  const priorityImages = {
-    low: "../assets/icons/low-medium.png",
-    medium: "../assets/icons/priority-medium.png",
-    urgent: "../assets/icons/urgent-medium.png",
-  };
-  const normalizedPriority = priority.toLowerCase();
-  return (
-    priorityImages[normalizedPriority] || "../assets/icons/priority-medium.png"
-  );
-}
-
 function closeContainerOverlay() {
   shadow.style.display = "none";
   container.classList.remove("show-from-right");
   setTimeout(() => {
     container.innerHTML = "";
-  }, 500);
+  }, 200);
 }
 
 async function init() {
@@ -64,8 +51,7 @@ async function updateTask() {
     let container = document.getElementById(col);
     container.innerHTML = "";
     filtered.forEach((task) => {
-      let imageUrl = getPriorityImage(task.priority);
-      container.innerHTML += generateTodoHTML(task, imageUrl);
+      container.innerHTML += generateTodoHTML(task);
       openTaskDetails(task);
     });
   });
