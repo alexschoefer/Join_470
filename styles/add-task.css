@@ -115,22 +115,11 @@
 
 .add-task-priority-button:hover {
   transform: translateY(0px) scale(1.005);
-  color: var(--white);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }
 
-.add-task-priority-button:active {
-  transform: scale(0.9);
-  box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.25);
-}
-
-.add-task-priority-button-urgent {
-  background-color: var(--white);
- 
-}
-
-.add-task-priority-button-urgent-image{
+.add-task-priority-button-urgent-image {
   width: 20px;
   height: 14.5px;
   background-image: url(../assets/icons/add-task-prio-capa-2-urgent-default.svg);
@@ -138,11 +127,7 @@
   background-position: center;
 }
 
-.add-task-priority-button-medium {
-  background-color: var(--white);
-}
-
-.add-task-priority-button-medium-image{
+.add-task-priority-button-medium-image {
   width: 20px;
   height: 14.5px;
   background-image: url(../assets/icons/add-task-prio-capa-2-medium-default.svg);
@@ -150,11 +135,7 @@
   background-position: center;
 }
 
-.add-task-priority-button-low {
-  background-color: var(--white);
-}
-
-.add-task-priority-button-low-image{
+.add-task-priority-button-low-image {
   width: 20px;
   height: 14.5px;
   background-image: url(../assets/icons/add-task-prio-capa-2-low-default.svg);
@@ -162,38 +143,31 @@
   background-position: center;
 }
 
-.add-task-priority-button-low-image:hover{
-  background-image: url(../assets/icons/Prio-urgent-white.svg);
+.add-task-priority-button-urgent-pic-pressed {
+  background-image: url(../assets/icons/add-task-prio-capa-2-urgent.svg);
 }
 
-.add-task-priority-button-urgent:hover {
+.add-task-priority-button-medium-pic-pressed {
+  background-image: url(../assets/icons/add-task-prio-capa-2-medium.svg);
+}
+
+.add-task-priority-button-low-pic-pressed {
+  background-image: url(../assets/icons/add-task-prio-capa-2-low.svg);
+}
+
+.add-task-priority-button-urgent {
+  color: var(--white);
   background-color: var(--button-urgent);
-  color: #fff;
 }
 
-.add-task-priority-button-medium:hover {
+.add-task-priority-button-medium {
+  color: var(--white);
   background-color: var(--button-medium);
-  color: #fff;
 }
 
-.add-task-priority-button-low:hover {
+.add-task-priority-button-low {
+  color: var(--white);
   background-color: var(--button-low);
-  color: #fff;
-}
-
-.add-task-priority-button-urgent-active {
-  background-color: var(--button-urgent);
-  color: #fff;
-}
-
-.add-task-priority-button-medium-active {
-  background-color: var(--button-medium);
-  color: #fff;
-}
-
-.add-task-priority-button-low-active {
-  background-color: var(--button-low);
-  color: #fff;
 }
 
 .add-task-priority-button-image {
@@ -646,20 +620,20 @@
   box-shadow: none;
 }
 
-.add-task-start-overlay-animation{
-   position: absolute;
-    top: 90%;
-    left: 46%;
-    width: 247px;
-    height: auto;
+.add-task-start-overlay-animation {
+  position: absolute;
+  top: 90%;
+  left: 46%;
+  width: 247px;
+  height: auto;
 }
 
-.add-task-finish-overlay-animation{
-   position: absolute;
-    top: 50%;
-    left: 46%;
-    width: 247px;
-    height: auto;
+.add-task-finish-overlay-animation {
+  position: absolute;
+  top: 50%;
+  left: 46%;
+  width: 247px;
+  height: auto;
 }
 
 .add-task-finish-ovelay {
@@ -673,7 +647,7 @@
   border-radius: 10px;
   padding: 16px;
   background-color: var(--main-color);
-  animation: moveUp 0.3s ease forwards;  
+  animation: moveUp 0.3s ease forwards;
 }
 
 .add-task-finish-ovelay-text {
@@ -696,11 +670,13 @@
   width: 30px;
 }
 
- @keyframes moveUp {
-      from {
-        transform: translateY(0);
-      }
-      to {
-        transform: translateY(-50vh); /* bewegt sich in die Mitte */
-      }
-    }
+@keyframes moveUp {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-50vh);
+    /* bewegt sich in die Mitte */
+  }
+}
