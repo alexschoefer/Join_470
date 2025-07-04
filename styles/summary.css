@@ -10,6 +10,29 @@
   gap: 30px;
 }
 
+.summary-icon {
+  width: 69px;
+  height: 69px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.summary-icon.todo {
+  background-image: url("../assets/icons/summary-icon-Todo.png");
+}
+.summary-icon.done {
+  background-image: url("../assets/icons/summary-icon-done.png");
+}
+
+.summary-overview-main-box:hover .summary-icon.todo {
+  background-image: url("../assets/icons/summary-icon-Todo-hover.png");
+}
+
+.summary-overview-main-box-two:hover .summary-icon.done {
+  background-image: url("../assets/icons/summary-icon-done-hover.png");
+}
+
 .summary-head-content h2 {
   font-size: 61px;
 }
