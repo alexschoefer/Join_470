@@ -130,35 +130,41 @@ let contactsDummy = [
         "name": "Thomas Müller",
         "email": "thomas@mueller.de",
         "phone": "+49 111 222 333",
+        "initial": "TM",
         "profilcolor": "#FF7A00"
     },
     {
         "name": "Max Mustermann",
         "email": "max@mustermann.de",
         "phone": "+49 111 222 334",
+        "initial": "MM",
         "profilcolor": "#00BEE8"
     },
     {
         "name": "Marianne Musterfrau",
         "email": "marianne@musterfrau.de",
         "phone": "+49 111 222 335",
+        "initial": "MM",
         "profilcolor": "#FF5EB3"
     },
     {
         "name": "Mark Zuckerberg",
         "email": "mark@zuckerberg.com",
         "phone": "+1 111 222 336",
+        "initial": "MZ",
         "profilcolor": "#FF745E"
     },
     {
         "name": "Bill Gates",
-        "email": "bill@gates",
+        "email": "bill@gates.com",
         "phone": "+1 111 222 337",
+        "initial": "BG",
         "profilcolor": "#0038FF"
     },
     {
         "name": "Developer Akademie",
         "email": "info@developerakademie.com",
+        "initial": "DA",
         "profilcolor": "#FF745E"
     },
 ];

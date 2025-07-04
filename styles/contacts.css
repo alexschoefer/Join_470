@@ -102,3 +102,90 @@
   letter-spacing: 0%;
   color: #2a3647;
 }
+
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: calc(100vh - 200px); 
+    background-color: #FFFFFF;
+    padding: 32px 24px;
+    overflow-y: auto; 
+}
+
+.capital-letter {
+    width: 352px; /* Breite passend zu Kontakt-Items */
+    height: 58px;
+    padding: 15px 24px;
+    display: flex;
+    align-items: flex-start;
+    text-align: left; 
+    font-size: 20px;
+    line-height: 120%;
+    font-weight: 400;
+    color: #000000;
+}
+
+.contact-line {
+    width: 352px;
+    height: 1px;
+    background-color: #D1D1D1;
+    display: flex;
+    gap: 10px;
+    border: none;
+}
+
+.contact-entry {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px;
+    max-width: 352px;
+    width: 100%;
+    height: 78px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.contact-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    color: white;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+}
+
+.contact-profil-badge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.contact-information {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.contact-name {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 120%;
+    text-align: left;
+    color: #000000;
+}
+
+.contact-email {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    text-align: left;
+    color: #007CEE;
+}
