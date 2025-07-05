@@ -1,11 +1,13 @@
+let allContacts = [];
+
 async function initContacts() {
     await getAllContacts(); // Kontakte in der Datenbank synchronisieren
-    const contacts = await loadAllContactsFromRemoteStorage(); // Kontakte laden
-    showAllContacts(contacts); // Kontakte gruppiert anzeigen
+    allContacts = await loadAllContactsFromRemoteStorage(); // Kontakte laden
+    showAllContacts(allContacts); // Kontakte gruppiert anzeigen
 }
 
-function showAllContacts(contacts) {
-    const sortedContacts = sortContactsAlphabetically(contacts);
+function showAllContacts(allContacts) {
+    const sortedContacts = sortContactsAlphabetically(allContacts);
     const groupedContacts = findCapitalFirstLetter(sortedContacts);
 
     renderGroupedContacts(groupedContacts);
@@ -22,15 +24,15 @@ async function getAllContacts() {
 
         if (existingProfil) {
             // Kontakt updaten
-            await updateContactInRemoteStorage(existingProfil.id, { name, email, phone,initial, profilcolor });
+            await updateContactInRemoteStorage(existingProfil.id, { name, email, phone, initial, profilcolor });
         } else {
             // Kontakt neu anlegen
-            await postContactsToRemoteStorage(name, email, phone,initial, profilcolor);
+            await postContactsToRemoteStorage(name, email, phone, initial, profilcolor);
         }
     }
 }
 
-async function postContactsToRemoteStorage(name, email, phone,initial, profilcolor) {
+async function postContactsToRemoteStorage(name, email, phone, initial, profilcolor) {
     let response = await fetch(fetchURLDataBase + '/contacts' + '.json', {
         method: "POST",
         headers: {
@@ -61,7 +63,7 @@ async function updateContactInRemoteStorage(id, updatedContact) {
 async function checkExistingContact() {
     const response = await fetch(fetchURLDataBase + '/contacts' + '.json');
     const data = await response.json();
-    
+
     if (!data) return [];
 
     // Konvertiere das Objekt in ein Array mit ID für spätere Updates
@@ -77,13 +79,13 @@ async function loadAllContactsFromRemoteStorage() {
     return Object.values(contactsData);
 }
 
-function sortContactsAlphabetically(contacts) {
-    return contacts.sort((a, b) => a.name.localeCompare(b.name));
+function sortContactsAlphabetically(allContacts) {
+    return allContacts.sort((a, b) => a.name.localeCompare(b.name));
 }
 
-function findCapitalFirstLetter(contacts) {
+function findCapitalFirstLetter(allContacts) {
     let contactList = {};
-    contacts.forEach(contact => {
+    allContacts.forEach(contact => {
         const firstLetter = contact.name.charAt(0).toUpperCase();
         if (!contactList[firstLetter]) {
             contactList[firstLetter] = [];
@@ -100,9 +102,9 @@ function getCaptialLetterHeaderTemplate(letter) {
     `;
 }
 
-function getContactEntryTemplate(contact) {
+function getContactEntryTemplate(contact, index) {
     return `
-    <div class="contact-entry">
+    <div class="contact-entry" onclick="getContactInformations(${index})">
         <div class="contact-profil-badge">
             <div class="contact-icon" style="background-color: ${contact.profilcolor};">${contact.initial}</div>
         </div>
@@ -120,14 +122,47 @@ function renderGroupedContacts(groupedContacts) {
     container.innerHTML = "";
 
     const letters = Object.keys(groupedContacts).sort();
+    let globalIndex = 0;
 
     letters.forEach(letter => {
-        // 1. Capital Letter + Linie
         container.innerHTML += getCaptialLetterHeaderTemplate(letter);
 
-        // 2. Kontakte für diesen Buchstaben
         groupedContacts[letter].forEach(contact => {
-            container.innerHTML += getContactEntryTemplate(contact);
+            container.innerHTML += getContactEntryTemplate(contact, globalIndex);
+            globalIndex++;
         });
     });
+}
+
+function getContactInformations(index) {
+    const contact = allContacts[index];
+    let selectedContact = document.getElementById('contact-details');
+    selectedContact.innerHTML="";
+    selectedContact.innerHTML += showContactInformationsTemplate(contact);
+}
+
+function showContactInformationsTemplate(contact) {
+    return `
+    <div class="contact">
+        <div class="contact-profil-badge">
+            <div class="contact-details-icon" style="background-color: ${contact.profilcolor};">${contact.initial}</div>
+        </div>
+        <div class="contact-profil">
+            <div class="contact-profil-name">${contact.name}</div>
+            <div class="contact-profil-btns-container">
+                <button class="contact-profil-btn-edit"><img src="../assets/icons/edit-icon.png" alt="edit-icon">Edit</button>
+                <button class="contact-profil-btn-delete"><img src="../assets/icons/delete-icon.png" alt="">Delete</button>
+            </div>
+        </div>
+    </div>
+        <div class="contact-informations-email-phone">
+            <h4>Contact Information</h4>
+        </div>
+        <div class="contact-email-phone">
+            <span>Email</span>
+            <div class="contact-email">${contact.email}</div>
+            <span>Phone</span>
+            <div class="contact-phone">${contact.phone}</div>
+        </div>
+    `;
 }
