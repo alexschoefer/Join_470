@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="../styles/fonts.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../styles/summary.css">
-    <link rel="stylesheet" href="../styles/add-task.css">
+    <link rel="stylesheet" href="../styles/sign-up.css">
+    <link rel="stylesheet" href="../styles/login.css">
     <script src="../scripts/include.js"></script>
     <script src="../scripts/dataRemoteStorage.js"></script>
     <script src="../scripts/contacts.js"></script>
@@ -24,14 +25,11 @@
         <div id="sidebar"></div>
         <div id="header"></div>
         <main class="main-content">
-            <!-- Add-new-Contact-Section -->
-             <div id="addNewConcat"></div>
             <!-- Contacts -->
             <div class="contacts">
                 <div class="contacts-left-container">
                     <div class="add-new-contact">
-                        <button onclick="addNewContact()" type="button"
-                            class="contacts-button-add-new-contact">
+                        <button onclick="addNewContact()" type="button" class="contacts-button-add-new-contact">
                             Add new Contact
                             <img class="add-task-button-create-icon" src="../assets/icons/person-add-icon.png"
                                 alt="person-add-icon">
@@ -52,10 +50,8 @@
                 </div>
             </div>
         </main>
+        <!-- Add-new-Contact-Section -->
+        <div id="addNewContactOverlayContainer"></div>
 </body>
 
 </html>
-
-
-
-

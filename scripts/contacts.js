@@ -188,39 +188,64 @@ function editContact(contact) {
 }
 
 function addNewContact() {
-    let newContact = document.getElementById('add-new-contact');
-    newContact.innerHTML += addNewContactTemplate();
+    let overlayContainer = document.getElementById('addNewContactOverlayContainer');
+    overlayContainer.innerHTML = addNewContactTemplate();
 }
 
 function addNewContactTemplate() {
     return `
-        <div class="add-contact-overlay">
-            <div class="add-contact-left-container">
-                <div>
-                    <img src="" alt="">
-                    <h3>Add contact</h3>
-                    <h4>Tasks are better with a team!</h4>
-                    <div></div>
-                </div>
+<div class="add-contact-overlay">
+ <img class="add-contact-close-overlay-icon" src="../assets/icons/close.png" alt="close-icon">
+    <div class="add-contact-left-container">
+        <img class="add-contact-menulogo" src="../assets/img/MenuLogo.png" alt="menulogo">
+        <div class="add-contact-headline-container">
+            <h3>Add contact</h3>
+            <span>Tasks are better with a team!</span>
+            <div class="add-contact-vector-line"></div>
+        </div>
+    </div>
+    <div class="add-contact-right-container">
+        <div class="add-contact-information-wrapper">
+            <div class="add-contact-profil-icon">
+                <img src="../assets/icons/profil-icon.png" alt="profil-icon.png">
             </div>
-            <div>
-                <div>
-                    <img src="" alt="">
-                </div>
-            <div>
-                <div>
-                    <img src="" alt="">
-                </div>
-                <div>
-                    <input type="text">
-                    <input type="text">
-                    <input type="text">
-                </div>
-                <div>
-                    <button></button>
-                    <button></button>
+
+            <div class="add-contact-input-wrapper">
+                    <div class="user-input-wrapper">
+                        <div class="input-container">
+                            <input id="add-contact-name-input" class="user-input" type="text" name="name" placeholder="Name">
+                            <div>
+                                <img class="email-icon" src="../assets/icons/person-icon.png" alt="email-icon">
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="user-input-wrapper">
+                        <div class="input-container">
+                            <input id="usermail-input" class="user-input" type="email" name="email"
+                                pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" placeholder="Email" autocomplete="off"
+                                onfocus="clearErrorMessage(this)"
+                                onblur="validateSignupInput(this), checkRequiredInputEmail(this)">
+                            <div>
+                                <img class="email-icon" src="../assets/icons/mail-icon.png" alt="email-icon">
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="user-input-wrapper">
+                        <div class="input-container">
+                            <input id="usermail-input" class="user-input" type="email" name="email"
+                                pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" placeholder="Email" autocomplete="off"
+                                onfocus="clearErrorMessage(this)"
+                                onblur="validateSignupInput(this), checkRequiredInputEmail(this)">
+                            <div>
+                                <img class="email-icon" src="../assets/icons/mail-icon.png" alt="email-icon">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
     `
 }
