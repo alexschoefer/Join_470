@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="../styles/fonts.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../styles/summary.css">
-    <link rel="stylesheet" href="../styles/add-task.css">
+    <link rel="stylesheet" href="../styles/sign-up.css">
+    <link rel="stylesheet" href="../styles/login.css">
     <script src="../scripts/include.js"></script>
     <script src="../scripts/dataRemoteStorage.js"></script>
     <script src="../scripts/contacts.js"></script>
@@ -28,13 +29,15 @@
             <div class="contacts">
                 <div class="contacts-left-container">
                     <div class="add-new-contact">
-                         <button onclick="functionLoadAddContactTemplate()" type="button" class="contacts-button-add-new-contact">
+                        <button onclick="addNewContact()" type="button" class="contacts-button-add-new-contact">
                             Add new Contact
-                            <img class="add-task-button-create-icon" src="../assets/icons/person-add-icon.png" alt="person-add-icon">
+                            <img class="add-task-button-create-icon" src="../assets/icons/person-add-icon.png"
+                                alt="person-add-icon">
                         </button>
                     </div>
-                    <div class="contact-list">
-                        <ol id="contact-list"></ol>
+                    <div id="contact-list" class="contact-list">
+                        <div id="capitelLetterContactList"></div>
+                        <div id="contact"></div>
                     </div>
                 </div>
                 <div class="contacts-right">
@@ -43,9 +46,13 @@
                         <div class="contacts-right-vector"></div>
                         <p class="contacts-right-credo">Better with a team</p>
                     </div>
+                    <div id="contact-details" class="contact-detail-container"></div>
                 </div>
             </div>
-
+        </main>
+        <!-- Add-new-Contact-Section -->
+        <div id="addNewContactOverlayContainer"></div>
 </body>
 
 </html>
+
