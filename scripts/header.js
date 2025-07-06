@@ -1,7 +1,3 @@
-function render(){
-
-
-}
 
 let contactsUrl = "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/contacts.json";
 
@@ -25,7 +21,7 @@ function CloseBurgerMenu() {
 
 function closeWhenClickedOutside(event) {
   const menu = document.getElementById("burger-menu");
-  const guestIcon = document.getElementById("guest-icon");
+  const guestIcon = document.getElementById("profileCircle");
   if (!menu.contains(event.target) && !guestIcon.contains(event.target)) {
     CloseBurgerMenu();
   }
