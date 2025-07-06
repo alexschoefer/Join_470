@@ -202,18 +202,18 @@ function subtaskRender() {
     allSubtasks.innerHTML = "";
     for (let i = 0; i < subtasks.length; i++) {
         let subtaski = subtasks[i];
-        allSubtasks.innerHTML += `<div id="add-task-subtask-template" class="add-task-subtask-style">
+        allSubtasks.innerHTML += `<li id="add-task-subtask-template${i}" class="add-task-subtask-style">
                  <input id="ATSubtask-container-${i}" type="text" title="ATSubtask-container" class="ATSubtask-container"
                      value="${subtaski}">
                  <div class="add-task-subtasks-icons" id="add-task-subtasks-icons-${i}">
                      <div id="add-task-subtasks-icon-edit-${i}" class="add-task-subtasks-icon-edit" onclick="editAddTaskSubtask(${i})">
                      </div>
-                     <div id="add-task-subtasks-icons-divider" class="add-task-subtasks-icons-divider">
+                     <div class="add-task-subtasks-icons-divider">
                      </div>
                      <div id="add-task-subtasks-icon-delete-${i}" class="add-task-subtasks-icon-delete" onclick="deleteAddTaskSubtask(${i})">
                      </div>
                  </div>
-             </div>`;
+             </li>`;
     }
 }
 
