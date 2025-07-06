@@ -234,12 +234,9 @@ function addNewContactTemplate() {
 
                 <div class="user-input-wrapper">
                         <div class="input-container">
-                            <input id="usermail-input" class="user-input" type="email" name="email"
-                                pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" placeholder="Email" autocomplete="off"
-                                onfocus="clearErrorMessage(this)"
-                                onblur="validateSignupInput(this), checkRequiredInputEmail(this)">
+                            <input id="add-contact-phone-input" class="user-input" type="tel" name="phone" placeholder="Phone">
                             <div>
-                                <img class="email-icon" src="../assets/icons/mail-icon.png" alt="email-icon">
+                                <img class="phone-icon" src="../assets/icons/call-icon.png" alt="phone-icon">
                             </div>
                         </div>
                     </div>
