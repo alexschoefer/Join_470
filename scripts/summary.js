@@ -5,11 +5,13 @@ function render() {
   getTasksAwaitFeedback();
   getTasksToDo();
   getTasksDone();
+  getTaskUrgent();
+  getUrgentDate();
 }
 
 let tasksURL =
   "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/tasks.json";
-console.log(tasksURL);
+
 function getCurrentDate() {
   const greating = document.getElementById("dategreating");
   const now = new Date();
@@ -48,7 +50,7 @@ async function getTasksInProgress() {
     let count = 0;
     if (data) {
       count = Object.values(data).filter(
-        (task) => task.status === "inProgress"
+        (task) => task && task.status === "inProgress"
       ).length;
     }
     taskscount.innerText = count;
@@ -66,10 +68,10 @@ async function getTasksAwaitFeedback() {
     let count = 0;
     if (data) {
       count = Object.values(data).filter(
-        (task) => task.status === "awaitFeedback"
+        (task) => task && task.status === "awaitFeedback"
       ).length;
-      taskscount.innerText = count;
     }
+    taskscount.innerText = count;
   } catch (error) {
     console.error("Fehler beim Laden der Aufgaben:", error);
     taskscount.innerText = "0";
@@ -84,10 +86,10 @@ async function getTasksToDo() {
     let count = 0;
     if (data) {
       count = Object.values(data).filter(
-        (task) => task.status === "toDo"
+        (task) => task && task.status === "toDo"
       ).length;
-      taskscount.innerText = count;
     }
+    taskscount.innerText = count;
   } catch (error) {
     console.error("Fehler beim Laden der Todo:", error);
     taskscount.innerText = "0";
@@ -102,12 +104,68 @@ async function getTasksDone() {
     let count = 0;
     if (data) {
       count = Object.values(data).filter(
-        (task) => task.status === "done"
+        (task) => task && task.status === "done"
       ).length;
-      taskscount.innerText = count;
     }
+    taskscount.innerText = count;
   } catch (error) {
     console.error("Fehler beim Laden der Done:", error);
     taskscount.innerText = "0";
+  }
+}
+
+async function getTaskUrgent() {
+  const taskscount = document.getElementById("urgent-tasks");
+  try {
+    const response = await fetch(tasksURL);
+    const data = await response.json();
+    let count = 0;
+    if (data) {
+      count = Object.values(data).filter(
+        (task) => task && task.priority === "urgent"
+      ).length;
+    }
+    taskscount.innerText = count;
+  } catch (error) {
+    console.error("Fehler beim Laden der Done:", error);
+    taskscount.innerText = "0";
+  }
+}
+
+async function getUrgentDate() {
+  const el = document.getElementById("deadline-date");
+
+  try {
+    const res = await fetch(tasksURL);
+    const data = await res.json();
+
+    let frühstesDatum = null;
+
+    for (let key in data) {
+      const aufgabe = data[key];
+      if (!aufgabe) continue;
+      const d = aufgabe.dueDate;
+
+      if (aufgabe.priority === "urgent" && d && d.length === 8) {
+        const tag = d.slice(0, 2);
+        const monat = d.slice(2, 4);
+        const jahr = d.slice(4, 8);
+        const datum = new Date(`${jahr}-${monat}-${tag}`);
+
+        if (frühstesDatum === null || datum < frühstesDatum) {
+          frühstesDatum = datum;
+        }
+      }
+    }
+
+    if (frühstesDatum) {
+      const options = { year: "numeric", month: "long", day: "numeric" };
+      el.innerText = frühstesDatum.toLocaleDateString("en-US", options);
+    } else {
+      el.innerText = "No Urgent Date";
+    }
+  } catch (err) {
+    console.log("Fehler:", err);
+    el.innerText = "Fehler";
   }
 }
