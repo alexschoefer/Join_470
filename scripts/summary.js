@@ -1,5 +1,5 @@
 async function render() {
-  await getCurrentDate();
+  getCurrentDate();
   await getTasks();
   await getTasksInProgress();
   await getTasksAwaitFeedback();
