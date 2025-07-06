@@ -1,12 +1,12 @@
-function render() {
-  getCurrentDate();
-  getTasks();
-  getTasksInProgress();
-  getTasksAwaitFeedback();
-  getTasksToDo();
-  getTasksDone();
-  getTaskUrgent();
-  getUrgentDate();
+async function render() {
+  await getCurrentDate();
+  await getTasks();
+  await getTasksInProgress();
+  await getTasksAwaitFeedback();
+  await getTasksToDo();
+  await getTasksDone();
+  await getTaskUrgent();
+  await getUrgentDate();
 }
 
 let tasksURL =
