@@ -238,9 +238,9 @@
   justify-content: space-between;
   width: 100%;
   height: 49px;
-  padding-top: 12px;
+  padding-top: 10px;
   padding-right: 16px;
-  padding-bottom: 12px;
+  padding-bottom: 10px;
   padding-left: 16px;
   gap: 10px;
   border-width: 1px;
@@ -251,6 +251,37 @@
   line-height: 120%;
   letter-spacing: 0%;
   border: 1px solid #D1D1D1;
+  outline: none;
+}
+
+.add-task-subtasks-input-style {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 49px;
+  padding-top: 10px;
+  padding-right: 16px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  gap: 10px;
+  border-width: 1px;
+  border-radius: 10px;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  /* border: 1px solid #D1D1D1; */
+  outline: none;
+}
+
+
+.add-task-input-style:focus {
+  border-color: var(--main-blue, #29abe2);
+}
+
+.add-task-input-style.error {
+  border-color: var(--asterix, #ff8190);
 }
 
 .add-task-input-style:active {
@@ -259,6 +290,13 @@
 
 .add-task-input-style:hover {
   cursor: pointer;
+}
+
+.required-text {
+  color: var(--asterix, #ff8190);
+  font-size: 14px;
+  margin-top: 2px;
+  display: block;
 }
 
 .add-task-subtask-style {
@@ -307,23 +345,23 @@
 }
 
 .ATSubtask-container {
-  border: none;
+  border: 1px solid #d1d1d1;
   background: #F6F7F8;
   font-family: Inter;
   font-weight: 400;
   font-size: 16px;
   line-height: 120%;
   letter-spacing: 0%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.ATSubtask-container:focus {
+  border: 1px solid var(--main-blue, #29abe2);
 }
 
 .ATSubtask-container:hover {
-  border: none;
-  background: #D1D1D1;
-  font-family: Inter;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 120%;
-  letter-spacing: 0%;
+  cursor: pointer;
 }
 
 .allSubtasks {
@@ -350,7 +388,7 @@
 }
 
 .add-task-input-placeholder-style {
-  border: #fff;
+  border: 1px solid #fff;
   outline: none;
   box-shadow: none;
   border-color: transparent;
@@ -528,6 +566,10 @@
 
 }
 
+.ATSError {
+  border: 2px solid var(--asterix) !important;
+}
+
 .add-task-form-right-subtasks {
   display: flex;
   flex-direction: column;
@@ -546,6 +588,10 @@
   border: 1px solid #D1D1D1;
   background-color: #fff;
   position: relative;
+}
+
+.add-task-subtask-input-wrapper:focus-within {
+  border: 1px solid var(--main-blue, #29abe2) !important; 
 }
 
 .add-task-subtasks-icons {
@@ -668,6 +714,7 @@
   from {
     transform: translateY(0);
   }
+
   to {
     transform: translateY(-50vh);
   }

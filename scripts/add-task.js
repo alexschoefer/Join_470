@@ -247,3 +247,58 @@ function startTaskAddedFinishAnimation() {
         window.location.href = "./board.html";
     }, 1000);
 }
+
+function validateTitle() {
+    if (!ATTitleRef.value.trim()) {
+        ATTitleRef.classList.add('error');
+        document.getElementById('title-required').classList.remove('d_none');
+        return false;
+    } else {
+        ATTitleRef.classList.remove('error');
+        document.getElementById('title-required').classList.add('d_none');
+        return true;
+    }
+}
+
+function validateDueDate() {
+    if (!ATDueDateRef.value.trim()) {
+        ATDueDateRef.classList.add('error');
+        document.getElementById('due-date-required').classList.remove('d_none');
+        return false;
+    } else {
+        ATDueDateRef.classList.remove('error');
+        document.getElementById('due-date-required').classList.add('d_none');
+        return true;
+    }
+}
+
+function validateCategory() {
+    if (!ATCategoryRef.value.trim()) {
+        ATCategoryRef.classList.add('error');
+        document.getElementById('category-required').classList.remove('d_none');
+        return false;
+    } else {
+        ATCategoryRef.classList.remove('error');
+        document.getElementById('category-required').classList.add('d_none');
+        return true;
+    }
+}
+
+function validateAddTaskInputs() {
+    let valid = true;
+    if (!validateTitle()) valid = false;
+    if (!validateDueDate()) valid = false;
+    if (!validateCategory()) valid = false;
+    return valid;
+}
+
+ATButtonAddTaskRef.addEventListener('click', function(event) {
+    if (!validateAddTaskInputs()) {
+        event.preventDefault();
+    }
+});
+
+ATTitleRef.addEventListener('blur', validateTitle);
+ATDueDateRef.addEventListener('blur', validateDueDate);
+ATCategoryRef.addEventListener('blur', validateCategory);
+
