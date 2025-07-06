@@ -41,7 +41,7 @@
                                         class="add-task-input-style add-task-placeholder-style"
                                         placeholder="Enter a Title" required>
                                     <span id="mobile-required-text-no-asterix-title"
-                                        class="mobile-required-text-no-asterix d-none">This field is required</span>
+                                        class="mobile-required-text-no-asterix d_none">This field is required</span>
                                 </div>
                                 <div class="add-task-form-left-description">
                                     <p for="add-task-description" class="label-add-task">Description</p>
@@ -59,7 +59,7 @@
                                             class="add-task-input-style add-task-due-date-input"
                                             placeholder="dd/mm/yyyy" required>
                                         <span id="mobile-required-text-no-asterix-due-date"
-                                            class="mobile-required-text-no-asterix d-none">This field is
+                                            class="mobile-required-text-no-asterix d_none">This field is
                                             required</span>
                                     </div>
                                 </div>
@@ -71,24 +71,24 @@
 
                                     <div class="add-task-priority-buttons">
                                         <button onclick="addTaskPrioButtonClick(0)" id="add-task-prio-button-urgent"
-                                            class="add-task-priority-button add-task-priority-button-urgent"
-                                            type="button">Urgent<div class="add-task-priority-button-urgent-image"></div></button>
+                                            class="add-task-priority-button"
+                                            type="button">Urgent<div id="add-task-prio-button-urgent-picture" class="add-task-priority-button-urgent-image"></div></button>
 
                                         <button onclick="addTaskPrioButtonClick(1)" id="add-task-prio-button-medium"
-                                            class="add-task-priority-button add-task-priority-button-medium"
-                                            type="button"><span class="">Medium</span><div
+                                            class="add-task-priority-button"
+                                            type="button"><span class="">Medium</span><div id="add-task-prio-button-medium-picture"
                                                 class="add-task-priority-button-medium-image"></div></button>
 
                                         <button onclick="addTaskPrioButtonClick(2)" id="add-task-prio-button-low"
-                                            class="add-task-priority-button add-task-priority-button-low"
-                                            type="button">Low<div class="add-task-priority-button-low-image"></div></button>
+                                            class="add-task-priority-button"
+                                            type="button">Low<div id="add-task-prio-button-low-picture" class="add-task-priority-button-low-image"></div></button>
                                     </div>
                                 </div>
                                 <div class="add-task-form-right-select-contacts">
                                     <p class="label-add-task">Assigned to</p>
                                     <select id="add-task-assigned-to-select" title="add-task-assigned-to"
                                         name="add-task-assigned-to"
-                                        class="add-task-input-style add-task-placeholder-black">
+                                        class="add-task-placeholder-black add-task-input-style">
                                         <option id="add-task-assigned-to" value=""
                                             class="label-add-task add-task-placeholder-black">Select contacts to
                                             assign
@@ -124,9 +124,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="allSubtasks" class="allSubtasks">
+                        <ul id="allSubtasks" class="allSubtasks">
                           
-                        </div>
+                        </ul>
                         <div class="add-task-form-buttons">
                             <div>
                                 <span class="label-add-task"><span class="red-asterix-required">*</span>This field

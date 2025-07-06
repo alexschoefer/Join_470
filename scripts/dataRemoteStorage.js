@@ -123,8 +123,7 @@ async function editTasksToRemoteStorage(path, data) {
 // deleteTasksToRemoteStorage("/tasks/0");
 // standartTasksToRemoteStorage("/tasks", standartTasks);
 
-// Dummy Kontakte 
-
+// Dummy Kontakte
 let contactsDummy = [
     {
         "name": "Thomas Müller",
@@ -167,6 +166,7 @@ let contactsDummy = [
         "initial": "DA",
         "profilcolor": "#FF745E"
     },
+
     {
         "name": "Alex Schöfer",
         "email": "alex@schoefer.de",
@@ -196,3 +196,6 @@ let contactsDummy = [
         "profilcolor": "#FF7A00"
     }
 ];
+
+
+

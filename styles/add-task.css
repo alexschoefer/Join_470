@@ -62,8 +62,6 @@
   height: 48px;
   border-width: 1px;
   border-radius: 10px;
-
-
 }
 
 .add-task-due-date-input {
@@ -72,7 +70,6 @@
   display: flex;
   cursor: pointer;
 }
-
 
 .add-task-form-right {
   display: flex;
@@ -115,22 +112,11 @@
 
 .add-task-priority-button:hover {
   transform: translateY(0px) scale(1.005);
-  color: var(--white);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }
 
-.add-task-priority-button:active {
-  transform: scale(0.9);
-  box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.25);
-}
-
-.add-task-priority-button-urgent {
-  background-color: var(--white);
- 
-}
-
-.add-task-priority-button-urgent-image{
+.add-task-priority-button-urgent-image {
   width: 20px;
   height: 14.5px;
   background-image: url(../assets/icons/add-task-prio-capa-2-urgent-default.svg);
@@ -138,11 +124,7 @@
   background-position: center;
 }
 
-.add-task-priority-button-medium {
-  background-color: var(--white);
-}
-
-.add-task-priority-button-medium-image{
+.add-task-priority-button-medium-image {
   width: 20px;
   height: 14.5px;
   background-image: url(../assets/icons/add-task-prio-capa-2-medium-default.svg);
@@ -150,11 +132,7 @@
   background-position: center;
 }
 
-.add-task-priority-button-low {
-  background-color: var(--white);
-}
-
-.add-task-priority-button-low-image{
+.add-task-priority-button-low-image {
   width: 20px;
   height: 14.5px;
   background-image: url(../assets/icons/add-task-prio-capa-2-low-default.svg);
@@ -162,38 +140,31 @@
   background-position: center;
 }
 
-.add-task-priority-button-low-image:hover{
-  background-image: url(../assets/icons/Prio-urgent-white.svg);
+.add-task-priority-button-urgent-pic-pressed {
+  background-image: url(../assets/icons/add-task-prio-capa-2-urgent.svg);
 }
 
-.add-task-priority-button-urgent:hover {
+.add-task-priority-button-medium-pic-pressed {
+  background-image: url(../assets/icons/add-task-prio-capa-2-medium.svg);
+}
+
+.add-task-priority-button-low-pic-pressed {
+  background-image: url(../assets/icons/add-task-prio-capa-2-low.svg);
+}
+
+.add-task-priority-button-urgent {
+  color: var(--white);
   background-color: var(--button-urgent);
-  color: #fff;
 }
 
-.add-task-priority-button-medium:hover {
+.add-task-priority-button-medium {
+  color: var(--white);
   background-color: var(--button-medium);
-  color: #fff;
 }
 
-.add-task-priority-button-low:hover {
+.add-task-priority-button-low {
+  color: var(--white);
   background-color: var(--button-low);
-  color: #fff;
-}
-
-.add-task-priority-button-urgent-active {
-  background-color: var(--button-urgent);
-  color: #fff;
-}
-
-.add-task-priority-button-medium-active {
-  background-color: var(--button-medium);
-  color: #fff;
-}
-
-.add-task-priority-button-low-active {
-  background-color: var(--button-low);
-  color: #fff;
 }
 
 .add-task-priority-button-image {
@@ -310,8 +281,6 @@
   line-height: 120%;
   letter-spacing: 0%;
   cursor: pointer;
-
-
 }
 
 .add-task-subtask-style:hover {
@@ -336,7 +305,6 @@
 .add-task-subtasks-icon-add:hover {
   background-image: url(../assets/icons/add-task-add-hover.png);
 }
-
 
 .ATSubtask-container {
   border: none;
@@ -364,6 +332,8 @@
   justify-content: flex-end;
   flex-direction: column;
   align-items: flex-end;
+  list-style: disc;
+  padding-left: 20px;
 }
 
 .add-task-placeholder-style {
@@ -375,7 +345,9 @@
   letter-spacing: 0%;
 }
 
-
+.add-task-input-style:focus:invalid {
+  border: 2px solid var(--asterix);
+}
 
 .add-task-input-placeholder-style {
   border: #fff;
@@ -387,7 +359,6 @@
   font-size: 20px;
   line-height: 120%;
   letter-spacing: 0%;
-
 }
 
 .add-task-placeholder-black::placeholder {
@@ -425,7 +396,6 @@
   top: 889px;
   left: 995.25px;
   gap: 16px;
-
 }
 
 .add-task-button-clear {
@@ -531,8 +501,6 @@
   align-items: center;
   justify-content: center;
 }
-
-
 
 .add-task-form-right-priority {
   width: 440px;
@@ -646,20 +614,20 @@
   box-shadow: none;
 }
 
-.add-task-start-overlay-animation{
-   position: absolute;
-    top: 90%;
-    left: 46%;
-    width: 247px;
-    height: auto;
+.add-task-start-overlay-animation {
+  position: absolute;
+  top: 90%;
+  left: 46%;
+  width: 247px;
+  height: auto;
 }
 
-.add-task-finish-overlay-animation{
-   position: absolute;
-    top: 50%;
-    left: 46%;
-    width: 247px;
-    height: auto;
+.add-task-finish-overlay-animation {
+  position: absolute;
+  top: 50%;
+  left: 46%;
+  width: 247px;
+  height: auto;
 }
 
 .add-task-finish-ovelay {
@@ -673,7 +641,7 @@
   border-radius: 10px;
   padding: 16px;
   background-color: var(--main-color);
-  animation: moveUp 0.3s ease forwards;  
+  animation: moveUp 0.3s ease forwards;
 }
 
 .add-task-finish-ovelay-text {
@@ -696,11 +664,11 @@
   width: 30px;
 }
 
- @keyframes moveUp {
-      from {
-        transform: translateY(0);
-      }
-      to {
-        transform: translateY(-50vh); /* bewegt sich in die Mitte */
-      }
-    }
+@keyframes moveUp {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50vh);
+  }
+}
