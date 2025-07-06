@@ -62,8 +62,6 @@
   height: 48px;
   border-width: 1px;
   border-radius: 10px;
-
-
 }
 
 .add-task-due-date-input {
@@ -72,7 +70,6 @@
   display: flex;
   cursor: pointer;
 }
-
 
 .add-task-form-right {
   display: flex;
@@ -284,8 +281,6 @@
   line-height: 120%;
   letter-spacing: 0%;
   cursor: pointer;
-
-
 }
 
 .add-task-subtask-style:hover {
@@ -310,7 +305,6 @@
 .add-task-subtasks-icon-add:hover {
   background-image: url(../assets/icons/add-task-add-hover.png);
 }
-
 
 .ATSubtask-container {
   border: none;
@@ -338,6 +332,8 @@
   justify-content: flex-end;
   flex-direction: column;
   align-items: flex-end;
+  list-style: disc;
+  padding-left: 20px;
 }
 
 .add-task-placeholder-style {
@@ -349,7 +345,9 @@
   letter-spacing: 0%;
 }
 
-
+.add-task-input-style:focus:invalid {
+  border: 2px solid var(--asterix);
+}
 
 .add-task-input-placeholder-style {
   border: #fff;
@@ -361,7 +359,6 @@
   font-size: 20px;
   line-height: 120%;
   letter-spacing: 0%;
-
 }
 
 .add-task-placeholder-black::placeholder {
@@ -399,7 +396,6 @@
   top: 889px;
   left: 995.25px;
   gap: 16px;
-
 }
 
 .add-task-button-clear {
@@ -505,8 +501,6 @@
   align-items: center;
   justify-content: center;
 }
-
-
 
 .add-task-form-right-priority {
   width: 440px;
@@ -674,9 +668,7 @@
   from {
     transform: translateY(0);
   }
-
   to {
     transform: translateY(-50vh);
-    /* bewegt sich in die Mitte */
   }
 }
