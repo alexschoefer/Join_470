@@ -29,7 +29,7 @@ const ATButtonMediumRef = document.getElementById('add-task-prio-button-medium')
 const ATButtonMediumPicRef = document.getElementById('add-task-prio-button-medium-picture');
 const ATButtonLowRef = document.getElementById('add-task-prio-button-low');
 const ATButtonLowPicRef = document.getElementById('add-task-prio-button-low-picture');
-let prioButtonState = 0;
+let prioButtonState = "";
 let subtasks = [];
 let subtasksObject = {};
 
@@ -142,15 +142,20 @@ function resetAddTaskForm() {
 }
 
 function addTaskPrioButtonClick(state) {
-    prioButtonState = state;
-    if (state == 'Urgent') {
-        holdButtonUrgent();
-    }
-    if (state == 'Medium') {
-        holdButtonMedium();
-    }
-    if (state == 'Low') {
-        holdButtonLow();
+    if (state == prioButtonState) {
+        unholdPrioButtons();
+        prioButtonState = "";
+    } else {
+        prioButtonState = state;
+        if (state == 'Urgent') {
+            holdButtonUrgent();
+        }
+        if (state == 'Medium') {
+            holdButtonMedium();
+        }
+        if (state == 'Low') {
+            holdButtonLow();
+        }
     }
 }
 
@@ -179,9 +184,18 @@ function holdButtonLow() {
     ATButtonMediumPicRef.classList.remove('add-task-priority-button-medium-pic-pressed');
     ATButtonLowPicRef.classList.add('add-task-priority-button-low-pic-pressed');
 
-    ATButtonUrgentRef.classList.remove('add-task-priority-button-urgent');
+
     ATButtonMediumRef.classList.remove('add-task-priority-button-medium');
     ATButtonLowRef.classList.add('add-task-priority-button-low');
+}
+
+function unholdPrioButtons() {
+    ATButtonUrgentPicRef.classList.remove('add-task-priority-button-urgent-pic-pressed');
+    ATButtonMediumPicRef.classList.remove('add-task-priority-button-medium-pic-pressed');
+    ATButtonLowPicRef.classList.remove('add-task-priority-button-low-pic-pressed');
+    ATButtonUrgentRef.classList.remove('add-task-priority-button-urgent');
+    ATButtonMediumRef.classList.remove('add-task-priority-button-medium');
+    ATButtonLowRef.classList.remove('add-task-priority-button-low');
 }
 
 
