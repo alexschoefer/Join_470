@@ -122,12 +122,12 @@ async function getTaskUrgent() {
     let count = 0;
     if (data) {
       count = Object.values(data).filter(
-        (task) => task && task.priority === "urgent"
+        (task) => task && task.priority === "Urgent"
       ).length;
     }
     taskscount.innerText = count;
   } catch (error) {
-    console.error("Fehler beim Laden der Done:", error);
+    console.error("Fehler beim Laden der Urgent Tasks:", error);
     taskscount.innerText = "0";
   }
 }
@@ -144,13 +144,18 @@ async function getUrgentDate() {
     for (let key in data) {
       const aufgabe = data[key];
       if (!aufgabe) continue;
-      const d = aufgabe.dueDate;
+      const d = aufgabe.dueDate?.trim();
 
-      if (aufgabe.priority === "urgent" && d && d.length === 8) {
-        const tag = d.slice(0, 2);
-        const monat = d.slice(2, 4);
-        const jahr = d.slice(4, 8);
-        const datum = new Date(`${jahr}-${monat}-${tag}`);
+      if (
+        aufgabe.priority === "Urgent" &&
+        d &&
+        d.length === 8 &&
+        !isNaN(Number(d))
+      ) {
+        const jahr = d.slice(0, 4);
+        const monat = d.slice(4, 6);
+        const tag = d.slice(6, 8);
+        const datum = new Date(Number(jahr), Number(monat) - 1, Number(tag));
 
         if (frühstesDatum === null || datum < frühstesDatum) {
           frühstesDatum = datum;
