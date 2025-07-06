@@ -72,3 +72,21 @@ position: relative;
   box-sizing: border-box;
   transition: background-color 0.2s ease;
 }
+
+.profile-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid #2a3647;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  font-weight: 600;
+  font-size: 16px;
+  color: #29abe2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  user-select: none;
+}
+
