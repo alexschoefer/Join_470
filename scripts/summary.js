@@ -5,6 +5,8 @@ function render() {
   getTasksAwaitFeedback();
   getTasksToDo();
   getTasksDone();
+  getTaskUrgent();
+  getUrgentDate();
 }
 
 let tasksURL =
@@ -109,5 +111,61 @@ async function getTasksDone() {
   } catch (error) {
     console.error("Fehler beim Laden der Done:", error);
     taskscount.innerText = "0";
+  }
+}
+
+async function getTaskUrgent(){
+const taskscount = document.getElementById("urgent-tasks")
+try {
+  const response = await fetch(tasksURL);
+  const data = await response.json();
+  let count = 0;
+  if (data){
+    count = Object.values(data).filter((task) => task.priority === "urgent").length;
+    taskscount.innerText = count;
+  }
+  
+} catch (error) {
+  console.error("Fehler beim Laden der Done:", error);
+    taskscount.innerText = "0";
+}
+
+}
+
+async function getUrgentDate() {
+  const el = document.getElementById("deadline-date");
+
+  try {
+    const res = await fetch(tasksURL);
+    const data = await res.json();
+
+    let frühstesDatum = null;
+
+    for (let key in data) {
+      const aufgabe = data[key];
+      const d = aufgabe.dueDate;
+
+      if (aufgabe.priority === "urgent" && d && d.length === 8) {
+        const tag = d.slice(0, 2);
+        const monat = d.slice(2, 4);
+        const jahr = d.slice(4, 8);
+        const datum = new Date(`${jahr}-${monat}-${tag}`);
+
+        if (frühstesDatum === null || datum < frühstesDatum) {
+          frühstesDatum = datum;
+        }
+      }
+    }
+
+    if (frühstesDatum) {
+      const options = { year: "numeric", month: "long", day: "numeric" };
+      el.innerText = frühstesDatum.toLocaleDateString("en-US", options);
+    } else {
+      el.innerText = "No Urgent Date";
+    }
+
+  } catch (err) {
+    console.log("Fehler:", err);
+    el.innerText = "Fehler";
   }
 }
