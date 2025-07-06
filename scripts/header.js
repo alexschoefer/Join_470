@@ -3,6 +3,8 @@ function render(){
 
 }
 
+let contactsUrl = "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/contacts.json";
+
 function ShowBurgerMenu() {
   const menu = document.getElementById("burger-menu");
   menu.classList.toggle("d_none");
