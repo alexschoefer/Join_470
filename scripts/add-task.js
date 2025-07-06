@@ -143,13 +143,13 @@ function resetAddTaskForm() {
 
 function addTaskPrioButtonClick(state) {
     prioButtonState = state;
-    if (state == 0) {
+    if (state == 'Urgent') {
         holdButtonUrgent();
     }
-    if (state == 1) {
+    if (state == 'Medium') {
         holdButtonMedium();
     }
-    if (state == 2) {
+    if (state == 'Low') {
         holdButtonLow();
     }
 }

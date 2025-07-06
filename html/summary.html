@@ -18,6 +18,7 @@
     />
     <script src="../scripts/summary.js"></script>
     <script src="../scripts/include.js"></script>
+    <script src="../scripts/header.js"></script>
   </head>
   <body onload="render()">
     <div class="app-layout">
@@ -39,19 +40,19 @@
           <div class="summary-overview-taskline">
             <div class="summary-overview-taskbox-one">
               <div class="summary-overview-taskbox-inside">
-                <p class="summary-overview-number">5</p>
+                <p id="tasks-in-board" class="summary-overview-number">5</p>
                 <p class="summary-overview-text">Tasks in Board</p>
               </div>
             </div>
             <div class="summary-overview-taskbox-two">
               <div class="summary-overview-taskbox-inside">
-                <p class="summary-overview-number">2</p>
-                <p class="summary-overview-text">Tasks in Progress</p>
+                <p id="tasks-in-progress" class="summary-overview-number">2</p>
+                <p  class="summary-overview-text">Tasks in Progress</p>
               </div>
             </div>
             <div class="summary-overview-taskbox-three">
               <div class="summary-overview-taskbox-inside">
-                <p class="summary-overview-number">2</p>
+                <p id="tasks-await-feedback" class="summary-overview-number">2</p>
                 <p class="summary-overview-text">Awaiting Feedback</p>
               </div>
             </div>
@@ -60,28 +61,28 @@
             <div class="summary-overview-urgent-content">
               <img src="../assets/icons/summary_ArrowUp.png" alt="" />
               <div class="summary-overview-urgent-text-content">
-                <p class="summary-overview-urgent-number">1</p>
+                <p id="urgent-tasks" class="summary-overview-urgent-number">1</p>
                 <p class="summary-overview-urgent-text">Urgent</p>
               </div>
             </div>
             <div class="summary-overview-urgent-vector"></div>
             <div class="summary-overview-urgent-deadline">
-              <p class="summary-overview-urgent-date">October 16, 2022</p>
+              <p id="deadline-date" class="summary-overview-urgent-date">October 16, 2022</p>
               <p class="summary-overview-urgent-datetext">Upcoming Deadline</p>
             </div>
           </div>
           <div class="summary-overview-main">
             <div class="summary-overview-main-box">
-              <img src="../assets/icons/summary-icon-Todo.png" alt="" />
+               <div class="summary-icon todo"></div>
               <div class="summary-overview-main-content">
-                <p class="summary-overview-main-number">1</p>
+                <p id="to-do" class="summary-overview-main-number">1</p>
                 <p class="summary-overview-main-text">To-do</p>
               </div>
             </div>
             <div class="summary-overview-main-box-two">
-              <img src="../assets/icons/summary-icon-done.png" alt="" />
+              <div class="summary-icon done"></div>
               <div class="summary-overview-main-content">
-                <p class="summary-overview-main-number">1</p>
+                <p id="done" class="summary-overview-main-number">1</p>
                 <p class="summary-overview-main-text">Done</p>
               </div>
             </div>
