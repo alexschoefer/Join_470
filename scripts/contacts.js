@@ -104,7 +104,7 @@ function getCaptialLetterHeaderTemplate(letter) {
 
 function getContactEntryTemplate(contact, index) {
     return `
-    <div class="contact-entry" onclick="getContactInformations(${index})">
+    <div id="contact-entry" class="contact-entry" onclick="getContactInformations(${index}, event)">
         <div class="contact-profil-badge">
             <div class="contact-icon" style="background-color: ${contact.profilcolor};">${contact.initial}</div>
         </div>
@@ -134,11 +134,27 @@ function renderGroupedContacts(groupedContacts) {
     });
 }
 
-function getContactInformations(index) {
+function getContactInformations(index, event) {
     const contact = allContacts[index];
     let selectedContact = document.getElementById('contact-details');
-    selectedContact.innerHTML="";
+    selectedContact.innerHTML = "";
+    toggleActiveContact(event.currentTarget);
     selectedContact.innerHTML += showContactInformationsTemplate(contact);
+}
+
+function toggleActiveContact(element) {
+    document.querySelectorAll('.contact-entry').forEach(entry => {
+        entry.classList.remove('contact-entry-active');
+        const activeContactName = entry.querySelector('.contact-name');
+        if (activeContactName) {
+            activeContactName.classList.remove('contact-entry-name-active');
+        }
+    });
+    element.classList.add('contact-entry-active');
+    const newActiveContactName = element.querySelector('.contact-name');
+    if (newActiveContactName) {
+        newActiveContactName.classList.add('contact-entry-name-active');
+    }
 }
 
 function showContactInformationsTemplate(contact) {
@@ -165,4 +181,46 @@ function showContactInformationsTemplate(contact) {
             <div class="contact-phone">${contact.phone}</div>
         </div>
     `;
+}
+
+function editContact(contact) {
+    
+}
+
+function addNewContact() {
+    let newContact = document.getElementById('add-new-contact');
+    newContact.innerHTML += addNewContactTemplate();
+}
+
+function addNewContactTemplate() {
+    return `
+        <div class="add-contact-overlay">
+            <div class="add-contact-left-container">
+                <div>
+                    <img src="" alt="">
+                    <h3>Add contact</h3>
+                    <h4>Tasks are better with a team!</h4>
+                    <div></div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <img src="" alt="">
+                </div>
+            <div>
+                <div>
+                    <img src="" alt="">
+                </div>
+                <div>
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                </div>
+                <div>
+                    <button></button>
+                    <button></button>
+                </div>
+            </div>
+        </div>
+    `
 }

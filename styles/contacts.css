@@ -159,7 +159,7 @@
     box-sizing: border-box;
     border-radius: 8px;
     transition: background-color 0.2s ease;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .contact-icon {
@@ -206,13 +206,17 @@
     color: #007CEE;
 }
 
-.contact-entry:hover {
+.contact-entry:not(.contact-entry-active):hover {
     cursor: pointer;
     background: linear-gradient(#F9F9F9 0%,#F0F0F0 100%);
 }
 
-.contact-entry:active {
+.contact-entry-active {
     background-color: #2A3647;
+}
+
+.contact-entry-name-active {
+    color: white;
 }
 
 .contact-detail-container {
@@ -331,4 +335,15 @@
     font-size: 16px;
     line-height: 120%;
     color: #000000;
+}
+
+.add-contact-overlay {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 1212px;
+    height: 592px;
+    border-radius: 30px;
+    background-color: #FFFFFF;
+    z-index: 100;
 }
