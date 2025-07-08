@@ -124,41 +124,41 @@ async function editTasksToRemoteStorage(path, data) {
 // standartTasksToRemoteStorage("/tasks", standartTasks);
 
 // Dummy Kontakte
-
 let contactsDummy = [
-  {
-    name: "Thomas Müller",
-    email: "thomas@mueller.de",
-    phone: "+49 111 222 333",
-    profilcolor: "#FF7A00",
-  },
-  {
-    name: "Max Mustermann",
-    email: "max@mustermann.de",
-    phone: "+49 111 222 334",
-    profilcolor: "#00BEE8",
-  },
-  {
-    name: "Marianne Musterfrau",
-    email: "marianne@musterfrau.de",
-    phone: "+49 111 222 335",
-    profilcolor: "#FF5EB3",
-  },
-  {
-    name: "Mark Zuckerberg",
-    email: "mark@zuckerberg.com",
-    phone: "+1 111 222 336",
-    profilcolor: "#FF745E",
-  },
-  {
-    name: "Bill Gates",
-    email: "bill@gates",
-    phone: "+1 111 222 337",
-    profilcolor: "#0038FF",
-  },
-  {
-    name: "Developer Akademie",
-    email: "info@developerakademie.com",
-    profilcolor: "#FF745E",
-  },
+    {
+        "name": "Thomas Müller",
+        "email": "thomas@mueller.de",
+        "phone": "+49 111 222 333",
+        "profilcolor": "#FF7A00"
+    },
+    {
+        "name": "Max Mustermann",
+        "email": "max@mustermann.de",
+        "phone": "+49 111 222 334",
+        "profilcolor": "#00BEE8"
+    },
+    {
+        "name": "Marianne Musterfrau",
+        "email": "marianne@musterfrau.de",
+        "phone": "+49 111 222 335",
+        "profilcolor": "#FF5EB3"
+    },
+    {
+        "name": "Mark Zuckerberg",
+        "email": "mark@zuckerberg.com",
+        "phone": "+1 111 222 336",
+        "profilcolor": "#FF745E"
+    },
+    {
+        "name": "Bill Gates",
+        "email": "bill@gates",
+        "phone": "+1 111 222 337",
+        "profilcolor": "#0038FF"
+    },
+    {
+        "name": "Developer Akademie",
+        "email": "info@developerakademie.com",
+        "profilcolor": "#FF745E"
+    },
 ];
+
