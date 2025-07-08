@@ -224,6 +224,8 @@ function subtaskRender() {
                  <div class="add-task-subtasks-icons" id="add-task-subtasks-icons-${i}">
                      <div id="add-task-subtasks-icon-edit-${i}" class="add-task-subtasks-icon-edit" onclick="editAddTaskSubtask(${i})">
                      </div>
+                     <div id="add-task-subtasks-icon-done-${i}" class="add-task-subtasks-icon-done d_none" onclick="getDoneAddTaskSubtask(${i})">
+                     </div>
                      <div class="add-task-subtasks-icons-divider">
                      </div>
                      <div id="add-task-subtasks-icon-delete-${i}" class="add-task-subtasks-icon-delete" onclick="deleteAddTaskSubtask(${i})">
@@ -291,7 +293,7 @@ function validateAddTaskInputs() {
     return valid;
 }
 
-ATButtonAddTaskRef.addEventListener('click', function(event) {
+ATButtonAddTaskRef.addEventListener('click', function (event) {
     if (!validateAddTaskInputs()) {
         event.preventDefault();
     }
@@ -301,33 +303,52 @@ ATTitleRef.addEventListener('blur', validateTitle);
 ATDueDateRef.addEventListener('blur', validateDueDate);
 ATCategoryRef.addEventListener('blur', validateCategory);
 
-function clearAddTaskSubtask(){
+function clearAddTaskSubtask() {
     ATSubtaskInput.value = "";
     ATSubtasksIconAddRef.classList.remove('d_none');
 }
 
-function doneAddTaskSubtask(){
+function getDoneAddTaskSubtask(id) {
+    const ATSubSubtaskContainerRef = document.getElementById('ATSubtask-container-' + id);
+    const addTaskSubtasksIconDoneRef = document.getElementById('add-task-subtasks-icon-done-' + id);
+    const ATSubSubtaskIconEditRef = document.getElementById('add-task-subtasks-icon-edit-' + id);
+    const ATSubSubtaskIconsRef = document.getElementById('add-task-subtasks-icons-' + id);
 
+    ATSubSubtaskContainerRef.blur();
+    ATSubSubtaskIconsRef.classList.remove('fdrr');
+    ATSubSubtaskIconEditRef.classList.remove('d_none');
+    addTaskSubtasksIconDoneRef.classList.add('d_none');
 }
 
+
+
 function editAddTaskSubtask(id) {
-    // Logic to edit a subtask
+    const ATSubSubtaskContainerRef = document.getElementById('ATSubtask-container-' + id);
+    const ATSubSubtaskIconEditRef = document.getElementById('add-task-subtasks-icon-edit-' + id);
+    const ATSubSubtaskIconsRef = document.getElementById('add-task-subtasks-icons-' + id);
+    const addTaskSubtasksIconDoneRef = document.getElementById('add-task-subtasks-icon-done-' + id);
+
+
+    ATSubSubtaskContainerRef.focus();
+    ATSubSubtaskIconsRef.classList.add('fdrr');
+    ATSubSubtaskIconEditRef.classList.add('d_none');
+    addTaskSubtasksIconDoneRef.classList.remove('d_none');
 }
 
 ATSubtaskInput.addEventListener('focus', showClearAndDoneButtons);
 ATSubtaskInput.addEventListener('blur', hideClearAndDoneButtons);
 
-function showClearAndDoneButtons(){
-ATSubtasksInputDivRef.classList.remove('d_none');
-ATSubtasksIconAddRef.classList.add('d_none');
+function showClearAndDoneButtons() {
+    ATSubtasksInputDivRef.classList.remove('d_none');
+    ATSubtasksIconAddRef.classList.add('d_none');
 }
 
-function hideClearAndDoneButtons(){
-ATSubtasksInputDivRef.classList.add('d_none');
-ATSubtasksIconAddRef.classList.remove('d_none');
+function hideClearAndDoneButtons() {
+    ATSubtasksInputDivRef.classList.add('d_none');
+    ATSubtasksIconAddRef.classList.remove('d_none');
 }
 
-function getFocusInSubtasksInput(){
+function getFocusInSubtasksInput() {
     document.getElementById('add-task-subtasks-input').focus();
     ATSubtasksIconAddRef.classList.add('d_none');
 }
