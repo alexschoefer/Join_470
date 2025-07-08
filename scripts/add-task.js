@@ -372,3 +372,10 @@ document.querySelectorAll('.add-task-subtask-style').forEach(container => {
     }
 });
 }
+
+document.getElementById('add-task-subtasks-input').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        addTaskAddSubtask();
+    }
+});
