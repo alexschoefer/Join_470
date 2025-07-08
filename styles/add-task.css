@@ -321,14 +321,17 @@
   cursor: pointer;
 }
 
-.add-task-subtask-style:hover{
+.add-task-subtask-style:hover {
   background-color: #f1f1f1;
   animation-timing-function: ease-out;
   animation-duration: 100ms;
+  border-radius: 10px;
 }
 
-.add-task-subtask-style:focus-within  {
+.add-task-subtask-style:focus-within {
   border-bottom: 1px solid var(--main-blue, #29abe2);
+  border-radius: 0;
+  background-color: var(--white);
 }
 
 .add-task-subtasks-icon-add {
@@ -365,14 +368,14 @@
   background-image: url(../assets/icons/add-task-subtasks-close-hover.svg);
 }
 
-.add-task-subtasks-icons-divider{
+.add-task-subtasks-icons-divider {
   width: 1px;
   height: 24px;
   background-color: var(--style);
   margin: 2px;
 }
 
-.add-task-subtasks-input-div{
+.add-task-subtasks-input-div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -380,8 +383,8 @@
 
 .ATSubtask-container {
   width: 100%;
-  border: 1px solid #F6F7F8;
-  background: #F6F7F8;
+  border: 1px solid transparent;
+  background: none;
   font-family: Inter;
   font-weight: 400;
   font-size: 16px;
@@ -392,9 +395,15 @@
 }
 
 .ATSubtask-container:hover {
-   background-color: #f1f1f1;
-    border: 1px solid #f1f1f1;
+  background-color: #f1f1f1;
+  border: 1px solid transparent;
   cursor: pointer;
+}
+
+.ATSubtask-container:focus-within {
+  border-bottom: 1px solid var(--white);
+  border-radius: 0;
+  background-color: var(--white);
 }
 
 .allSubtasks {
@@ -624,7 +633,7 @@
 }
 
 .add-task-subtask-input-wrapper:focus-within {
-  border: 1px solid var(--main-blue, #29abe2) !important; 
+  border: 1px solid var(--main-blue, #29abe2) !important;
 }
 
 .add-task-subtasks-icons {
@@ -636,26 +645,30 @@
   align-items: center;
 }
 
+.ATSubtask-container:has(.add-task-subtasks-icons:hover) {
+  background-color: #f1f1f1;
+}
+
 .add-task-subtasks-icon-delete {
-  background-image: url(../assets/icons/add-task-delete.png);
+  background-image: url(../assets/icons/add-task-subtasks-delete.svg);
   width: 24px;
   height: 24px;
   cursor: pointer;
 }
 
 .add-task-subtasks-icon-delete:hover {
-  background-image: url(../assets/icons/add-task-delete-hover.png);
+  background-image: url(../assets/icons/add-task-subtasks-delete-hover.svg);
 }
 
 .add-task-subtasks-icon-edit {
-  background-image: url(../assets/icons/add-task-edit.png);
+  background-image: url(../assets/icons/add-task-subtasks-edit.svg);
   width: 24px;
   height: 24px;
   cursor: pointer;
 }
 
 .add-task-subtasks-icon-edit:hover {
-  background-image: url(../assets/icons/add-task-edit-hover.png);
+  background-image: url(../assets/icons/add-task-subtasks-edit-hover.svg);
 }
 
 #add-task-category:focus,
