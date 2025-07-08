@@ -21,8 +21,7 @@
   flex-direction: column;
 }
 
-.add-task-form-div {
-
+.add-task-form-div-container {
   display: flex;
   justify-content: space-between;
 }
@@ -257,6 +256,7 @@
 .add-task-subtasks-input-style {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: 49px;
   padding-top: 10px;
@@ -312,7 +312,7 @@
   padding-left: 16px;
   gap: 10px;
   border-width: 1px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   font-family: Inter;
   font-weight: 400;
   font-size: 20px;
@@ -321,31 +321,66 @@
   cursor: pointer;
 }
 
-.add-task-subtask-style:hover {
+.add-task-subtask-style:hover{
   background-color: #f1f1f1;
   animation-timing-function: ease-out;
   animation-duration: 100ms;
 }
 
-.add-task-subtask-style:hover .ATSubtask-container {
-  background-color: #f1f1f1;
-  animation-timing-function: ease-out;
-  animation-duration: 100ms;
+.add-task-subtask-style:focus-within  {
+  border-bottom: 1px solid var(--main-blue, #29abe2);
 }
 
 .add-task-subtasks-icon-add {
-  background-image: url(../assets/icons/add-task-add.png);
+  background-image: url(../assets/icons/add-task-subtasks-add.svg);
+  width: 26px;
+  height: 24px;
+  cursor: pointer;
+  margin-right: 0;
+}
+
+.add-task-subtasks-icon-add:hover {
+  background-image: url(../assets/icons/add-task-subtasks-add-hover.svg);
+}
+
+.add-task-subtasks-icon-done {
+  background-image: url(../assets/icons/add-task-subtasks-done.svg);
   width: 24px;
   height: 24px;
   cursor: pointer;
 }
 
-.add-task-subtasks-icon-add:hover {
-  background-image: url(../assets/icons/add-task-add-hover.png);
+.add-task-subtasks-icon-done:hover {
+  background-image: url(../assets/icons/add-task-subtasks-done-hover.svg);
+}
+
+.add-task-subtasks-icon-clear {
+  background-image: url(../assets/icons/add-task-subtasks-close.svg);
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.add-task-subtasks-icon-clear:hover {
+  background-image: url(../assets/icons/add-task-subtasks-close-hover.svg);
+}
+
+.add-task-subtasks-icons-divider{
+  width: 1px;
+  height: 24px;
+  background-color: var(--style);
+  margin: 4px;
+}
+
+.add-task-subtasks-input-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .ATSubtask-container {
-  border: 1px solid #d1d1d1;
+  width: 100%;
+  border: 1px solid #F6F7F8;
   background: #F6F7F8;
   font-family: Inter;
   font-weight: 400;
@@ -356,11 +391,9 @@
   transition: border-color 0.2s;
 }
 
-.ATSubtask-container:focus {
-  border: 1px solid var(--main-blue, #29abe2);
-}
-
 .ATSubtask-container:hover {
+   background-color: #f1f1f1;
+    border: 1px solid #f1f1f1;
   cursor: pointer;
 }
 

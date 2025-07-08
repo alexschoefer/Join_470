@@ -29,6 +29,8 @@ const ATButtonMediumRef = document.getElementById('add-task-prio-button-medium')
 const ATButtonMediumPicRef = document.getElementById('add-task-prio-button-medium-picture');
 const ATButtonLowRef = document.getElementById('add-task-prio-button-low');
 const ATButtonLowPicRef = document.getElementById('add-task-prio-button-low-picture');
+const ATSubtasksInputDivRef = document.getElementById('add-task-subtasks-input-div');
+const ATSubtasksIconAddRef = document.getElementById('add-task-subtasks-icon-add')
 let prioButtonState = "";
 let subtasks = [];
 let subtasksObject = {};
@@ -231,9 +233,6 @@ function subtaskRender() {
     }
 }
 
-function editAddTaskSubtask() {
-    // Logic to edit a subtask
-}
 
 function deleteAddTaskSubtask(index) {
     subtasks.splice(index, 1);
@@ -302,3 +301,33 @@ ATTitleRef.addEventListener('blur', validateTitle);
 ATDueDateRef.addEventListener('blur', validateDueDate);
 ATCategoryRef.addEventListener('blur', validateCategory);
 
+function clearAddTaskSubtask(){
+    ATSubtaskInput.value = "";
+    ATSubtasksIconAddRef.classList.remove('d_none');
+}
+
+function doneAddTaskSubtask(){
+
+}
+
+function editAddTaskSubtask(id) {
+    // Logic to edit a subtask
+}
+
+ATSubtaskInput.addEventListener('focus', showClearAndDoneButtons);
+ATSubtaskInput.addEventListener('blur', hideClearAndDoneButtons);
+
+function showClearAndDoneButtons(){
+ATSubtasksInputDivRef.classList.remove('d_none');
+ATSubtasksIconAddRef.classList.add('d_none');
+}
+
+function hideClearAndDoneButtons(){
+ATSubtasksInputDivRef.classList.add('d_none');
+ATSubtasksIconAddRef.classList.remove('d_none');
+}
+
+function getFocusInSubtasksInput(){
+    document.getElementById('add-task-subtasks-input').focus();
+    ATSubtasksIconAddRef.classList.add('d_none');
+}
