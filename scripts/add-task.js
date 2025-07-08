@@ -31,7 +31,7 @@ const ATButtonLowRef = document.getElementById('add-task-prio-button-low');
 const ATButtonLowPicRef = document.getElementById('add-task-prio-button-low-picture');
 const ATSubtasksInputDivRef = document.getElementById('add-task-subtasks-input-div');
 const ATSubtasksIconAddRef = document.getElementById('add-task-subtasks-icon-add')
-let prioButtonState = "";
+let prioButtonState = "Medium";
 let subtasks = [];
 let subtasksObject = {};
 
@@ -144,22 +144,22 @@ function resetAddTaskForm() {
 }
 
 function addTaskPrioButtonClick(state) {
-    if (state == prioButtonState) {
-        unholdPrioButtons();
-        prioButtonState = "";
-    } else {
-        prioButtonState = state;
-        if (state == 'Urgent') {
-            holdButtonUrgent();
-        }
-        if (state == 'Medium') {
-            holdButtonMedium();
-        }
-        if (state == 'Low') {
-            holdButtonLow();
-        }
+    // if (state == prioButtonState) {
+    //     unholdPrioButtons();
+    //     prioButtonState = "";
+    // } else {
+    //     prioButtonState = state;
+    if (state == 'Urgent') {
+        holdButtonUrgent();
+    }
+    if (state == 'Medium') {
+        holdButtonMedium();
+    }
+    if (state == 'Low') {
+        holdButtonLow();
     }
 }
+// }
 
 function holdButtonUrgent() {
     ATButtonLowPicRef.classList.remove('add-task-priority-button-low-pic-pressed');
@@ -186,19 +186,19 @@ function holdButtonLow() {
     ATButtonMediumPicRef.classList.remove('add-task-priority-button-medium-pic-pressed');
     ATButtonLowPicRef.classList.add('add-task-priority-button-low-pic-pressed');
 
-
+    ATButtonUrgentRef.classList.remove('add-task-priority-button-urgent');
     ATButtonMediumRef.classList.remove('add-task-priority-button-medium');
     ATButtonLowRef.classList.add('add-task-priority-button-low');
 }
 
-function unholdPrioButtons() {
-    ATButtonUrgentPicRef.classList.remove('add-task-priority-button-urgent-pic-pressed');
-    ATButtonMediumPicRef.classList.remove('add-task-priority-button-medium-pic-pressed');
-    ATButtonLowPicRef.classList.remove('add-task-priority-button-low-pic-pressed');
-    ATButtonUrgentRef.classList.remove('add-task-priority-button-urgent');
-    ATButtonMediumRef.classList.remove('add-task-priority-button-medium');
-    ATButtonLowRef.classList.remove('add-task-priority-button-low');
-}
+// function unholdPrioButtons() {
+//     ATButtonUrgentPicRef.classList.remove('add-task-priority-button-urgent-pic-pressed');
+//     ATButtonMediumPicRef.classList.remove('add-task-priority-button-medium-pic-pressed');
+//     ATButtonLowPicRef.classList.remove('add-task-priority-button-low-pic-pressed');
+//     ATButtonUrgentRef.classList.remove('add-task-priority-button-urgent');
+//     ATButtonMediumRef.classList.remove('add-task-priority-button-medium');
+//     ATButtonLowRef.classList.remove('add-task-priority-button-low');
+// }
 
 
 
@@ -314,7 +314,7 @@ function getDoneAddTaskSubtask(id) {
     const addTaskSubtasksIconDoneRef = document.getElementById('add-task-subtasks-icon-done-' + id);
     const ATSubSubtaskIconEditRef = document.getElementById('add-task-subtasks-icon-edit-' + id);
     const ATSubSubtaskIconsRef = document.getElementById('add-task-subtasks-icons-' + id);
-    const ATSubLiRef = document.getElementById('ATSubLi'+ id);
+    const ATSubLiRef = document.getElementById('ATSubLi' + id);
 
     ATSubSubtaskContainerRef.blur();
     ATSubLiRef.classList.remove('d_none');
@@ -330,7 +330,7 @@ function editAddTaskSubtask(id) {
     const ATSubSubtaskIconEditRef = document.getElementById('add-task-subtasks-icon-edit-' + id);
     const ATSubSubtaskIconsRef = document.getElementById('add-task-subtasks-icons-' + id);
     const addTaskSubtasksIconDoneRef = document.getElementById('add-task-subtasks-icon-done-' + id);
-    const ATSubLiRef = document.getElementById('ATSubLi'+ id);
+    const ATSubLiRef = document.getElementById('ATSubLi' + id);
 
     ATSubLiRef.classList.add('d_none');
     ATSubSubtaskContainerRef.focus();
@@ -358,22 +358,22 @@ function getFocusInSubtasksInput() {
 }
 
 
-function ADSShowIcons(){
-document.querySelectorAll('.add-task-subtask-style').forEach(container => {
-    const icons = container.querySelector('.add-task-subtasks-icons');
-    if (icons) {
-        icons.classList.add('d_none');
-        container.addEventListener('mouseenter', () => {
-            icons.classList.remove('d_none');
-        });
-        container.addEventListener('mouseleave', () => {
+function ADSShowIcons() {
+    document.querySelectorAll('.add-task-subtask-style').forEach(container => {
+        const icons = container.querySelector('.add-task-subtasks-icons');
+        if (icons) {
             icons.classList.add('d_none');
-        });
-    }
-});
+            container.addEventListener('mouseenter', () => {
+                icons.classList.remove('d_none');
+            });
+            container.addEventListener('mouseleave', () => {
+                icons.classList.add('d_none');
+            });
+        }
+    });
 }
 
-document.getElementById('add-task-subtasks-input').addEventListener('keydown', function(event) {
+document.getElementById('add-task-subtasks-input').addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
         event.preventDefault();
         addTaskAddSubtask();
