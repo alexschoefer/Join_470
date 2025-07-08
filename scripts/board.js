@@ -2,6 +2,7 @@ let container = document.getElementById("task-card-container");
 let shadow = document.getElementById("shadow-container");
 let tasks = [];
 let updateTasks;
+let tasksPriority;
 let currentDraggedElement = null;
 
 function openTaskDetails(task) {
@@ -15,7 +16,8 @@ function openTaskDetails(task) {
         let task = JSON.parse(taskData);
         shadow.style.display = "block";
         container.classList.remove("hide-to-right");
-        container.innerHTML = boardTaskOverlay(task);
+        tasksPriority = getImageForPriority(task.priority);
+        container.innerHTML = boardTaskOverlay(task, tasksPriority);
         container.classList.add("show-from-right");
         deleteTasksOfOverlay(task.id);
         editTaskOfOverlay(task.id);
@@ -51,7 +53,8 @@ async function updateTask() {
     let container = document.getElementById(col);
     container.innerHTML = "";
     filtered.forEach((task) => {
-      container.innerHTML += generateTodoHTML(task);
+      tasksPriority = getImageForPriority(task.priority);
+      container.innerHTML += generateTodoHTML(task, tasksPriority);
       openTaskDetails(task);
     });
   });
@@ -155,4 +158,12 @@ async function valueTasksToEditTasks(id) {
   };
   await editTasksToRemoteStorage(`/tasks/${id}`, updateTasks);
   closeContainerOverlay();
+}
+function getImageForPriority(priority) {
+  const imageMap = {
+    Medium: "../assets/icons/priority-medium.png",
+    Low: "../assets/icons/low-medium.png",
+    Urgent: "../assets/icons/urgent-medium.png",
+  };
+  return imageMap[priority] || "../assets/icons/low-icon.png";
 }

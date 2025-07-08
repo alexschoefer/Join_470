@@ -1,4 +1,4 @@
-function boardTaskOverlay(task) {
+function boardTaskOverlay(task, priorityImg) {
   return `
   <div id="task-overlay">
               <div class="card-name-overlay">
@@ -20,7 +20,7 @@ function boardTaskOverlay(task) {
                 <span>
                   Priority:
                   <span class="content-value"
-                    >Medium <img src="../assets/icons/priority-medium.png"
+                    >Medium <img src="${priorityImg}"
                   /></span>
                 </span>
               </div>
@@ -87,7 +87,7 @@ function boardTaskOverlay(task) {
               </div>
             </div>`;
 }
-function generateTodoHTML(task) {
+function generateTodoHTML(task,priorityImg) {
   return `
          <div class="card todo task" draggable="true" data-task='${JSON.stringify(
            task
@@ -107,7 +107,7 @@ function generateTodoHTML(task) {
                       <span class="exemplu">MN</span>
                     </div>
                     <div class="prioriti">
-                      <img src="../assets/icons/priority-medium.png" />
+                      <img src="${priorityImg}" />
                     </div>
                   </div>
                 </div>
