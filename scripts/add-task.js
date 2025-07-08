@@ -212,16 +212,17 @@ function addTaskAddSubtask() {
     subtasksToArray();
     subtaskRender();
     resetAddTaskSubtaskInput();
+    ADSShowIcons();
 }
 
 function subtaskRender() {
     allSubtasks.innerHTML = "";
     for (let i = 0; i < subtasks.length; i++) {
         let subtaski = subtasks[i];
-        allSubtasks.innerHTML += `<li id="add-task-subtask-template${i}" class="add-task-subtask-style">
-                 <input id="ATSubtask-container-${i}" type="text" title="ATSubtask-container" class="ATSubtask-container"
+        allSubtasks.innerHTML += `<div id="add-task-subtask-template${i}" class="add-task-subtask-style">
+                <li class="ATSubLi" id="ATSubLi${i}"></li>                 <input id="ATSubtask-container-${i}" type="text" title="ATSubtask-container" class="ATSubtask-container"
                      value="${subtaski}">
-                 <div class="add-task-subtasks-icons" id="add-task-subtasks-icons-${i}">
+                 <div class="add-task-subtasks-icons d_none" id="add-task-subtasks-icons-${i}">
                      <div id="add-task-subtasks-icon-edit-${i}" class="add-task-subtasks-icon-edit" onclick="editAddTaskSubtask(${i})">
                      </div>
                      <div id="add-task-subtasks-icon-done-${i}" class="add-task-subtasks-icon-done d_none" onclick="getDoneAddTaskSubtask(${i})">
@@ -231,7 +232,7 @@ function subtaskRender() {
                      <div id="add-task-subtasks-icon-delete-${i}" class="add-task-subtasks-icon-delete" onclick="deleteAddTaskSubtask(${i})">
                      </div>
                  </div>
-             </li>`;
+             </div>`;
     }
 }
 
@@ -313,8 +314,10 @@ function getDoneAddTaskSubtask(id) {
     const addTaskSubtasksIconDoneRef = document.getElementById('add-task-subtasks-icon-done-' + id);
     const ATSubSubtaskIconEditRef = document.getElementById('add-task-subtasks-icon-edit-' + id);
     const ATSubSubtaskIconsRef = document.getElementById('add-task-subtasks-icons-' + id);
+    const ATSubLiRef = document.getElementById('ATSubLi'+ id);
 
     ATSubSubtaskContainerRef.blur();
+    ATSubLiRef.classList.remove('d_none');
     ATSubSubtaskIconsRef.classList.remove('fdrr');
     ATSubSubtaskIconEditRef.classList.remove('d_none');
     addTaskSubtasksIconDoneRef.classList.add('d_none');
@@ -327,8 +330,9 @@ function editAddTaskSubtask(id) {
     const ATSubSubtaskIconEditRef = document.getElementById('add-task-subtasks-icon-edit-' + id);
     const ATSubSubtaskIconsRef = document.getElementById('add-task-subtasks-icons-' + id);
     const addTaskSubtasksIconDoneRef = document.getElementById('add-task-subtasks-icon-done-' + id);
+    const ATSubLiRef = document.getElementById('ATSubLi'+ id);
 
-
+    ATSubLiRef.classList.add('d_none');
     ATSubSubtaskContainerRef.focus();
     ATSubSubtaskIconsRef.classList.add('fdrr');
     ATSubSubtaskIconEditRef.classList.add('d_none');
@@ -351,4 +355,20 @@ function hideClearAndDoneButtons() {
 function getFocusInSubtasksInput() {
     document.getElementById('add-task-subtasks-input').focus();
     ATSubtasksIconAddRef.classList.add('d_none');
+}
+
+
+function ADSShowIcons(){
+document.querySelectorAll('.add-task-subtask-style').forEach(container => {
+    const icons = container.querySelector('.add-task-subtasks-icons');
+    if (icons) {
+        icons.classList.add('d_none');
+        container.addEventListener('mouseenter', () => {
+            icons.classList.remove('d_none');
+        });
+        container.addEventListener('mouseleave', () => {
+            icons.classList.add('d_none');
+        });
+    }
+});
 }
