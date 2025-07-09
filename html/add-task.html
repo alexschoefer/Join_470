@@ -21,7 +21,7 @@
     <script src="../scripts/header.js"></script>
 </head>
 
-<body>
+<body onload="addTaskInit()">
     <div class="app-layout">
         <div id="sidebar"></div>
         <div id="header"></div>
@@ -170,7 +170,7 @@
                                         src="../assets/icons/add-task-iconoir_cancel.svg" alt="close-pic" />
                                 </button>
                                 <button onclick="sendAddTaskData()" type="button" id="add-task-button-create-task"
-                                    class="label-add-task add-task-button-create">
+                                    class="label-add-task add-task-button-create" disabled="true">
                                     <span class="add-task-button-create-text">Create Task</span>
                                     <div class="label-add-task add-task-button-create-capsule">
                                         <img class="add-task-button-create-icon"
