@@ -772,3 +772,28 @@
     transform: translateY(-50vh);
   }
 }
+
+#add-task-due-date-input::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+.add-task-due-date-wrapper {
+  position: relative;
+}
+
+.calendar-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: url('../assets/icons/add-task-due-date-icon.svg') no-repeat center center;
+  background-size: contain;
+  pointer-events: none;
+}
+
+.calendar-icon {
+  pointer-events: auto;
+  cursor: pointer;
+}

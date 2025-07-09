@@ -371,6 +371,12 @@ function createTaskButtonRequiredFieldsNotOK() {
         ATButtonAddTaskRef.disabled = true;
 }
 
+document.querySelector('.calendar-icon').addEventListener('click', function() {
+    const input = document.getElementById('add-task-due-date-input');
+    input.focus();
+    if (input.showPicker) input.showPicker();
+});
+
 async function getContactsFromRemoteStorage() {
     let response = await fetch(fetchURLDataBase + '/contacts' + '.json', {
         method: "GET",

@@ -52,8 +52,10 @@
                                 </div>
                                 <div class="add-task-form-left-due-date">
                                     <p class="label-add-task">Due date<span class="red-asterix-required">*</span></p>
-                                    <input type="date" id="add-task-due-date-input" title="due-date"
-                                        class="add-task-input-style" required>
+                                    <div class="add-task-due-date-wrapper">
+                                        <input type="date" title="due-date" id="add-task-due-date-input" class="add-task-input-style" />
+                                        <span class="calendar-icon" onclick="document.getElementById('add-task-due-date-input').focus();"></span>
+                                    </div>
                                     <span id="due-date-required" class="required-text d_none">This field is
                                         required</span>
                                 </div>
@@ -73,11 +75,13 @@
                                         </button>
 
                                         <button onclick="addTaskPrioButtonClick('Medium')"
-                                            id="add-task-prio-button-medium" class="add-task-priority-button add-task-priority-button-medium"
+                                            id="add-task-prio-button-medium"
+                                            class="add-task-priority-button add-task-priority-button-medium"
                                             type="button">
                                             <span class="">Medium</span>
                                             <div id="add-task-prio-button-medium-picture"
-                                                class="add-task-priority-button-medium-image add-task-priority-button-medium-pic-pressed"></div>
+                                                class="add-task-priority-button-medium-image add-task-priority-button-medium-pic-pressed">
+                                            </div>
                                         </button>
 
                                         <button onclick="addTaskPrioButtonClick('Low')" id="add-task-prio-button-low"
@@ -124,10 +128,11 @@
                                             <input type="text"
                                                 class="add-task-placeholder-style add-task-input-placeholder-style "
                                                 id="add-task-subtasks-input" placeholder="Add new subtask" />
-                                            <div id="add-task-subtasks-icon-add"
-                                                class="add-task-subtasks-icon-add " onclick="getFocusInSubtasksInput()">
+                                            <div id="add-task-subtasks-icon-add" class="add-task-subtasks-icon-add "
+                                                onclick="getFocusInSubtasksInput()">
                                             </div>
-                                            <div id="add-task-subtasks-input-div" class="df add-task-subtasks-input-div d_none">
+                                            <div id="add-task-subtasks-input-div"
+                                                class="df add-task-subtasks-input-div d_none">
                                                 <div id="add-task-subtasks-icon-clear"
                                                     class="add-task-subtasks-icon-clear"
                                                     onmousedown="clearAddTaskSubtask()">
