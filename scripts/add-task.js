@@ -27,7 +27,7 @@ let subtasksObject = {};
 
 function addTaskInit() {
     createTaskButtonRequiredFieldsNotOK();
-// contacts trigger
+    getContactsFromRemoteStorage();
 }
 
 async function sendAddTaskData() {
@@ -353,7 +353,7 @@ function checkRequiredFieldsAndToggleButton() {
     if (titleFilled && dueDateFilled && categoryFilled) {
         createTaskButtonRequiredFieldsOK();
     } else {
-       createTaskButtonRequiredFieldsNotOK();
+        createTaskButtonRequiredFieldsNotOK();
     }
 }
 
@@ -367,11 +367,11 @@ function createTaskButtonRequiredFieldsOK() {
 }
 
 function createTaskButtonRequiredFieldsNotOK() {
-     ATButtonAddTaskRef.style.backgroundColor = "var(--main-color)";
-        ATButtonAddTaskRef.disabled = true;
+    ATButtonAddTaskRef.style.backgroundColor = "var(--main-color)";
+    ATButtonAddTaskRef.disabled = true;
 }
 
-document.querySelector('.calendar-icon').addEventListener('click', function() {
+document.querySelector('.calendar-icon').addEventListener('click', function () {
     const input = document.getElementById('add-task-due-date-input');
     input.focus();
     if (input.showPicker) input.showPicker();
@@ -386,6 +386,31 @@ async function getContactsFromRemoteStorage() {
 
     });
     const data = await response.json();
-    console.log(data);
-    return data;
+    await createAddTasskContacts(data);
+}
+
+async function createAddTasskContacts(data) {
+    const result = [];
+    for (const key in data) {
+        const contact = data[key];
+        result.push({ initial: contact.initial, name: contact.name });
+    }
+    loadAddTaskAssignedTo(result);
+}
+
+async function loadAddTaskAssignedTo(result) {
+    const optionToRender = document.getElementById('add-task-assigned-to-select');
+    optionToRender.innerHTML = "";
+    for (let i = 0; i < result.length; i++) {
+        const initial = result[i].initial;
+        const name = result[i].name;
+        optionToRender.innerHTML += `<option value="${i}" class="label-add-task add-task-placeholder-black">
+                                            <div id="ATContact-option-intials-container"
+                                                class="ATContact-option-intials-container">
+                                                <div id="ATContact-option-initials" class="ATContact-option-initials">${initial}</div>
+                                            </div>
+                                            <div id="ATContact-option-name" class="ATContact-option-name">${name}</div>
+                                            <div id="ATContact-option-checkbox" class="ATContact-option-checkbox"></div>
+                                        </option>`
+    }
 }

@@ -416,7 +416,7 @@
   padding-left: 20px;
 }
 
-.ATSubLi{
+.ATSubLi {
   margin-left: 30px;
   margin-right: -16px;
   color: var(--black);
@@ -797,3 +797,27 @@
   pointer-events: auto;
   cursor: pointer;
 }
+
+.contact-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: white;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+.ATContact-option-initials {}
+
+.ATContact-option-name {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  text-align: left;
+  color: #000000;
+}
+
+.ATContact-option-checkbox {}
