@@ -71,3 +71,15 @@
     overflow-y: auto;
   }
 }
+
+.df {
+  display: flex;
+}
+
+.fdr {
+  flex-direction: row;
+}
+
+.fdrr {
+  flex-direction: row-reverse;
+}
