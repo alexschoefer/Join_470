@@ -135,10 +135,6 @@ function resetAddTaskForm() {
 }
 
 function addTaskPrioButtonClick(state) {
-     if (state == prioButtonState) {
-        unholdPrioButtons();
-        prioButtonState = "";
-    } else {
         prioButtonState = state;
         if (state == 'Urgent') {
             holdButtonUrgent();
@@ -150,7 +146,7 @@ function addTaskPrioButtonClick(state) {
             holdButtonLow();
         }
 }
-}
+
 
 function holdButtonUrgent() {
     ATButtonLowPicRef.classList.remove('add-task-priority-button-low-pic-pressed');
@@ -177,15 +173,6 @@ function holdButtonLow() {
     ATButtonUrgentRef.classList.remove('add-task-priority-button-urgent');
     ATButtonMediumRef.classList.remove('add-task-priority-button-medium');
     ATButtonLowRef.classList.add('add-task-priority-button-low');
-}
-
-function unholdPrioButtons() {
-    ATButtonUrgentPicRef.classList.remove('add-task-priority-button-urgent-pic-pressed');
-    ATButtonMediumPicRef.classList.remove('add-task-priority-button-medium-pic-pressed');
-    ATButtonLowPicRef.classList.remove('add-task-priority-button-low-pic-pressed');
-    ATButtonUrgentRef.classList.remove('add-task-priority-button-urgent');
-    ATButtonMediumRef.classList.remove('add-task-priority-button-medium');
-    ATButtonLowRef.classList.remove('add-task-priority-button-low');
 }
 
 function resetAddTaskSubtaskInput() {
