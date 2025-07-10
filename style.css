@@ -37,7 +37,7 @@
 
 .main-content {
   grid-area: content;
-  background-color: white;
+  background-color: #f6f7f8;
   overflow-y: auto;
   display: flex;
 }
