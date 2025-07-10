@@ -1,8 +1,8 @@
-function boardTaskOverlay(task) {
+function boardTaskOverlay(task, priorityImg, assigned, subtasks, color) {
   return `
   <div id="task-overlay">
               <div class="card-name-overlay">
-                <span class="card-name">${task.category}</span>
+                <span style="background-color: ${color}"   class="card-name">${task.category}</span>
                 <span class="close-overlay" onclick="closeContainerOverlay()"
                   ><img src="../assets/icons/close.png"
                 /></span>
@@ -13,63 +13,27 @@ function boardTaskOverlay(task) {
               </div>
               <div class="date">
                 <span
-                  >Due date: <span class="content-value">${task.dueDate}</span></span
+                  >Due date: <span class="content-value">${task.date}</span></span
                 >
               </div>
               <div class="priority-card date">
                 <span>
                   Priority:
                   <span class="content-value"
-                    >Medium <img src="../assets/icons/priority-medium.png"
+                    >${task.priority}<img src="${priorityImg}"
                   /></span>
                 </span>
               </div>
               <div class="assigned-overlay-card">
                 <span class="assigned-list">Assigned To:</span>
                 <div class="content">
-                  <div class="assigned-content">
-                    <span class="logo"> JL </span>
-                    <span class="name">Judtih Lütke</span>
-                  </div>
-                  <div class="assigned-content">
-                    <span class="logo"> MN </span>
-                    <span class="name">Miriam Neumann</span>
-                  </div>
+                ${assigned}
                 </div>
               </div>
               <div class="subtasks">
                 <span class="subtasks-title">Subtasks</span>
                 <div class="subtasks-input">
-                  <div class="subtask-container">
-                    <input
-                      class="checkbox"
-                      type="checkbox"
-                      id="1"
-                      name="task1"
-                      value="task1"
-                    />
-                    <label> Implement Recipe Recommendation</label><br />
-                  </div>
-                  <div class="subtask-container">
-                    <input
-                      class="checkbox"
-                      type="checkbox"
-                      id="2"
-                      name="task2"
-                      value="task2"
-                    />
-                    <label> Start Page Layout</label><br />
-                  </div>
-                  <div class="subtask-container">
-                    <input
-                      class="checkbox"
-                      type="checkbox"
-                      id="3"
-                      name="task3"
-                      value="task3"
-                    />
-                    <label> Implement User Authentication</label><br /><br />
-                  </div>
+                 ${subtasks}
                 </div>
               </div>
               <div class="tasks-functionen">
@@ -87,27 +51,30 @@ function boardTaskOverlay(task) {
               </div>
             </div>`;
 }
-function generateTodoHTML(task) {
+function generateTodoHTML(task, priorityImg, assigned, color) {
   return `
          <div class="card todo task" draggable="true" data-task='${JSON.stringify(
            task
          )}' ondragstart="startDragging(${task.id})">
                 <div class="card-content">
-                  <span class="card-name"> ${task.category}</span>
+                  <span style="background-color: ${color}" class="card-name"> ${
+    task.category
+  }</span>
                   <div class="card-description">
                     <h4>${task.title}</h4>
                     <p>${task.description}</p>
                   </div>
                   <div class="progress-bar">
                     <div class="bar"><span class="col-bar"></span></div>
-                    <span class="nr-progress-tasks">1/2 Subtasks</span>
+                    <span id="nr-progress-tasks"></span>
                   </div>
                   <div class="assignees-priority"> 
-                    <div class="assignees">
-                      <span class="exemplu">MN</span>
-                    </div>
+                  <div class="card-assigned-initials">
+                  ${assigned}
+                  </div>
+                    
                     <div class="prioriti">
-                      <img src="../assets/icons/priority-medium.png" />
+                      <img src="${priorityImg}" />
                     </div>
                   </div>
                 </div>
@@ -161,7 +128,7 @@ function editTasksOfBoard(id) {
                                             type="button">Urgent<img class="add-task-priority-button-medium-image"
                                                 src="../assets/icons/add-task-prio-capa-2-urgent-default.svg"
                                                 alt="urgent-button"></img></button>
-                                        <button  id="add-task-prio-button-medium"
+                                        <button  id="add-task-prio-button-medium" 
                                             class="add-task-priority-button add-task-priority-button-medium"
                                             type="button"><span class="">Medium</span><img
                                                 class="add-task-priority-button-medium-image"
@@ -235,3 +202,34 @@ function editTasksOfBoard(id) {
                      </div>
                     `;
 }
+
+//  <div class="subtask-container">
+//                     <input
+//                       class="checkbox"
+//                       type="checkbox"
+//                       id="1"
+//                       name="task1"
+//                       value="task1"
+//                     />
+//                     <label> Implement Recipe Recommendation</label><br />
+//                   </div>
+//                   <div class="subtask-container">
+//                     <input
+//                       class="checkbox"
+//                       type="checkbox"
+//                       id="2"
+//                       name="task2"
+//                       value="task2"
+//                     />
+//                     <label> Start Page Layout</label><br />
+//                   </div>
+//                   <div class="subtask-container">
+//                     <input
+//                       class="checkbox"
+//                       type="checkbox"
+//                       id="3"
+//                       name="task3"
+//                       value="task3"
+//                     />
+//                     <label> Implement User Authentication</label><br /><br />
+//                   </div>
