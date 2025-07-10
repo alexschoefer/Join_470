@@ -1,4 +1,5 @@
 let allContacts = [];
+let colors = ['#FF7A00','#FF5EB3','#FF5EB3','#9327FF','#FF4646','#C3FF2B','#FF745E','#FFE62B','#00BEE8','#0038FF'];
 
 async function initContacts() {
     await getAllContacts(); // Kontakte in der Datenbank synchronisieren
@@ -9,7 +10,6 @@ async function initContacts() {
 function showAllContacts(allContacts) {
     const sortedContacts = sortContactsAlphabetically(allContacts);
     const groupedContacts = findCapitalFirstLetter(sortedContacts);
-
     renderGroupedContacts(groupedContacts);
 }
 
@@ -19,12 +19,12 @@ async function getAllContacts() {
     for (let contact of contactsDummy) {
         let { name, email, phone, initial, profilcolor } = contact;
 
-        // Prüfen, ob Kontakt mit derselben bereits E-Mail existiert
+        // Prüfung, ob Kontakt mit derselben bereits E-Mail existiert
         let existingProfil = existingContacts.find(c => c.email === email);
 
         if (existingProfil) {
             // Kontakt updaten
-            await updateContactInRemoteStorage(existingProfil.id, { name, email, phone, initial, profilcolor });
+            await updateContactInRemoteStorage(existingProfil.id, {name, email, phone, initial, profilcolor});
         } else {
             // Kontakt neu anlegen
             await postContactsToRemoteStorage(name, email, phone, initial, profilcolor);
@@ -63,10 +63,8 @@ async function updateContactInRemoteStorage(id, updatedContact) {
 async function checkExistingContact() {
     const response = await fetch(fetchURLDataBase + '/contacts' + '.json');
     const data = await response.json();
-
     if (!data) return [];
-
-    // Konvertiere das Objekt in ein Array mit ID für spätere Updates
+    // Konvertiere das Objekt in ein Array mit Firebase ID für spätere Updates
     return Object.entries(data).map(([id, contact]) => ({
         id,
         ...contact
@@ -74,9 +72,12 @@ async function checkExistingContact() {
 }
 
 async function loadAllContactsFromRemoteStorage() {
-    const response = await fetch(fetchURLDataBase + '/contacts.json');
+    const response = await fetch(fetchURLDataBase + '/contacts' + '.json');
     const contactsData = await response.json();
-    return Object.values(contactsData);
+    return Object.entries(contactsData).map(([id, contact]) => ({
+        id,
+        ...contact
+    }));
 }
 
 function sortContactsAlphabetically(allContacts) {
@@ -94,28 +95,6 @@ function findCapitalFirstLetter(allContacts) {
     });
     return contactList;
 }
-
-function getCaptialLetterHeaderTemplate(letter) {
-    return `
-        <div class="capital-letter">${letter}</div>
-        <div class="contact-line"></div>                       
-    `;
-}
-
-function getContactEntryTemplate(contact, index) {
-    return `
-    <div id="contact-entry" class="contact-entry" onclick="getContactInformations(${index}, event)">
-        <div class="contact-profil-badge">
-            <div class="contact-icon" style="background-color: ${contact.profilcolor};">${contact.initial}</div>
-        </div>
-        <div class="contact-information">
-            <div class="contact-name">${contact.name}</div>
-            <div class="contact-email">${contact.email}</div>
-        </div>
-    </div>
-    `;
-}
-
 
 function renderGroupedContacts(groupedContacts) {
     const container = document.getElementById('contact-list');
@@ -157,38 +136,12 @@ function toggleActiveContact(element) {
     }
 }
 
-function showContactInformationsTemplate(contact,index) {
-    return `
-    <div class="contact">
-        <div class="contact-profil-badge">
-            <div class="contact-details-icon" style="background-color: ${contact.profilcolor};">${contact.initial}</div>
-        </div>
-        <div class="contact-profil">
-            <div class="contact-profil-name">${contact.name}</div>
-            <div class="contact-profil-btns-container">
-                <button class="contact-profil-btn-edit" onclick="editContact(${index})"><img src="../assets/icons/edit-icon.png" alt="edit-icon">Edit</button>
-                <button class="contact-profil-btn-delete"><img src="../assets/icons/delete-icon.png" alt="">Delete</button>
-            </div>
-        </div>
-    </div>
-        <div class="contact-informations-email-phone">
-            <h4>Contact Information</h4>
-        </div>
-        <div class="contact-email-phone">
-            <span>Email</span>
-            <div class="contact-email">${contact.email || ''}</div>
-            <span>Phone</span>
-            <div class="contact-phone">${contact.phone || ''}</div>
-        </div>
-    `;
-}
-
 function editContact(index) {
     const contact = allContacts[index];
     let closeOverlay = document.getElementById('editContactOverlayContainer');
     closeOverlay.classList.remove('d_none');
     let overlayContainer = document.getElementById('editContactOverlayContainer');
-    overlayContainer.innerHTML = editContactTemplate(contact);
+    overlayContainer.innerHTML = editContactTemplate(contact,index);
 }
 
 function addNewContact() {
@@ -196,80 +149,6 @@ function addNewContact() {
     closeOverlay.classList.remove('d_none');
     let overlayContainer = document.getElementById('addNewContactOverlayContainer');
     overlayContainer.innerHTML = addNewContactTemplate();
-}
-
-function addNewContactTemplate() {
-    return `
-<div class="add-contact-overlay">
-    <div>
-        <img class="add-contact-close-overlay-icon" src="../assets/icons/close.png" alt="close-icon"
-            onclick="closeAddContactOverlay()">
-    </div>
-
-    <div class="add-contact-left-container">
-        <img class="add-contact-menulogo" src="../assets/img/MenuLogo.png" alt="menulogo">
-        <div class="add-contact-headline-container">
-            <h3>Add contact</h3>
-            <span>Tasks are better with a team!</span>
-            <div class="add-contact-vector-line"></div>
-        </div>
-    </div>
-
-    <div class="add-contact-right-container">
-        <form class="add-contact-form" onsubmit="saveUserInputsForRemoteStorage(event)">
-            <div class="add-contact-information-wrapper">
-                <div class="add-contact-profil-icon">
-                    <img src="../assets/icons/profil-icon.png" alt="profil-icon.png">
-                </div>
-
-                <div class="add-contact-input-wrapper">
-                    <div class="user-input-wrapper">
-                        <div class="input-container">
-                            <input id="add-contact-name-input" class="user-input" type="text" name="name"
-                                placeholder="Name" required>
-                            <div>
-                                <img class="email-icon" src="../assets/icons/person-icon.png" alt="person-icon">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="user-input-wrapper">
-                        <div class="input-container">
-                            <input id="usermail-input" class="user-input" type="email" name="email" placeholder="Email"
-                                autocomplete="off" required pattern="^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$">
-                            <div>
-                                <img class="email-icon" src="../assets/icons/mail-icon.png" alt="mail-icon">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="user-input-wrapper">
-                        <div class="input-container">
-                            <input id="add-contact-phone-input" class="user-input" type="tel" name="phone"
-                                placeholder="Phone" required>
-                            <div>
-                                <img class="phone-icon" src="../assets/icons/call-icon.png" alt="call-icon">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="add-contact-btns-container">
-                        <button type="button" class="cancel-btn" onclick="closeAddContactOverlay()">
-                            Cancel
-                            <img class="add-task-button-create-icon" src="../assets/icons/close.png" alt="close-icon">
-                        </button>
-                        <button type="submit" class="create-contact-btn">
-                            Create contact
-                            <img class="add-task-button-check-icon" src="../assets/icons/check-icon.png"
-                                alt="check-icon">
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-    `
 }
 
 function bubblingPropagation(event) {
@@ -286,73 +165,98 @@ function closeEditContactOverlay() {
     closeOverlay.classList.add('d_none');
 }
 
-function editContactTemplate(contact) {
-    return `
-    <div class="add-contact-overlay">
-    <div>
-        <img class="add-contact-close-overlay-icon" src="../assets/icons/close.png" alt="close-icon"
-        onclick="closeEditContactOverlay()">
-    </div>
+async function deleteContact(index) {
+    let selectedContact = document.getElementById('contact-details');
+    let deleteContact = allContacts[index];        
+    await fetch(`${fetchURLDataBase}/contacts/${deleteContact.id}.json`, {
+        method: "DELETE",
+    });
+    closeEditContactOverlay(); 
+    await refreshContacts();
+    selectedContact.innerHTML = "";
+}
 
-    <div class="add-contact-left-container">
-        <img class="add-contact-menulogo" src="../assets/img/MenuLogo.png" alt="menulogo">
-        <div class="add-contact-headline-container">
-            <h3>Edit contact</h3>
-            <div class="add-contact-vector-line"></div>
-        </div>
-    </div>
+async function refreshContacts() {
+    allContacts = await loadAllContactsFromRemoteStorage();
+    showAllContacts(allContacts);
+}
 
-    <div class="add-contact-right-container">
-        <form class="add-contact-form" onsubmit="saveUserInputsForRemoteStorage(event)">
-            <div class="add-contact-information-wrapper">
-                <div class="add-contact-profil-icon">
-                    <div class="contact-details-icon" style="background-color: ${contact.profilcolor};">${contact.initial}</div>
-                </div>
+async function createContactForRemoteStorage(event) {
+    event.preventDefault();
+    let nameInput = document.getElementById('add-contact-name-input');
+    let emailInput = document.getElementById('add-contact-email-input');
+    let phoneInput = document.getElementById('add-contact-phone-input');
+    let initial = createUserInitial(nameInput.value);
+    let profilcolor = getProfilColorIcon();
+    postContactsToRemoteStorage(nameInput.value, emailInput.value, phoneInput.value, initial, profilcolor);
+    closeAddContactOverlay();
+    showCreateContactSuccess();
+    
+}
 
-                <div class="add-contact-input-wrapper">
-                    <div class="user-input-wrapper">
-                        <div class="input-container">
-                            <input id="add-contact-name-input" class="user-input" type="text" name="name" placeholder="Name" value="${contact.name}">
-                            <div>
-                                <img class="email-icon" src="../assets/icons/person-icon.png" alt="person-icon">
-                            </div>
-                        </div>
-                    </div>
+function createUserInitial(nameInput) {
+    let initial = nameInput.trim().split(' ');
+    let firstLetterInitial = initial[0].charAt(0).toUpperCase();
+    let secondLetterInitial = initial[1].charAt(0).toUpperCase();
+    return firstLetterInitial + secondLetterInitial;
+}
 
-                    <div class="user-input-wrapper">
-                        <div class="input-container">
-                            <input id="usermail-input" class="user-input" type="email" name="email" placeholder="Email"
-                                autocomplete="off" value="${contact.email}">
-                            <div>
-                                <img class="email-icon" src="../assets/icons/mail-icon.png" alt="mail-icon">
-                            </div>
-                        </div>
-                    </div>
+function getProfilColorIcon() {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
 
-                    <div class="user-input-wrapper">
-                        <div class="input-container">
-                            <input id="add-contact-phone-input" class="user-input" type="tel" name="phone" placeholder="Phone"
-                                value="${contact.phone || ''}">
-                            <div>
-                                <img class="phone-icon" src="../assets/icons/call-icon.png" alt="call-icon">
-                            </div>
-                        </div>
-                    </div>
+function validateSignupInput(input) {
+    const errorMessage = document.getElementById(input.id + '-validation-message');
+    const wrapper = input.closest('.user-input-wrapper');
+    if (errorMessage && wrapper) {
+        if (input.value.trim() === '') {
+            errorMessage.classList.remove('d_none');
+            wrapper.classList.add('input-error');
+        } else {
+            errorMessage.classList.add('d_none');
+            wrapper.classList.remove('input-error');
+        }
+    }
+}
 
-                    <div class="add-contact-btns-container">
-                        <button type="button" class="delete-btn" onclick="closeAddContactOverlay()">
-                            Delete
-                        </button>
-                        <button type="submit" class="save-contact-btn">
-                            Save
-                            <img class="add-task-button-check-icon" src="../assets/icons/check-icon.png"
-                                alt="check-icon">
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-    `
+function clearErrorMessage(input) {
+    let errorMessage = document.getElementById(input.id + '-validation-message');
+    let wrapper = input.closest('.user-input-wrapper');
+    errorMessage.classList.add('d_none');
+    wrapper.classList.remove('input-error');
+    const defaultText = errorMessage.getAttribute('data-default-message');
+    if (defaultText && errorMessage.innerHTML !== defaultText) {
+        errorMessage.innerHTML = defaultText;
+    }
+}
+
+async function getChangesFromContact(id, event, profilcolor, initial) {
+    let selectedContact = document.getElementById('contact-details');  
+    event.preventDefault();
+    let nameInput = document.getElementById('add-contact-name-input');
+    let emailInput = document.getElementById('add-contact-email-input');
+    let phoneInput = document.getElementById('add-contact-phone-input');
+    let initialInput = createUserInitial(nameInput.value);    
+    const updatedContact = {
+        name: nameInput.value,
+        email: emailInput.value,
+        phone: phoneInput.value,
+        profilcolor: profilcolor,
+        initial: initialInput
+    };    
+    await updateContactInRemoteStorage(id, updatedContact);
+    closeEditContactOverlay();
+    await refreshContacts();
+    selectedContact.innerHTML = "";
+}
+
+async function showCreateContactSuccess() {
+    const overlay = document.getElementById('sign-up-success-overlay');
+    overlay.classList.remove('d_none');
+    overlay.classList.add('show');
+    setTimeout(() => {
+        overlay.classList.add('d_none');
+        overlay.classList.remove('show');
+    }, 800);
+    await initContacts();
 }
