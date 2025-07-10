@@ -1,12 +1,20 @@
+.summary-layout {
+  padding-top: 110px;
+  padding-left: 96px;
+}
+.summary-main-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .summary-head-content {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 625px;
   height: 73px;
-  position: absolute;
-  top: 206px;
-  left: 328px;
+  margin-bottom: 60px;
   gap: 30px;
 }
 
@@ -51,10 +59,6 @@
   flex-direction: column;
   height: 136px;
   width: 385px;
-  position: absolute;
-  top: 547.5px;
-  left: 968px;
-  gap: 3px;
 }
 
 .summary-greating-user h2 {
@@ -66,27 +70,54 @@
   font-weight: 700;
   color: #29abe2;
 }
-.summary-overview {
-  height: 562px;
-  width: 560px;
-  position: absolute;
-  top: 335px;
-  left: 328px;
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 gleich breite Spalten */
+  grid-template-rows: auto auto auto; /* 3 Zeilen */
+  gap: 20px;
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
 }
 
-.summary-overview-taskline {
-  display: flex;
-  position: absolute;
-  top: 392px;
+/* Zeile 1: To-do und Done */
+.box-todo {
+  grid-column: 1 / 2;
+  grid-row: 1;
 }
+.box-done {
+  grid-column: 2 / 4; /* geht über Spalte 2 und 3 */
+  grid-row: 1;
+}
+
+/* Zeile 2: Urgent über ganze Breite */
+.box-urgent {
+  grid-column: 1 / 4;
+  grid-row: 2;
+}
+
+/* Zeile 3: Tasks, Progress, Feedback */
+.box-tasks {
+  grid-column: 1;
+  grid-row: 3;
+}
+.box-progress {
+  grid-column: 2;
+  grid-row: 3;
+}
+.box-feedback {
+  grid-column: 3;
+  grid-row: 3;
+}
+
 .summary-overview-taskbox-one {
+  grid-column: 1;
+  grid-row: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 169px;
   height: 168px;
-  position: absolute;
-  top: 1px;
   border-radius: 30px;
   padding-top: 25px;
   padding-bottom: 25px;
@@ -96,13 +127,13 @@
   transform-origin: bottom left;
 }
 .summary-overview-taskbox-two {
+  grid-column: 2;
+  grid-row: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 169px;
   height: 168px;
-  position: absolute;
-  top: 1px;
   left: 196px;
   border-radius: 30px;
   padding-top: 25px;
@@ -113,13 +144,13 @@
   transform-origin: bottom center;
 }
 .summary-overview-taskbox-three {
+  grid-column: 1;
+  grid-row: 2;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 169px;
   height: 168px;
-  position: absolute;
-  top: 1px;
   left: 392px;
   border-radius: 30px;
   padding-top: 25px;
@@ -149,13 +180,13 @@
 }
 
 .summary-overview-urgent {
+  grid-column: 2;
+  grid-row: 2;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 560px;
   height: 168px;
-  position: absolute;
-  top: 196px;
   border-radius: 30px;
   padding-top: 28px;
   padding-right: 48px;
@@ -165,6 +196,16 @@
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
   transition: transform 0.15s ease;
   transform-origin: top left;
+}
+
+.summary-grid > div {
+  background-color: white;
+  border: 2px solid black;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
 }
 
 .summary-overview-urgent-vector {
@@ -232,6 +273,8 @@
 }
 
 .summary-overview-main-box {
+  grid-column: 1;
+  grid-row: 3;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -276,11 +319,11 @@
   font-weight: 400;
 }
 .summary-overview-main-box-two {
+  grid-column: 2;
+  grid-row: 3;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  left: 296px;
   height: 168px;
   width: 264px;
   border-radius: 30px;
