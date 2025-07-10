@@ -2,9 +2,12 @@ let container = document.getElementById("task-card-container");
 let shadow = document.getElementById("shadow-container");
 let tasks = [];
 let updateTasks;
+let tasksPriority;
 let currentDraggedElement = null;
+let subtasksContent;
+let colorLabels;
 
-function openTaskDetails(task) {
+function openTaskDetails() {
   let tasksCards = document.querySelectorAll(".card");
   if (!tasksCards.length) return;
   tasksCards.forEach((card) => {
@@ -15,7 +18,17 @@ function openTaskDetails(task) {
         let task = JSON.parse(taskData);
         shadow.style.display = "block";
         container.classList.remove("hide-to-right");
-        container.innerHTML = boardTaskOverlay(task);
+        colorLabels = getColoredLabels(task.category);
+        tasksPriority = getImageForPriority(task.priority);
+        let assigned = generateAssignedCardOverlay(task.assigned);
+        subtasksContent = generateSubtaskHTML(task.subtasks);
+        container.innerHTML = boardTaskOverlay(
+          task,
+          tasksPriority,
+          assigned,
+          subtasksContent,
+          colorLabels
+        );
         container.classList.add("show-from-right");
         deleteTasksOfOverlay(task.id);
         editTaskOfOverlay(task.id);
@@ -51,8 +64,18 @@ async function updateTask() {
     let container = document.getElementById(col);
     container.innerHTML = "";
     filtered.forEach((task) => {
-      container.innerHTML += generateTodoHTML(task);
+      tasksPriority = getImageForPriority(task.priority);
+      let assigned = getInitialsList(task.assigned);
+      colorLabels = getColoredLabels(task.category);
+      container.innerHTML += generateTodoHTML(
+        task,
+        tasksPriority,
+        assigned,
+        colorLabels
+      );
       openTaskDetails(task);
+      let lastTask = container.lastElementChild;
+      updateSubtaskProgress(task.subtasks, lastTask);
     });
   });
   enableTiltOnDrag(".task");
@@ -104,19 +127,27 @@ function formatName(name) {
   };
   return map[name] || name;
 }
-
 function enableTiltOnDrag(selector) {
+  let cardContainer = document.querySelectorAll(".card-drag-drop-container");
   let elements = document.querySelectorAll(selector);
   elements.forEach((el) => {
     el.addEventListener("dragstart", () => {
       el.classList.add("tilt-on-drag");
+      cardContainer.forEach((container) => {
+        container.style.height = container.offsetHeight + 250 + "px";
+        container.style.boxShadow = "inset 0 0 0 2px rgba(0, 0, 0, 0.15)";
+      });
     });
     el.addEventListener("dragend", () => {
       el.classList.remove("tilt-on-drag");
+      cardContainer.forEach((container) => {
+        container.style.height = "auto";
+        container.style.boxShadow = "";
+      });
     });
   });
 }
-// --------------------------------------------------
+
 function deleteTasksOfOverlay(id) {
   let taskCardContainer = document.getElementById("task-overlay");
   let deleteButton = document.getElementsByClassName("delete")[0];
@@ -155,4 +186,92 @@ async function valueTasksToEditTasks(id) {
   };
   await editTasksToRemoteStorage(`/tasks/${id}`, updateTasks);
   closeContainerOverlay();
+}
+function getImageForPriority(priority) {
+  let imageMap = {
+    Medium: "../assets/icons/priority-medium.png",
+    Low: "../assets/icons/low-medium.png",
+    Urgent: "../assets/icons/urgent-medium.png",
+  };
+  return imageMap[priority] || "../assets/icons/low-medium.png";
+}
+
+function generateAssignedCardOverlay(assignedList) {
+  let result = "";
+  for (let i = 0; i < assignedList.length; i++) {
+    let name = assignedList[i];
+    let initials = name
+      .split(" ")
+      .map((w) => w[0])
+      .join("")
+      .toUpperCase();
+
+    result += `
+        <div class="assigned-content">
+          <span class="logo">${initials}</span>
+          <span class="name">${name}</span>
+        </div>
+      `;
+  }
+
+  return result;
+}
+function getInitialsList(assignedList) {
+  return assignedList
+    .map((name) => {
+      let initials = name
+        .trim()
+        .split(/\s+/)
+        .map((w) => w[0])
+        .join("")
+        .toUpperCase();
+
+      return `<div class="assignees">
+    <span>${initials}</span>
+    </div>
+    `;
+    })
+    .join("");
+}
+function updateSubtaskProgress(subtasksVolume, container) {
+  let total = subtasksVolume.length;
+  let completed = subtasksVolume.filter((t) => t.done === true).length;
+
+  let percent = total === 0 ? 0 : (completed / total) * 100;
+
+  container.querySelector(".col-bar").style.width = percent + "%";
+  container.querySelector(
+    "#nr-progress-tasks"
+  ).textContent = `${completed}/${total} Subtasks`;
+}
+
+function generateSubtaskHTML(subtasks) {
+  return subtasks
+    .map((subtask, index) => {
+      const checked = subtask.done ? "checked" : "";
+      const id = index + 1;
+      return `
+      <div class="subtask-container">
+        <input
+          class="checkbox"
+          type="checkbox"
+          id="${id}"
+          name="task${id}"
+          value="task${id}"
+          ${checked}
+        />
+        <label> ${subtask.title}</label><br />
+      </div>
+    `;
+    })
+    .join("");
+}
+function getColoredLabels(items) {
+  let color = "";
+  if (items === "User Story") {
+    color = "#0038FF";
+  } else if (items === "Technical Task") {
+    color = "#1FD7C1";
+  }
+  return color;
 }
