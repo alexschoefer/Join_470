@@ -1,7 +1,7 @@
-.content-limit{
-max-width: 1920px;
-width: 100%;
-position: relative;
+.content-limit {
+  max-width: 1920px;
+  width: 100%;
+  position: relative;
 }
 
 .header-content {
@@ -12,14 +12,14 @@ position: relative;
   padding-top: 20px;
   padding-right: 40px;
   padding-bottom: 20px;
-  padding-left: 116px;;
+  padding-left: 116px;
   box-sizing: border-box;
 }
-.header-user-content{
+.header-user-content {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap:16px;
+  gap: 16px;
 }
 
 #help-icon {
@@ -40,31 +40,31 @@ position: relative;
   cursor: pointer;
 }
 
-.burger-menu{
+.burger-menu {
   display: flex;
   flex-direction: column;
- justify-content: center;
- align-items: center;
+  justify-content: center;
+  align-items: center;
   height: 158px;
-  width:150px;
-  background-color: #2A3647;
-  position:absolute;
+  width: 150px;
+  background-color: #2a3647;
+  position: absolute;
   right: 20px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   border-top-left-radius: 20px;
   font-size: 16px;
   font-weight: 400;
-  color: #CDCDCD;
-  padding:10px
+  color: #cdcdcd;
+  padding: 10px;
 }
-.burger-menu-button{
+.burger-menu-button {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   height: 46px;
   width: 100%;
-  color: #CDCDCD;
+  color: #cdcdcd;
   text-decoration: none;
   font-family: "Inter", sans-serif;
   text-align: left;
@@ -90,3 +90,27 @@ position: relative;
   user-select: none;
 }
 
+.header-logo {
+  display: none;
+}
+
+@media (max-width: 1020px) {
+  .header-content h1 {
+    display: none;
+  }
+  .header-logo {
+    display: block;
+    height: 39px;
+    width: 32px;
+  }
+
+  .content-limit {
+    height: 80px;
+  }
+
+  .header-content {
+    height: 80px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
