@@ -142,7 +142,7 @@
   height: 168px;
   border-radius: 30px;
   padding: 28px 48px;
-  gap: 61px;
+  gap: 20px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
   background-color: white;
   transition: transform 0.15s ease;
