@@ -37,7 +37,7 @@
                                 <div class="add-task-form-left-title">
                                     <p class="label-add-task">Title<span class="red-asterix-required">*</span></p>
                                     <input type="text" id="add-task-title-input" class="add-task-input-style"
-                                        placeholder="Enter a Title" required>
+                                        placeholder="Enter a Title" required autocomplete="off">
                                     <span id="title-required" class="required-text d_none">This field is required</span>
                                 </div>
                                 <div class="add-task-form-left-description">
@@ -96,14 +96,19 @@
                                 </div>
                                 <div class="add-task-form-right-select-contacts">
                                     <p class="label-add-task">Assigned to</p>
-                                    <select id="add-task-assigned-to-select" title="add-task-assigned-to"
-                                        name="add-task-assigned-to"
-                                        class="add-task-placeholder-black add-task-input-style">
-                                        <option id="add-task-assigned-to" value=""
-                                            class="label-add-task add-task-placeholder-black">
-                                            Select contacts to assign
-                                        </option>
-                                    </select>
+                                    <div class="ATcustom-dropdown-wrapper" id="customDropdownWrapper">
+                                        <div class="ATcustom-dropdown-selected" id="customDropdownSelected">
+                                            <span id="customDropdownSelectedText">Kontakt wählen</span>
+                                            <span class="ATcustom-dropdown-arrow"
+                                                id="customDropdownArrow">&#9662;</span>
+                                        </div>
+                                        <div class="ATcustom-dropdown" id="add-task-assigned-to-select"
+                                            style="display: none;">
+                                            <!-- Hier werden die Optionen per JS eingefügt -->
+                                        </div>
+                                    </div>
+                                    <div id="add-task-assigned-to-chosen-initials"
+                                        class="add-task-assigned-to-chosen-initials"></div>
                                 </div>
                                 <div class="add-task-form-left-category">
                                     <p class="label-add-task">Category<span class="red-asterix-required">*</span></p>
@@ -126,7 +131,8 @@
                                         <div class="add-task-subtasks-input-style">
                                             <input type="text"
                                                 class="add-task-placeholder-style add-task-input-placeholder-style "
-                                                id="add-task-subtasks-input" placeholder="Add new subtask" />
+                                                id="add-task-subtasks-input" placeholder="Add new subtask"
+                                                autocomplete="off" />
                                             <div id="add-task-subtasks-icon-add" class="add-task-subtasks-icon-add "
                                                 onclick="getFocusInSubtasksInput()">
                                             </div>

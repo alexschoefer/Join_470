@@ -19,10 +19,19 @@ const ATButtonMediumPicRef = document.getElementById('add-task-prio-button-mediu
 const ATButtonLowRef = document.getElementById('add-task-prio-button-low');
 const ATButtonLowPicRef = document.getElementById('add-task-prio-button-low-picture');
 const ATSubtasksInputDivRef = document.getElementById('add-task-subtasks-input-div');
-const ATSubtasksIconAddRef = document.getElementById('add-task-subtasks-icon-add')
+const ATSubtasksIconAddRef = document.getElementById('add-task-subtasks-icon-add');
+const ATAssignToChosenInitialsRef = document.getElementById('add-task-assigned-to-chosen-initials');
+const dropdownSelected = document.getElementById('customDropdownSelected');
+const dropdownMenu = document.getElementById('add-task-assigned-to-select');
+const dropdownArrow = document.getElementById('customDropdownArrow');
+const dropdownSelectedText = document.getElementById('customDropdownSelectedText');
+
+let dropdownOpen = false;
 let prioButtonState = "Medium";
 let subtasks = [];
 let subtasksObject = {};
+let assignedCheckbox = [];
+let resultContactList = [];
 
 
 function addTaskInit() {
@@ -135,16 +144,16 @@ function resetAddTaskForm() {
 }
 
 function addTaskPrioButtonClick(state) {
-        prioButtonState = state;
-        if (state == 'Urgent') {
-            holdButtonUrgent();
-        }
-        if (state == 'Medium') {
-            holdButtonMedium();
-        }
-        if (state == 'Low') {
-            holdButtonLow();
-        }
+    prioButtonState = state;
+    if (state == 'Urgent') {
+        holdButtonUrgent();
+    }
+    if (state == 'Medium') {
+        holdButtonMedium();
+    }
+    if (state == 'Low') {
+        holdButtonLow();
+    }
 }
 
 
@@ -190,20 +199,7 @@ function subtaskRender() {
     allSubtasks.innerHTML = "";
     for (let i = 0; i < subtasks.length; i++) {
         let subtaski = subtasks[i];
-        allSubtasks.innerHTML += `<div id="add-task-subtask-template${i}" class="add-task-subtask-style">
-                <li class="ATSubLi" id="ATSubLi${i}"></li>                 <input id="ATSubtask-container-${i}" type="text" title="ATSubtask-container" class="ATSubtask-container"
-                     value="${subtaski}">
-                 <div class="add-task-subtasks-icons d_none" id="add-task-subtasks-icons-${i}">
-                     <div id="add-task-subtasks-icon-edit-${i}" class="add-task-subtasks-icon-edit" onclick="editAddTaskSubtask(${i})">
-                     </div>
-                     <div id="add-task-subtasks-icon-done-${i}" class="add-task-subtasks-icon-done d_none" onclick="getDoneAddTaskSubtask(${i})">
-                     </div>
-                     <div class="add-task-subtasks-icons-divider">
-                     </div>
-                     <div id="add-task-subtasks-icon-delete-${i}" class="add-task-subtasks-icon-delete" onclick="deleteAddTaskSubtask(${i})">
-                     </div>
-                 </div>
-             </div>`;
+        allSubtasks.innerHTML += addSubtaskTemplate(i, subtaski);
     }
 }
 
@@ -387,31 +383,106 @@ async function getContactsFromRemoteStorage() {
 
     });
     const data = await response.json();
+    console.log(data);
+    
     await createAddTasskContacts(data);
 }
 
 async function createAddTasskContacts(data) {
-    const result = [];
+    resultContactList = [];
+    assignedCheckbox = [];
     for (const key in data) {
         const contact = data[key];
-        result.push({ initial: contact.initial, name: contact.name });
+         console.log(contact); 
+        resultContactList.push({ email: contact.email, initial: contact.initial, name: contact.name, phone: contact.phone, color: contact.color, checkbox: false });
+        assignedCheckbox.push({ checkbox: false });
     }
-    loadAddTaskAssignedTo(result);
+    await loadAddTaskAssignedTo(resultContactList);
+    await updateContactsToRemoteStorage(resultContactList);
+}
+
+async function updateContactsToRemoteStorage(result) {
+    const response = await fetch(fetchURLDataBase + '/contacts' + '.json', {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(result)
+    });
+    const data = await response.json();
+    return data;
 }
 
 async function loadAddTaskAssignedTo(result) {
     const optionToRender = document.getElementById('add-task-assigned-to-select');
     optionToRender.innerHTML = "";
-    for (let i = 0; i < result.length; i++) {
-        const initial = result[i].initial;
-        const name = result[i].name;
-        optionToRender.innerHTML += `<option value="${i}" class="label-add-task add-task-placeholder-black">
-                                            <div id="ATContact-option-intials-container"
-                                                class="ATContact-option-intials-container">
-                                                <div id="ATContact-option-initials" class="ATContact-option-initials">${initial}</div>
-                                            </div>
-                                            <div id="ATContact-option-name" class="ATContact-option-name">${name}</div>
-                                            <div id="ATContact-option-checkbox" class="ATContact-option-checkbox"></div>
-                                        </option>`
-    }
+    result.forEach((contact, i) => {
+        optionToRender.innerHTML += `
+  <div class="ATcustom-dropdown-option" data-index="${i}">
+    <div class="ATContact-option-intials-container" style="background-color: ${contact.color};">
+      <div class="ATContact-option-initials">${contact.initial}</div>
+    </div>
+    <div class="ATContact-option-name">${contact.name}</div>
+    <div id="ATContact-option-checkbox${i}" class="ATContact-option-checkbox" onclick="assignedCheckboxClick(${i})"></div>
+  </div>
+`;
+    });
 }
+
+async function assignedCheckboxClick(id) {
+    const ATContactOptionCheckboxRef = document.getElementById('ATContact-option-checkbox' + id);
+    if (!assignedCheckbox[id].checkbox) {
+        ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox');
+        ATContactOptionCheckboxRef.classList.add('ATContact-option-checkbox-checked');
+        assignedCheckbox[id].checkbox = true;
+    } else {
+        ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox-checked');
+        ATContactOptionCheckboxRef.classList.add('ATContact-option-checkbox');
+        assignedCheckbox[id].checkbox = false;
+    }
+    await updateChosenInitials();
+}
+
+async function updateChosenInitials() {
+    const chosenDiv = document.getElementById('add-task-assigned-to-chosen-initials');
+    chosenDiv.innerHTML = '';
+    assignedCheckbox.forEach((item, i) => {
+        if (item.checkbox) {
+            // result muss im Scope verfügbar sein!
+            const contact = resultContactList[i];
+            chosenDiv.innerHTML += `
+                <div class="ATContact-option-intials-container" style="background-color: ${contact.color}; display:inline-flex; margin-right:4px;">
+                    <div class="ATContact-option-initials">${contact.initial}</div>
+                </div>
+            `;
+        }
+    });
+}
+
+dropdownSelected.addEventListener('click', function () {
+    dropdownOpen = !dropdownOpen;
+    dropdownMenu.style.display = dropdownOpen ? 'block' : 'none';
+    dropdownArrow.classList.toggle('open', dropdownOpen);
+});
+
+// Optional: Dropdown schließen, wenn außerhalb geklickt wird
+document.addEventListener('click', function (e) {
+    if (!document.getElementById('customDropdownWrapper').contains(e.target)) {
+        dropdownMenu.style.display = 'none';
+        dropdownArrow.classList.remove('open');
+        dropdownOpen = false;
+    }
+});
+
+// Beispiel: Auswahl eines Kontakts
+document.getElementById('add-task-assigned-to-select').addEventListener('click', function (e) {
+    const option = e.target.closest('.ATcustom-dropdown-option');
+    if (option) {
+        dropdownSelectedText.textContent = option.querySelector('.ATContact-option-name').textContent;
+        dropdownMenu.style.display = 'none';
+        dropdownArrow.classList.remove('open');
+        dropdownOpen = false;
+        // Hier kannst du weitere Logik für die Auswahl einbauen
+    }
+});
+
