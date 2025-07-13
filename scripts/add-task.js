@@ -380,11 +380,8 @@ async function getContactsFromRemoteStorage() {
         headers: {
             "Content-Type": "application/json",
         }
-
     });
     const data = await response.json();
-    console.log(data);
-    
     await createAddTasskContacts(data);
 }
 
@@ -394,7 +391,7 @@ async function createAddTasskContacts(data) {
     for (const key in data) {
         const contact = data[key];
          console.log(contact); 
-        resultContactList.push({ email: contact.email, initial: contact.initial, name: contact.name, phone: contact.phone, color: contact.color, checkbox: false });
+        resultContactList.push({ email: contact.email, initial: contact.initial, name: contact.name, phone: contact.phone, color: contact.profilcolor, checkbox: contact.checkbox || false });
         assignedCheckbox.push({ checkbox: false });
     }
     await loadAddTaskAssignedTo(resultContactList);
@@ -402,13 +399,13 @@ async function createAddTasskContacts(data) {
 }
 
 async function updateContactsToRemoteStorage(result) {
-    const response = await fetch(fetchURLDataBase + '/contacts' + '.json', {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(result)
-    });
+    const response = await fetch(fetchURLDataBase + '/contacts/' + contactId + '.json', {
+    method: "PATCH",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ checkbox: true })
+});
     const data = await response.json();
     return data;
 }
@@ -443,12 +440,14 @@ async function assignedCheckboxClick(id) {
     await updateChosenInitials();
 }
 
-async function updateChosenInitials() {
+function updateChosenInitials() {
     const chosenDiv = document.getElementById('add-task-assigned-to-chosen-initials');
+    const parent = chosenDiv.closest('.add-task-form-right-select-contacts');
     chosenDiv.innerHTML = '';
+    let hasInitials = false;
     assignedCheckbox.forEach((item, i) => {
         if (item.checkbox) {
-            // result muss im Scope verfügbar sein!
+            hasInitials = true;
             const contact = resultContactList[i];
             chosenDiv.innerHTML += `
                 <div class="ATContact-option-intials-container" style="background-color: ${contact.color}; display:inline-flex; margin-right:4px;">
@@ -457,6 +456,9 @@ async function updateChosenInitials() {
             `;
         }
     });
+    if (parent) {
+        parent.classList.toggle('has-initials', hasInitials);
+    }
 }
 
 dropdownSelected.addEventListener('click', function () {

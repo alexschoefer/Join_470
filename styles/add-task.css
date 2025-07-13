@@ -601,8 +601,22 @@
   display: flex;
   flex-direction: column;
   width: 440px;
-  height: 88px;
+  min-height: 88px;
+  max-height: 130px;
   gap: 8px;
+}
+
+.add-task-form-right-select-contacts.has-initials {
+  min-height: 120px;
+}
+
+.add-task-assigned-to-chosen-initials{
+  min-height: 42px;
+  max-height: 42px;
+   display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
 }
 
 #add-task-assigned-to-select {
@@ -882,13 +896,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-width: 2px solid var(--white);
+  border: 2px solid var(--white);
   gap: 10px;
 }
 
 .ATContact-option-initials {
   font-weight: bold;
   color: #fff;
+  font-weight: 400;
 }
 
 .ATContact-option-name {
