@@ -124,8 +124,8 @@ function addNewContactTemplate() {
         </form>
     </div>
 </div>
-    `
-}
+`}
+
 
 function editContactTemplate(contact,index) {
     return `

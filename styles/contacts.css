@@ -1,3 +1,11 @@
+html, body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+}
+
+
 .contacts {
   width: 100%;
   height: calc(100vh - 96px);
@@ -6,6 +14,7 @@
   align-items: flex-start;
   background-color: #F6F7F8; 
 }
+
 
 .contacts-left-container {
   width: 456px;
@@ -105,17 +114,27 @@
 }
 
 .contact-line {
-    width: 352px;
-    height: 1px;
+    width: 100%;
+    padding-left: 8px;
+    padding-right: 8px;
+    box-sizing: border-box;
+    min-height: 1px;
     background-color: #D1D1D1;
     display: block;
     margin-top: 5px;
     margin-bottom: 5px;
     border-radius: 3px;
+    border: none;
+    display: flex;
+    gap: 10px;
 }
 
 .capital-letter {
-    width: 352px; 
+    width: 100%;
+    max-width: 100%;
+    padding-left: 8px;
+    padding-right: 8px;
+    box-sizing: border-box;
     height: 58px;
     padding: 17px 24px;
     display: flex;
@@ -130,22 +149,14 @@
 .contact-list {
     display: flex;
     flex-direction: column;
-    align-items: center;       /* <-- wichtig */
-    width: 452px;
+    align-items: flex-start;
+    max-width: 100%;
     height: calc(100vh - 200px); 
     background-color: #FFFFFF;
     padding: 32px 24px;
     overflow-y: auto; 
-}
-
-.contact-line {
-    width: 352px;
-    height: 1px;
-    min-height: 1px;
-    background-color: #D1D1D1;
-    display: flex;
-    gap: 10px;
-    border: none;
+    overflow-x: hidden;
+    box-sizing: border-box;
 }
 
 .contact-entry {
@@ -549,3 +560,123 @@
     align-items: center;
     justify-content: center;
 }
+
+.mobile-add-contact-button-create-icon {
+    display: none;
+    position: fixed;
+    bottom: 100px;
+    right: 64px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    padding: 12px;
+    background-color: #2A3647;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    z-index: 9999;
+    border: 1px solid #2A3647;
+    justify-content: center;
+    align-items: center;
+}
+
+.mobile-add-contact-button-create-icon img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    color: white;
+}
+
+.mobile-button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+/* Contacts Media-Quieres */
+
+@media(max-width: 1020px) {
+    .contacts-right {
+        display: none;
+    }
+
+    .add-new-contact {
+        display: none;
+    }
+
+    .contacts-left-container {
+        width: 100%;
+        height: 100%; 
+    }
+
+    .contact-list {
+        width: 100%;
+        height: calc(100vh - 96px); 
+        overflow-y: visible; 
+        overflow-x: hidden;
+        height: auto;  
+        padding: 32px 16px;
+        box-sizing: border-box;
+    }
+
+    .contact-entry {
+        max-width: 100%;
+    }
+
+    .contacts {
+        flex-direction: column;
+    }
+
+    .mobile-add-contact-button-create-icon {
+        display: flex;
+    }
+
+    .mobile-add-contact-button-create-icon:hover {
+        background-color: #29ABE2;
+        border-color: #29abe2;
+    }
+
+    .add-contact-overlay {
+        flex-direction: column;
+        max-width: 450px;
+        width: 100%;
+        max-height: 800px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .add-contact-left-container {
+        max-width: 450px;
+        width: 100%;
+        border-radius: 30px 30px 0px 0px;
+    }
+
+    .mobile-add-contact-profil-icon-container {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: -60px;
+        margin-bottom: -60px;
+        z-index: 10;
+    }
+    
+    .mobile-add-contact-profil-icon {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .mobile-add-contact-btns-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+

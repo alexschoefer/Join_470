@@ -148,7 +148,9 @@ function addNewContact() {
     let closeOverlay = document.getElementById('addNewContactOverlayContainer');
     closeOverlay.classList.remove('d_none');
     let overlayContainer = document.getElementById('addNewContactOverlayContainer');
-    overlayContainer.innerHTML = addNewContactTemplate();
+    let screenSizeRef = window.innerWidth;
+    screenSizeRef >= 1020 ? overlayContainer.innerHTML = addNewContactTemplate() : overlayContainer.innerHTML = addNewContactTemplateMobile()
+   
 }
 
 function bubblingPropagation(event) {
