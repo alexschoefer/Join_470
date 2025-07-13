@@ -51,8 +51,7 @@ async function saveUserInputsForFirebase() {
     let date = ATDueDateRef.value;
     let priority = prioButtonState;
     let status = "toDo";
-    let assignTo = "Branislav"; // assignedTo is a part of code, that has to be changed by dynamic version of contacts
-    // let assignTo = ATAssignToRef.value;
+    let assignTo = getAssignedContacts();
     let category = ATCategoryRef.value;
     let subtasks = getSubtasksArray();
     let responseData = await postAddTaskDataToFirebase(
@@ -98,8 +97,6 @@ async function postAddTaskDataToFirebase(
 
     let existingIds = data ? Object.keys(data).map((id) => parseInt(id)) : [];
     let nextId = existingIds.length > 0 ? Math.max(...existingIds) + 1 : 1;
-    console.log(assignTo);
-
     let newTask = {
         title: title,
         description: description,
@@ -380,11 +377,8 @@ async function getContactsFromRemoteStorage() {
         headers: {
             "Content-Type": "application/json",
         }
-
     });
     const data = await response.json();
-    console.log(data);
-    
     await createAddTasskContacts(data);
 }
 
@@ -393,24 +387,25 @@ async function createAddTasskContacts(data) {
     assignedCheckbox = [];
     for (const key in data) {
         const contact = data[key];
-         console.log(contact); 
-        resultContactList.push({ email: contact.email, initial: contact.initial, name: contact.name, phone: contact.phone, color: contact.color, checkbox: false });
+        resultContactList.push({ email: contact.email, initial: contact.initial, name: contact.name, phone: contact.phone, color: contact.profilcolor, checkbox: contact.checkbox || false });
         assignedCheckbox.push({ checkbox: false });
     }
     await loadAddTaskAssignedTo(resultContactList);
-    await updateContactsToRemoteStorage(resultContactList);
+    for (const key in data) {
+    await updateContactsToRemoteStorage(key, { checkbox: true });
+}
 }
 
-async function updateContactsToRemoteStorage(result) {
-    const response = await fetch(fetchURLDataBase + '/contacts' + '.json', {
-        method: "PUT",
+async function updateContactsToRemoteStorage(contactId, data) {
+    const response = await fetch(fetchURLDataBase + '/contacts/' + contactId + '.json', {
+        method: "PATCH",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(result)
+        body: JSON.stringify(data)
     });
-    const data = await response.json();
-    return data;
+    const result = await response.json();
+    return result;
 }
 
 async function loadAddTaskAssignedTo(result) {
@@ -443,12 +438,14 @@ async function assignedCheckboxClick(id) {
     await updateChosenInitials();
 }
 
-async function updateChosenInitials() {
+function updateChosenInitials() {
     const chosenDiv = document.getElementById('add-task-assigned-to-chosen-initials');
+    const parent = chosenDiv.closest('.add-task-form-right-select-contacts');
     chosenDiv.innerHTML = '';
+    let hasInitials = false;
     assignedCheckbox.forEach((item, i) => {
         if (item.checkbox) {
-            // result muss im Scope verfügbar sein!
+            hasInitials = true;
             const contact = resultContactList[i];
             chosenDiv.innerHTML += `
                 <div class="ATContact-option-intials-container" style="background-color: ${contact.color}; display:inline-flex; margin-right:4px;">
@@ -457,6 +454,9 @@ async function updateChosenInitials() {
             `;
         }
     });
+    if (parent) {
+        parent.classList.toggle('has-initials', hasInitials);
+    }
 }
 
 dropdownSelected.addEventListener('click', function () {
@@ -474,15 +474,13 @@ document.addEventListener('click', function (e) {
     }
 });
 
-// Beispiel: Auswahl eines Kontakts
-document.getElementById('add-task-assigned-to-select').addEventListener('click', function (e) {
-    const option = e.target.closest('.ATcustom-dropdown-option');
-    if (option) {
-        dropdownSelectedText.textContent = option.querySelector('.ATContact-option-name').textContent;
-        dropdownMenu.style.display = 'none';
-        dropdownArrow.classList.remove('open');
-        dropdownOpen = false;
-        // Hier kannst du weitere Logik für die Auswahl einbauen
-    }
-});
+function getAssignedContacts() {
+    const assigned = [];
+    assignedCheckbox.forEach((item, i) => {
+        if (item.checkbox) {
+            assigned.push(resultContactList[i]);
+        }
+    });
+    return assigned;
+}
 
