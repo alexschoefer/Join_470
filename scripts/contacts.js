@@ -49,6 +49,15 @@ async function postContactsToRemoteStorage(name, email, phone, initial, profilco
     return await response.json();
 }
 
+function addNewUserToContacts(username, useremail) {
+    let nameInput = username;
+    let emailInput = useremail;
+    let phoneInput = "";
+    let initial = createUserInitial(nameInput.value);
+    let profilcolor = getProfilColorIcon();
+    postContactsToRemoteStorage(nameInput.value, emailInput.value, phoneInput.value, initial, profilcolor);
+}
+
 
 async function updateContactInRemoteStorage(id, updatedContact) {
     await fetch(`${fetchURLDataBase}/contacts/${id}.json`, {
@@ -253,7 +262,7 @@ async function getChangesFromContact(id, event, profilcolor, initial) {
 }
 
 async function showCreateContactSuccess() {
-    const overlay = document.getElementById('sign-up-success-overlay');
+    const overlay = document.getElementById('success-message-overlay');
     overlay.classList.remove('d_none');
     overlay.classList.add('show');
     setTimeout(() => {
