@@ -955,13 +955,18 @@
 }
 
 .ATcustom-dropdown-arrow {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  background: url('../assets/icons/add-task-assign-arrow-down.svg') no-repeat center center;
+  background-size: contain;
   transition: transform 0.2s;
-  font-size: 20px;
   margin-left: 8px;
+  content: "";
 }
 
 .ATcustom-dropdown-arrow.open {
-  transform: rotate(180deg);
+   background-image: url('../assets/icons/add-task-assign-arrow-up.svg');
 }
 
 .ATcustom-dropdown {
