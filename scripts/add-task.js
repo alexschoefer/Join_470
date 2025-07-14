@@ -28,7 +28,7 @@ const dropdownSelectedText = document.getElementById('customDropdownSelectedText
 
 let dropdownOpen = false;
 let prioButtonState = "Medium";
-let subtasks = [];
+let subtasks = [""];
 let subtasksObject = {};
 let assignedCheckbox = [];
 let resultContactList = [];
@@ -71,15 +71,6 @@ async function checkIdAmount() {
     let data = await response.json();
     let id = Object.keys(data).length + 1;
     return id;
-}
-
-function subtasksToArray() {
-
-    const inputData = document.getElementById("add-task-subtasks-input").value;
-    if (inputData == "") {
-        return;
-    }
-    subtasks.push(inputData);
 }
 
 async function postAddTaskDataToFirebase(
@@ -187,19 +178,24 @@ function resetAddTaskSubtaskInput() {
 
 function addTaskAddSubtask() {
     subtasksToArray();
-    subtaskRender();
     resetAddTaskSubtaskInput();
     ADSShowIcons();
 }
 
-function subtaskRender() {
+function subtasksToArray() {
+    const inputData = document.getElementById("add-task-subtasks-input").value;
+    subtasks.push(inputData);
+    subtaskRender(subtasks);
+}
+
+function subtaskRender(subtasks) {
     allSubtasks.innerHTML = "";
     for (let i = 0; i < subtasks.length; i++) {
         let subtaski = subtasks[i];
         allSubtasks.innerHTML += addSubtaskTemplate(i, subtaski);
+           console.log(subtaski);
     }
 }
-
 
 function deleteAddTaskSubtask(index) {
     subtasks.splice(index, 1);
@@ -392,18 +388,18 @@ async function createAddTasskContacts(data) {
     }
     await loadAddTaskAssignedTo(resultContactList);
     for (const key in data) {
-    await updateContactsToRemoteStorage(key, { checkbox: true });
-}
+        await updateContactsToRemoteStorage(key, { checkbox: true });
+    }
 }
 
 async function updateContactsToRemoteStorage(contactId, data) {
     const response = await fetch(fetchURLDataBase + '/contacts/' + contactId + '.json', {
-    method: "PATCH",
-    headers: {
-        "Content-Type": "application/json",
-    },
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
         body: JSON.stringify(data)
-});
+    });
     const result = await response.json();
     return result;
 }
