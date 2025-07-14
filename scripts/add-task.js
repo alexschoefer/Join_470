@@ -398,12 +398,12 @@ async function createAddTasskContacts(data) {
 
 async function updateContactsToRemoteStorage(contactId, data) {
     const response = await fetch(fetchURLDataBase + '/contacts/' + contactId + '.json', {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json",
-        },
+    method: "PATCH",
+    headers: {
+        "Content-Type": "application/json",
+    },
         body: JSON.stringify(data)
-    });
+});
     const result = await response.json();
     return result;
 }
