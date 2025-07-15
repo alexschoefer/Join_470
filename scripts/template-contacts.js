@@ -47,6 +47,7 @@ function showContactInformationsTemplate(contact,index) {
 
 function addNewContactTemplate() {
     return `
+    <div class="overlay">
 <div class="add-contact-overlay">
     <div>
         <img class="add-contact-close-overlay-icon" src="../assets/icons/close.png" alt="close-icon"
@@ -123,6 +124,7 @@ function addNewContactTemplate() {
             </div>
         </form>
     </div>
+</div>
 </div>
 `}
 
