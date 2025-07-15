@@ -20,11 +20,11 @@ const ATButtonLowRef = document.getElementById('add-task-prio-button-low');
 const ATButtonLowPicRef = document.getElementById('add-task-prio-button-low-picture');
 const ATSubtasksInputDivRef = document.getElementById('add-task-subtasks-input-div');
 const ATSubtasksIconAddRef = document.getElementById('add-task-subtasks-icon-add');
-const ATAssignToChosenInitialsRef = document.getElementById('add-task-assigned-to-chosen-initials');
 const dropdownSelected = document.getElementById('customDropdownSelected');
 const dropdownMenu = document.getElementById('add-task-assigned-to-select');
 const dropdownArrow = document.getElementById('customDropdownArrow');
 const dropdownSelectedText = document.getElementById('customDropdownSelectedText');
+const chosenDiv = document.getElementById('add-task-assigned-to-chosen-initials');
 
 let dropdownOpen = false;
 let prioButtonState = "Medium";
@@ -32,7 +32,6 @@ let subtasks = [""];
 let subtasksObject = {};
 let assignedCheckbox = [];
 let resultContactList = [];
-
 
 function addTaskInit() {
     createTaskButtonRequiredFieldsNotOK();
@@ -123,14 +122,6 @@ function getSubtasksArray() {
     return subtasks;
 }
 
-function resetAddTaskForm() {
-    ATTitleRef.value = "";
-    ATDescriptionRef.value = "";
-    ATDueDateRef.value = "";
-    allSubtasks.innerHTML = "";
-    ATSubtaskInput.value = "";
-}
-
 function addTaskPrioButtonClick(state) {
     prioButtonState = state;
     if (state == 'Urgent') {
@@ -193,7 +184,7 @@ function subtaskRender(subtasks) {
     for (let i = 0; i < subtasks.length; i++) {
         let subtaski = subtasks[i];
         allSubtasks.innerHTML += addSubtaskTemplate(i, subtaski);
-           console.log(subtaski);
+        console.log(subtaski);
     }
 }
 
@@ -435,7 +426,6 @@ async function assignedCheckboxClick(id) {
 }
 
 function updateChosenInitials() {
-    const chosenDiv = document.getElementById('add-task-assigned-to-chosen-initials');
     const parent = chosenDiv.closest('.add-task-form-right-select-contacts');
     chosenDiv.innerHTML = '';
     let hasInitials = false;
@@ -480,3 +470,10 @@ function getAssignedContacts() {
     return assigned;
 }
 
+function resetAddTaskForm() {
+    ATTitleRef.value = "";
+    ATDescriptionRef.value = "";
+    ATDueDateRef.value = "";
+    allSubtasks.innerHTML = "";
+    ATSubtaskInput.value = "";
+}
