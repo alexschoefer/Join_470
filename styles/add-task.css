@@ -642,7 +642,7 @@ textarea {
 
 .add-task-assigned-to-chosen-initials {
   min-height: 1px;
-  max-height: 1px;
+  max-height: 48px;
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
