@@ -21,18 +21,20 @@ function getContactEntryTemplate(contact, index) {
 
 function showContactInformationsTemplate(contact,index) {
     return `
-    <div id="contact" class="contact">
-        <div class="contact-profil-badge">
-            <div class="contact-details-icon" style="background-color: ${contact.profilcolor};">${contact.initial}</div>
-        </div>
-        <div class="contact-profil">
-            <div class="contact-profil-name">${contact.name}</div>
-            <div class="contact-profil-btns-container">
-                <button class="contact-profil-btn-edit" onclick="editContact(${index})"><img src="../assets/icons/edit-icon.png" alt="edit-icon">Edit</button>
-                <button class="contact-profil-btn-delete" onclick="deleteContact(${index})"><img src="../assets/icons/delete-icon.png" alt="">Delete</button>
+        <div id="contact" class="contact">
+            <div class="contact-profil-badge">
+                <div class="contact-details-icon" style="background-color: ${contact.profilcolor};">${contact.initial}</div>
+            </div>
+            <div class="contact-profil">
+                <div class="contact-profil-name">${contact.name}</div>
+                <div class="contact-profil-btns-container">
+                    <button class="contact-profil-btn-edit" onclick="editContact(${index})"><img
+                            src="../assets/icons/edit-icon.png" alt="edit-icon">Edit</button>
+                    <button class="contact-profil-btn-delete" onclick="deleteContact(${index})"><img
+                            src="../assets/icons/delete-icon.png" alt="">Delete</button>
+                </div>
             </div>
         </div>
-    </div>
         <div class="contact-informations-email-phone">
             <h4>Contact Information</h4>
         </div>
@@ -41,6 +43,11 @@ function showContactInformationsTemplate(contact,index) {
             <div class="contact-email">${contact.email || ''}</div>
             <span>Phone</span>
             <div class="contact-phone">${contact.phone || ''}</div>
+        </div>
+        <div class="mobile-button-wrapper">
+            <button class="mobile-add-contact-button-create-icon" onclick="editContact(${index})">
+                <img src="../assets/icons/mobile-edit-contact-icon.png" alt="Add Contact Mobil">
+            </button>
         </div>
     `;
 }

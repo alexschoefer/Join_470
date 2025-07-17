@@ -36,7 +36,31 @@ body {
   width: 100%;
   height: 100%;
   background-color: #f6f7f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 625px;
+  height: 73px;
+  margin-left: 40px;
+  margin-top: 100px;
+  gap: 30px;
 }
+
+.contacts-right-container-mobile {
+    width: 100%;
+    height: 100%;
+    background-color: #f6f7f8;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 213px;
+    height: 104px;
+    margin-left: 80px;
+    margin-top: 100px;
+    gap: 16px;
+  }
+
 
 .add-new-contact {
   width: 456px;
@@ -91,17 +115,6 @@ body {
   box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.25);
 }
 
-.contacts-right-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 625px;
-  height: 73px;
-  margin-left: 40px;
-  margin-top: 100px;
-  gap: 30px;
-}
-
 .contacts-right-title {
   font-weight: 700;
   font-size: 61px;
@@ -109,10 +122,23 @@ body {
   letter-spacing: 0%;
 }
 
+.contacts-right-title-mobile {
+    font-weight: 700;
+    font-size: 47px;
+    line-height: 120%;
+    letter-spacing: 0%;
+  }
+
 .contacts-right-vector {
   height: 59px;
   border: solid 3px #29abe2;
 }
+
+.contacts-right-vector-mobile {
+    width: 90px;
+    border: solid 3px #29abe2;
+  }
+
 
 .contacts-right-credo {
   font-weight: 400;
@@ -121,6 +147,14 @@ body {
   letter-spacing: 0%;
   color: #2a3647;
 }
+
+.contacts-right-credo-mobile {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 120%;
+    letter-spacing: 0%;
+    color: #2a3647;
+  }
 
 .contact-line {
   width: 100%;
@@ -707,4 +741,10 @@ body {
   .add-contact-form {
     width: 100%;
   }
+}
+
+@media(max-width: 560px) {
+    .contacts-right-container-mobile {
+        margin-left: 20px;
+    }
 }

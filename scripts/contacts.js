@@ -183,7 +183,7 @@ window.addEventListener('resize', () => {
     const overlay = document.getElementById('addNewContactOverlayContainer');
     const isVisible = overlay && !overlay.classList.contains('d_none');
     if (isVisible) {
-        renderAddContactOverlay();
+        return;
     }
 });
 
