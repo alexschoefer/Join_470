@@ -14,7 +14,8 @@ function startLogoAnimation()
     }, 1000);;
 }
 
-async function loginUser() {
+async function loginUser(event) {
+    event.preventDefault();
     let email = document.getElementById('login-usermail-input').value.trim();
     let password = document.getElementById('login-userpassword-input').value.trim();
     let response = await fetch(fetchURLDataBase + '/users.json');
@@ -22,7 +23,26 @@ async function loginUser() {
     let userLogin = users && Object.values(users).find(
         user => user.email === email && user.password === password
     );
-    userLogin ? window.location.href = './html/summary.html' : showLoginError();
+    if (userLogin) {
+        await saveLoginUserDataToLocalStorage(email);
+        window.location.href = './html/summary.html';
+    } else {
+        showLoginError();
+    }
+}
+
+async function saveLoginUserDataToLocalStorage(email) {
+    let response = await fetch(fetchURLDataBase + '/contacts.json');
+    let loginUserDetails = await response.json();
+    let loggedInUser = loginUserDetails && Object.values(loginUserDetails).find(user => user.email === email);
+    if (loggedInUser) {
+        localStorage.setItem('loggedInUser', JSON.stringify({
+            email: loggedInUser.email,
+            name: loggedInUser.name,
+            profilcolor: loggedInUser.profilcolor,
+            initial: loggedInUser.initial
+        }));
+    } 
 }
 
 function validateLoginInput(input) {
