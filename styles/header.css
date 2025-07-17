@@ -73,6 +73,21 @@
   transition: background-color 0.2s ease;
 }
 
+.burger-menu-button-help {
+  display: none;
+  justify-content: flex-start;
+  align-items: center;
+  height: 46px;
+  width: 100%;
+  color: #cdcdcd;
+  text-decoration: none;
+  font-family: "Inter", sans-serif;
+  text-align: left;
+  border-radius: 10px;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease;
+}
+
 .profile-circle {
   width: 56px;
   height: 56px;
@@ -112,5 +127,23 @@
     height: 80px;
     padding-left: 16px;
     padding-right: 16px;
+  }
+  #help-icon {
+    display: none;
+  }
+
+  .burger-menu-button-help {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 46px;
+    width: 100%;
+    color: #cdcdcd;
+    text-decoration: none;
+    font-family: "Inter", sans-serif;
+    text-align: left;
+    border-radius: 10px;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease;
   }
 }
