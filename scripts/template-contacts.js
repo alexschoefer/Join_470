@@ -21,18 +21,20 @@ function getContactEntryTemplate(contact, index) {
 
 function showContactInformationsTemplate(contact,index) {
     return `
-    <div id="contact" class="contact">
-        <div class="contact-profil-badge">
-            <div class="contact-details-icon" style="background-color: ${contact.profilcolor};">${contact.initial}</div>
-        </div>
-        <div class="contact-profil">
-            <div class="contact-profil-name">${contact.name}</div>
-            <div class="contact-profil-btns-container">
-                <button class="contact-profil-btn-edit" onclick="editContact(${index})"><img src="../assets/icons/edit-icon.png" alt="edit-icon">Edit</button>
-                <button class="contact-profil-btn-delete" onclick="deleteContact(${index})"><img src="../assets/icons/delete-icon.png" alt="">Delete</button>
+        <div id="contact" class="contact">
+            <div class="contact-profil-badge">
+                <div class="contact-details-icon" style="background-color: ${contact.profilcolor};">${contact.initial}</div>
+            </div>
+            <div class="contact-profil">
+                <div class="contact-profil-name">${contact.name}</div>
+                <div class="contact-profil-btns-container">
+                    <button class="contact-profil-btn-edit" onclick="editContact(${index})"><img
+                            src="../assets/icons/edit-icon.png" alt="edit-icon">Edit</button>
+                    <button class="contact-profil-btn-delete" onclick="deleteContact(${index})"><img
+                            src="../assets/icons/delete-icon.png" alt="">Delete</button>
+                </div>
             </div>
         </div>
-    </div>
         <div class="contact-informations-email-phone">
             <h4>Contact Information</h4>
         </div>
@@ -42,11 +44,17 @@ function showContactInformationsTemplate(contact,index) {
             <span>Phone</span>
             <div class="contact-phone">${contact.phone || ''}</div>
         </div>
+        <div class="mobile-button-wrapper">
+            <button class="mobile-add-contact-button-create-icon" onclick="editContact(${index})">
+                <img src="../assets/icons/mobile-edit-contact-icon.png" alt="Add Contact Mobil">
+            </button>
+        </div>
     `;
 }
 
 function addNewContactTemplate() {
     return `
+    <div class="overlay">
 <div class="add-contact-overlay">
     <div>
         <img class="add-contact-close-overlay-icon" src="../assets/icons/close.png" alt="close-icon"
@@ -98,16 +106,20 @@ function addNewContactTemplate() {
                                 <p id="add-contact-email-input-validation-message" class="input-validation-message d_none" data-default-message="Please enter a valid email address.">Please enter a valid email adress.</p>
                             </div>
                 </div>
+                <div class="input-wrapper">
                     <div class="user-input-wrapper">
                         <div class="input-container">
                             <input id="add-contact-phone-input" class="user-input" type="tel" name="phone"
-                                placeholder="Phone" autocomplete="off">
+                                placeholder="Phone" autocomplete="off"  onfocus="clearErrorMessage(this)" onblur="validateSignupInput(this)">
                             <div>
                                 <img class="phone-icon" src="../assets/icons/call-icon.png" alt="call-icon">
                             </div>
                         </div>
                     </div>
-
+                     <div class="input-validation-container">
+                                <p id="add-contact-phone-input-validation-message" class="input-validation-message d_none" data-default-message="Please enter a valid phone number.">Please enter a valid phone number.</p>
+                            </div>
+                </div>
                     <div class="add-contact-btns-container">
                         <button type="button" class="cancel-btn" onclick="closeAddContactOverlay()">
                             Cancel
@@ -123,6 +135,7 @@ function addNewContactTemplate() {
             </div>
         </form>
     </div>
+</div>
 </div>
 `}
 
