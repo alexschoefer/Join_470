@@ -1,3 +1,11 @@
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+.move-smooth {
+  transition: transform 0.5s ease;
+}
+
 .add-task {
   width: 100vw;
   height: 100%;
@@ -9,6 +17,7 @@
 }
 
 .add-task-content {
+  padding-top: 96px;
   height: 100%;
   width: calc(1440px - 327px);
   display: flex;
@@ -83,8 +92,6 @@
   display: flex;
   flex-direction: column;
   width: 440px;
-  height: 415px;
-  top: 327px;
   left: 864.25px;
   gap: 24px;
 }
@@ -185,7 +192,7 @@
   height: 208px;
   gap: 1px;
   display: flex;
-  align-items: center;
+  align-items: start;
 }
 
 .add-task-h1 {
@@ -195,6 +202,7 @@
   line-height: 120%;
   display: flex;
   justify-content: start;
+  margin-bottom: 100px;
 }
 
 .red-asterix-required {
@@ -491,7 +499,7 @@ textarea {
 }
 
 .add-task-input-textarea-style::placeholder {
-   color: var(--style);
+  color: var(--style);
   font-weight: 400;
   font-size: 20px;
   line-height: 120%;
@@ -633,8 +641,8 @@ textarea {
 }
 
 .add-task-assigned-to-chosen-initials {
-  min-height: 42px;
-  max-height: 42px;
+  min-height: 1px;
+  max-height: 1px;
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
@@ -668,7 +676,6 @@ textarea {
   display: flex;
   flex-direction: column;
   width: 440px;
-  height: 86px;
   gap: 8px;
 
 }
@@ -681,7 +688,6 @@ textarea {
   display: flex;
   flex-direction: column;
   width: 440px;
-  height: 80px;
   gap: 8px;
 }
 
@@ -916,6 +922,26 @@ textarea {
   align-items: stretch;
 }
 
+.ATcustom-dropdown-category {
+  border-radius: 8px;
+  min-height: 104px;
+  max-height: 104px;
+  overflow-y: auto;
+  background: #fff;
+  width: 437px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-width: 1px;
+  border-radius: 10px;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  border: 1px solid #D1D1D1;
+}
+
 .ATcustom-dropdown-option {
   width: 100%;
   height: 48px;
@@ -925,6 +951,10 @@ textarea {
   transition: background 0.2s;
   display: flex;
   justify-content: space-between;
+  padding-top: 10px;
+  padding-right: 16px;
+  padding-bottom: 10px;
+  padding-left: 16px;
 }
 
 .ATcustom-dropdown-option:hover {
@@ -1011,7 +1041,7 @@ textarea {
   background-image: url('../assets/icons/add-task-assign-arrow-up.svg');
 }
 
-.ATcustom-dropdown {
+. {
   position: absolute;
   top: 100%;
   left: 0;
