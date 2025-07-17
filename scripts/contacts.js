@@ -123,7 +123,17 @@ function getContactInformations(index, event) {
     selectedContact.innerHTML = "";
     toggleActiveContact(event.currentTarget);
     let screenSizeRef = window.innerWidth;
-    screenSizeRef >= 1020 ? selectedContact.innerHTML += showContactInformationsTemplate(contact,index) : getContactInformationMobile(contact,index)
+    screenSizeRef >= 1230 ? selectedContact.innerHTML += showContactInformationsTemplate(contact,index) : getContactInformationMobile(contact,index)    
+}
+
+function arrowBack() {
+    let contactListRef = document.getElementById('contact-list');
+    contactListRef.classList.remove('d_none');
+    let contactsLeftContainerRef = document.getElementById('contacts-left-container');
+    contactsLeftContainerRef.classList.remove('d_none');
+    let selectedContact = document.getElementById('contact-details');
+    selectedContact.innerHTML = "";
+    refreshContacts();
 }
 
 function getContactInformationMobile(contact,index) {
@@ -156,7 +166,7 @@ function editContact(index) {
     const contact = allContacts[index];
     let closeOverlay = document.getElementById('editContactOverlayContainer');
     closeOverlay.classList.remove('d_none');
-    let overlayContainer = document.getElementById('editContactOverlayContainer');
+    // let overlayContainer = document.getElementById('editContactOverlayContainer');
     renderEditContactOverlay(contact, index);
 }
 
@@ -189,6 +199,7 @@ function renderAddContactOverlay() {
     }
 }
 
+
 function renderEditContactOverlay(contact, index) {
     isOverlayOpen = true;
     const container = document.getElementById('editContactOverlayContainer');
@@ -208,10 +219,12 @@ function closeAddContactOverlay() {
     closeOverlay.classList.add('d_none');
 }
 
+
 function closeEditContactOverlay() {
     let closeOverlay = document.getElementById('editContactOverlayContainer');
     closeOverlay.classList.add('d_none');
 }
+
 
 async function deleteContact(index) {
     let selectedContact = document.getElementById('contact-details');
@@ -224,10 +237,12 @@ async function deleteContact(index) {
     selectedContact.innerHTML = "";
 }
 
+
 async function refreshContacts() {
     allContacts = await loadAllContactsFromRemoteStorage();
     showAllContacts(allContacts);
 }
+
 
 async function createContactForRemoteStorage(event) {
     event.preventDefault();
@@ -267,16 +282,6 @@ function validateSignupInput(input) {
     }
 }
 
-function clearErrorMessage(input) {
-    let errorMessage = document.getElementById(input.id + '-validation-message');
-    let wrapper = input.closest('.user-input-wrapper');
-    errorMessage.classList.add('d_none');
-    wrapper.classList.remove('input-error');
-    const defaultText = errorMessage.getAttribute('data-default-message');
-    if (defaultText && errorMessage.innerHTML !== defaultText) {
-        errorMessage.innerHTML = defaultText;
-    }
-}
 
 async function getChangesFromContact(id, event, profilcolor, initial) {
     let selectedContact = document.getElementById('contact-details');  

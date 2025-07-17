@@ -99,16 +99,20 @@ function addNewContactTemplate() {
                                 <p id="add-contact-email-input-validation-message" class="input-validation-message d_none" data-default-message="Please enter a valid email address.">Please enter a valid email adress.</p>
                             </div>
                 </div>
+                <div class="input-wrapper">
                     <div class="user-input-wrapper">
                         <div class="input-container">
                             <input id="add-contact-phone-input" class="user-input" type="tel" name="phone"
-                                placeholder="Phone" autocomplete="off">
+                                placeholder="Phone" autocomplete="off"  onfocus="clearErrorMessage(this)" onblur="validateSignupInput(this)">
                             <div>
                                 <img class="phone-icon" src="../assets/icons/call-icon.png" alt="call-icon">
                             </div>
                         </div>
                     </div>
-
+                     <div class="input-validation-container">
+                                <p id="add-contact-phone-input-validation-message" class="input-validation-message d_none" data-default-message="Please enter a valid phone number.">Please enter a valid phone number.</p>
+                            </div>
+                </div>
                     <div class="add-contact-btns-container">
                         <button type="button" class="cancel-btn" onclick="closeAddContactOverlay()">
                             Cancel
