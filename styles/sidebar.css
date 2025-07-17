@@ -40,6 +40,9 @@
   padding: 8px 56px 8px 56px;
   gap: 8px;
 }
+.active {
+  background-color: #091931;
+}
 
 .menu-selection-icons {
   height: 30px;

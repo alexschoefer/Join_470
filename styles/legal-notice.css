@@ -1,18 +1,17 @@
 .legal-notice-content h1 {
-  position: absolute;
-  top: 206px;
-  left: 328px;
   font-size: 61px;
   font-weight: 700;
+  padding-top: 110px;
+  padding-left: 96px;
 }
 
 .legal-notice-content-container {
   display: flex;
   flex-direction: column;
+  padding-top: 50px;
+  padding-left: 96px;
+  padding-right: 96px;
   gap: 24px;
-  position: absolute;
-  top: 311px;
-  left: 328px;
 }
 
 .legal-notice-content h2 {
@@ -23,4 +22,21 @@
 .legal-notice-content h3 {
   font-size: 16px;
   font-weight: 700;
+}
+
+@media (max-width: 1020px) {
+  .legal-notice-content h1 {
+    font-size: 61px;
+    font-weight: 700;
+    padding-top: 50px;
+    padding-left: 16px;
+  }
+  .legal-notice-content-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+    padding-left: 16px;
+    padding-right: 16px;
+    gap: 24px;
+  }
 }
