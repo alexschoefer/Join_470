@@ -231,7 +231,7 @@ div#shadow-container{
       justify-content: space-between;
       align-items: center;
      }
-     span.nr-progress-tasks{
+     span#nr-progress-tasks{
       font-size: 12px;
       font-weight: 400px;
       color: #000000;
@@ -250,6 +250,7 @@ div#shadow-container{
       justify-content: center;
       align-items: center;
       border-radius: 100px;
+      margin-left: -6px;
      }
      div.assignees span{
       font-size: 12px;
@@ -495,6 +496,7 @@ div.card-drag-drop-container {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  border-radius: 24px;
 }
 .tilt-on-drag {
   transform: rotate(20deg);
@@ -533,4 +535,11 @@ span.add-task-button-create-text{
 }
 button#add-task-button-create-task{
   width: auto;
+}
+div.card-assigned-initials{
+  display: flex;
+  gap: -10px;
+}
+div.assignees:first-child {
+  margin-left: 0;
 }

@@ -9,7 +9,7 @@ let standartTasks = [
       "As a user, I want the website to remember my selected theme even after I close the browser.",
     priority: "Medium",
     status: "toDo",
-    dueDate: "26062025",
+    date: "20024-04-16",
     subtasks: [
       { title: "Save selected theme in localStorage", done: true },
       { title: "Save selected theme in localStorage", done: false },
@@ -24,7 +24,7 @@ let standartTasks = [
     description: "Build start page with recipe recommendation.",
     priority: "Low",
     status: "inProgress",
-    dueDate: "10052025",
+    date: "20024-04-16",
     subtasks: [
       { title: "mplement Recipe Recommendation", done: true },
       { title: "Start page Layout", done: false },
@@ -39,7 +39,7 @@ let standartTasks = [
       "As a user, I want to receive a visual confirmation when I switch themes.",
     priority: "Urgent",
     status: "awaitFeedback",
-    dueDate: "20250620",
+    date: "2025-06-20",
     subtasks: [
       { title: "Display toast or icon when theme is changed", done: true },
       { title: "Ensure message does not interrupt interaction", done: false },
@@ -52,9 +52,9 @@ let standartTasks = [
     title: "Refactor Theme Toggle Logic",
     description:
       "Improve code maintainability by extracting theme toggle functionality into a reusable and testable module.",
-    priority: "medium",
+    priority: "Medium",
     status: "done",
-    dueDate: "27062025",
+    date: "20024-04-16",
     subtasks: [
       { title: "mplement Recipe Recommendation", done: true },
       { title: "Remove duplicate code from components", done: true },
@@ -71,7 +71,7 @@ let standartTasks = [
       "Description: Implement CSS variables for easier theming and consistent styling between dark and light modes.",
     priority: "Low",
     status: "toDo",
-    dueDate: "30062025",
+    date: "20024-04-16",
     subtasks: [
       { title: "mplement Recipe Recommendation", done: true },
       { title: "Define CSS variables for colors and fonts", done: true },
@@ -125,40 +125,76 @@ async function editTasksToRemoteStorage(path, data) {
 
 // Dummy Kontakte
 let contactsDummy = [
+
     {
         "name": "Thomas Müller",
         "email": "thomas@mueller.de",
         "phone": "+49 111 222 333",
+        "initial": "TM",
         "profilcolor": "#FF7A00"
     },
     {
         "name": "Max Mustermann",
         "email": "max@mustermann.de",
         "phone": "+49 111 222 334",
-        "profilcolor": "#00BEE8"
+        "initial": "MM",
+        "profilcolor": "#FF5EB3"
     },
     {
         "name": "Marianne Musterfrau",
         "email": "marianne@musterfrau.de",
         "phone": "+49 111 222 335",
-        "profilcolor": "#FF5EB3"
+        "initial": "MM",
+        "profilcolor": "#9327FF"
     },
     {
         "name": "Mark Zuckerberg",
         "email": "mark@zuckerberg.com",
         "phone": "+1 111 222 336",
+        "initial": "MZ",
         "profilcolor": "#FF745E"
     },
     {
         "name": "Bill Gates",
-        "email": "bill@gates",
+        "email": "bill@gates.com",
         "phone": "+1 111 222 337",
+        "initial": "BG",
         "profilcolor": "#0038FF"
     },
     {
         "name": "Developer Akademie",
         "email": "info@developerakademie.com",
+        "initial": "DA",
         "profilcolor": "#FF745E"
     },
+
+    {
+        "name": "Alex Schöfer",
+        "email": "alex@schoefer.de",
+        "phone": "+49 222 222 221",
+        "initial": "AS",
+        "profilcolor": "#1FD7C1"
+    },
+    {
+        "name": "Certan Viorel",
+        "email": "certan@viorel.de",
+        "phone": "+49 222 222 222",
+        "initial": "CV",
+        "profilcolor": "#FFE62B"
+    },
+    {
+        "name": "Nikolaos Loukataris",
+        "email": "nikolaos@loukataris.at",
+        "phone": "+49 222 222 223",
+        "initial": "NL",
+        "profilcolor": "#C3FF2B"
+    },
+    {
+        "name": "Branislav Bardon",
+        "email": "bransilav@bardon.de",
+        "phone": "+49 222 222 224",
+        "initial": "BB",
+        "profilcolor": "#FF7A00"
+    }
 ];
 
