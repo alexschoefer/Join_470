@@ -2,6 +2,7 @@
   <link rel="stylesheet" href="../styles/header.css" />
   <link rel="stylesheet" href="../styles/standard.css" />
 </head>
+
 <body onload="render()">
   <header>
     <div class="content-limit">
@@ -10,19 +11,15 @@
         <img class="header-logo" src="../assets/img/MainLogo.png" alt="" />
         <div class="header-user-content">
           <img id="help-icon" src="../assets/icons/help.png" alt="" />
-          <div
-            onclick="ShowBurgerMenu()"
-            class="profile-circle"
-            id="profileCircle"
-          >
+          <div onclick="ShowBurgerMenu()" class="profile-circle" id="profileCircle">
             <p id="initials"></p>
           </div>
         </div>
       </div>
       <div id="burger-menu" class="burger-menu d_none">
-        <a class="burger-menu-button" href="#">Legal Notice</a>
-        <a class="burger-menu-button" href="#">Privacy Policy</a>
-        <a class="burger-menu-button" href="#">Log out</a>
+        <a class="burger-menu-button" href="./legal-notice.html">Legal Notice</a>
+        <a class="burger-menu-button" href="./privacy-policy.html">Privacy Policy</a>
+        <a class="burger-menu-button" href="./sign.html">Log out</a>
       </div>
     </div>
   </header>
