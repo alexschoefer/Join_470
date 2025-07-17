@@ -1,10 +1,10 @@
-
-.main-content{
+.main-content {
   display: flex;
   height: 100vh;
   overflow: auto;
 }
-div#shadow-container{
+
+div#shadow-container {
   position: absolute;
   width: 100%;
   height: 100vh;
@@ -12,294 +12,338 @@ div#shadow-container{
   z-index: 5;
   display: none;
 }
- header {
-      width: auto;
-      background-color: #fff;
-    }
-    #board-content {
-      width: 100%;
-      background-color: #F6F7F8;
 
-    }
-    div.board-find-task {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1440px;
-      height: 208px;
-    }
-    div.board-container {
-      align-items: center;
-      margin-left: 64px;
-      margin-right: 64px;
-      max-width: 1440px;
-
-    }
-    div.board-find-task h1 {
-      font-size: 61px;
-      font-weight: 700;
-    }
-    div.task-search {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-    }
-    div.input-search {
-      border-radius: 10px;
-      height: 48px;
-      width: 312px;
-      border: 1px solid #a8a8a8;
-      padding: 8px 16px 8px 16px;
-      display: flex;
-      justify-content: space-between;
-      background-color: #fff;
-    }
-    div.input-search input {
-      height: 32px;
-      width: 232px;
-      border: none;
-    }
-    div.input-search input:focus {
-      outline: none;
-    }
-    button.search {
-      text-decoration: none;
-      border: none;
-      background-color: transparent;
-      padding: 0;
-      width: 48px;
-      height: 32px;
-      border-left: 1px solid #d1d1d1;
-      text-align: center;
-    }
-    button.search img {
-      width: 17.58px;
-      height: 17.58px;
-      margin-top: 7.21px;
-    }
-    span.border-img {
-      display: inline-block;
-      height: 32px;
-      width: 32px;
-      border-radius: 100px;
-      transition: 0.1s;
-      cursor: pointer;
-    }
-    span.border-img:hover {
-      background-color: #d9d9d9;
-    }
-    button.add-task{
-      height: 48px;
-      width: auto !important;
-      padding: 8px 16px 8px 16px;
-      background-color: #2A3647;
-      border-radius: 10px;
-      border: 1px solid transparent;
-      display: flex !important;
-      flex-direction: row !important;
-      gap: 4px;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
-     button.add-task span{
-      color: white;
-      font-size: 21px;
-      font-weight: 700;
-     }
-     button.add-task img{
-      width: 18.67px;
-      height: 18.67px;
-      margin-top: 5px;
-     }
-     span.img-add-task{
-      width: 32px;
-      height: 32px;
-     }
-     button.add-task:hover{
-      background-color: #29abe2;
-      box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25)
-     }
-     span.border-img:hover{
-      transform: scale(1.05);
-      -webkit-transform: scale(1.05);
-      -moz-transform: scale(1.05);
-      -ms-transform: scale(1.05);
-      -o-transform: scale(1.05);
-}
-     div.board-task-column {
-      width: 252px;
-      height: auto;
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      gap: 20px;
-     }
-     section#all-task{
-      display: flex;
-      gap: 24px;
-      justify-content: space-between;
-      /* trebuie de facut media  */
-
-     }
-     div.task-title{
-      display: flex;
-      justify-content: space-between;
-      color: #42526E;
-     }
-     div.task-title h2{
-      font-size: 20px;
-      font-weight: 700;
-     }
-     div.add-task-icon{
-      background-image: url(../assets/icons/add-task-plus.png);
-      width: 24px;
-      height: 24px;
-      cursor: pointer;
-     }
-     div.add-task-icon:hover{
-      background-image: url(../assets/icons/add-task-plus-hover.png);
-     }
-     div.not-task{
-      width: 100%;
-      height: 48px;
-      border-radius: 10px;
-      border: 2px dotted #A8A8A8;
-      background-color: #E7E7E7;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-     }
-     div.not-task p{
-      font-size: 16px;
-      font-weight: 400;
-      color: #A8A8A8;
-     }
-     div.card{
-      width: 100%;
-      height: auto;
-      background-color: #fff;
-      border-radius: 24px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
-      cursor: pointer;
-     }
-     div.card-content{
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-     }
-     span.card-name{
-      display: inline-block;
-      width: fit-content;
-      height: 27px;
-      border-radius: 8px;
-      padding: 4px 16px 4px 16px;
-      color: white;
-      background-color: #0038FF;
-      font-size: 16px;
-      font-weight: 400;
-     }
-     div.card-description h4{
-      font-size: 16px;
-      font-weight: 700;
-      color: #2A3647;
-      padding-bottom: 10px;
-     }
-     div.card-description p{
-      color: #A8A8A8;
-      font-size: 16px;
-      font-weight: 400;
-     }
-     div.bar{
-      height: 8px;
-      width: 128px;
-      background-color: #F4F4F4;
-      border-radius: 8px;
-     }
-     span.col-bar{
-      display: block;
-      width: 64px;
-      height: 8px;
-      border-radius: 16px;
-      background-color: #4589FF;
-     }
-     div.progress-bar{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-     }
-     span#nr-progress-tasks{
-      font-size: 12px;
-      font-weight: 400px;
-      color: #000000;
-     }
-     div.assignees-priority{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-     }
-     div.assignees{
-      height: 32px;
-      width: 32px;
-      background-color: #0038FF;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 100px;
-      margin-left: -6px;
-     }
-     div.assignees span{
-      font-size: 12px;
-     }
-div#task-overlay{
-   width: 525px;
-   height: auto;
-   padding: 48px 40px 48px 40px;
-   display: flex;
-   flex-direction: column;
-   gap: 24px;
-   background-color: #fff;
-}
-div#task-card-container{
-       max-height: 90vh;
-       overflow: auto;
-       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-       position: fixed;
-       top: 50%;
-       left: 100%;
-       background-color: #fff;
-       transform: translate(100%, -50%);
-       z-index: 10;
-       border-radius: 30px;
-       -webkit-border-radius: 30px;
-       -moz-border-radius: 30px;
-       -ms-border-radius: 30px;
-       -o-border-radius: 30px;
-       transition:0.6s;
-       -webkit-transition:0.6s;
-       -moz-transition:0.6s;
-       -ms-transition:0.6s;
-       -o-transition:0.6s;
-       padding: 48px 40px 48px 40px; /* trebuie sa sterg de aici  si sa gasesc cumva sa adaug pentru editContainer*/
+header {
+  width: auto;
+  background-color: #fff;
 }
 
-div.card-name-overlay{
+#board-content {
+  width: 100%;
+  background-color: #F6F7F8;
+
+}
+
+div.board-find-task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1440px;
+  height: 208px;
+}
+
+div.board-container {
+  align-items: center;
+  margin-left: 64px;
+  margin-right: 64px;
+  max-width: 1440px;
+
+}
+
+div.board-find-task h1 {
+  font-size: 61px;
+  font-weight: 700;
+}
+
+div.task-search {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+div.input-search {
+  border-radius: 10px;
+  height: 48px;
+  width: 312px;
+  border: 1px solid #a8a8a8;
+  padding: 8px 16px 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+}
+
+div.input-search input {
+  height: 32px;
+  width: 232px;
+  border: none;
+}
+
+div.input-search input:focus {
+  outline: none;
+}
+
+button.search {
+  text-decoration: none;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  width: 48px;
+  height: 32px;
+  border-left: 1px solid #d1d1d1;
+  text-align: center;
+}
+
+button.search img {
+  width: 17.58px;
+  height: 17.58px;
+  margin-top: 7.21px;
+}
+
+span.border-img {
+  display: inline-block;
+  height: 32px;
+  width: 32px;
+  border-radius: 100px;
+  transition: 0.1s;
+  cursor: pointer;
+}
+
+span.border-img:hover {
+  background-color: #d9d9d9;
+}
+
+button.add-task {
+  height: 48px;
+  width: auto !important;
+  padding: 8px 16px 8px 16px;
+  background-color: #2A3647;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+button.add-task span {
+  color: white;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+button.add-task img {
+  width: 18.67px;
+  height: 18.67px;
+  margin-top: 5px;
+}
+
+span.img-add-task {
+  width: 32px;
+  height: 32px;
+}
+
+button.add-task:hover {
+  background-color: #29abe2;
+  box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25)
+}
+
+span.border-img:hover {
+  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+}
+
+div.board-task-column {
+  width: 252px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+section#all-task {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  /* trebuie de facut media  */
+
+}
+
+div.task-title {
+  display: flex;
+  justify-content: space-between;
+  color: #42526E;
+}
+
+div.task-title h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+div.add-task-icon {
+  background-image: url(../assets/icons/add-task-plus.png);
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+div.add-task-icon:hover {
+  background-image: url(../assets/icons/add-task-plus-hover.png);
+}
+
+div.not-task {
+  width: 100%;
+  height: 48px;
+  border-radius: 10px;
+  border: 2px dotted #A8A8A8;
+  background-color: #E7E7E7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.not-task p {
+  font-size: 16px;
+  font-weight: 400;
+  color: #A8A8A8;
+}
+
+div.card {
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+  border-radius: 24px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+
+div.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+span.card-name {
+  display: inline-block;
+  width: fit-content;
+  height: 27px;
+  border-radius: 8px;
+  padding: 4px 16px 4px 16px;
+  color: white;
+  background-color: #0038FF;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+div.card-description h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2A3647;
+  padding-bottom: 10px;
+}
+
+div.card-description p {
+  color: #A8A8A8;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+div.bar {
+  height: 8px;
+  width: 128px;
+  background-color: #F4F4F4;
+  border-radius: 8px;
+}
+
+span.col-bar {
+  display: block;
+  width: 64px;
+  height: 8px;
+  border-radius: 16px;
+  background-color: #4589FF;
+}
+
+div.progress-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+span#nr-progress-tasks {
+  font-size: 12px;
+  font-weight: 400px;
+  color: #000000;
+}
+
+div.assignees-priority {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+div.assignees {
+  height: 32px;
+  width: 32px;
+  background-color: #0038FF;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  margin-left: -6px;
+}
+
+div.assignees span {
+  font-size: 12px;
+}
+
+div#task-overlay {
+  width: 525px;
+  height: auto;
+  padding: 48px 40px 48px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background-color: #fff;
+}
+
+div#task-card-container {
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 50%;
+  left: 100%;
+  background-color: #fff;
+  transform: translate(100%, -50%);
+  z-index: 10;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  transition: 0.6s;
+  -webkit-transition: 0.6s;
+  -moz-transition: 0.6s;
+  -ms-transition: 0.6s;
+  -o-transition: 0.6s;
+  padding: 48px 40px 48px 40px;
+  /* trebuie sa sterg de aici  si sa gasesc cumva sa adaug pentru editContainer*/
+}
+
+div.card-name-overlay {
   display: flex;
   justify-content: space-between;
 
 }
-div.card-name-overlay span.card-name{
+
+div.card-name-overlay span.card-name {
   height: 36px;
   padding: 4px 24px 4px 24px;
   font-size: 23px;
   font-weight: 400;
   color: white;
 }
-span.close-overlay{
+
+span.close-overlay {
   width: 32px;
   height: 32px;
   display: block;
@@ -315,68 +359,81 @@ span.close-overlay{
   -ms-transition: 0.2s;
   -o-transition: 0.2s;
 }
-span.close-overlay:hover{
-background-color: #e0e0e0;
+
+span.close-overlay:hover {
+  background-color: #e0e0e0;
 }
-span.close-overlay img{
+
+span.close-overlay img {
   width: 13.15px;
   height: 13.15px;
   margin-top: 9.43px;
   margin-left: 9.42px;
-   image-rendering: auto;
+  image-rendering: auto;
 }
-div.card-description-overlay h1{
+
+div.card-description-overlay h1 {
   font-size: 61px;
   font-weight: 700;
   color: #000000;
 
 }
-div.card-description-overlay p{
+
+div.card-description-overlay p {
   font-size: 20px;
   font-weight: 400;
-color: #000000;
-margin-top: 20px;
+  color: #000000;
+  margin-top: 20px;
 }
-div.date span{
-font-size: 20px;
-font-weight: 400;
-color: #2A3647;
+
+div.date span {
+  font-size: 20px;
+  font-weight: 400;
+  color: #2A3647;
 }
-span.content-value{
-color: #000000;
-margin-left: 25px;
+
+span.content-value {
+  color: #000000;
+  margin-left: 25px;
 }
-div.priority-card span.content-value{
+
+div.priority-card span.content-value {
   padding: 4px 18px 4px 18px;
   display: inline-flex;
 }
-div.priority-card span.content-value img{
+
+div.priority-card span.content-value img {
   width: 17px;
   height: 12.33px;
   margin-top: 9px;
   margin-left: 10px;
 }
-span.assigned-list{
+
+span.assigned-list {
   font-size: 20px;
   font-weight: 400;
   color: #2A3647;
 }
+
 div.assigned-overlay-card {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-div.assigned-overlay-card div.content{
-display: flex;
-flex-direction: column;
-gap: 4px;
+
+div.assigned-overlay-card div.content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
-div.assigned-content{
+
+div.assigned-content {
   padding: 7px 16px 7px 16px;
   display: flex;
   align-items: center;
 }
-div.assigned-content span.logo{
+
+div.assigned-content span.logo {
   width: 42px;
   height: 42px;
   border-radius: 50px;
@@ -391,113 +448,137 @@ div.assigned-content span.logo{
   color: white;
   font-size: 12px;
 }
-div.assigned-content span.name{
+
+div.assigned-content span.name {
   font-size: 19px;
   font-weight: 400;
   color: #000000;
   margin-left: 16px;
 }
-span.subtasks-title{
+
+span.subtasks-title {
   font-size: 20px;
   font-weight: 400;
   color: #2A3647;
 }
-div.subtasks{
+
+div.subtasks {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-div.subtasks-input{
+
+div.subtasks-input {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  }
-div.subtask-container{
-    padding: 6px 16px 6px 16px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    height: 32px;
 }
-input.checkbox{
+
+div.subtask-container {
+  padding: 6px 16px 6px 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 32px;
+}
+
+input.checkbox {
   width: 16px;
   height: 16px;
   appearance: none;
-      background-color: #ffffff;
-    border: 2px solid #2a3647;
-    border-radius: 3px;
-    position: relative;
-      transition: all 0.2s ease;
+  background-color: #ffffff;
+  border: 2px solid #2a3647;
+  border-radius: 3px;
+  position: relative;
+  transition: all 0.2s ease;
 }
+
 input.checkbox:checked::after {
-      content: '✔';
-      color: #2A3647;
-      font-size: 16px;
-      position: absolute;
-      top: -5.5px;
+  content: '✔';
+  color: #2A3647;
+  font-size: 16px;
+  position: absolute;
+  top: -5.5px;
 
 }
-div.functionen{
+
+div.functionen {
   display: flex;
   gap: 8px;
 }
-div.tasks-functionen{
+
+div.tasks-functionen {
   display: flex;
   justify-content: flex-end;
-align-items: center;
-gap: 8px;
+  align-items: center;
+  gap: 8px;
 }
-span.delete div.icon-delete,span.edit div.icon-edit{
+
+span.delete div.icon-delete,
+span.edit div.icon-edit {
   background-repeat: no-repeat;
   background-size: cover;
   display: inline-block;
-width: 16px;
-height: 18px;
+  width: 16px;
+  height: 18px;
 }
-span.delete div.icon-delete{
+
+span.delete div.icon-delete {
   background-image: url(../assets/icons/delete.png);
 }
-span.edit div.icon-edit{
+
+span.edit div.icon-edit {
   background-image: url(../assets/icons/edit.png);
 }
-span.delete:hover div.icon-delete{
+
+span.delete:hover div.icon-delete {
   background-image: url(../assets/icons/delete-hover.png);
 }
-span.edit:hover div.icon-edit{
+
+span.edit:hover div.icon-edit {
   background-image: url(../assets/icons/edit-hover.png);
 }
-span.delete:hover,span.edit:hover{
+
+span.delete:hover,
+span.edit:hover {
   color: #29abe3;
 }
+
 span.delete {
   font-size: 16px;
   font-weight: 400;
 }
-span.delete,span.edit{
+
+span.delete,
+span.edit {
   display: flex;
   align-items: center;
   cursor: pointer;
   gap: 8px;
 }
-span.split{
+
+span.split {
   width: 1px;
   height: 24px;
   background-color: #D1D1D1;
 }
- .show-from-right {
+
+.show-from-right {
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
-  -webkit-transform: translate(-50%, -50%) ;
-  -moz-transform: translate(-50%, -50%) ;
-  -ms-transform: translate(-50%, -50%) ;
-  -o-transform: translate(-50%, -50%) ;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
 }
+
 div.card-drag-drop-container {
   display: flex;
   flex-direction: column;
   gap: 20px;
   border-radius: 24px;
 }
+
 .tilt-on-drag {
   transform: rotate(20deg);
   z-index: 1000;
@@ -506,40 +587,54 @@ div.card-drag-drop-container {
   -ms-transform: rotate(20deg);
   -o-transform: rotate(20deg);
 }
-div.add-task-form-div{
+
+div.add-task-form-div {
   display: block;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    background-color: #fff;
-    overflow: auto;
-    max-height: 685px;
-    margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background-color: #fff;
+  overflow: auto;
+  max-height: 685px;
+  margin-top: 24px;
 }
-div.add-task-form-left{
+
+div.add-task-form-left {
   height: auto;
   margin-top: 24px;
 }
-div.add-task-form-div span.close-overlay{
+
+.add-task-form-left {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+div.add-task-form-div span.close-overlay {
   position: absolute;
   right: 24px;
   top: 24px;
 }
-div.task-button-overlay{
+
+div.task-button-overlay {
   display: flex;
   justify-content: end;
- padding: 40px 0px 0px 40px;
+  padding: 40px 0px 0px 40px;
 }
-span.add-task-button-create-text{
+
+span.add-task-button-create-text {
   width: auto;
 }
-button#add-task-button-create-task{
+
+button#add-task-button-create-task {
   width: auto;
 }
-div.card-assigned-initials{
+
+div.card-assigned-initials {
   display: flex;
   gap: -10px;
 }
+
 div.assignees:first-child {
   margin-left: 0;
 }

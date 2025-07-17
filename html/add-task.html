@@ -42,17 +42,21 @@
                                     <span id="title-required" class="required-text d_none">This field is required</span>
                                 </div>
                                 <div class="add-task-form-left-description">
-                                    <p for="add-task-description" class="label-add-task">
+                                    <p for="add-task-description" class="label-add-task label-corrector-bottom">
                                         Description
                                     </p>
-                                    <textarea name="add-task-description" id="add-task-description-textarea"
-                                        class="add-task-input-textarea-style add-task-placeholder-style"
-                                        placeholder="Enter a Description" rows="4" cols="50"></textarea>
+                                    <div class="description-flex-wrapper">
+                                        <textarea id="add-task-description-textarea"
+                                            class="add-task-input-textarea-style"
+                                            placeholder="Enter a Description"></textarea>
+                                        <span class="desription-ico"></span>
+                                    </div>
                                     <span id="mobile-required-text-no-asterix-description"
                                         class="mobile-required-text-no-asterix"></span>
                                 </div>
                                 <div class="add-task-form-left-due-date">
-                                    <p class="label-add-task">Due date<span class="red-asterix-required">*</span></p>
+                                    <p class="label-add-task label-corrector-bottom">Due date<span
+                                            class="red-asterix-required">*</span></p>
                                     <div class="add-task-due-date-wrapper">
                                         <input type="date" title="due-date" id="add-task-due-date-input"
                                             class="add-task-input-style" />
@@ -100,8 +104,7 @@
                                     <div class="ATcustom-dropdown-wrapper" id="customDropdownWrapper">
                                         <div class="ATcustom-dropdown-selected" id="customDropdownSelected">
                                             <span id="customDropdownSelectedText">Kontakt wählen</span>
-                                            <span class="ATcustom-dropdown-arrow"
-                                                id="customDropdownArrow"></span>
+                                            <span class="ATcustom-dropdown-arrow" id="customDropdownArrow"></span>
                                         </div>
                                         <div class="ATcustom-dropdown" id="add-task-assigned-to-select"
                                             style="display: none;">
@@ -111,9 +114,20 @@
                                     <div id="add-task-assigned-to-chosen-initials"
                                         class="add-task-assigned-to-chosen-initials"></div>
                                 </div>
-                                <div class="add-task-form-left-category">
-                                    <p class="label-add-task">Category<span class="red-asterix-required">*</span></p>
-                                    <select id="add-task-category" title="add-task-category"
+                                <div class="add-task-form-right-category">
+                                    <p class="label-add-task label-corrector-bottom-category">Category<span
+                                            class="red-asterix-required">*</span></p>
+                                    <div class="ATcustom-dropdown-wrapper" id="categoryDropdownWrapper">
+                                        <div class="ATcustom-dropdown-selected error" id="categoryDropdownSelected">
+                                            <span id="categoryDropdownSelectedText">Select a category</span>
+                                            <span class="ATcustom-dropdown-arrow" id="categoryDropdownArrow"></span>
+                                        </div>
+                                        <div class="ATcustom-dropdown-category" id="add-task-category-select"
+                                            style="display: none;">
+                                            <!-- Optionen per JS -->
+                                        </div>
+                                    </div>
+                                    <!-- <select id="add-task-category" title="add-task-category"
                                         class="add-task-input-style" required>
                                         <option value="">Select a category</option>
                                         <option value="Technical Task" class="label-add-task">
@@ -122,7 +136,7 @@
                                         <option value="User Story" class="label-add-task">
                                             User Story
                                         </option>
-                                    </select>
+                                    </select> -->
                                     <span id="category-required" class="required-text d_none">This field is
                                         required</span>
                                 </div>

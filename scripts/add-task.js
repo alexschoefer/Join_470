@@ -6,7 +6,6 @@ const ATButtonPrioButtonUrgentRef = document.getElementById("add-task-prio-butto
 const ATButtonPrioButtonMediumRef = document.getElementById("add-task-prio-button-medium");
 const ATButtonPrioButtonLowRef = document.getElementById("add-task-prio-button-low");
 const ATAssignToRef = document.getElementById("add-task-assign-to");
-const ATCategoryRef = document.getElementById("add-task-category");
 const ATSubtasksRef = document.getElementById("add-task-subtasks");
 const ATSubtaskInput = document.getElementById("add-task-subtasks-input");
 const ATButtonAddTaskRef = document.getElementById("add-task-button-create-task");
@@ -20,23 +19,29 @@ const ATButtonLowRef = document.getElementById('add-task-prio-button-low');
 const ATButtonLowPicRef = document.getElementById('add-task-prio-button-low-picture');
 const ATSubtasksInputDivRef = document.getElementById('add-task-subtasks-input-div');
 const ATSubtasksIconAddRef = document.getElementById('add-task-subtasks-icon-add');
-const ATAssignToChosenInitialsRef = document.getElementById('add-task-assigned-to-chosen-initials');
 const dropdownSelected = document.getElementById('customDropdownSelected');
 const dropdownMenu = document.getElementById('add-task-assigned-to-select');
 const dropdownArrow = document.getElementById('customDropdownArrow');
 const dropdownSelectedText = document.getElementById('customDropdownSelectedText');
+const chosenDiv = document.getElementById('add-task-assigned-to-chosen-initials');
+const categoryDropdownSelected = document.getElementById('categoryDropdownSelected');
+const categoryDropdownMenu = document.getElementById('add-task-category-select');
+const categoryDropdownArrow = document.getElementById('categoryDropdownArrow');
+const categoryDropdownWrapper = document.getElementById('categoryDropdownWrapper');
+const customDropdownWrapper = document.getElementById('customDropdownWrapper');
 
+let categoryDropdownOpen = false;
 let dropdownOpen = false;
 let prioButtonState = "Medium";
-let subtasks = [];
+let subtasks = [""];
 let subtasksObject = {};
 let assignedCheckbox = [];
 let resultContactList = [];
 
-
 function addTaskInit() {
     createTaskButtonRequiredFieldsNotOK();
     getContactsFromRemoteStorage();
+    loadCategoryOptions();
 }
 
 async function sendAddTaskData() {
@@ -52,7 +57,7 @@ async function saveUserInputsForFirebase() {
     let priority = prioButtonState;
     let status = "toDo";
     let assignTo = getAssignedContacts();
-    let category = ATCategoryRef.value;
+    let category = categoryDropdownSelected.value;
     let subtasks = getSubtasksArray();
     let responseData = await postAddTaskDataToFirebase(
         title,
@@ -71,15 +76,6 @@ async function checkIdAmount() {
     let data = await response.json();
     let id = Object.keys(data).length + 1;
     return id;
-}
-
-function subtasksToArray() {
-
-    const inputData = document.getElementById("add-task-subtasks-input").value;
-    if (inputData == "") {
-        return;
-    }
-    subtasks.push(inputData);
 }
 
 async function postAddTaskDataToFirebase(
@@ -132,14 +128,6 @@ function getSubtasksArray() {
     return subtasks;
 }
 
-function resetAddTaskForm() {
-    ATTitleRef.value = "";
-    ATDescriptionRef.value = "";
-    ATDueDateRef.value = "";
-    allSubtasks.innerHTML = "";
-    ATSubtaskInput.value = "";
-}
-
 function addTaskPrioButtonClick(state) {
     prioButtonState = state;
     if (state == 'Urgent') {
@@ -187,19 +175,24 @@ function resetAddTaskSubtaskInput() {
 
 function addTaskAddSubtask() {
     subtasksToArray();
-    subtaskRender();
     resetAddTaskSubtaskInput();
     ADSShowIcons();
 }
 
-function subtaskRender() {
+function subtasksToArray() {
+    const inputData = document.getElementById("add-task-subtasks-input").value;
+    subtasks.push(inputData);
+    subtaskRender(subtasks);
+}
+
+function subtaskRender(subtasks) {
     allSubtasks.innerHTML = "";
     for (let i = 0; i < subtasks.length; i++) {
         let subtaski = subtasks[i];
         allSubtasks.innerHTML += addSubtaskTemplate(i, subtaski);
+        console.log(subtaski);
     }
 }
-
 
 function deleteAddTaskSubtask(index) {
     subtasks.splice(index, 1);
@@ -239,12 +232,12 @@ function validateDueDate() {
 }
 
 function validateCategory() {
-    if (!ATCategoryRef.value.trim()) {
-        ATCategoryRef.classList.add('error');
+    if (!categoryDropdownSelected.value.trim()) {
+        categoryDropdownSelected.classList.add('error');
         document.getElementById('category-required').classList.remove('d_none');
         return false;
     } else {
-        ATCategoryRef.classList.remove('error');
+        categoryDropdownSelected.classList.remove('error');
         document.getElementById('category-required').classList.add('d_none');
         return true;
     }
@@ -266,7 +259,7 @@ ATButtonAddTaskRef.addEventListener('click', function (event) {
 
 ATTitleRef.addEventListener('blur', validateTitle);
 ATDueDateRef.addEventListener('blur', validateDueDate);
-ATCategoryRef.addEventListener('blur', validateCategory);
+categoryDropdownSelected.addEventListener('blur', validateCategory);
 
 function clearAddTaskSubtask() {
     ATSubtaskInput.value = "";
@@ -342,7 +335,7 @@ document.getElementById('add-task-subtasks-input').addEventListener('keydown', f
 function checkRequiredFieldsAndToggleButton() {
     const titleFilled = ATTitleRef.value.trim() != "";
     const dueDateFilled = ATDueDateRef.value.trim() != "";
-    const categoryFilled = ATCategoryRef.value.trim() != "";
+    const categoryFilled = categoryDropdownSelected.value.trim() != "";
 
     if (titleFilled && dueDateFilled && categoryFilled) {
         createTaskButtonRequiredFieldsOK();
@@ -353,7 +346,7 @@ function checkRequiredFieldsAndToggleButton() {
 
 ATTitleRef.addEventListener('input', checkRequiredFieldsAndToggleButton);
 ATDueDateRef.addEventListener('input', checkRequiredFieldsAndToggleButton);
-ATCategoryRef.addEventListener('input', checkRequiredFieldsAndToggleButton);
+categoryDropdownSelected.addEventListener('input', checkRequiredFieldsAndToggleButton);
 
 function createTaskButtonRequiredFieldsOK() {
     ATButtonAddTaskRef.style.backgroundColor = "var(--black)";
@@ -392,8 +385,8 @@ async function createAddTasskContacts(data) {
     }
     await loadAddTaskAssignedTo(resultContactList);
     for (const key in data) {
-    await updateContactsToRemoteStorage(key, { checkbox: true });
-}
+        await updateContactsToRemoteStorage(key, { checkbox: true });
+    }
 }
 
 async function updateContactsToRemoteStorage(contactId, data) {
@@ -418,13 +411,14 @@ async function loadAddTaskAssignedTo(result) {
       <div class="ATContact-option-initials">${contact.initial}</div>
     </div>
     <div class="ATContact-option-name">${contact.name}</div>
-    <div id="ATContact-option-checkbox${i}" class="ATContact-option-checkbox" onclick="assignedCheckboxClick(${i})"></div>
+    <div id="ATContact-option-checkbox${i}" class="ATContact-option-checkbox" onclick="assignedCheckboxClick(event, ${i})"></div>
   </div>
 `;
     });
 }
 
-async function assignedCheckboxClick(id) {
+async function assignedCheckboxClick(event,id) {
+    event.stopPropagation();
     const ATContactOptionCheckboxRef = document.getElementById('ATContact-option-checkbox' + id);
     if (!assignedCheckbox[id].checkbox) {
         ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox');
@@ -439,7 +433,6 @@ async function assignedCheckboxClick(id) {
 }
 
 function updateChosenInitials() {
-    const chosenDiv = document.getElementById('add-task-assigned-to-chosen-initials');
     const parent = chosenDiv.closest('.add-task-form-right-select-contacts');
     chosenDiv.innerHTML = '';
     let hasInitials = false;
@@ -459,18 +452,32 @@ function updateChosenInitials() {
     }
 }
 
-dropdownSelected.addEventListener('click', function () {
+categoryDropdownSelected.addEventListener('click', function (event) {
+     event.stopPropagation();
+    categoryDropdownOpen = !categoryDropdownOpen;
+    categoryDropdownMenu.style.display = categoryDropdownOpen ? 'block' : 'none';
+    categoryDropdownArrow.classList.toggle('open', categoryDropdownOpen);
+});
+
+dropdownSelected.addEventListener('click', function (event) {
+     event.stopPropagation();
     dropdownOpen = !dropdownOpen;
     dropdownMenu.style.display = dropdownOpen ? 'block' : 'none';
     dropdownArrow.classList.toggle('open', dropdownOpen);
 });
 
-// Optional: Dropdown schließen, wenn außerhalb geklickt wird
 document.addEventListener('click', function (e) {
-    if (!document.getElementById('customDropdownWrapper').contains(e.target)) {
+    // Assigned To Dropdown
+    if (!customDropdownWrapper.contains(e.target)) {
         dropdownMenu.style.display = 'none';
         dropdownArrow.classList.remove('open');
         dropdownOpen = false;
+    }
+    // Category Dropdown
+    if (!categoryDropdownWrapper.contains(e.target)) {
+        categoryDropdownMenu.style.display = 'none';
+        categoryDropdownArrow.classList.remove('open');
+        categoryDropdownOpen = false;
     }
 });
 
@@ -484,3 +491,35 @@ function getAssignedContacts() {
     return assigned;
 }
 
+function resetAddTaskForm() {
+    ATTitleRef.value = "";
+    ATDescriptionRef.value = "";
+    ATDueDateRef.value = "";
+    allSubtasks.innerHTML = "";
+    ATSubtaskInput.value = "";
+    assignedCheckbox.forEach(item => item.checkbox = false);
+    updateChosenInitials();
+}
+
+function loadCategoryOptions() {
+ categoryDropdownMenu.innerHTML = '';
+ const categories = [
+        { value: 'Technical Task', label: 'Technical Task' },
+        { value: 'User Story', label: 'User Story' }
+    ];
+
+    categories.forEach(cat => {
+        const option = document.createElement('div');
+        option.className = 'ATcustom-dropdown-option';
+        option.dataset.value = cat.value;
+        option.innerHTML = `<span class="ATContact-option-name">${cat.label}</span>`;
+        option.addEventListener('click', function(event) {
+            event.stopPropagation();
+            document.getElementById('categoryDropdownSelectedText').textContent = cat.label;
+            categoryDropdownMenu.style.display = 'none';
+            document.getElementById('categoryDropdownArrow').classList.remove('open');
+            window.selectedCategory = cat.value; // optional: speichern
+        });
+        categoryDropdownMenu.appendChild(option);
+    });
+}
