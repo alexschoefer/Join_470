@@ -19,13 +19,10 @@ async function getAllContacts() {
     let existingContacts = await checkExistingContact();
     for (let contact of contactsDummy) {
         let { name, email, phone, initial, profilcolor } = contact;
-        // Prüfung, ob Kontakt mit derselben bereits E-Mail existiert
         let existingProfil = existingContacts.find(c => c.email === email);
         if (existingProfil) {
-            // Kontakt updaten
             await updateContactInRemoteStorage(existingProfil.id, {name, email, phone, initial, profilcolor});
         } else {
-            // Kontakt neu anlegen
             await postContactsToRemoteStorage(name, email, phone, initial, profilcolor);
         }
     }
@@ -126,7 +123,7 @@ function getContactInformations(index, event) {
     screenSizeRef >= 1230 ? selectedContact.innerHTML += showContactInformationsTemplate(contact,index) : getContactInformationMobile(contact,index)    
 }
 
-function arrowBack() {
+function arrowBack(event) {
     let contactListRef = document.getElementById('contact-list');
     contactListRef.classList.remove('d_none');
     let contactsLeftContainerRef = document.getElementById('contacts-left-container');
@@ -312,4 +309,26 @@ async function showCreateContactSuccess() {
         overlay.classList.remove('show');
     }, 800);
     await initContacts();
+}
+
+function changeContact(index) {
+    const btnContainer = document.getElementById('mobile-contact-profil-btns-container');
+    const editButton = document.querySelector('.mobile-button-wrapper');
+    const mobileBtnWrapper = document.getElementById('mobile-button-wrapper');
+    mobileBtnWrapper.classList.add('d_none');
+    btnContainer.classList.remove('d_none');
+    editButton.classList.add('d_none');
+    setTimeout(() => {
+        document.addEventListener('click', hideMobileContactBtns);
+    }, 0);
+}
+
+function hideMobileContactBtns(event) {
+    const btnContainer = document.getElementById('mobile-contact-profil-btns-container');
+    const isClickInsideMenu = btnContainer.contains(event.target);
+    if (!isClickInsideMenu) {
+        btnContainer.classList.add('d_none');
+        document.getElementById('mobile-button-wrapper').classList.remove('d_none');
+        document.removeEventListener('click', hideMobileContactBtns);
+    }
 }

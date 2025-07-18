@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../styles/standard.css">
     <link rel="stylesheet" href="../styles/contacts.css">
     <link rel="stylesheet" href="../styles/fonts.css">
+    <link rel="stylesheet" href="../styles/media.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../styles/summary.css">
     <link rel="stylesheet" href="../styles/sign-up.css">
@@ -50,20 +51,16 @@
                     </div>
                 </div>
                 <div class="contacts-right" id="contacts-right">
-                    <div class="arrow-back-container">
+                    <div class="arrow-back-container" onclick="bubblingPropagation(event)">
                         <img src="../assets/icons/arrow-left-line-icon.png" alt="Back Arrow" class="arrow-icon"
                             onclick="arrowBack()">
                     </div>
                     <div class="contacts-right-container">
                         <h2 class="contacts-right-title">Contacts</h2>
-                        <div class="contacts-right-vector"></div>
-                        <p class="contacts-right-credo">Better with a team</p>
-                    </div>
-                    <!-- Mobile-Contact-Information-Section -->
-                    <div class="contacts-right-container-mobile">
-                        <h2 class="contacts-right-title-mobile">Contacts</h2>
-                        <p class="contacts-right-credo-mobile">Better with a team</p>
-                        <div class="contacts-right-vector-mobile"></div>
+                        <div class="contacts-right-wrapper-headline">
+                            <div class="contacts-right-vector"></div>
+                            <p class="contacts-right-credo">Better with a team</p>
+                        </div>
                     </div>
                     <div id="contact-details" class="contact-detail-container"></div>
                 </div>
@@ -82,3 +79,7 @@
 </body>
 
 </html>
+
+<div>
+
+</div>

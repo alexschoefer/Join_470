@@ -27,7 +27,7 @@ function showContactInformationsTemplate(contact,index) {
             </div>
             <div class="contact-profil">
                 <div class="contact-profil-name">${contact.name}</div>
-                <div class="contact-profil-btns-container">
+                <div class="contact-profil-btns-container" id="contact-profil-btns-container">
                     <button class="contact-profil-btn-edit" onclick="editContact(${index})"><img
                             src="../assets/icons/edit-icon.png" alt="edit-icon">Edit</button>
                     <button class="contact-profil-btn-delete" onclick="deleteContact(${index})"><img
@@ -44,10 +44,16 @@ function showContactInformationsTemplate(contact,index) {
             <span>Phone</span>
             <div class="contact-phone">${contact.phone || ''}</div>
         </div>
-        <div class="mobile-button-wrapper">
-            <button class="mobile-add-contact-button-create-icon" onclick="editContact(${index})">
-                <img src="../assets/icons/mobile-edit-contact-icon.png" alt="Add Contact Mobil">
+        <div class="mobile-button-wrapper" id="mobile-button-wrapper">
+            <button class="mobile-edit-contact-button" onclick="changeContact(${index})">
+                <img src="../assets/icons/mobile-edit-contact-icon.png" alt="Edit Contact Mobil">
             </button>
+        </div>
+        <div class="mobile-contact-profil-btns-container d_none" id="mobile-contact-profil-btns-container" onclick="bubblingPropagation(event)">
+            <button class="contact-profil-btn-edit" onclick="editContact(${index})"><img
+                            src="../assets/icons/edit-icon.png" alt="edit-icon">Edit</button>
+            <button class="contact-profil-btn-delete" onclick="deleteContact(${index})"><img
+                            src="../assets/icons/delete-icon.png" alt="">Delete</button>
         </div>
     `;
 }
