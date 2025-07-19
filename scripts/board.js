@@ -7,6 +7,22 @@ let currentDraggedElement = null;
 let subtasksContent;
 let colorLabels;
 
+
+function openAddTaskOverlay() {
+  if (!container) return;
+  container.innerHTML = addTasks();
+  if (!document.getElementById('add-task-script')) {
+    const s = document.createElement('script');
+    s.id  = 'add-task-script';
+    s.src = '../scripts/add-task.js';
+    document.body.appendChild(s);
+  }
+  let taskOverlay = document.getElementById("task-card-container");
+  taskOverlay.classList.add("show-from-right");
+  shadow.style.display = 'block';
+}
+
+
 function openTaskDetails() {
   let tasksCards = document.querySelectorAll(".card");
   if (!tasksCards.length) return;
@@ -44,7 +60,7 @@ function closeContainerOverlay() {
   container.classList.remove("show-from-right");
   setTimeout(() => {
     container.innerHTML = "";
-  }, 200);
+  }, 500);
 }
 
 async function init() {
@@ -55,6 +71,10 @@ async function init() {
   }
   updateTask();
   openTaskDetails();
+  const addBtn = document.querySelector('.add-task');
+  if (addBtn) {
+    addBtn.addEventListener('click', openAddTaskOverlay);
+  }
 }
 
 async function updateTask() {
