@@ -92,7 +92,6 @@
   display: flex;
   flex-direction: column;
   width: 440px;
-  left: 864.25px;
   gap: 24px;
 }
 
@@ -327,8 +326,6 @@
   padding-top: 6px;
   padding-right: 16px;
   padding-bottom: 6px;
-  padding-left: 16px;
-  gap: 10px;
   border-width: 1px;
   /* border-radius: 10px; */
   font-family: Inter;
@@ -435,19 +432,10 @@
 }
 
 .ATSubLi {
-  margin-left: 30px;
+  margin-left: 20px;
   margin-right: -16px;
   color: var(--black);
   text-align: center;
-}
-
-.add-task-placeholder-style {
-  width: 100%;
-  font-family: Inter;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 120%;
-  letter-spacing: 0%;
 }
 
 .add-task-input-style:focus:invalid {
@@ -488,6 +476,9 @@
   border: 1px solid #D1D1D1;
   resize: none;
   flex: 1;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0%;
 }
 
 textarea {
@@ -498,7 +489,7 @@ textarea {
   cursor: pointer;
 }
 
-.add-task-input-textarea-style::placeholder {
+.add-task-input-textarea-style::placeholder,  .add-task-input-title-style::placeholder, .add-task-input-placeholder-style::placeholder, .add-task-input-date-style{
   color: var(--style);
   font-weight: 400;
   font-size: 20px;
@@ -642,7 +633,7 @@ textarea {
 
 .add-task-assigned-to-chosen-initials {
   min-height: 1px;
-  max-height: 1px;
+  max-height: 48px;
   display: flex;
   flex-wrap: wrap;
   gap: 4px;

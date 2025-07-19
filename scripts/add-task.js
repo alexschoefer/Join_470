@@ -182,21 +182,23 @@ function addTaskAddSubtask() {
 function subtasksToArray() {
     const inputData = document.getElementById("add-task-subtasks-input").value;
     subtasks.push(inputData);
-    subtaskRender(subtasks);
+    subtaskRender();
 }
 
-function subtaskRender(subtasks) {
+function subtaskRender() {
     allSubtasks.innerHTML = "";
     for (let i = 0; i < subtasks.length; i++) {
         let subtaski = subtasks[i];
-        allSubtasks.innerHTML += addSubtaskTemplate(i, subtaski);
-        console.log(subtaski);
+        if(subtaski !== ""){
+       allSubtasks.innerHTML += addSubtaskTemplate(i, subtaski);
+        }
     }
+    ADSShowIcons();
 }
 
 function deleteAddTaskSubtask(index) {
     subtasks.splice(index, 1);
-    subtaskRender();
+    subtaskRender(index);
 }
 
 function startTaskAddedFinishAnimation() {
@@ -372,15 +374,16 @@ async function getContactsFromRemoteStorage() {
         }
     });
     const data = await response.json();
-    await createAddTasskContacts(data);
+    await createAddTaskContacts(data);
 }
 
-async function createAddTasskContacts(data) {
+async function createAddTaskContacts(data) {
     resultContactList = [];
     assignedCheckbox = [];
     for (const key in data) {
         const contact = data[key];
-        resultContactList.push({ email: contact.email, initial: contact.initial, name: contact.name, phone: contact.phone, color: contact.profilcolor, checkbox: contact.checkbox || false });
+        resultContactList.push({ email: contact.email, initial: contact.initial, name: contact.name, phone: contact.phone, color: contact.profilcolor, }); 
+        /* checkbox: contact.checkbox || false */ 
         assignedCheckbox.push({ checkbox: false });
     }
     await loadAddTaskAssignedTo(resultContactList);
