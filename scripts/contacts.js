@@ -1,4 +1,7 @@
 let allContacts = [];
+let colors = ['#FF7A00','#FF5EB3','#FF5EB3','#9327FF','#FF4646','#C3FF2B','#FF745E','#FFE62B','#00BEE8','#0038FF'];
+let currentOverlayMode = null; // 'desktop' oder 'mobile'
+let isOverlayOpen = false;
 
 async function initContacts() {
     await getAllContacts(); // Kontakte in der Datenbank synchronisieren
@@ -9,22 +12,18 @@ async function initContacts() {
 function showAllContacts(allContacts) {
     const sortedContacts = sortContactsAlphabetically(allContacts);
     const groupedContacts = findCapitalFirstLetter(sortedContacts);
-
     renderGroupedContacts(groupedContacts);
 }
 
 async function getAllContacts() {
     let existingContacts = await checkExistingContact();
-
     for (let contact of contactsDummy) {
         let { name, email, phone, initial, profilcolor } = contact;
-
-        // Prüfen, ob Kontakt mit derselben bereits E-Mail existiert
+        // Prüfung, ob Kontakt mit derselben bereits E-Mail existiert
         let existingProfil = existingContacts.find(c => c.email === email);
-
         if (existingProfil) {
             // Kontakt updaten
-            await updateContactInRemoteStorage(existingProfil.id, { name, email, phone, initial, profilcolor });
+            await updateContactInRemoteStorage(existingProfil.id, {name, email, phone, initial, profilcolor});
         } else {
             // Kontakt neu anlegen
             await postContactsToRemoteStorage(name, email, phone, initial, profilcolor);
@@ -49,6 +48,15 @@ async function postContactsToRemoteStorage(name, email, phone, initial, profilco
     return await response.json();
 }
 
+function addNewUserToContacts(username, useremail) {
+    let nameInput = username;
+    let emailInput = useremail;
+    let phoneInput = "";
+    let initial = createUserInitial(nameInput.value);
+    let profilcolor = getProfilColorIcon();
+    postContactsToRemoteStorage(nameInput.value, emailInput.value, phoneInput.value, initial, profilcolor);
+}
+
 
 async function updateContactInRemoteStorage(id, updatedContact) {
     await fetch(`${fetchURLDataBase}/contacts/${id}.json`, {
@@ -63,10 +71,7 @@ async function updateContactInRemoteStorage(id, updatedContact) {
 async function checkExistingContact() {
     const response = await fetch(fetchURLDataBase + '/contacts' + '.json');
     const data = await response.json();
-
     if (!data) return [];
-
-    // Konvertiere das Objekt in ein Array mit ID für spätere Updates
     return Object.entries(data).map(([id, contact]) => ({
         id,
         ...contact
@@ -74,9 +79,12 @@ async function checkExistingContact() {
 }
 
 async function loadAllContactsFromRemoteStorage() {
-    const response = await fetch(fetchURLDataBase + '/contacts.json');
+    const response = await fetch(fetchURLDataBase + '/contacts' + '.json');
     const contactsData = await response.json();
-    return Object.values(contactsData);
+    return Object.entries(contactsData).map(([id, contact]) => ({
+        id,
+        ...contact
+    }));
 }
 
 function sortContactsAlphabetically(allContacts) {
@@ -95,38 +103,13 @@ function findCapitalFirstLetter(allContacts) {
     return contactList;
 }
 
-function getCaptialLetterHeaderTemplate(letter) {
-    return `
-        <div class="capital-letter">${letter}</div>
-        <div class="contact-line"></div>                       
-    `;
-}
-
-function getContactEntryTemplate(contact, index) {
-    return `
-    <div id="contact-entry" class="contact-entry" onclick="getContactInformations(${index}, event)">
-        <div class="contact-profil-badge">
-            <div class="contact-icon" style="background-color: ${contact.profilcolor};">${contact.initial}</div>
-        </div>
-        <div class="contact-information">
-            <div class="contact-name">${contact.name}</div>
-            <div class="contact-email">${contact.email}</div>
-        </div>
-    </div>
-    `;
-}
-
-
 function renderGroupedContacts(groupedContacts) {
     const container = document.getElementById('contact-list');
     container.innerHTML = "";
-
     const letters = Object.keys(groupedContacts).sort();
     let globalIndex = 0;
-
     letters.forEach(letter => {
         container.innerHTML += getCaptialLetterHeaderTemplate(letter);
-
         groupedContacts[letter].forEach(contact => {
             container.innerHTML += getContactEntryTemplate(contact, globalIndex);
             globalIndex++;
@@ -139,7 +122,29 @@ function getContactInformations(index, event) {
     let selectedContact = document.getElementById('contact-details');
     selectedContact.innerHTML = "";
     toggleActiveContact(event.currentTarget);
-    selectedContact.innerHTML += showContactInformationsTemplate(contact);
+    let screenSizeRef = window.innerWidth;
+    screenSizeRef >= 1230 ? selectedContact.innerHTML += showContactInformationsTemplate(contact,index) : getContactInformationMobile(contact,index)    
+}
+
+function arrowBack() {
+    let contactListRef = document.getElementById('contact-list');
+    contactListRef.classList.remove('d_none');
+    let contactsLeftContainerRef = document.getElementById('contacts-left-container');
+    contactsLeftContainerRef.classList.remove('d_none');
+    let selectedContact = document.getElementById('contact-details');
+    selectedContact.innerHTML = "";
+    refreshContacts();
+}
+
+function getContactInformationMobile(contact,index) {
+    let contactListRef = document.getElementById('contact-list');
+    contactListRef.classList.add('d_none');
+    let contactsLeftContainerRef = document.getElementById('contacts-left-container');
+    contactsLeftContainerRef.classList.add('d_none');
+    let contactDetailsRef = document.getElementById('contacts-right');
+    contactDetailsRef.style.display = 'flex';
+    let selectedContact = document.getElementById('contact-details');
+    selectedContact.innerHTML += showContactInformationsTemplate(contact,index)
 }
 
 function toggleActiveContact(element) {
@@ -157,92 +162,154 @@ function toggleActiveContact(element) {
     }
 }
 
-function showContactInformationsTemplate(contact) {
-    return `
-    <div class="contact">
-        <div class="contact-profil-badge">
-            <div class="contact-details-icon" style="background-color: ${contact.profilcolor};">${contact.initial}</div>
-        </div>
-        <div class="contact-profil">
-            <div class="contact-profil-name">${contact.name}</div>
-            <div class="contact-profil-btns-container">
-                <button class="contact-profil-btn-edit"><img src="../assets/icons/edit-icon.png" alt="edit-icon">Edit</button>
-                <button class="contact-profil-btn-delete"><img src="../assets/icons/delete-icon.png" alt="">Delete</button>
-            </div>
-        </div>
-    </div>
-        <div class="contact-informations-email-phone">
-            <h4>Contact Information</h4>
-        </div>
-        <div class="contact-email-phone">
-            <span>Email</span>
-            <div class="contact-email">${contact.email}</div>
-            <span>Phone</span>
-            <div class="contact-phone">${contact.phone}</div>
-        </div>
-    `;
-}
-
-function editContact(contact) {
-    
+function editContact(index) {
+    const contact = allContacts[index];
+    let closeOverlay = document.getElementById('editContactOverlayContainer');
+    closeOverlay.classList.remove('d_none');
+    // let overlayContainer = document.getElementById('editContactOverlayContainer');
+    renderEditContactOverlay(contact, index);
 }
 
 function addNewContact() {
-    let overlayContainer = document.getElementById('addNewContactOverlayContainer');
-    overlayContainer.innerHTML = addNewContactTemplate();
+    const overlay = document.getElementById('addNewContactOverlayContainer');
+    overlay.classList.remove('d_none');
+    const mobileAddContactBtn = document.querySelector('.mobile-add-contact-button-create-icon');
+    if (mobileAddContactBtn) mobileAddContactBtn.classList.add('d_none');
+    renderAddContactOverlay();
 }
 
-function addNewContactTemplate() {
-    return `
-<div class="add-contact-overlay">
- <img class="add-contact-close-overlay-icon" src="../assets/icons/close.png" alt="close-icon">
-    <div class="add-contact-left-container">
-        <img class="add-contact-menulogo" src="../assets/img/MenuLogo.png" alt="menulogo">
-        <div class="add-contact-headline-container">
-            <h3>Add contact</h3>
-            <span>Tasks are better with a team!</span>
-            <div class="add-contact-vector-line"></div>
-        </div>
-    </div>
-    <div class="add-contact-right-container">
-        <div class="add-contact-information-wrapper">
-            <div class="add-contact-profil-icon">
-                <img src="../assets/icons/profil-icon.png" alt="profil-icon.png">
-            </div>
+window.addEventListener('resize', () => {
+    if (!isOverlayOpen) return; 
+    const overlay = document.getElementById('addNewContactOverlayContainer');
+    const isVisible = overlay && !overlay.classList.contains('d_none');
+    if (isVisible) {
+        return;
+    }
+});
 
-            <div class="add-contact-input-wrapper">
-                    <div class="user-input-wrapper">
-                        <div class="input-container">
-                            <input id="add-contact-name-input" class="user-input" type="text" name="name" placeholder="Name">
-                            <div>
-                                <img class="email-icon" src="../assets/icons/person-icon.png" alt="email-icon">
-                            </div>
-                        </div>
-                    </div>
 
-                <div class="user-input-wrapper">
-                        <div class="input-container">
-                            <input id="usermail-input" class="user-input" type="email" name="email"
-                                pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" placeholder="Email" autocomplete="off"
-                                onfocus="clearErrorMessage(this)"
-                                onblur="validateSignupInput(this), checkRequiredInputEmail(this)">
-                            <div>
-                                <img class="email-icon" src="../assets/icons/mail-icon.png" alt="email-icon">
-                            </div>
-                        </div>
-                    </div>
+function renderAddContactOverlay() {
+    isOverlayOpen = true;
+    const container = document.getElementById('addNewContactOverlayContainer');
+    const isMobile = window.innerWidth < 1230;
+    const desiredMode = isMobile ? 'mobile' : 'desktop';
+    if (currentOverlayMode !== desiredMode) {
+        container.innerHTML = isMobile ? addNewContactTemplateMobile() : addNewContactTemplate();
+        currentOverlayMode = desiredMode;
+    }
+}
 
-                <div class="user-input-wrapper">
-                        <div class="input-container">
-                            <input id="add-contact-phone-input" class="user-input" type="tel" name="phone" placeholder="Phone">
-                            <div>
-                                <img class="phone-icon" src="../assets/icons/call-icon.png" alt="phone-icon">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    `
+
+function renderEditContactOverlay(contact, index) {
+    isOverlayOpen = true;
+    const container = document.getElementById('editContactOverlayContainer');
+    const isMobile = window.innerWidth < 1230;
+    const desiredMode = isMobile ? 'mobile' : 'desktop';
+    if (currentOverlayMode !== desiredMode) {
+        container.innerHTML = isMobile ? editContactTemplateMobile(contact, index) : editContactTemplate(contact, index);
+        currentOverlayMode = desiredMode;
+    }
+}
+
+
+function closeAddContactOverlay() {
+    let closeOverlay = document.getElementById('addNewContactOverlayContainer');
+    const mobileAddContactBtn = document.querySelector('.mobile-add-contact-button-create-icon');
+    if (mobileAddContactBtn) mobileAddContactBtn.classList.remove('d_none');
+    closeOverlay.classList.add('d_none');
+}
+
+
+function closeEditContactOverlay() {
+    let closeOverlay = document.getElementById('editContactOverlayContainer');
+    closeOverlay.classList.add('d_none');
+}
+
+
+async function deleteContact(index) {
+    let selectedContact = document.getElementById('contact-details');
+    let deleteContact = allContacts[index];        
+    await fetch(`${fetchURLDataBase}/contacts/${deleteContact.id}.json`, {
+        method: "DELETE",
+    });
+    closeEditContactOverlay(); 
+    await refreshContacts();
+    selectedContact.innerHTML = "";
+}
+
+
+async function refreshContacts() {
+    allContacts = await loadAllContactsFromRemoteStorage();
+    showAllContacts(allContacts);
+}
+
+
+async function createContactForRemoteStorage(event) {
+    event.preventDefault();
+    let nameInput = document.getElementById('add-contact-name-input');
+    let emailInput = document.getElementById('add-contact-email-input');
+    let phoneInput = document.getElementById('add-contact-phone-input');
+    let initial = createUserInitial(nameInput.value);
+    let profilcolor = getProfilColorIcon();
+    postContactsToRemoteStorage(nameInput.value, emailInput.value, phoneInput.value, initial, profilcolor);
+    closeAddContactOverlay();
+    showCreateContactSuccess();
+    
+}
+
+function createUserInitial(nameInput) {
+    let initial = nameInput.trim().split(' ');
+    let firstLetterInitial = initial[0].charAt(0).toUpperCase();
+    let secondLetterInitial = initial[1].charAt(0).toUpperCase();
+    return firstLetterInitial + secondLetterInitial;
+}
+
+function getProfilColorIcon() {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function validateSignupInput(input) {
+    const errorMessage = document.getElementById(input.id + '-validation-message');
+    const wrapper = input.closest('.user-input-wrapper');
+    if (errorMessage && wrapper) {
+        if (input.value.trim() === '') {
+            errorMessage.classList.remove('d_none');
+            wrapper.classList.add('input-error');
+        } else {
+            errorMessage.classList.add('d_none');
+            wrapper.classList.remove('input-error');
+        }
+    }
+}
+
+
+async function getChangesFromContact(id, event, profilcolor, initial) {
+    let selectedContact = document.getElementById('contact-details');  
+    event.preventDefault();
+    let nameInput = document.getElementById('add-contact-name-input');
+    let emailInput = document.getElementById('add-contact-email-input');
+    let phoneInput = document.getElementById('add-contact-phone-input');
+    let initialInput = createUserInitial(nameInput.value);    
+    const updatedContact = {
+        name: nameInput.value,
+        email: emailInput.value,
+        phone: phoneInput.value,
+        profilcolor: profilcolor,
+        initial: initialInput
+    };    
+    await updateContactInRemoteStorage(id, updatedContact);
+    closeEditContactOverlay();
+    await refreshContacts();
+    selectedContact.innerHTML = "";
+}
+
+async function showCreateContactSuccess() {
+    const overlay = document.getElementById('success-message-overlay');
+    overlay.classList.remove('d_none');
+    overlay.classList.add('show');
+    setTimeout(() => {
+        overlay.classList.add('d_none');
+        overlay.classList.remove('show');
+    }, 800);
+    await initContacts();
 }

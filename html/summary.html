@@ -9,6 +9,16 @@
     <link rel="stylesheet" href="../styles/fonts.css" />
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../styles/summary.css" />
+    <link
+      rel="stylesheet"
+      href="../styles/summary.mobile.css"
+      media="(max-width: 1020px)"
+    />
+    <link
+      rel="stylesheet"
+      href="../style.mobile.css"
+      media="(max-width: 1020px)"
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,71 +30,72 @@
     <script src="../scripts/include.js"></script>
     <script src="../scripts/header.js"></script>
   </head>
+
   <body onload="render()">
     <div class="app-layout">
       <div id="sidebar"></div>
       <div id="header"></div>
       <main class="main-content">
-        <div>
-          <div class="summary-head-content">
-            <h2>Join470</h2>
-            <div class="summary-head-vector"></div>
-            <p>Key Metrics at a Glance</p>
-          </div>
-        </div>
-        <div class="summary-greating-user">
-          <h2 id="dategreating">Good morning,</h2>
-          <p>Sofia Müller</p>
-        </div>
-        <div class="summary-overview">
-          <div class="summary-overview-taskline">
-            <div class="summary-overview-taskbox-one">
-              <div class="summary-overview-taskbox-inside">
-                <p id="tasks-in-board" class="summary-overview-number">5</p>
-                <p class="summary-overview-text">Tasks in Board</p>
-              </div>
-            </div>
-            <div class="summary-overview-taskbox-two">
-              <div class="summary-overview-taskbox-inside">
-                <p id="tasks-in-progress" class="summary-overview-number">2</p>
-                <p  class="summary-overview-text">Tasks in Progress</p>
-              </div>
-            </div>
-            <div class="summary-overview-taskbox-three">
-              <div class="summary-overview-taskbox-inside">
-                <p id="tasks-await-feedback" class="summary-overview-number">2</p>
-                <p class="summary-overview-text">Awaiting Feedback</p>
-              </div>
+        <div class="summary-layout">
+          <div>
+            <div class="summary-head-content">
+              <h2>Join470</h2>
+              <div class="summary-head-vector"></div>
+              <p>Key Metrics at a Glance</p>
+              <div class="summary-head-vector-mobile"></div>
             </div>
           </div>
-          <div class="summary-overview-urgent">
-            <div class="summary-overview-urgent-content">
-              <img src="../assets/icons/summary_ArrowUp.png" alt="" />
-              <div class="summary-overview-urgent-text-content">
-                <p id="urgent-tasks" class="summary-overview-urgent-number">1</p>
-                <p class="summary-overview-urgent-text">Urgent</p>
+          <div class="summary-main-content">
+            <div class="summary-grid">
+              <div class="box-row">
+                <section class="box box-todo">
+                  <div class="icon todo"></div>
+                  <div class="text">
+                    <p id="to-do" class="number">1</p>
+                    <p class="label">To-do</p>
+                  </div>
+                </section>
+
+                <section class="box box-done">
+                  <div class="icon done"></div>
+                  <div class="text">
+                    <p id="done" class="number">1</p>
+                    <p class="label">Done</p>
+                  </div>
+                </section>
               </div>
+
+              <section class="box box-urgent">
+                <img src="../assets/icons/summary_ArrowUp.png" alt="" />
+                <div class="urgent-info">
+                  <p id="urgent-tasks" class="number">1</p>
+                  <p class="label">Urgent</p>
+                </div>
+                <div class="vector-urgent"></div>
+                <div class="deadline-info">
+                  <p id="deadline-date" class="date">October 16, 2022</p>
+                  <p class="label">Upcoming Deadline</p>
+                </div>
+              </section>
+
+              <section class="box box-board">
+                <p id="tasks-in-board" class="number">5</p>
+                <p class="label">Tasks in Board</p>
+              </section>
+
+              <section class="box box-progress">
+                <p id="tasks-in-progress" class="number">2</p>
+                <p class="label">Tasks in Progress</p>
+              </section>
+
+              <section class="box box-feedback">
+                <p id="tasks-await-feedback" class="number">2</p>
+                <p class="label">Awaiting Feedback</p>
+              </section>
             </div>
-            <div class="summary-overview-urgent-vector"></div>
-            <div class="summary-overview-urgent-deadline">
-              <p id="deadline-date" class="summary-overview-urgent-date">October 16, 2022</p>
-              <p class="summary-overview-urgent-datetext">Upcoming Deadline</p>
-            </div>
-          </div>
-          <div class="summary-overview-main">
-            <div class="summary-overview-main-box">
-               <div class="summary-icon todo"></div>
-              <div class="summary-overview-main-content">
-                <p id="to-do" class="summary-overview-main-number">1</p>
-                <p class="summary-overview-main-text">To-do</p>
-              </div>
-            </div>
-            <div class="summary-overview-main-box-two">
-              <div class="summary-icon done"></div>
-              <div class="summary-overview-main-content">
-                <p id="done" class="summary-overview-main-number">1</p>
-                <p class="summary-overview-main-text">Done</p>
-              </div>
+            <div class="summary-greating-user">
+              <h2 id="dategreating">Good morning,</h2>
+              <p>Sofia Müller</p>
             </div>
           </div>
         </div>

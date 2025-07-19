@@ -274,6 +274,7 @@ async function postUserDataToRemoteStorage(username, usermail, userpassword) {
         )
     });
     forwardingToLoginPage();
+    addNewUserToContacts(username,usermail);
     resetRegistration();
     return responseToJson = await response.json();
 }

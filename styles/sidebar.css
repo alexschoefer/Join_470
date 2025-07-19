@@ -40,6 +40,9 @@
   padding: 8px 56px 8px 56px;
   gap: 8px;
 }
+.active {
+  background-color: #091931;
+}
 
 .menu-selection-icons {
   height: 30px;
@@ -59,4 +62,65 @@
 
   padding: 8px;
   gap: 8px;
+}
+
+@media (max-width: 1020px) {
+  .aside-content {
+    width: 100%;
+    height: 80px;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: #2a3647;
+    z-index: 100;
+  }
+
+  .aside-content a {
+    font-size: 14px;
+  }
+
+  .menuLogo-container,
+  .legal-information-container {
+    display: none; /* Logo und Footer entfernen */
+  }
+
+  .menu-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    gap: 0;
+  }
+
+  .menu-selection-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 100%;
+    padding: 4px;
+    border-radius: 16px;
+  }
+
+  .menu-selection-icons {
+    width: 24px;
+    height: 24px;
+  }
+
+  .menu-selection-button:hover {
+    background-color: #091931;
+    cursor: pointer;
+  }
+
+  .menu-selection-icons {
+    height: 24px;
+    width: 24px;
+  }
 }
