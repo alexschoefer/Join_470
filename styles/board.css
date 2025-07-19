@@ -543,3 +543,32 @@ div.card-assigned-initials{
 div.assignees:first-child {
   margin-left: 0;
 }
+div.add-task-overlay{
+  width: 100% !important;
+}
+div.add-task-form-div-container{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 74px;
+}
+.add-task-title{
+  width: auto !important;
+  height: auto !important;
+  margin-bottom: 0 !important;
+  padding-left: 34px !important;
+  padding-right: 34px !important;
+}
+div.add-task-overlay{
+  padding: 0 !important;
+}
+div.add-task-content{
+  padding-left: 0;
+}
+div.add-task-form-div-container{
+  padding-left: 34px !important;
+  padding-right: 34px !important;
+  margin-left: 0px;
+}
+.add-task-form-buttons{
+  width: auto !important;
+}
