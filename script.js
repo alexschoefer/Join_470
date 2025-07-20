@@ -1,3 +1,4 @@
+const fetchURLDataBase = "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/";
 function bubblingPropagation(event) {
     event.stopPropagation();
 }

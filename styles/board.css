@@ -658,6 +658,7 @@ div.add-task-overlay{
 }
 div.add-task-content{
   padding-left: 0;
+  padding-top: 0;
 }
 div.add-task-form-div-container{
   padding-left: 34px !important;
@@ -666,4 +667,19 @@ div.add-task-form-div-container{
 }
 .add-task-form-buttons{
   width: auto !important;
+}
+.add-task-h1{
+  margin-bottom: 0 !important;
+}
+.add-task-form-buttons{
+  padding-right: 34px;
+  padding-left: 34px;
+  padding-bottom: 0 !important;
+}
+.add-task-button-clear {
+  width: auto !important;
+    height: 56px;
+    gap: 19px !important;
+    padding: 16px !important;
+    justify-content: space-between;
 }

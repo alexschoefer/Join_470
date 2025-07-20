@@ -7,21 +7,24 @@ let currentDraggedElement = null;
 let subtasksContent;
 let colorLabels;
 
-
 function openAddTaskOverlay() {
   if (!container) return;
   container.innerHTML = addTasks();
-  if (!document.getElementById('add-task-script')) {
-    const s = document.createElement('script');
-    s.id  = 'add-task-script';
-    s.src = '../scripts/add-task.js';
-    document.body.appendChild(s);
-  }
-  let taskOverlay = document.getElementById("task-card-container");
-  taskOverlay.classList.add("show-from-right");
-  shadow.style.display = 'block';
+  const old = document.getElementById("add-task-script");
+  if (old) old.remove();
+  const s = document.createElement("script");
+  s.id = "add-task-script";
+  s.src = "../scripts/add-task.js";
+  s.async = false;
+  s.onload = () => {
+    if (typeof window.addTaskInit === "function") {
+      window.addTaskInit();
+    }
+  };
+  document.body.appendChild(s);
+  container.classList.add("show-from-right");
+  shadow.style.display = "block";
 }
-
 
 function openTaskDetails() {
   let tasksCards = document.querySelectorAll(".card");
@@ -71,9 +74,9 @@ async function init() {
   }
   updateTask();
   openTaskDetails();
-  const addBtn = document.querySelector('.add-task');
+  const addBtn = document.querySelector(".add-task");
   if (addBtn) {
-    addBtn.addEventListener('click', openAddTaskOverlay);
+    addBtn.addEventListener("click", openAddTaskOverlay);
   }
 }
 
