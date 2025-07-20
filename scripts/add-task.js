@@ -30,6 +30,7 @@ const categoryDropdownArrow = document.getElementById('categoryDropdownArrow');
 const categoryDropdownWrapper = document.getElementById('categoryDropdownWrapper');
 const customDropdownWrapper = document.getElementById('customDropdownWrapper');
 const ATdueDateInput = document.getElementById('add-task-due-date-input');
+const ATcategory = document.getElementById('categoryDropdownSelectedText');
 
 let categoryDropdownOpen = false;
 let dropdownOpen = false;
@@ -58,7 +59,7 @@ async function saveUserInputsForFirebase() {
     let priority = prioButtonState;
     let status = "toDo";
     let assignTo = getAssignedContacts();
-    let category = categoryDropdownSelected.value;
+    let category = ATcategory.textContent;
     let subtasks = getSubtasksArray();
     let responseData = await postAddTaskDataToFirebase(
         title,
@@ -235,7 +236,9 @@ function validateDueDate() {
 }
 
 function validateCategory() {
-    if (!categoryDropdownSelected.value.trim()) {
+    const selectedText = ATcategory.textContent;
+    const defaultText = 'Select a category';
+    if (selectedText === defaultText) {
         categoryDropdownSelected.classList.add('error');
         document.getElementById('category-required').classList.remove('d_none');
         return false;
@@ -251,12 +254,17 @@ function validateAddTaskInputs() {
     if (!validateTitle()) valid = false;
     if (!validateDueDate()) valid = false;
     if (!validateCategory()) valid = false;
+    console.log(valid);
+    
     return valid;
 }
 
 ATButtonAddTaskRef.addEventListener('click', function (event) {
     if (!validateAddTaskInputs()) {
         event.preventDefault();
+    }
+    else {
+        sendAddTaskData();
     }
 });
 
@@ -338,7 +346,7 @@ document.getElementById('add-task-subtasks-input').addEventListener('keydown', f
 function checkRequiredFieldsAndToggleButton() {
     const titleFilled = ATTitleRef.value.trim() != "";
     const dueDateFilled = ATDueDateRef.value.trim() != "";
-    const categoryFilled = categoryDropdownSelected.value.trim() != "";
+    const categoryFilled = ATcategory.textContent.trim() != "";
 
     if (titleFilled && dueDateFilled && categoryFilled) {
         createTaskButtonRequiredFieldsOK();
@@ -471,13 +479,11 @@ dropdownSelected.addEventListener('click', function (event) {
 });
 
 document.addEventListener('click', function (e) {
-    // Assigned To Dropdown
     if (!customDropdownWrapper.contains(e.target)) {
         dropdownMenu.style.display = 'none';
         dropdownArrow.classList.remove('open');
         dropdownOpen = false;
     }
-    // Category Dropdown
     if (!categoryDropdownWrapper.contains(e.target)) {
         categoryDropdownMenu.style.display = 'none';
         categoryDropdownArrow.classList.remove('open');
@@ -501,6 +507,7 @@ function resetAddTaskForm() {
     ATDueDateRef.value = "";
     allSubtasks.innerHTML = "";
     ATSubtaskInput.value = "";
+    ATcategory.textContent = 'Select a category';
     assignedCheckbox.forEach(item => item.checkbox = false);
     updateChosenInitials();
 }
@@ -519,9 +526,9 @@ function loadCategoryOptions() {
         option.innerHTML = `<span class="ATContact-option-name">${cat.label}</span>`;
         option.addEventListener('click', function(event) {
             event.stopPropagation();
-            document.getElementById('categoryDropdownSelectedText').textContent = cat.label;
+            ATcategory.textContent = cat.label;
             categoryDropdownMenu.style.display = 'none';
-            document.getElementById('categoryDropdownArrow').classList.remove('open');
+            categoryDropdownArrow.classList.remove('open');
             window.selectedCategory = cat.value; // optional: speichern
         });
         categoryDropdownMenu.appendChild(option);

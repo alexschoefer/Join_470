@@ -682,6 +682,10 @@ textarea {
   border: 2px solid var(--asterix) !important;
 }
 
+.error {
+  border: 2px solid var(--asterix) !important;
+}
+
 .add-task-form-right-subtasks {
   display: flex;
   flex-direction: column;
@@ -1039,7 +1043,7 @@ textarea {
   background-image: url('../assets/icons/add-task-assign-arrow-up.svg');
 }
 
-. {
+/* . {
   position: absolute;
   top: 100%;
   left: 0;
@@ -1051,7 +1055,7 @@ textarea {
   overflow-y: auto;
   z-index: 10;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
+} */
 
 .label-corrector-bottom {
   padding-bottom: 8px;
