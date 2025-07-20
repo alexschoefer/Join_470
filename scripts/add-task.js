@@ -48,8 +48,10 @@ function addTaskInit() {
 
 async function sendAddTaskData() {
     saveUserInputsForFirebase();
-    resetAddTaskForm();
     startTaskAddedFinishAnimation();
+     setTimeout(() => {
+        resetAddTaskForm();
+    }, 1100);
 }
 
 async function saveUserInputsForFirebase() {
@@ -191,8 +193,8 @@ function subtaskRender() {
     allSubtasks.innerHTML = "";
     for (let i = 0; i < subtasks.length; i++) {
         let subtaski = subtasks[i];
-        if(subtaski !== ""){
-       allSubtasks.innerHTML += addSubtaskTemplate(i, subtaski);
+        if (subtaski !== "") {
+            allSubtasks.innerHTML += addSubtaskTemplate(i, subtaski);
         }
     }
     ADSShowIcons();
@@ -255,7 +257,7 @@ function validateAddTaskInputs() {
     if (!validateDueDate()) valid = false;
     if (!validateCategory()) valid = false;
     console.log(valid);
-    
+
     return valid;
 }
 
@@ -346,26 +348,24 @@ document.getElementById('add-task-subtasks-input').addEventListener('keydown', f
 function checkRequiredFieldsAndToggleButton() {
     const titleFilled = ATTitleRef.value.trim() != "";
     const dueDateFilled = ATDueDateRef.value.trim() != "";
-    const categoryFilled = ATcategory.textContent.trim() != "";
-
-    if (titleFilled && dueDateFilled && categoryFilled) {
+    const categoryFilled = ATcategory.textContent.trim() != "Select a category";
+    if (titleFilled && dueDateFilled && categoryFilled) {       
+        console.log("ok");
         createTaskButtonRequiredFieldsOK();
     } else {
+              console.log("not ok");
         createTaskButtonRequiredFieldsNotOK();
     }
 }
 
 ATTitleRef.addEventListener('input', checkRequiredFieldsAndToggleButton);
 ATDueDateRef.addEventListener('input', checkRequiredFieldsAndToggleButton);
-categoryDropdownSelected.addEventListener('input', checkRequiredFieldsAndToggleButton);
 
 function createTaskButtonRequiredFieldsOK() {
-    ATButtonAddTaskRef.style.backgroundColor = "var(--black)";
     ATButtonAddTaskRef.disabled = false;
 }
 
 function createTaskButtonRequiredFieldsNotOK() {
-    ATButtonAddTaskRef.style.backgroundColor = "var(--main-color)";
     ATButtonAddTaskRef.disabled = true;
 }
 
@@ -391,8 +391,8 @@ async function createAddTaskContacts(data) {
     assignedCheckbox = [];
     for (const key in data) {
         const contact = data[key];
-        resultContactList.push({ email: contact.email, initial: contact.initial, name: contact.name, phone: contact.phone, color: contact.profilcolor, }); 
-        /* checkbox: contact.checkbox || false */ 
+        resultContactList.push({ email: contact.email, initial: contact.initial, name: contact.name, phone: contact.phone, color: contact.profilcolor, });
+        /* checkbox: contact.checkbox || false */
         assignedCheckbox.push({ checkbox: false });
     }
     await loadAddTaskAssignedTo(resultContactList);
@@ -429,7 +429,7 @@ async function loadAddTaskAssignedTo(result) {
     });
 }
 
-async function assignedCheckboxClick(event,id) {
+async function assignedCheckboxClick(event, id) {
     event.stopPropagation();
     const ATContactOptionCheckboxRef = document.getElementById('ATContact-option-checkbox' + id);
     if (!assignedCheckbox[id].checkbox) {
@@ -465,14 +465,14 @@ function updateChosenInitials() {
 }
 
 categoryDropdownSelected.addEventListener('click', function (event) {
-     event.stopPropagation();
+    event.stopPropagation();
     categoryDropdownOpen = !categoryDropdownOpen;
     categoryDropdownMenu.style.display = categoryDropdownOpen ? 'block' : 'none';
     categoryDropdownArrow.classList.toggle('open', categoryDropdownOpen);
 });
 
 dropdownSelected.addEventListener('click', function (event) {
-     event.stopPropagation();
+    event.stopPropagation();
     dropdownOpen = !dropdownOpen;
     dropdownMenu.style.display = dropdownOpen ? 'block' : 'none';
     dropdownArrow.classList.toggle('open', dropdownOpen);
@@ -513,8 +513,8 @@ function resetAddTaskForm() {
 }
 
 function loadCategoryOptions() {
- categoryDropdownMenu.innerHTML = '';
- const categories = [
+    categoryDropdownMenu.innerHTML = '';
+    const categories = [
         { value: 'Technical Task', label: 'Technical Task' },
         { value: 'User Story', label: 'User Story' }
     ];
@@ -524,9 +524,10 @@ function loadCategoryOptions() {
         option.className = 'ATcustom-dropdown-option';
         option.dataset.value = cat.value;
         option.innerHTML = `<span class="ATContact-option-name">${cat.label}</span>`;
-        option.addEventListener('click', function(event) {
+        option.addEventListener('click', function (event) {
             event.stopPropagation();
             ATcategory.textContent = cat.label;
+            checkRequiredFieldsAndToggleButton();
             categoryDropdownMenu.style.display = 'none';
             categoryDropdownArrow.classList.remove('open');
             window.selectedCategory = cat.value; // optional: speichern
@@ -535,7 +536,7 @@ function loadCategoryOptions() {
     });
 }
 
-ATdueDateInput.addEventListener('input', function() {
+ATdueDateInput.addEventListener('input', function () {
     if (this.value) {
         this.classList.add('date-selected');
     } else {

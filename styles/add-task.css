@@ -488,7 +488,10 @@ textarea {
   cursor: pointer;
 }
 
-.add-task-input-textarea-style::placeholder,  .add-task-input-title-style::placeholder, .add-task-input-placeholder-style::placeholder, .add-task-input-date-style{
+.add-task-input-textarea-style::placeholder,
+.add-task-input-title-style::placeholder,
+.add-task-input-placeholder-style::placeholder,
+.add-task-input-date-style {
   color: var(--style);
   font-weight: 400;
   font-size: 20px;
@@ -640,7 +643,8 @@ textarea {
 
 .add-task-assigned-to-chosen-initials {
   min-height: 1px;
-  max-height: 48px;
+  max-height: 46px;
+  max-width: 440px;
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
@@ -926,7 +930,7 @@ textarea {
 
 .ATcustom-dropdown-category {
   border-radius: 8px;
-  min-height: 104px;
+  min-height: 98px;
   max-height: 104px;
   overflow-y: auto;
   background: #fff;
@@ -934,7 +938,6 @@ textarea {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  border-width: 1px;
   border-radius: 10px;
   font-family: Inter;
   font-weight: 400;
@@ -961,6 +964,7 @@ textarea {
 
 .ATcustom-dropdown-option:hover {
   background: #f1f1f1;
+  border-radius: 10px;
 }
 
 .ATContact-option-intials-container {
