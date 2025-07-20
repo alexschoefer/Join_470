@@ -40,6 +40,65 @@ let subtasksObject = {};
 let assignedCheckbox = [];
 let resultContactList = [];
 
+ATTitleRef.addEventListener('input', checkRequiredFieldsAndToggleButton);
+ATDueDateRef.addEventListener('input', checkRequiredFieldsAndToggleButton);
+ATTitleRef.addEventListener('blur', validateTitle);
+ATDueDateRef.addEventListener('blur', validateDueDate);
+categoryDropdownSelected.addEventListener('blur', validateCategory);
+ATSubtaskInput.addEventListener('focus', showClearAndDoneButtons);
+ATSubtaskInput.addEventListener('blur', hideClearAndDoneButtons);
+
+document.getElementById('add-task-subtasks-input').addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        addTaskAddSubtask();
+    }
+});
+
+ATButtonAddTaskRef.addEventListener('click', function (event) {
+    if (!validateAddTaskInputs()) {
+        event.preventDefault();
+    }
+    else {
+        sendAddTaskData();
+    }
+});
+
+categoryDropdownSelected.addEventListener('click', function (event) {
+    event.stopPropagation();
+    categoryDropdownOpen = !categoryDropdownOpen;
+    categoryDropdownMenu.style.display = categoryDropdownOpen ? 'block' : 'none';
+    categoryDropdownArrow.classList.toggle('open', categoryDropdownOpen);
+});
+
+dropdownSelected.addEventListener('click', function (event) {
+    event.stopPropagation();
+    dropdownOpen = !dropdownOpen;
+    dropdownMenu.style.display = dropdownOpen ? 'block' : 'none';
+    dropdownArrow.classList.toggle('open', dropdownOpen);
+});
+
+ATdueDateInput.addEventListener('input', function () {
+    if (this.value) {
+        this.classList.add('date-selected');
+    } else {
+        this.classList.remove('date-selected');
+    }
+});
+
+document.addEventListener('click', function (e) {
+    if (!customDropdownWrapper.contains(e.target)) {
+        dropdownMenu.style.display = 'none';
+        dropdownArrow.classList.remove('open');
+        dropdownOpen = false;
+    }
+    if (!categoryDropdownWrapper.contains(e.target)) {
+        categoryDropdownMenu.style.display = 'none';
+        categoryDropdownArrow.classList.remove('open');
+        categoryDropdownOpen = false;
+    }
+});
+
 function addTaskInit() {
     createTaskButtonRequiredFieldsNotOK();
     getContactsFromRemoteStorage();
@@ -82,30 +141,24 @@ async function checkIdAmount() {
     return id;
 }
 
-async function postAddTaskDataToFirebase(
-    title,
-    description,
-    date,
-    priority,
-    status,
-    assignTo,
-    category,
-    subtasks
-) {
+async function getNextTaskId() {
     let res = await fetch(fetchURLDataBase + "/tasks.json");
     let data = await res.json();
-
     let existingIds = data ? Object.keys(data).map((id) => parseInt(id)) : [];
-    let nextId = existingIds.length > 0 ? Math.max(...existingIds) + 1 : 1;
-    let newTask = {
-        title: title,
-        description: description,
-        priority: priority,
-        status: status,
+    return existingIds.length > 0 ? Math.max(...existingIds) + 1 : 1;
+}
+
+async function postAddTaskDataToFirebase(title, description, date, priority, status, assignTo, category, subtasks) {
+    const nextId = await getNextTaskId();
+    const newTask = {
+        title,
+        description,
+        priority,
+        status,
         dueDate: date,
-        subtasks: subtasks,
+        subtasks,
         assigned: assignTo,
-        category: category,
+        category,
         id: nextId,
     };
     let response = await fetch(`${fetchURLDataBase}/tasks/${nextId}.json`, {
@@ -117,7 +170,6 @@ async function postAddTaskDataToFirebase(
     });
     const responseData = await response.json();
     return responseData;
-
 }
 
 function getSubtasksArray() {
@@ -144,7 +196,6 @@ function addTaskPrioButtonClick(state) {
         holdButtonLow();
     }
 }
-
 
 function holdButtonUrgent() {
     ATButtonLowPicRef.classList.remove('add-task-priority-button-low-pic-pressed');
@@ -259,19 +310,6 @@ function validateAddTaskInputs() {
     return valid;
 }
 
-ATButtonAddTaskRef.addEventListener('click', function (event) {
-    if (!validateAddTaskInputs()) {
-        event.preventDefault();
-    }
-    else {
-        sendAddTaskData();
-    }
-});
-
-ATTitleRef.addEventListener('blur', validateTitle);
-ATDueDateRef.addEventListener('blur', validateDueDate);
-categoryDropdownSelected.addEventListener('blur', validateCategory);
-
 function clearAddTaskSubtask() {
     ATSubtaskInput.value = "";
     ATSubtasksIconAddRef.classList.remove('d_none');
@@ -303,9 +341,6 @@ function editAddTaskSubtask(id) {
     addTaskSubtasksIconDoneRef.classList.remove('d_none');
 }
 
-ATSubtaskInput.addEventListener('focus', showClearAndDoneButtons);
-ATSubtaskInput.addEventListener('blur', hideClearAndDoneButtons);
-
 function showClearAndDoneButtons() {
     ATSubtasksInputDivRef.classList.remove('d_none');
     ATSubtasksIconAddRef.classList.add('d_none');
@@ -336,13 +371,6 @@ function ADSShowIcons() {
     });
 }
 
-document.getElementById('add-task-subtasks-input').addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') {
-        event.preventDefault();
-        addTaskAddSubtask();
-    }
-});
-
 function checkRequiredFieldsAndToggleButton() {
     const titleFilled = ATTitleRef.value.trim() != "";
     const dueDateFilled = ATDueDateRef.value.trim() != "";
@@ -353,9 +381,6 @@ function checkRequiredFieldsAndToggleButton() {
         createTaskButtonRequiredFieldsNotOK();
     }
 }
-
-ATTitleRef.addEventListener('input', checkRequiredFieldsAndToggleButton);
-ATDueDateRef.addEventListener('input', checkRequiredFieldsAndToggleButton);
 
 function createTaskButtonRequiredFieldsOK() {
     ATButtonAddTaskRef.disabled = false;
@@ -442,33 +467,6 @@ function updateChosenInitials() {
     }
 }
 
-categoryDropdownSelected.addEventListener('click', function (event) {
-    event.stopPropagation();
-    categoryDropdownOpen = !categoryDropdownOpen;
-    categoryDropdownMenu.style.display = categoryDropdownOpen ? 'block' : 'none';
-    categoryDropdownArrow.classList.toggle('open', categoryDropdownOpen);
-});
-
-dropdownSelected.addEventListener('click', function (event) {
-    event.stopPropagation();
-    dropdownOpen = !dropdownOpen;
-    dropdownMenu.style.display = dropdownOpen ? 'block' : 'none';
-    dropdownArrow.classList.toggle('open', dropdownOpen);
-});
-
-document.addEventListener('click', function (e) {
-    if (!customDropdownWrapper.contains(e.target)) {
-        dropdownMenu.style.display = 'none';
-        dropdownArrow.classList.remove('open');
-        dropdownOpen = false;
-    }
-    if (!categoryDropdownWrapper.contains(e.target)) {
-        categoryDropdownMenu.style.display = 'none';
-        categoryDropdownArrow.classList.remove('open');
-        categoryDropdownOpen = false;
-    }
-});
-
 function resetAddTaskForm() {
     ATTitleRef.value = "";
     ATDescriptionRef.value = "";
@@ -507,10 +505,3 @@ function loadCategoryOptions() {
     });
 }
 
-ATdueDateInput.addEventListener('input', function () {
-    if (this.value) {
-        this.classList.add('date-selected');
-    } else {
-        this.classList.remove('date-selected');
-    }
-});
