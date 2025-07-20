@@ -47,7 +47,6 @@
   display: flex;
   flex-direction: column;
   width: 440px;
-  height: 376px;
 }
 
 .add-task-form-left-title {
@@ -495,6 +494,14 @@ textarea {
   font-size: 20px;
   line-height: 120%;
   letter-spacing: 0%;
+}
+
+.add-task-input-date-style::placeholder {
+  color: var(--style);
+}
+
+.add-task-input-date-style.date-selected {
+  color: var(--black);
 }
 
 .add-task-buttons-create-and-clear {

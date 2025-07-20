@@ -29,6 +29,7 @@ const categoryDropdownMenu = document.getElementById('add-task-category-select')
 const categoryDropdownArrow = document.getElementById('categoryDropdownArrow');
 const categoryDropdownWrapper = document.getElementById('categoryDropdownWrapper');
 const customDropdownWrapper = document.getElementById('customDropdownWrapper');
+const ATdueDateInput = document.getElementById('add-task-due-date-input');
 
 let categoryDropdownOpen = false;
 let dropdownOpen = false;
@@ -526,3 +527,11 @@ function loadCategoryOptions() {
         categoryDropdownMenu.appendChild(option);
     });
 }
+
+ATdueDateInput.addEventListener('input', function() {
+    if (this.value) {
+        this.classList.add('date-selected');
+    } else {
+        this.classList.remove('date-selected');
+    }
+});
