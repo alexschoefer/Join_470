@@ -256,8 +256,6 @@ function validateAddTaskInputs() {
     if (!validateTitle()) valid = false;
     if (!validateDueDate()) valid = false;
     if (!validateCategory()) valid = false;
-    console.log(valid);
-
     return valid;
 }
 
@@ -350,10 +348,8 @@ function checkRequiredFieldsAndToggleButton() {
     const dueDateFilled = ATDueDateRef.value.trim() != "";
     const categoryFilled = ATcategory.textContent.trim() != "Select a category";
     if (titleFilled && dueDateFilled && categoryFilled) {       
-        console.log("ok");
         createTaskButtonRequiredFieldsOK();
     } else {
-              console.log("not ok");
         createTaskButtonRequiredFieldsNotOK();
     }
 }
@@ -391,41 +387,27 @@ async function createAddTaskContacts(data) {
     assignedCheckbox = [];
     for (const key in data) {
         const contact = data[key];
-        resultContactList.push({ email: contact.email, initial: contact.initial, name: contact.name, phone: contact.phone, color: contact.profilcolor, });
-        /* checkbox: contact.checkbox || false */
-        assignedCheckbox.push({ checkbox: false });
+        resultContactList.push({ email: contact.email, initial: contact.initial, name: contact.name, phone: contact.phone, color: contact.profilcolor});
+        assignedCheckbox.push({ checkbox: false }); 
     }
     await loadAddTaskAssignedTo(resultContactList);
-    for (const key in data) {
-        await updateContactsToRemoteStorage(key, { checkbox: true });
-    }
 }
 
-async function updateContactsToRemoteStorage(contactId, data) {
-    const response = await fetch(fetchURLDataBase + '/contacts/' + contactId + '.json', {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
+function getAssignedContacts() {
+    const assigned = [];
+    assignedCheckbox.forEach((item, i) => {
+        if (item.checkbox) {
+            assigned.push(resultContactList[i].name);
+        }
     });
-    const result = await response.json();
-    return result;
+    return assigned;
 }
 
 async function loadAddTaskAssignedTo(result) {
     const optionToRender = document.getElementById('add-task-assigned-to-select');
     optionToRender.innerHTML = "";
     result.forEach((contact, i) => {
-        optionToRender.innerHTML += `
-  <div class="ATcustom-dropdown-option" data-index="${i}">
-    <div class="ATContact-option-intials-container" style="background-color: ${contact.color};">
-      <div class="ATContact-option-initials">${contact.initial}</div>
-    </div>
-    <div class="ATContact-option-name">${contact.name}</div>
-    <div id="ATContact-option-checkbox${i}" class="ATContact-option-checkbox" onclick="assignedCheckboxClick(event, ${i})"></div>
-  </div>
-`;
+        optionToRender.innerHTML += getAssignedContactTemplate(contact, i);
     });
 }
 
@@ -441,7 +423,7 @@ async function assignedCheckboxClick(event, id) {
         ATContactOptionCheckboxRef.classList.add('ATContact-option-checkbox');
         assignedCheckbox[id].checkbox = false;
     }
-    await updateChosenInitials();
+    updateChosenInitials();
 }
 
 function updateChosenInitials() {
@@ -452,11 +434,7 @@ function updateChosenInitials() {
         if (item.checkbox) {
             hasInitials = true;
             const contact = resultContactList[i];
-            chosenDiv.innerHTML += `
-                <div class="ATContact-option-intials-container" style="background-color: ${contact.color}; display:inline-flex; margin-right:4px;">
-                    <div class="ATContact-option-initials">${contact.initial}</div>
-                </div>
-            `;
+            chosenDiv.innerHTML += getInitialsTemplate(contact);
         }
     });
     if (parent) {
@@ -491,16 +469,6 @@ document.addEventListener('click', function (e) {
     }
 });
 
-function getAssignedContacts() {
-    const assigned = [];
-    assignedCheckbox.forEach((item, i) => {
-        if (item.checkbox) {
-            assigned.push(resultContactList[i]);
-        }
-    });
-    return assigned;
-}
-
 function resetAddTaskForm() {
     ATTitleRef.value = "";
     ATDescriptionRef.value = "";
@@ -512,26 +480,29 @@ function resetAddTaskForm() {
     updateChosenInitials();
 }
 
+function createCategoryOption(cat) {
+    const option = document.createElement('div');
+    option.className = 'ATcustom-dropdown-option';
+    option.dataset.value = cat.value;
+    option.innerHTML = `<span class="ATContact-option-name">${cat.label}</span>`;
+    option.addEventListener('click', function (event) {
+        event.stopPropagation();
+        ATcategory.textContent = cat.label;
+        checkRequiredFieldsAndToggleButton();
+        categoryDropdownMenu.style.display = 'none';
+        categoryDropdownArrow.classList.remove('open');
+    });
+    return option;
+}
+
 function loadCategoryOptions() {
     categoryDropdownMenu.innerHTML = '';
     const categories = [
         { value: 'Technical Task', label: 'Technical Task' },
         { value: 'User Story', label: 'User Story' }
     ];
-
     categories.forEach(cat => {
-        const option = document.createElement('div');
-        option.className = 'ATcustom-dropdown-option';
-        option.dataset.value = cat.value;
-        option.innerHTML = `<span class="ATContact-option-name">${cat.label}</span>`;
-        option.addEventListener('click', function (event) {
-            event.stopPropagation();
-            ATcategory.textContent = cat.label;
-            checkRequiredFieldsAndToggleButton();
-            categoryDropdownMenu.style.display = 'none';
-            categoryDropdownArrow.classList.remove('open');
-            window.selectedCategory = cat.value; // optional: speichern
-        });
+        const option = createCategoryOption(cat);
         categoryDropdownMenu.appendChild(option);
     });
 }
