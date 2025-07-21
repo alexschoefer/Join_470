@@ -1,6 +1,5 @@
 let allContacts = [];
 let colors = ['#FF7A00','#FF5EB3','#FF5EB3','#9327FF','#FF4646','#C3FF2B','#FF745E','#FFE62B','#00BEE8','#0038FF'];
-let currentOverlayMode = null; // 'desktop' oder 'mobile'
 let isOverlayOpen = false;
 
 async function initContacts() {
@@ -123,13 +122,11 @@ function getContactInformations(index, event) {
     screenSizeRef >= 1230 ? selectedContact.innerHTML += showContactInformationsTemplate(contact,index) : getContactInformationMobile(contact,index)    
 }
 
-function arrowBack(event) {
-    let contactListRef = document.getElementById('contact-list');
-    contactListRef.classList.remove('d_none');
-    let contactsLeftContainerRef = document.getElementById('contacts-left-container');
-    contactsLeftContainerRef.classList.remove('d_none');
-    let selectedContact = document.getElementById('contact-details');
-    selectedContact.innerHTML = "";
+function arrowBack() {
+    document.getElementById('contact-list').classList.remove('d_none');
+    document.getElementById('contacts-left-container').classList.remove('d_none');
+    document.getElementById('contacts-right').style.display = 'none';
+    document.getElementById('contact-details').innerHTML = "";
     refreshContacts();
 }
 
@@ -163,7 +160,6 @@ function editContact(index) {
     const contact = allContacts[index];
     let closeOverlay = document.getElementById('editContactOverlayContainer');
     closeOverlay.classList.remove('d_none');
-    // let overlayContainer = document.getElementById('editContactOverlayContainer');
     renderEditContactOverlay(contact, index);
 }
 
@@ -175,36 +171,30 @@ function addNewContact() {
     renderAddContactOverlay();
 }
 
-window.addEventListener('resize', () => {
-    if (!isOverlayOpen) return; 
-    const overlay = document.getElementById('addNewContactOverlayContainer');
-    const isVisible = overlay && !overlay.classList.contains('d_none');
-    if (isVisible) {
-        return;
-    }
-});
-
 
 function renderAddContactOverlay() {
     isOverlayOpen = true;
+    currentOverlayType = 'add';
     const container = document.getElementById('addNewContactOverlayContainer');
-    const isMobile = window.innerWidth < 1230;
-    const desiredMode = isMobile ? 'mobile' : 'desktop';
-    if (currentOverlayMode !== desiredMode) {
-        container.innerHTML = isMobile ? addNewContactTemplateMobile() : addNewContactTemplate();
-        currentOverlayMode = desiredMode;
+    if (currentOverlayMode !== currentDeviceType) {
+        container.innerHTML = currentDeviceType === 'mobile'
+            ? addNewContactTemplateMobile()
+            : addNewContactTemplate();
+        currentOverlayMode = currentDeviceType;
     }
 }
 
-
 function renderEditContactOverlay(contact, index) {
     isOverlayOpen = true;
+    currentOverlayType = 'edit';
+    lastEditedContact = contact;
+    lastEditedIndex = index;
     const container = document.getElementById('editContactOverlayContainer');
-    const isMobile = window.innerWidth < 1230;
-    const desiredMode = isMobile ? 'mobile' : 'desktop';
-    if (currentOverlayMode !== desiredMode) {
-        container.innerHTML = isMobile ? editContactTemplateMobile(contact, index) : editContactTemplate(contact, index);
-        currentOverlayMode = desiredMode;
+    if (currentOverlayMode !== currentDeviceType) {
+        container.innerHTML = currentDeviceType === 'mobile'
+            ? editContactTemplateMobile(contact, index)
+            : editContactTemplate(contact, index);
+        currentOverlayMode = currentDeviceType;
     }
 }
 

@@ -290,6 +290,20 @@ body {
   z-index: 1000;
 }
 
+.mobile-contact-details-icon {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 47px;
+    color: white;
+    /* border: 3px solid #ffffff; */
+  }
+
 .contact-profil {
   display: flex;
   flex-direction: column;
@@ -393,6 +407,7 @@ body {
   gap: 12px;
   width: 467px;
   max-height: 594px;
+  height: 100%;
   background-color: #2a3647;
   border-color: #2a3647;
   border-radius: 30px 0 0px 30px;
@@ -584,6 +599,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 350px;
 }
 
 .mobile-add-contact-button-create-icon {

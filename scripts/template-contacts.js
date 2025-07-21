@@ -49,7 +49,7 @@ function showContactInformationsTemplate(contact,index) {
                 <img src="../assets/icons/mobile-edit-contact-icon.png" alt="Edit Contact Mobil">
             </button>
         </div>
-        <div class="mobile-contact-profil-btns-container d_none" id="mobile-contact-profil-btns-container" onclick="bubblingPropagation(event)">
+        <div class="mobile-contact-profil-btns-container d_none" id="mobile-contact-profil-btns-container">
             <button class="contact-profil-btn-edit" onclick="editContact(${index})"><img
                             src="../assets/icons/edit-icon.png" alt="edit-icon">Edit</button>
             <button class="contact-profil-btn-delete" onclick="deleteContact(${index})"><img

@@ -1,3 +1,30 @@
+let currentDeviceType = ''; // 'mobile' oder 'desktop'
+let currentOverlayMode = ''; // Overlay-Status ('mobile' oder 'desktop')
+let currentOverlayType = null;
+let lastEditedContact = null;
+let lastEditedIndex = null;
+
+// Initial einmal festlegen
+document.addEventListener('DOMContentLoaded', updateDeviceType);
+
+// Laufend prüfen beim Resizen
+window.addEventListener('resize', updateDeviceType);
+
+function updateDeviceType() {
+    const width = window.innerWidth;
+    const newType = width < 1230 ? 'mobile' : 'desktop';
+    if (newType !== currentDeviceType) {
+        currentDeviceType = newType;
+        if (isOverlayOpen) {
+            if (currentOverlayType === 'add') {
+                renderAddContactOverlay();
+            } else if (currentOverlayType === 'edit') {
+                renderEditContactOverlay(lastEditedContact, lastEditedIndex);
+            }
+        }
+    }
+}
+
 function bubblingPropagation(event) {
     event.stopPropagation();
 }
@@ -12,3 +39,12 @@ function clearErrorMessage(input) {
         errorMessage.innerHTML = defaultText;
     }
 }
+
+function validateForms() {
+    const filled = areAllInputsFilled();
+    const emailInput = document.getElementById('usermail-input');
+    const emailOK = isValidEmail(emailInput.value);
+    const formValid = filled && emailOK && !isEmailAlreadyUsed;
+    setSignUpButtonState(formValid);
+}
+
