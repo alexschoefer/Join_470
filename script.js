@@ -1,4 +1,4 @@
-
+const fetchURLDataBase = "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/";
 let currentDeviceType = ''; // 'mobile' oder 'desktop'
 let currentOverlayMode = ''; // Overlay-Status ('mobile' oder 'desktop')
 let currentOverlayType = null;
