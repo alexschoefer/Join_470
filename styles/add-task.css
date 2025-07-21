@@ -47,7 +47,6 @@
   display: flex;
   flex-direction: column;
   width: 440px;
-  height: 376px;
 }
 
 .add-task-form-left-title {
@@ -92,7 +91,6 @@
   display: flex;
   flex-direction: column;
   width: 440px;
-  left: 864.25px;
   gap: 24px;
 }
 
@@ -327,8 +325,6 @@
   padding-top: 6px;
   padding-right: 16px;
   padding-bottom: 6px;
-  padding-left: 16px;
-  gap: 10px;
   border-width: 1px;
   /* border-radius: 10px; */
   font-family: Inter;
@@ -435,19 +431,10 @@
 }
 
 .ATSubLi {
-  margin-left: 30px;
+  margin-left: 20px;
   margin-right: -16px;
   color: var(--black);
   text-align: center;
-}
-
-.add-task-placeholder-style {
-  width: 100%;
-  font-family: Inter;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 120%;
-  letter-spacing: 0%;
 }
 
 .add-task-input-style:focus:invalid {
@@ -488,6 +475,9 @@
   border: 1px solid #D1D1D1;
   resize: none;
   flex: 1;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0%;
 }
 
 textarea {
@@ -498,12 +488,23 @@ textarea {
   cursor: pointer;
 }
 
-.add-task-input-textarea-style::placeholder {
+.add-task-input-textarea-style::placeholder,
+.add-task-input-title-style::placeholder,
+.add-task-input-placeholder-style::placeholder,
+.add-task-input-date-style {
   color: var(--style);
   font-weight: 400;
   font-size: 20px;
   line-height: 120%;
   letter-spacing: 0%;
+}
+
+.add-task-input-date-style::placeholder {
+  color: var(--style);
+}
+
+.add-task-input-date-style.date-selected {
+  color: var(--black);
 }
 
 .add-task-buttons-create-and-clear {
@@ -642,7 +643,8 @@ textarea {
 
 .add-task-assigned-to-chosen-initials {
   min-height: 1px;
-  max-height: 48px;
+  max-height: 46px;
+  max-width: 440px;
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
@@ -681,6 +683,10 @@ textarea {
 }
 
 .ATSError {
+  border: 2px solid var(--asterix) !important;
+}
+
+.error {
   border: 2px solid var(--asterix) !important;
 }
 
@@ -924,7 +930,7 @@ textarea {
 
 .ATcustom-dropdown-category {
   border-radius: 8px;
-  min-height: 104px;
+  min-height: 98px;
   max-height: 104px;
   overflow-y: auto;
   background: #fff;
@@ -932,7 +938,6 @@ textarea {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  border-width: 1px;
   border-radius: 10px;
   font-family: Inter;
   font-weight: 400;
@@ -959,6 +964,7 @@ textarea {
 
 .ATcustom-dropdown-option:hover {
   background: #f1f1f1;
+  border-radius: 10px;
 }
 
 .ATContact-option-intials-container {
@@ -1041,7 +1047,7 @@ textarea {
   background-image: url('../assets/icons/add-task-assign-arrow-up.svg');
 }
 
-. {
+/* . {
   position: absolute;
   top: 100%;
   left: 0;
@@ -1053,7 +1059,7 @@ textarea {
   overflow-y: auto;
   z-index: 10;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
+} */
 
 .label-corrector-bottom {
   padding-bottom: 8px;
