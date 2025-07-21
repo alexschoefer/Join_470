@@ -5,7 +5,6 @@ function addNewContactTemplateMobile() {
         <img class="add-contact-close-overlay-icon" src="../assets/icons/mobile-close-white-icon.png" alt="close-icon"
             onclick="closeAddContactOverlay()">
         <div class="add-contact-left-container">
-            <img class="add-contact-menulogo" src="../assets/img/MenuLogo.png" alt="menulogo">
             <div class="add-contact-headline-container">
                 <h3>Add contact</h3>
                 <span>Tasks are better with a team!</span>
@@ -13,13 +12,10 @@ function addNewContactTemplateMobile() {
             </div>
         </div>
         <div class="mobile-add-contact-profil-icon-container">
-            <div class="mobile-profil-icon">
-                <img src="../assets/icons/profil-icon.png" alt="profil-icon.png">
-            </div>
+                <img class="mobile-contact-details-icon" src="../assets/icons/profil-icon.png" alt="profil-icon.png">
         </div>
-        <div class="add-contact-right-container">
             <form class="add-contact-form" onsubmit="createContactForRemoteStorage(event)">
-                <div class="add-contact-information-wrapper">
+              
                     <div class="add-contact-input-wrapper">
                         <div class="input-wrapper">
                             <div class="user-input-wrapper">
@@ -57,26 +53,26 @@ function addNewContactTemplateMobile() {
                                     email adress.</p>
                             </div>
                         </div>
-                        <div class="user-input-wrapper">
-                            <div class="input-container">
-                                <input id="add-contact-phone-input" class="user-input" type="tel" name="phone"
+                        <div class="input-wrapper">
+                            <div class="user-input-wrapper">
+                                <div class="input-container">
+                                    <input id="add-contact-phone-input" class="user-input" type="tel" name="phone"
                                     placeholder="Phone" autocomplete="off">
                                 <div>
                                     <img class="phone-icon" src="../assets/icons/call-icon.png" alt="call-icon">
                                 </div>
                             </div>
                         </div>
+                        </div>
                         <div class="mobile-add-contact-btns-container" id="mobile-add-contact-btns-container">
-                            <button type="submit" class="create-contact-btn">
+                            <button type="submit" class="create-contact-btn" id="btn-form" disabled>
                                 Create contact
                                 <img class="add-task-button-check-icon" src="../assets/icons/check-icon.png"
                                     alt="check-icon">
                             </button>
                         </div>
                     </div>
-                </div>
             </form>
-        </div>
     </div>
 </div>
     `
@@ -91,7 +87,6 @@ function editContactTemplateMobile(contact,index) {
                 alt="close-icon" onclick="closeEditContactOverlay()">
         </div>
         <div class="add-contact-left-container">
-            <img class="add-contact-menulogo" src="../assets/img/MenuLogo.png" alt="menulogo">
             <div class="add-contact-headline-container">
                 <h3>Edit contact</h3>
                 <div class="add-contact-vector-line"></div>
@@ -99,7 +94,7 @@ function editContactTemplateMobile(contact,index) {
         </div>
         <div class="mobile-edit-contact-profil-icon-container">
             <div class="mobile-profil-icon">
-                <div class="contact-details-icon" style="background-color: ${contact.profilcolor};">${contact.initial}
+                <div class="mobile-contact-details-icon" style="background-color: ${contact.profilcolor};">${contact.initial}
                 </div>
             </div>
         </div>
@@ -142,6 +137,7 @@ function editContactTemplateMobile(contact,index) {
                             </div>
                         </div>
                         <div>
+                        <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
                                     <input id="add-contact-phone-input" class="user-input" type="tel" name="phone"
@@ -151,6 +147,7 @@ function editContactTemplateMobile(contact,index) {
                                     </div>
                                 </div>
                             </div>
+                        </div>
                             <div class="input-validation-container">
                                 <p id="add-contact-phone-input-validation-message"
                                     class="input-validation-message d_none"
@@ -158,7 +155,6 @@ function editContactTemplateMobile(contact,index) {
                                     number.</p>
                             </div>
                         </div>
-
                         <div class="mobile-add-contact-btns-container">
                             <button type="button" class="delete-btn" onclick="deleteContact(${index})">
                                 Delete
