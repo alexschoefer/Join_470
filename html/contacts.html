@@ -19,6 +19,8 @@
     <script src="../scripts/dataRemoteStorage.js"></script>
     <script src="../scripts/contacts.js"></script>
     <script src="../scripts/template-contacts.js"></script>
+    <script src="../scripts/template-mobil-contacts.js"></script>
+    <script src="../script.js"></script>
 
 </head>
 
@@ -29,7 +31,7 @@
         <main class="main-content">
             <!-- Contacts -->
             <div class="contacts">
-                <div class="contacts-left-container">
+                <div class="contacts-left-container" id="contacts-left-container">
                     <div class="add-new-contact">
                         <button onclick="addNewContact()" type="button" class="contacts-button-add-new-contact">
                             Add new Contact
@@ -37,16 +39,31 @@
                                 alt="person-add-icon">
                         </button>
                     </div>
+                    <div class="mobile-button-wrapper">
+                        <button class="mobile-add-contact-button-create-icon" onclick="addNewContact()">
+                            <img src="../assets/icons/mobile-person-add-icon.png" alt="Add Contact Mobil">
+                        </button>
+                    </div>
                     <div id="contact-list" class="contact-list">
                         <div id="capitelLetterContactList"></div>
                         <div id="contact"></div>
                     </div>
                 </div>
-                <div class="contacts-right">
+                <div class="contacts-right" id="contacts-right">
+                    <div class="arrow-back-container">
+                        <img src="../assets/icons/arrow-left-line-icon.png" alt="Back Arrow" class="arrow-icon"
+                            onclick="arrowBack()">
+                    </div>
                     <div class="contacts-right-container">
                         <h2 class="contacts-right-title">Contacts</h2>
                         <div class="contacts-right-vector"></div>
                         <p class="contacts-right-credo">Better with a team</p>
+                    </div>
+                    <!-- Mobile-Contact-Information-Section -->
+                    <div class="contacts-right-container-mobile">
+                        <h2 class="contacts-right-title-mobile">Contacts</h2>
+                        <p class="contacts-right-credo-mobile">Better with a team</p>
+                        <div class="contacts-right-vector-mobile"></div>
                     </div>
                     <div id="contact-details" class="contact-detail-container"></div>
                 </div>
@@ -57,7 +74,7 @@
         <!-- Edit-Contact-Section -->
         <div id="editContactOverlayContainer"></div>
         <!-- Create-Contact-Overlay-Success -->
-        <div id="sign-up-success-overlay" class="sign-up-success-overlay d_none">
+        <div id="success-message-overlay" class="sign-up-success-overlay d_none">
             <div class="sign-up-success-container slide-in">
                 <p class="sign-up-success-message">Contact successfully created!</p>
             </div>
