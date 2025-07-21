@@ -28,6 +28,7 @@ const categoryDropdownSelected = document.getElementById('categoryDropdownSelect
 const categoryDropdownMenu = document.getElementById('add-task-category-select');
 const categoryDropdownArrow = document.getElementById('categoryDropdownArrow');
 const categoryDropdownWrapper = document.getElementById('categoryDropdownWrapper');
+const categoryRequired = document.getElementById('category-required');
 const customDropdownWrapper = document.getElementById('customDropdownWrapper');
 const ATdueDateInput = document.getElementById('add-task-due-date-input');
 const ATcategory = document.getElementById('categoryDropdownSelectedText');
@@ -44,11 +45,10 @@ ATTitleRef.addEventListener('input', checkRequiredFieldsAndToggleButton);
 ATDueDateRef.addEventListener('input', checkRequiredFieldsAndToggleButton);
 ATTitleRef.addEventListener('blur', validateTitle);
 ATDueDateRef.addEventListener('blur', validateDueDate);
-categoryDropdownSelected.addEventListener('blur', validateCategory);
 ATSubtaskInput.addEventListener('focus', showClearAndDoneButtons);
 ATSubtaskInput.addEventListener('blur', hideClearAndDoneButtons);
 
-document.getElementById('add-task-subtasks-input').addEventListener('keydown', function (event) {
+ATSubtaskInput.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
         event.preventDefault();
         addTaskAddSubtask();
@@ -100,7 +100,6 @@ document.addEventListener('click', function (e) {
 });
 
 function addTaskInit() {
-    createTaskButtonRequiredFieldsNotOK();
     getContactsFromRemoteStorage();
     loadCategoryOptions();
 }
@@ -289,19 +288,20 @@ function validateDueDate() {
 }
 
 function validateCategory() {
+     console.log('validateCategory aufgerufen');
     const selectedText = ATcategory.textContent;
+     console.log('Kategorie:', selectedText);
     const defaultText = 'Select a category';
     if (selectedText === defaultText) {
         categoryDropdownSelected.classList.add('error');
-        document.getElementById('category-required').classList.remove('d_none');
+        categoryRequired.classList.remove('d_none');
         return false;
     } else {
         categoryDropdownSelected.classList.remove('error');
-        document.getElementById('category-required').classList.add('d_none');
+        categoryRequired.classList.add('d_none');
         return true;
     }
 }
-
 function validateAddTaskInputs() {
     let valid = true;
     if (!validateTitle()) valid = false;
@@ -376,18 +376,10 @@ function checkRequiredFieldsAndToggleButton() {
     const dueDateFilled = ATDueDateRef.value.trim() != "";
     const categoryFilled = ATcategory.textContent.trim() != "Select a category";
     if (titleFilled && dueDateFilled && categoryFilled) {       
-        createTaskButtonRequiredFieldsOK();
+        ATButtonAddTaskRef.disabled = false;
     } else {
-        createTaskButtonRequiredFieldsNotOK();
+        ATButtonAddTaskRef.disabled = true;
     }
-}
-
-function createTaskButtonRequiredFieldsOK() {
-    ATButtonAddTaskRef.disabled = false;
-}
-
-function createTaskButtonRequiredFieldsNotOK() {
-    ATButtonAddTaskRef.disabled = true;
 }
 
 document.querySelector('.calendar-icon').addEventListener('click', function () {
@@ -476,6 +468,7 @@ function resetAddTaskForm() {
     ATcategory.textContent = 'Select a category';
     assignedCheckbox.forEach(item => item.checkbox = false);
     updateChosenInitials();
+    loadCategoryOptions();
 }
 
 function createCategoryOption(cat) {
