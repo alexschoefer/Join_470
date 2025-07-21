@@ -1,16 +1,18 @@
 function aktive() {
-  const currentFile = window.location.pathname.split("/").pop();
-  console.log("Aktuelle Datei:", currentFile); // Testausgabe
+  const currentPage = window.location.pathname.split("/").pop();
 
-  const activeLink = document.querySelector(`a[href="./${currentFile}"]`);
-  if (activeLink) {
-    activeLink.parentElement.classList.add("active");
-  } else {
-    console.warn("Kein aktiver Menüpunkt gefunden für:", currentFile);
-  }
+  const buttons = document.querySelectorAll(".menu-selection-button");
+
+  buttons.forEach((button) => {
+    const link = button.querySelector("a");
+    if (!link) return;
+
+    const href = link.getAttribute("href").replace("./", "");
+
+    if (href === currentPage) {
+      button.classList.add("active");
+    }
+  });
 }
 
-// Aufruf
-document.addEventListener("DOMContentLoaded", aktive);
-
-console.log("Hallo");
+console.log("Sidebar script loaded");
