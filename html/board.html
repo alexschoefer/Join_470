@@ -17,6 +17,7 @@
     />
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../styles/add-task.css" />
+    <script src="../scripts/template-add-task.js"></script>
     <script src="../scripts/include.js"></script>
     <script src="../scripts/header.js"></script>
   </head>
@@ -31,7 +32,7 @@
             <h1>Board</h1>
             <div class="task-search">
               <div class="input-search">
-                <input type="text" placeholder="Find Task" />
+                <input id="searchInput" type="text" placeholder="Find Task" />
                 <button class="search">
                   <span class="border-img">
                     <img src="../assets/icons/search.png" />
@@ -106,9 +107,9 @@
         </div>
       </section>
     </main>
-    <!-- <script src="../scripts/add-task.js"></script> -->
+    <script src="../script.js"></script>
     <script src="../scripts/dataRemoteStorage.js"></script>
-    <script src="../scripts/board.js"></script>
     <script src="../scripts/template-board.js"></script>
+    <script src="../scripts/board.js"></script>
   </body>
 </html>

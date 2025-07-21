@@ -1,3 +1,4 @@
+
 let currentDeviceType = ''; // 'mobile' oder 'desktop'
 let currentOverlayMode = ''; // Overlay-Status ('mobile' oder 'desktop')
 let currentOverlayType = null;

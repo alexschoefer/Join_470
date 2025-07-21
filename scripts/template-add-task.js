@@ -15,3 +15,23 @@ function addSubtaskTemplate(i, subtaski) {
                  </div>
              </div>`;
 }
+
+function getInitialsTemplate(contact) {
+    return `
+        <div class="ATContact-option-intials-container" style="background-color: ${contact.color}; display:inline-flex; margin-right:4px;">
+            <div class="ATContact-option-initials">${contact.initial}</div>
+        </div>
+    `;
+}
+
+function getAssignedContactTemplate(contact, i) {
+    return `
+        <div class="ATcustom-dropdown-option" data-index="${i}">
+            <div class="ATContact-option-intials-container" style="background-color: ${contact.color};">
+                <div class="ATContact-option-initials">${contact.initial}</div>
+            </div>
+            <div class="ATContact-option-name">${contact.name}</div>
+            <div id="ATContact-option-checkbox${i}" class="ATContact-option-checkbox" onclick="assignedCheckboxClick(event, ${i})"></div>
+        </div>
+    `;
+}
