@@ -6,13 +6,88 @@ let tasksPriority;
 let currentDraggedElement = null;
 let subtasksContent;
 let colorLabels;
+let searchInput = document.getElementById("searchInput");
+let currentFilter = "";
+let toDoContainer = document.querySelector(".to-do");
+let inProgressContainer = document.querySelector(".in-progress");
+let awaitFeedbackContainer = document.querySelector(".await-feedback");
+let doneContainer = document.querySelector(".done");
+
+function updateBoardContent() {
+  let cols = [
+    { container: toDoContainer, emptyText: "No tasks To do" },
+    { container: inProgressContainer, emptyText: "No tasks In Progress" },
+    { container: awaitFeedbackContainer, emptyText: "No tasks Await Feedback" },
+    { container: doneContainer, emptyText: "No tasks Done" },
+  ];
+  cols.forEach(({ container }) => {
+    let dropArea = container.querySelector(".drag-area");
+    if (dropArea) {
+      dropArea
+        .querySelectorAll(".task, .empty-placeholder")
+        .forEach((node) => node.remove());
+    }
+  });
+
+  tasks
+    .filter((task) => {
+      return (
+        task &&
+        (!currentFilter || task.title.toLowerCase().startsWith(currentFilter))
+      );
+    })
+    .forEach((task) => {
+      let card = createCardElement(task);
+
+      let dropArea;
+      switch (task.status) {
+        case "toDo":
+          dropArea = toDoContainer.querySelector(".drag-area");
+          break;
+        case "inProgress":
+          dropArea = inProgressContainer.querySelector(".drag-area");
+          break;
+        case "awaitFeedback":
+          dropArea = awaitFeedbackContainer.querySelector(".drag-area");
+          break;
+        case "done":
+          dropArea = doneContainer.querySelector(".drag-area");
+          break;
+        default:
+          return;
+      }
+      dropArea.appendChild(card);
+      openTaskDetails();
+      updateSubtaskProgress(task.subtasks, card);
+    });
+
+  enableTiltOnDrag(".task");
+  insertTemplateIfEmpty();
+}
+
+searchInput.addEventListener("input", () => {
+  let q = searchInput.value.trim().toLowerCase();
+  currentFilter = q.length >= 3 ? q : "";
+  updateBoardContent();
+});
+function createCardElement(task) {
+  let html = generateTodoHTML(
+    task,
+    getImageForPriority(task.priority),
+    getInitialsList(task.assigned),
+    getColoredLabels(task.category)
+  );
+  let template = document.createElement("template");
+  template.innerHTML = html.trim();
+  return template.content.firstElementChild;
+}
 
 function openAddTaskOverlay() {
   if (!container) return;
   container.innerHTML = addTasks();
-  const old = document.getElementById("add-task-script");
+  let old = document.getElementById("add-task-script");
   if (old) old.remove();
-  const s = document.createElement("script");
+  let s = document.createElement("script");
   s.id = "add-task-script";
   s.src = "../scripts/add-task.js";
   s.async = false;
@@ -74,9 +149,13 @@ async function init() {
   }
   updateTask();
   openTaskDetails();
-  const addBtn = document.querySelector(".add-task");
+  let addBtn = document.querySelector(".add-task");
+  let plusButton = document.querySelectorAll(".add-task-icon");
   if (addBtn) {
     addBtn.addEventListener("click", openAddTaskOverlay);
+    plusButton.forEach((btn) => {
+      btn.addEventListener("click", openAddTaskOverlay);
+    });
   }
 }
 
@@ -133,10 +212,14 @@ function removeHighlight(id) {
 }
 
 function insertTemplateIfEmpty() {
-  let dragAreas = document.querySelectorAll(".drag-area");
-  dragAreas.forEach((area) => {
-    if (area.innerHTML.trim() === "") {
-      area.innerHTML = templeteNotTasks(area.id);
+  document.querySelectorAll(".drag-area").forEach((area) => {
+    area.querySelectorAll(".empty-placeholder").forEach((n) => n.remove());
+    if (!area.querySelector(".task")) {
+      let html = templeteNotTasks(area.id);
+      let wrapper = document.createElement("div");
+      wrapper.classList.add("empty-placeholder");
+      wrapper.innerHTML = html;
+      area.appendChild(wrapper);
     }
   });
 }
@@ -172,17 +255,20 @@ function enableTiltOnDrag(selector) {
 }
 
 function deleteTasksOfOverlay(id) {
-  let taskCardContainer = document.getElementById("task-overlay");
-  let deleteButton = document.getElementsByClassName("delete")[0];
-  if (taskCardContainer) {
-    deleteButton.addEventListener("click", () => {
-      closeContainerOverlay();
-      setTimeout(() => {
-        deleteTasksToRemoteStorage(`/tasks/${id}`);
-      }, 100);
-    });
-  }
+  let deleteButton = document.querySelector(".delete");
+  if (!deleteButton) return;
+  deleteButton.addEventListener("click", async () => {
+    closeContainerOverlay();
+    try {
+      await deleteTasksToRemoteStorage(`/tasks/${id}`);
+      tasks = tasks.filter((task) => task && task.id !== id);
+      updateTask();
+    } catch (error) {
+      console.error(error);
+    }
+  });
 }
+
 function editTaskOfOverlay(id) {
   let taskOverlay = document.getElementById("task-card-container");
   let taskCardContainer = document.getElementById("task-overlay");
@@ -271,8 +357,8 @@ function updateSubtaskProgress(subtasksVolume, container) {
 function generateSubtaskHTML(subtasks) {
   return subtasks
     .map((subtask, index) => {
-      const checked = subtask.done ? "checked" : "";
-      const id = index + 1;
+      let checked = subtask.done ? "checked" : "";
+      let id = index + 1;
       return `
       <div class="subtask-container">
         <input
