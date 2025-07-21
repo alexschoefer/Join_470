@@ -1,4 +1,3 @@
-const fetchURLDataBase = "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/";
 const ATTitleRef = document.getElementById("add-task-title-input");
 const ATDescriptionRef = document.getElementById("add-task-description-textarea");
 const ATDueDateRef = document.getElementById("add-task-due-date-input");
