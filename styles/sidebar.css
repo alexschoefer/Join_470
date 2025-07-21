@@ -43,7 +43,9 @@
 .active {
   background-color: #091931;
 }
-
+.active a {
+  color: white;
+}
 .menu-selection-icons {
   height: 30px;
   width: 30px;
