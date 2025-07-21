@@ -55,6 +55,7 @@ ATSubtaskInput.addEventListener('keydown', function (event) {
     }
 });
 
+// dies muss geklärt werden, event listener funktioniert nicht auf button disabled!!!!
 ATButtonAddTaskRef.addEventListener('click', function (event) {
     if (!validateAddTaskInputs()) {
         event.preventDefault();
