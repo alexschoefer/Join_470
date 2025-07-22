@@ -39,7 +39,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 569px;
+  width: 569px;
   max-height: 73px;
   margin-left: 40px;
   margin-top: 100px;
@@ -204,6 +204,7 @@ body {
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
+  border: 3px solid white;
 }
 
 .contact-profil-badge {
@@ -328,32 +329,11 @@ body {
   gap: 13px;
 }
 
-.contact-profil-btn-edit {
-  width: 62px;
-  height: 24px;
-  display: flex;
-  gap: 8px;
-  background-color: #f6f7f8;
-  align-items: center;
-  border: none;
-  cursor: pointer;
-}
-
-.contact-profil-btn-delete {
-  width: 81px;
-  height: 24px;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  background-color: #f6f7f8;
-  border: none;
-  cursor: pointer;
-}
-
 .contact-informations-email-phone {
   display: flex;
   gap: 59px;
-  height: 74px;
+  min-height: 74px;
+  box-sizing: border-box;
 }
 
 .contact-informations-email-phone h4 {
@@ -367,7 +347,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 22px;
-  height: 128px;
 }
 
 .contact-email-phone span {
@@ -494,7 +473,10 @@ body {
   align-items: center;
   justify-content: center;
   transform: translateY(-40px);
-  margin-right: 20px;
+  margin-right: 20px; 
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 70px;
+  border: 2px solid #ffffff;
 }
 
 .add-contact-information-wrapper {
@@ -623,7 +605,7 @@ body {
 .mobile-edit-contact-button {
     display: none;
     position: fixed;
-    bottom: 40px;
+    bottom: 30px;
     right: 40px;
     width: 56px;
     height: 56px;
@@ -672,21 +654,4 @@ body {
   right: 40px;
   top: 120px;
   cursor: pointer;
-}
-
-.mobile-contact-profil-btns-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-left: 30px;
-    gap: 16px;
-    position: fixed;
-    bottom: 30px;
-    right: 35px;
-    width: 116px;
-    height: 100px;
-    border-radius: 20px 20px 20px 10px;
-    background-color: white;
-    z-index: 998;
 }

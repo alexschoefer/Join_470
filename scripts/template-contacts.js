@@ -19,7 +19,7 @@ function getContactEntryTemplate(contact, index) {
     `;
 }
 
-function showContactInformationsTemplate(contact,index) {
+function showContactInformationsTemplate(contact, index) {
     return `
         <div id="contact" class="contact">
             <div class="contact-profil-badge">
@@ -28,10 +28,12 @@ function showContactInformationsTemplate(contact,index) {
             <div class="contact-profil">
                 <div class="contact-profil-name">${contact.name}</div>
                 <div class="contact-profil-btns-container" id="contact-profil-btns-container">
-                    <button class="contact-profil-btn-edit" onclick="editContact(${index})"><img
-                            src="../assets/icons/edit-icon.png" alt="edit-icon">Edit</button>
-                    <button class="contact-profil-btn-delete" onclick="deleteContact(${index})"><img
-                            src="../assets/icons/delete-icon.png" alt="">Delete</button>
+                    <button class="contact-profil-btn-edit" onclick="editContact(${index})">
+                        <img src="../assets/icons/edit-icon.png" alt="edit-icon">Edit
+                    </button>
+                    <button class="contact-profil-btn-delete" onclick="deleteContact(${index})">
+                        <img src="../assets/icons/delete-icon.png" alt="">Delete
+                    </button>
                 </div>
             </div>
         </div>
@@ -48,12 +50,6 @@ function showContactInformationsTemplate(contact,index) {
             <button class="mobile-edit-contact-button" onclick="changeContact(${index})">
                 <img src="../assets/icons/mobile-edit-contact-icon.png" alt="Edit Contact Mobil">
             </button>
-        </div>
-        <div class="mobile-contact-profil-btns-container d_none" id="mobile-contact-profil-btns-container">
-            <button class="contact-profil-btn-edit" onclick="editContact(${index})"><img
-                            src="../assets/icons/edit-icon.png" alt="edit-icon">Edit</button>
-            <button class="contact-profil-btn-delete" onclick="deleteContact(${index})"><img
-                            src="../assets/icons/delete-icon.png" alt="">Delete</button>
         </div>
     `;
 }
@@ -80,7 +76,7 @@ function addNewContactTemplate() {
         <form class="add-contact-form" onsubmit="createContactForRemoteStorage(event)">
             <div class="add-contact-information-wrapper">
                 <div class="add-contact-profil-icon">
-                    <img src="../assets/icons/profil-icon.png" alt="profil-icon.png">
+                    <img class="profil-icon" src="../assets/icons/profil-icon.png" alt="profil-icon.png">
                 </div>
 
                 <div class="add-contact-input-wrapper">
@@ -148,6 +144,7 @@ function addNewContactTemplate() {
 
 function editContactTemplate(contact,index) {
     return `
+        <div class="overlay">
     <div class="add-contact-overlay">
     <div>
         <img class="add-contact-close-overlay-icon" src="../assets/icons/close.png" alt="close-icon"
@@ -212,6 +209,7 @@ function editContactTemplate(contact,index) {
                 </div>
             </div>
         </form>
+    </div>
     </div>
 </div>
     `

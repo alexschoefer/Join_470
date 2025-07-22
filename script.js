@@ -1,9 +1,11 @@
 const fetchURLDataBase = "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/";
 let currentDeviceType = ''; // 'mobile' oder 'desktop'
 let currentOverlayMode = ''; // Overlay-Status ('mobile' oder 'desktop')
+let isOverlayOpen = false;
 let currentOverlayType = null;
 let lastEditedContact = null;
 let lastEditedIndex = null;
+let currentContactIndex = null;
 
 // Initial einmal festlegen
 document.addEventListener('DOMContentLoaded', updateDeviceType);
@@ -22,6 +24,11 @@ function updateDeviceType() {
             } else if (currentOverlayType === 'edit') {
                 renderEditContactOverlay(lastEditedContact, lastEditedIndex);
             }
+        }
+        adaptLayoutOnResize();
+        if (currentContactIndex !== null && document.getElementById('contact-details').innerHTML.trim()) {
+            const contactEntry = document.querySelectorAll('.contact-entry')[currentContactIndex];
+            if (contactEntry) getContactInformations(currentContactIndex, { currentTarget: contactEntry });
         }
     }
 }

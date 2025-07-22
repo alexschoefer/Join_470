@@ -1,8 +1,8 @@
-@media (min-width: 1361px) {
+/* @media (min-width: 1361px) {
   .arrow-back-container {
     display: none;
   }
-}
+} */
 
 @media (max-width: 1360px) {
   .contacts-right-container {
@@ -40,11 +40,13 @@
   }
 }
 
-@media (max-width: 1230px) {
-  .arrow-back-container {
-    display: block;
+@media (min-width: 1230px) {
+  #arrow-back {
+    display: none !important;
   }
+}
 
+@media (max-width: 1230px) {
   .contacts-right {
     display: none;
   }
@@ -145,7 +147,7 @@
   .mobile-contact-profil-btns-container,
   .mobile-edit-contact-button,
   .mobile-add-contact-button-create-icon {
-    margin-bottom: 90px;
+    margin-bottom: 60px;
   }
 }
 
@@ -156,9 +158,13 @@
     margin-bottom: 40px;
   }
 
+  .arrow-back-container {
+    top: 100px;
+  }
+
   .mobile-add-contact-profil-icon-container,
   .mobile-edit-contact-profil-icon-container {
-    margin-top: -60px;
+    margin-top: -40px;
     margin-bottom: -30px;
   }
 
@@ -261,6 +267,11 @@
 }
 
 @media (max-width: 450px) {
+
+    .add-contact-headline-container h3 {
+        height: 50px;
+    }
+
   .contact-profil-name {
     font-size: 27px;
     width: 180px;
@@ -322,11 +333,15 @@
 }
 
 @media (max-width: 375px) {
+
+    .mobile-add-contact-profil-icon-container, .mobile-edit-contact-profil-icon-container {
+        margin-top: -40px;
+        margin-bottom: -30px;
+    }
+
   .add-contact-overlay {
     max-width: 350px;
     max-height: 600px;
-    padding-left: 10px;
-    padding-right: 10px;
   }
 
   .delete-btn {
@@ -351,4 +366,47 @@
     gap: 4px;
     font-size: 21px;
   }
+}
+
+@media (max-width: 350px) {
+
+    .add-contact-input-wrapper {
+        width: 100%;
+        max-width: 290px;
+        box-sizing: border-box;
+        padding: 0 10px;
+      }
+
+  .add-contact-overlay {
+    max-width: 300px;
+    max-height: 600px;
+  }
+
+  .user-input {
+    font-size: 14px;
+  }
+
+  .input-wrapper, .user-input-wrapper {
+    width: 100%;
+    max-width: 290px;
+    box-sizing: border-box;
+  }
+
+  .add-contact-headline-container h3 {
+    font-size: 36px;
+    font-weight: 700;
+  }
+
+  .add-contact-headline-container span {
+    font-size: 16px;
+  }
+
+  .create-contact-btn {
+    font-size: 18px;
+  }
+
+  .mobile-add-contact-profil-icon-container, .mobile-edit-contact-profil-icon-container {
+    margin-top: -40px;
+    margin-bottom: -40px;
+}
 }
