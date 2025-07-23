@@ -259,7 +259,7 @@ function getProfilColorIcon() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-function validateSignupInput(input) {
+function validateContactFormsInput(input) {
     const errorMessage = document.getElementById(input.id + '-validation-message');
     const wrapper = input.closest('.user-input-wrapper');
     if (errorMessage && wrapper) {
@@ -271,6 +271,7 @@ function validateSignupInput(input) {
             wrapper.classList.remove('input-error');
         }
     }
+    validateContactSectionForms()
 }
 
 

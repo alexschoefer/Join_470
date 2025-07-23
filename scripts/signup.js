@@ -1,4 +1,4 @@
-const fetchURLDataBase = "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/"
+// const fetchURLDataBase = "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/"
 let isEmailAlreadyUsed = false;
 
 /**
@@ -83,20 +83,6 @@ function showEmailAlreadyExistError(input) {
     wrapper.classList.add('input-error');
 }
 
-/**
- * Help-function - Validates a given user-email 
- * 
- * Trims the input and checks it against a regular expression pattern for basic email structure.
- * 
- * @param {string} email - The email adress to validate.
- * @returns Returns true if the email is valid, otherwise false.
- */
-
-function isValidEmail(email) {
-    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-    return emailRegex.test(email.trim());
-}
-
 /** 
  * Help-function - Clears all error messages by the input fields
  * 
@@ -159,23 +145,7 @@ function toggleInputTypePassword(iconElement) {
     }
 }
 
-/**
- * Help function - Checks whether all input fields with the class "user-input" have been filled out.
- * 
- * Iterates through all relevant input fields and returns false if any of them are empty
- * (after trimming whitespace). Returns true only if all fields contain a value.
- * 
- * @returns {boolean} Returns true if all input fields are filled, otherwise false.
- */
-function areAllInputsFilled() {
-    const inputs = document.querySelectorAll('.user-input');
-    for (let input of inputs) {
-        if (input.value.trim() === '') {
-            return false;
-        }
-    }
-    return true;
-}
+
 
 /**
  * Help-functions - Checks if the button for privacy police is clicked
@@ -203,15 +173,6 @@ function validateSignUpForm() {
     setSignUpButtonState(formValid);
 }
 
-/**
- * Help-function - Enables or disables the sign-up button based on the provided state.
- *
- * @param {boolean} enabled - If true, the sign-up button is enabled; if false, it is disabled.
- */
-function setSignUpButtonState(enabled) {
-    const button = document.getElementById('btn-sign-up');
-    button.disabled = !enabled;
-}
 
 /**
  * Validates if the password and confirm password inputs match.
