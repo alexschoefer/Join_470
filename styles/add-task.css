@@ -28,6 +28,7 @@
 
 .add-task-form {
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -52,19 +53,18 @@
 .add-task-form-left-title {
   display: flex;
   flex-direction: column;
-  width: 440px;
+  width: 100%;
   height: 108px;
-  gap: 8px;
 }
 
 .add-task-form-left-description {
-  width: 440px;
+  width: 100%;
   height: 200px;
   gap: 8px;
 }
 
 .add-task-form-left-description-ico {
-  width: 440px;
+  width: 100%;
   height: 168px;
   gap: 8px;
   position: relative;
@@ -74,7 +74,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 440px;
+  width: 100%;
   height: 48px;
   border-width: 1px;
   border-radius: 10px;
@@ -316,7 +316,7 @@
 }
 
 .add-task-subtask-style {
-  width: 440px;
+  width: 100%;
   height: 32px;
   display: flex;
   justify-content: space-between;
@@ -462,7 +462,7 @@
 }
 
 .add-task-input-textarea-style {
-  width: 440px;
+  width: 100%;
   height: 136px;
   gap: 4px;
   padding-top: 12px;
@@ -623,7 +623,7 @@ textarea {
 }
 
 .add-task-form-right-priority {
-  width: 440px;
+  width: 100%;
   height: 88px;
   gap: 8px;
   display: flex;
@@ -633,7 +633,7 @@ textarea {
 .add-task-form-right-select-contacts {
   display: flex;
   flex-direction: column;
-  width: 440px;
+  width: 100%;
   gap: 8px;
 }
 
@@ -644,7 +644,7 @@ textarea {
 .add-task-assigned-to-chosen-initials {
   min-height: 1px;
   max-height: 46px;
-  max-width: 440px;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
@@ -677,7 +677,7 @@ textarea {
 .add-task-form-right-category {
   display: flex;
   flex-direction: column;
-  width: 440px;
+  width: 100%;
   gap: 8px;
 
 }
@@ -693,7 +693,7 @@ textarea {
 .add-task-form-right-subtasks {
   display: flex;
   flex-direction: column;
-  width: 440px;
+  width: 100%;
   gap: 8px;
 }
 
@@ -701,7 +701,7 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 440px;
+  width: 100%;
   height: 48px;
   border-radius: 10px;
   border: 1px solid #D1D1D1;
@@ -1016,7 +1016,7 @@ textarea {
 
 .ATcustom-dropdown-wrapper {
   position: relative;
-  width: 437px;
+  width: 100%;
 }
 
 .ATcustom-dropdown-selected {
@@ -1046,20 +1046,6 @@ textarea {
 .ATcustom-dropdown-arrow.open {
   background-image: url('../assets/icons/add-task-assign-arrow-up.svg');
 }
-
-/* . {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  border: 1px solid #D1D1D1;
-  border-radius: 0 0 8px 8px;
-  background: #fff;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 10;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-} */
 
 .label-corrector-bottom {
   padding-bottom: 8px;
