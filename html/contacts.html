@@ -15,13 +15,15 @@
     <link rel="stylesheet" href="../styles/summary.css">
     <link rel="stylesheet" href="../styles/sign-up.css">
     <link rel="stylesheet" href="../styles/login.css">
+    <link rel="stylesheet" href="../styles/assets.css">
+    <script src="../script.js"></script>
     <script src="../scripts/include.js"></script>
     <script src="../scripts/header.js"></script>
     <script src="../scripts/dataRemoteStorage.js"></script>
     <script src="../scripts/contacts.js"></script>
     <script src="../scripts/template-contacts.js"></script>
     <script src="../scripts/template-mobil-contacts.js"></script>
-    <script src="../script.js"></script>
+    <script src="../scripts/signup.js"></script>
 
 </head>
 
@@ -75,6 +77,14 @@
             <div class="sign-up-success-container slide-in">
                 <p class="sign-up-success-message">Contact successfully created!</p>
             </div>
+        </div>
+        <div class="mobile-contact-profil-btns-container d_none" id="mobile-contact-profil-btns-container">
+            <button class="mobile-contact-profil-btn-edit" onclick="editContact(currentContactIndex)">
+                <img src="../assets/icons/edit-icon.png" alt="edit-icon">Edit
+            </button>
+            <button class="mobile-profil-btn-delete" onclick="deleteContact(currentContactIndex)">
+                <img src="../assets/icons/delete-icon.png" alt="">Delete
+            </button>
         </div>
 </body>
 </html>
