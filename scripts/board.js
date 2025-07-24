@@ -6,6 +6,7 @@ let tasksPriority;
 let currentDraggedElement = null;
 let subtasksContent;
 let colorLabels;
+let contactColor;
 let searchInput = document.getElementById("searchInput");
 let currentFilter = "";
 let toDoContainer = document.querySelector(".to-do");
@@ -166,6 +167,8 @@ async function updateTask() {
     let container = document.getElementById(col);
     container.innerHTML = "";
     filtered.forEach((task) => {
+      contactColor = JSON.stringify(
+        task.color);
       tasksPriority = getImageForPriority(task.priority);
       let assigned = getInitialsList(task.assigned);
       colorLabels = getColoredLabels(task.category);
@@ -173,7 +176,8 @@ async function updateTask() {
         task,
         tasksPriority,
         assigned,
-        colorLabels
+        colorLabels,
+        contactColor
       );
       openTaskDetails(task);
       let lastTask = container.lastElementChild;
@@ -327,21 +331,23 @@ function generateAssignedCardOverlay(assignedList) {
 }
 function getInitialsList(assignedList) {
   return assignedList
-    .map((name) => {
-      let initials = name
+   .map((contact) => {
+      if (!contact || !contact.name) return "";
+      let initials = contact.name
         .trim()
         .split(/\s+/)
         .map((w) => w[0])
         .join("")
         .toUpperCase();
 
-      return `<div class="assignees">
+      return `<div class="assignees" style="background-color: ${contact.color};">
     <span>${initials}</span>
     </div>
     `;
     })
     .join("");
 }
+
 function updateSubtaskProgress(subtasksVolume, container) {
   let total = subtasksVolume.length;
   let completed = subtasksVolume.filter((t) => t.done === true).length;

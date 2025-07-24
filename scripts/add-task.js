@@ -151,6 +151,9 @@ async function getNextTaskId() {
 
 async function postAddTaskDataToFirebase(title, description, date, priority, status, assignTo, category, subtasks, colorTo) {
     const nextId = await getNextTaskId();
+     const assigned = assignTo.map((name, i) => ({
+        name: name,
+        color: colorTo[i] || "#CCCCCC"}));
     const newTask = {
         title,
         description,
@@ -158,7 +161,7 @@ async function postAddTaskDataToFirebase(title, description, date, priority, sta
         status,
         dueDate: date,
         subtasks,
-        assigned: assignTo,
+        assigned,
         category,
         id: nextId,
         colorTo

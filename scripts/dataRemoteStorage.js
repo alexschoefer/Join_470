@@ -15,9 +15,12 @@ let standartTasks = [
       { title: "Save selected theme in localStorage", done: false },
       { title: "Load and apply theme on page load", done: false },
     ],
-    assigned: ["Alan Turing", "Shafi Goldwasser"],
+    assigned: [
+      { name: "Alan Turing", color: "#0038FF" },
+      { name: "Shafi Goldwasser", color: "#9327FF" }
+    ],
     category: "User Story",
-    colorTo: ["#0038FF","#9327FF"]
+    colorTo: ["#0038FF", "#9327FF"]
   },
   {
     id: 1,
@@ -30,9 +33,12 @@ let standartTasks = [
       { title: "mplement Recipe Recommendation", done: true },
       { title: "Start page Layout", done: false },
     ],
-    assigned: ["Shafi Goldwasser", "Grace Hopper"],
+    assigned: [
+      { name: "Shafi Goldwasser", color: "#FF7A00" },
+      { name: "Grace Hopper", color: "#FFE62B" }
+    ],
     category: "User Story",
-    colorTo: ["#FF7A00","#FFE62B"]
+    colorTo: ["#FF7A00", "#FFE62B"]
   },
   {
     id: 2,
@@ -46,9 +52,12 @@ let standartTasks = [
       { title: "Display toast or icon when theme is changed", done: true },
       { title: "Ensure message does not interrupt interaction", done: false },
     ],
-    assigned: ["Grace Hopper", "Ada Lovelace"],
+    assigned: [
+      { name: "Grace Hopper", color: "#1FD7C1" },
+      { name: "Ada Lovelace", color: "#0038FF" }
+    ],
     category: "Technical Task",
-    colorTo: ["#1FD7C1","#0038FF"]
+    colorTo: ["#1FD7C1", "#0038FF"]
   },
   {
     id: 3,
@@ -64,9 +73,12 @@ let standartTasks = [
       { title: "Add unit tests for toggle function", done: true },
       { title: "Ensure compatibility with all themes", done: true },
     ],
-    assigned: ["Shafi Goldwasser", "Tim Berners"],
+    assigned: [
+      { name: "Shafi Goldwasser", color: "#FFE62B" },
+      { name: "Tim Berners", color: "#1FD7C1" }
+    ],
     category: "Technical Task",
-    colorTo: ["#FFE62B","#1FD7C1"]
+    colorTo: ["#FFE62B", "#1FD7C1"]
   },
   {
     id: 4,
@@ -82,10 +94,14 @@ let standartTasks = [
       { title: "Update existing styles to use variables", done: false },
       { title: "Test styles in both themes", done: false },
     ],
-    assigned: ["Margaret Hamilton", "Alan Turing", "Ada Lovelace"],
+    assigned: [
+      { name: "Margaret Hamilton", color: "#FF7A00" },
+      { name: "Alan Turing", color: "#FFE62B" },
+      { name: "Ada Lovelace", color: "#9327FF" }
+    ],
     category: "Technical Task",
-    colorTo: ["#FF7A00","#FFE62B","#9327FF"]
-  },
+    colorTo: ["#FF7A00", "#FFE62B", "#9327FF"]
+  }
 ];
 
 async function getTasksFromRemoteStorage(path) {
