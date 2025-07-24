@@ -298,7 +298,6 @@ div.assignees span {
 div#task-overlay {
   width: 525px;
   height: auto;
-  padding: 48px 40px 48px 40px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -346,7 +345,7 @@ div.card-name-overlay span.card-name {
 span.close-overlay {
   width: 32px;
   height: 32px;
-  display: block;
+  display: flex;
   cursor: pointer;
   border-radius: 50px;
   -webkit-border-radius: 50px;
@@ -358,6 +357,8 @@ span.close-overlay {
   -moz-transition: 0.2s;
   -ms-transition: 0.2s;
   -o-transition: 0.2s;
+  justify-content: center;
+  align-items: center;
 }
 
 span.close-overlay:hover {
@@ -365,10 +366,8 @@ span.close-overlay:hover {
 }
 
 span.close-overlay img {
-  width: 13.15px;
-  height: 13.15px;
-  margin-top: 9.43px;
-  margin-left: 9.42px;
+  width: 24px;
+  height: 24px;
   image-rendering: auto;
 }
 
