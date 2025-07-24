@@ -9,7 +9,7 @@ let standartTasks = [
       "As a user, I want the website to remember my selected theme even after I close the browser.",
     priority: "Medium",
     status: "toDo",
-    date: "20024-04-16",
+    date: "2024-04-16",
     subtasks: [
       { title: "Save selected theme in localStorage", done: true },
       { title: "Save selected theme in localStorage", done: false },
@@ -24,7 +24,7 @@ let standartTasks = [
     description: "Build start page with recipe recommendation.",
     priority: "Low",
     status: "inProgress",
-    date: "20024-04-16",
+    date: "2024-04-16",
     subtasks: [
       { title: "mplement Recipe Recommendation", done: true },
       { title: "Start page Layout", done: false },
@@ -54,7 +54,7 @@ let standartTasks = [
       "Improve code maintainability by extracting theme toggle functionality into a reusable and testable module.",
     priority: "Medium",
     status: "done",
-    date: "20024-04-16",
+    date: "2024-04-16",
     subtasks: [
       { title: "mplement Recipe Recommendation", done: true },
       { title: "Remove duplicate code from components", done: true },
@@ -71,7 +71,7 @@ let standartTasks = [
       "Description: Implement CSS variables for easier theming and consistent styling between dark and light modes.",
     priority: "Low",
     status: "toDo",
-    date: "20024-04-16",
+    date: "2024-04-16",
     subtasks: [
       { title: "mplement Recipe Recommendation", done: true },
       { title: "Define CSS variables for colors and fonts", done: true },
