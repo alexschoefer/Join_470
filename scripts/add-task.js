@@ -119,6 +119,7 @@ async function saveUserInputsForFirebase() {
     let priority = prioButtonState;
     let status = "toDo";
     let assignTo = getAssignedContacts();
+    let colorTo = getAssignedColor();
     let category = ATcategory.textContent;
     let subtasks = getSubtasksArray();
     let responseData = await postAddTaskDataToFirebase(
@@ -129,7 +130,8 @@ async function saveUserInputsForFirebase() {
         status,
         assignTo,
         category,
-        subtasks
+        subtasks,
+        colorTo
     );
 }
 
@@ -147,7 +149,7 @@ async function getNextTaskId() {
     return existingIds.length > 0 ? Math.max(...existingIds) + 1 : 1;
 }
 
-async function postAddTaskDataToFirebase(title, description, date, priority, status, assignTo, category, subtasks) {
+async function postAddTaskDataToFirebase(title, description, date, priority, status, assignTo, category, subtasks, colorTo) {
     const nextId = await getNextTaskId();
     const newTask = {
         title,
@@ -159,6 +161,7 @@ async function postAddTaskDataToFirebase(title, description, date, priority, sta
         assigned: assignTo,
         category,
         id: nextId,
+        colorTo
     };
     let response = await fetch(`${fetchURLDataBase}/tasks/${nextId}.json`, {
         method: "PUT",
@@ -418,6 +421,16 @@ function getAssignedContacts() {
         }
     });
     return assigned;
+}
+
+function getAssignedColor(){
+    const color = [];
+    assignedCheckbox.forEach((item, i) => {
+        if (item.checkbox) {
+            color.push(resultContactList[i].color);
+        }
+    });
+    return color;
 }
 
 async function loadAddTaskAssignedTo(result) {
