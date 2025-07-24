@@ -1,5 +1,5 @@
 function boardTaskOverlay(task, priorityImg, assigned, subtasks, color) {
-  return `
+    return `
   <div id="task-overlay">
               <div class="card-name-overlay">
                 <span style="background-color: ${color}"   class="card-name">${task.category}</span>
@@ -51,15 +51,13 @@ function boardTaskOverlay(task, priorityImg, assigned, subtasks, color) {
               </div>
             </div>`;
 }
-function generateTodoHTML(task, priorityImg, assigned, color) {
-  return `
+function generateTodoHTML(task, priorityImg, assigned, color, ) {
+    return `
          <div class="card todo task" draggable="true" data-task='${JSON.stringify(
-           task
-         )}' ondragstart="startDragging(${task.id})">
+        task)}' ondragstart="startDragging(${task.id})">
                 <div class="card-content">
-                  <span style="background-color: ${color}" class="card-name"> ${
-    task.category
-  }</span>
+                  <span style="background-color: ${color}" class="card-name"> ${task.category
+        }</span>
                   <div class="card-description">
                     <h4>${task.title}</h4>
                     <p>${task.description}</p>
@@ -82,13 +80,13 @@ function generateTodoHTML(task, priorityImg, assigned, color) {
     `;
 }
 function templeteNotTasks(name) {
-  return `
+    return `
                  <div class="not-task">
                   <p>No tasks ${formatName(name)}</p>
                 </div>`;
 }
 function editTasksOfBoard(id) {
-  return `
+    return `
                         <div class="add-task-form-div">
                          <span class="close-overlay" onclick="closeContainerOverlay()"
                            ><img src="../assets/icons/close.png"
@@ -204,7 +202,7 @@ function editTasksOfBoard(id) {
 }
 
 function addTasks() {
-  return `
+    return `
     <div id="task-overlay" class="add-task-overlay">
               <div class="card-name-overlay">
  <div class="add-task-title">
