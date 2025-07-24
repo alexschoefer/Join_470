@@ -17,6 +17,7 @@ let standartTasks = [
     ],
     assigned: ["Alan Turing", "Shafi Goldwasser"],
     category: "User Story",
+    colorTo: ["#0038FF","#9327FF"]
   },
   {
     id: 1,
@@ -31,6 +32,7 @@ let standartTasks = [
     ],
     assigned: ["Shafi Goldwasser", "Grace Hopper"],
     category: "User Story",
+    colorTo: ["#FF7A00","#FFE62B"]
   },
   {
     id: 2,
@@ -46,6 +48,7 @@ let standartTasks = [
     ],
     assigned: ["Grace Hopper", "Ada Lovelace"],
     category: "Technical Task",
+    colorTo: ["#1FD7C1","#0038FF"]
   },
   {
     id: 3,
@@ -63,6 +66,7 @@ let standartTasks = [
     ],
     assigned: ["Shafi Goldwasser", "Tim Berners"],
     category: "Technical Task",
+    colorTo: ["#FFE62B","#1FD7C1"]
   },
   {
     id: 4,
@@ -80,6 +84,7 @@ let standartTasks = [
     ],
     assigned: ["Margaret Hamilton", "Alan Turing", "Ada Lovelace"],
     category: "Technical Task",
+    colorTo: ["#FF7A00","#FFE62B","#9327FF"]
   },
 ];
 
