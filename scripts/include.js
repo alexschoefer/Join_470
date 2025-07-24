@@ -4,20 +4,25 @@ async function loadComponent(id, path) {
     if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
     const html = await res.text();
     document.getElementById(id).innerHTML = html;
+
+    // Aktive Navigation setzen, wenn Sidebar geladen ist
+    if (path.includes("sidebar.html") && typeof aktive === "function") {
+      aktive();
+    }
+
+    // Header-Funktionen, wenn nötig
+    if (path.includes("header.html") && typeof render === "function") {
+      render();
+    }
   } catch (err) {
     console.error(`Error loading ${path}:`, err);
   }
 }
 
-// Wenn das HTML-DOM vollständig geladen ist
 document.addEventListener("DOMContentLoaded", async () => {
-  // Header laden und danach render() aufrufen
+  // Header zuerst
   await loadComponent("header", "./header.html");
 
-  if (typeof render === "function") {
-    render(); // Zeigt Initialen an
-  }
-
-  // Sidebar danach laden (kein render nötig)
+  // Sidebar danach
   await loadComponent("sidebar", "./sidebar.html");
 });
