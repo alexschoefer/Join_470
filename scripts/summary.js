@@ -12,18 +12,18 @@ async function render() {
 let tasksURL =
   "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/tasks.json";
 
-function getCurrentDate() {
-  const greating = document.getElementById("dategreating");
+function getCurrentGreeting() {
   const now = new Date();
   const hour = now.getHours();
 
-  if (hour <= 12) {
-    greating.innerHTML = "Good Morning";
-  } else if (hour <= 18 && hour > 12) {
-    greating.innerHTML = "Good Afternoon";
-  } else if (hour > 18) {
-    greating.innerHTML = "Good Evening";
-  }
+  if (hour <= 12) return "Good Morning";
+  if (hour <= 18) return "Good Afternoon";
+  return "Good Evening";
+}
+
+function getCurrentDate() {
+  const greetingEl = document.getElementById("dategreating");
+  greetingEl.innerText = getCurrentGreeting();
 }
 
 async function getTasks() {
@@ -174,3 +174,37 @@ async function getUrgentDate() {
     el.innerText = "Fehler";
   }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const showWelcome = localStorage.getItem("showWelcomeOnce") === "true";
+  const isSmallScreen = window.innerWidth < 1020;
+
+  if (showWelcome && isSmallScreen) {
+    localStorage.removeItem("showWelcomeOnce");
+
+    const overlay = document.getElementById("welcome-overlay");
+    const welcomeText = document.getElementById("welcome-text");
+    const nameText = document.getElementById("name-text");
+
+    const greeting = getCurrentGreeting();
+    const userData = JSON.parse(localStorage.getItem("loggedInUser"));
+    const userName = userData?.name;
+    const isGuest =
+      !userName || ["gast", "guest"].includes(userName.toLowerCase());
+
+    welcomeText.innerText = greeting;
+    nameText.innerText = isGuest ? "" : `, ${userName}`;
+
+    // Overlay anzeigen
+    overlay.classList.remove("hidden");
+
+    setTimeout(() => {
+      overlay.classList.add("fade-out");
+    }, 1500);
+
+    setTimeout(() => {
+      overlay.classList.add("hidden");
+      overlay.classList.remove("fade-out");
+    }, 3000);
+  }
+});

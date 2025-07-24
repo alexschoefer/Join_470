@@ -215,3 +215,41 @@
   width: 2px;
   background-color: #d1d1d1;
 }
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.overlay-content {
+  background-color: white;
+  color: black;
+  padding: 40px 60px;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.hidden {
+  display: none;
+}
+.fade-out {
+  opacity: 0;
+}
+
+.greeting-text {
+  font-size: 36px;
+  font-weight: 400;
+}
+
+.username-text {
+  font-size: 47px;
+  font-weight: 700;
+  font-style: bold;
+  color: #29abe2;
+}
