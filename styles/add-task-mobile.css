@@ -1,0 +1,44 @@
+@media (width <= 768px) {
+  .add-task-form-div-container {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .add-task-form-left,
+  .add-task-form-right {
+    width: 100%;
+    min-width: 0;
+  }
+  .add-task-center-dividor {
+    display: none;
+  }
+  .add-task-buttons-create-and-clear {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .add-task-form-left-title,
+  .add-task-form-left-description {
+    height: auto;
+  }
+    .add-task-center-dividor{
+    display: none;
+  }
+}
+
+@media (769px <= width <= 1440px) {
+  .add-task-form-div-container {
+    flex-direction: column;
+    gap: 32px;
+  }
+  .add-task-form-left,
+  .add-task-form-right {
+    width: 50%;
+    min-width: 300px;
+  }
+  .add-task-center-dividor {
+    display: block;
+    height: 350px;
+  }
+    .add-task-center-dividor{
+    display: none;
+  }
+}
