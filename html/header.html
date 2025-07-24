@@ -1,9 +1,10 @@
 <head>
   <link rel="stylesheet" href="../styles/header.css" />
   <link rel="stylesheet" href="../styles/standard.css" />
+  <script src="../scripts/header.js" defer></script>
 </head>
 
-<body onload="render()">
+<body>
   <header>
     <div class="content-limit">
       <div class="header-content">
@@ -20,7 +21,7 @@
         <a class="burger-menu-button-help" href="./help.html">Help</a>
         <a class="burger-menu-button" href="./legal-notice.html">Legal Notice</a>
         <a class="burger-menu-button" href="./privacy-policy.html">Privacy Policy</a>
-        <a class="burger-menu-button" href="./sign.html">Log out</a>
+        <a onclick="logout()" class="burger-menu-button" href="../index.html">Log out</a>
       </div>
     </div>
   </header>
