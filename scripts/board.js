@@ -312,21 +312,22 @@ function getImageForPriority(priority) {
 function generateAssignedCardOverlay(assignedList) {
   let result = "";
   for (let i = 0; i < assignedList.length; i++) {
-    let name = assignedList[i];
-    let initials = name
-      .split(" ")
+    let contact = assignedList[i];
+    if (!contact || !contact.name) continue;
+    let initials = contact.name
+      .trim()
+      .split(/\s+/)
       .map((w) => w[0])
       .join("")
       .toUpperCase();
 
     result += `
-        <div class="assigned-content">
-          <span class="logo">${initials}</span>
-          <span class="name">${name}</span>
-        </div>
-      `;
+      <div class="assigned-content">
+        <span class="logo"  style="background-color: ${contact.color};">${initials}</span>
+        <span class="name">${contact.name}</span>
+      </div>
+    `;
   }
-
   return result;
 }
 function getInitialsList(assignedList) {
