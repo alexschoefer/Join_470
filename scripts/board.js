@@ -296,6 +296,11 @@ async function valueTasksToEditTasks(id) {
   await editTasksToRemoteStorage(`/tasks/${id}`, updateTasks);
   closeContainerOverlay();
 }
+
+// --------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------
+
 function getImageForPriority(priority) {
   let imageMap = {
     Medium: "../assets/icons/priority-medium.png",
