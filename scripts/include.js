@@ -9,7 +9,15 @@ async function loadComponent(id, path) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  loadComponent("header", "./header.html");
-  loadComponent("sidebar", "./sidebar.html");
+// Wenn das HTML-DOM vollständig geladen ist
+document.addEventListener("DOMContentLoaded", async () => {
+  // Header laden und danach render() aufrufen
+  await loadComponent("header", "./header.html");
+
+  if (typeof render === "function") {
+    render(); // Zeigt Initialen an
+  }
+
+  // Sidebar danach laden (kein render nötig)
+  await loadComponent("sidebar", "./sidebar.html");
 });

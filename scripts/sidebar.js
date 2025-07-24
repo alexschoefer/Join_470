@@ -14,5 +14,3 @@ function aktive() {
     }
   });
 }
-
-console.log("Sidebar script loaded");
