@@ -1,7 +1,5 @@
 let allContacts = [];
-let colors = ['#FF7A00','#FF5EB3','#FF5EB3','#9327FF','#FF4646','#C3FF2B','#FF745E','#FFE62B','#00BEE8','#0038FF'];
-let currentOverlayMode = null; // 'desktop' oder 'mobile'
-let isOverlayOpen = false;
+let colors = ['#FF7A00', '#FF5EB3', '#FF5EB3', '#9327FF', '#FF4646', '#C3FF2B', '#FF745E', '#FFE62B', '#00BEE8', '#0038FF'];
 
 async function initContacts() {
     await getAllContacts(); // Kontakte in der Datenbank synchronisieren
@@ -19,13 +17,10 @@ async function getAllContacts() {
     let existingContacts = await checkExistingContact();
     for (let contact of contactsDummy) {
         let { name, email, phone, initial, profilcolor } = contact;
-        // Prüfung, ob Kontakt mit derselben bereits E-Mail existiert
         let existingProfil = existingContacts.find(c => c.email === email);
         if (existingProfil) {
-            // Kontakt updaten
-            await updateContactInRemoteStorage(existingProfil.id, {name, email, phone, initial, profilcolor});
+            await updateContactInRemoteStorage(existingProfil.id, { name, email, phone, initial, profilcolor });
         } else {
-            // Kontakt neu anlegen
             await postContactsToRemoteStorage(name, email, phone, initial, profilcolor);
         }
     }
@@ -117,34 +112,51 @@ function renderGroupedContacts(groupedContacts) {
     });
 }
 
+
 function getContactInformations(index, event) {
     const contact = allContacts[index];
-    let selectedContact = document.getElementById('contact-details');
+    const selectedContact = document.getElementById('contact-details');
     selectedContact.innerHTML = "";
     toggleActiveContact(event.currentTarget);
-    let screenSizeRef = window.innerWidth;
-    screenSizeRef >= 1230 ? selectedContact.innerHTML += showContactInformationsTemplate(contact,index) : getContactInformationMobile(contact,index)    
+    currentOverlayMode = currentDeviceType;
+    currentContactIndex = index;
+    if (currentDeviceType === 'desktop') {
+        selectedContact.innerHTML = showContactInformationsTemplate(contact, index);
+    } else {
+        getContactInformationMobile(contact, index);
+    }
 }
 
+
 function arrowBack() {
-    let contactListRef = document.getElementById('contact-list');
-    contactListRef.classList.remove('d_none');
-    let contactsLeftContainerRef = document.getElementById('contacts-left-container');
-    contactsLeftContainerRef.classList.remove('d_none');
-    let selectedContact = document.getElementById('contact-details');
-    selectedContact.innerHTML = "";
+    document.getElementById('contact-list').classList.remove('d_none');
+    document.getElementById('contacts-left-container').classList.remove('d_none');
+    document.getElementById('contacts-right').style.display = 'none';
+    document.getElementById('contact-details').innerHTML = "";
+    let arrowBackRef = document.getElementById('arrow-back');
+    arrowBackRef.style.display = 'none';
     refreshContacts();
 }
 
-function getContactInformationMobile(contact,index) {
-    let contactListRef = document.getElementById('contact-list');
-    contactListRef.classList.add('d_none');
-    let contactsLeftContainerRef = document.getElementById('contacts-left-container');
-    contactsLeftContainerRef.classList.add('d_none');
-    let contactDetailsRef = document.getElementById('contacts-right');
-    contactDetailsRef.style.display = 'flex';
-    let selectedContact = document.getElementById('contact-details');
-    selectedContact.innerHTML += showContactInformationsTemplate(contact,index)
+function getContactInformationMobile(contact, index) {
+    document.getElementById('contact-list')?.classList.add('d_none');
+    document.getElementById('contacts-left-container')?.classList.add('d_none');
+    let rightContainer = document.getElementById('contacts-right');
+    rightContainer.style.display = 'flex';
+    let arrowBackRef = document.getElementById('arrow-back');
+    arrowBackRef.style.display = 'flex';
+    let contactDetails = document.getElementById('contact-details');
+    contactDetails.innerHTML = showContactInformationsTemplate(contact, index);
+}
+
+function renderAddContactOverlay() {
+    isOverlayOpen = true;
+    currentOverlayType = 'add';
+    currentOverlayMode = currentDeviceType;
+    const container = document.getElementById('addNewContactOverlayContainer');
+    container.innerHTML = currentDeviceType === 'mobile'
+        ? addNewContactTemplateMobile()
+        : addNewContactTemplate();
 }
 
 function toggleActiveContact(element) {
@@ -166,7 +178,6 @@ function editContact(index) {
     const contact = allContacts[index];
     let closeOverlay = document.getElementById('editContactOverlayContainer');
     closeOverlay.classList.remove('d_none');
-    // let overlayContainer = document.getElementById('editContactOverlayContainer');
     renderEditContactOverlay(contact, index);
 }
 
@@ -178,37 +189,17 @@ function addNewContact() {
     renderAddContactOverlay();
 }
 
-window.addEventListener('resize', () => {
-    if (!isOverlayOpen) return; 
-    const overlay = document.getElementById('addNewContactOverlayContainer');
-    const isVisible = overlay && !overlay.classList.contains('d_none');
-    if (isVisible) {
-        return;
-    }
-});
-
-
-function renderAddContactOverlay() {
-    isOverlayOpen = true;
-    const container = document.getElementById('addNewContactOverlayContainer');
-    const isMobile = window.innerWidth < 1230;
-    const desiredMode = isMobile ? 'mobile' : 'desktop';
-    if (currentOverlayMode !== desiredMode) {
-        container.innerHTML = isMobile ? addNewContactTemplateMobile() : addNewContactTemplate();
-        currentOverlayMode = desiredMode;
-    }
-}
-
 
 function renderEditContactOverlay(contact, index) {
     isOverlayOpen = true;
+    currentOverlayType = 'edit';
+    currentOverlayMode = currentDeviceType;
+    lastEditedContact = contact;
+    lastEditedIndex = index;
     const container = document.getElementById('editContactOverlayContainer');
-    const isMobile = window.innerWidth < 1230;
-    const desiredMode = isMobile ? 'mobile' : 'desktop';
-    if (currentOverlayMode !== desiredMode) {
-        container.innerHTML = isMobile ? editContactTemplateMobile(contact, index) : editContactTemplate(contact, index);
-        currentOverlayMode = desiredMode;
-    }
+    container.innerHTML = currentDeviceType === 'mobile'
+        ? editContactTemplateMobile(contact, index)
+        : editContactTemplate(contact, index);
 }
 
 
@@ -228,11 +219,11 @@ function closeEditContactOverlay() {
 
 async function deleteContact(index) {
     let selectedContact = document.getElementById('contact-details');
-    let deleteContact = allContacts[index];        
+    let deleteContact = allContacts[index];
     await fetch(`${fetchURLDataBase}/contacts/${deleteContact.id}.json`, {
         method: "DELETE",
     });
-    closeEditContactOverlay(); 
+    closeEditContactOverlay();
     await refreshContacts();
     selectedContact.innerHTML = "";
 }
@@ -254,7 +245,7 @@ async function createContactForRemoteStorage(event) {
     postContactsToRemoteStorage(nameInput.value, emailInput.value, phoneInput.value, initial, profilcolor);
     closeAddContactOverlay();
     showCreateContactSuccess();
-    
+
 }
 
 function createUserInitial(nameInput) {
@@ -268,7 +259,7 @@ function getProfilColorIcon() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-function validateSignupInput(input) {
+function validateContactFormsInput(input) {
     const errorMessage = document.getElementById(input.id + '-validation-message');
     const wrapper = input.closest('.user-input-wrapper');
     if (errorMessage && wrapper) {
@@ -280,23 +271,24 @@ function validateSignupInput(input) {
             wrapper.classList.remove('input-error');
         }
     }
+    validateContactSectionForms()
 }
 
 
 async function getChangesFromContact(id, event, profilcolor, initial) {
-    let selectedContact = document.getElementById('contact-details');  
+    let selectedContact = document.getElementById('contact-details');
     event.preventDefault();
     let nameInput = document.getElementById('add-contact-name-input');
     let emailInput = document.getElementById('add-contact-email-input');
     let phoneInput = document.getElementById('add-contact-phone-input');
-    let initialInput = createUserInitial(nameInput.value);    
+    let initialInput = createUserInitial(nameInput.value);
     const updatedContact = {
         name: nameInput.value,
         email: emailInput.value,
         phone: phoneInput.value,
         profilcolor: profilcolor,
         initial: initialInput
-    };    
+    };
     await updateContactInRemoteStorage(id, updatedContact);
     closeEditContactOverlay();
     await refreshContacts();
@@ -312,4 +304,47 @@ async function showCreateContactSuccess() {
         overlay.classList.remove('show');
     }, 800);
     await initContacts();
+}
+
+function changeContact(index) {
+    const btnContainer = document.getElementById('mobile-contact-profil-btns-container');
+    const editButton = document.querySelector('.mobile-button-wrapper');
+    const mobileBtnWrapper = document.getElementById('mobile-button-wrapper');
+    mobileBtnWrapper.classList.add('d_none');
+    btnContainer.classList.remove('d_none');
+    setTimeout(() => {
+        btnContainer.classList.add('slide-in');
+        document.addEventListener('click', hideMobileContactBtns);
+    }, 10);
+}
+
+function hideMobileContactBtns(event) {
+    const btnContainer = document.getElementById('mobile-contact-profil-btns-container');
+    const isClickInsideMenu = btnContainer.contains(event.target);
+    if (!isClickInsideMenu) {
+        btnContainer.classList.remove('slide-in');
+        setTimeout(() => {
+            btnContainer.classList.add('d_none');
+        }, 400); 
+        document.getElementById('mobile-button-wrapper').classList.remove('d_none');
+        document.removeEventListener('click', hideMobileContactBtns);
+    }
+}
+
+function adaptLayoutOnResize() {
+    const contactIsOpen = document.getElementById('contact-details').innerHTML.trim() !== '';
+    const left = document.getElementById('contacts-left-container');
+    const list = document.getElementById('contact-list');
+    const right = document.getElementById('contacts-right');
+
+    // Immer Kontaktbereich anzeigen
+    right.style.display = 'flex';
+
+    // Wenn kein Kontakt offen ist, beende hier (aber lass den Kontaktbereich sichtbar)
+    if (!contactIsOpen) return;
+
+    // Wenn Kontakt offen: je nach Gerät Ansicht anpassen
+    const show = currentDeviceType === 'desktop';
+    left.classList.toggle('d_none', !show);
+    list.classList.toggle('d_none', !show);
 }

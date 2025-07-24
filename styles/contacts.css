@@ -18,7 +18,7 @@ body {
 
 .contacts {
   width: 100%;
-  height: calc(100vh - 96px);
+  height: calc(100vh - 168px);
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -39,28 +39,19 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 625px;
-  height: 73px;
+  width: 569px;
+  max-height: 73px;
   margin-left: 40px;
   margin-top: 100px;
   gap: 30px;
 }
 
-.contacts-right-container-mobile {
-    width: 100%;
-    height: 100%;
-    background-color: #f6f7f8;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    width: 213px;
-    height: 104px;
-    margin-left: 80px;
-    margin-top: 100px;
-    gap: 16px;
-  }
-
+.contacts-right-wrapper-headline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
 
 .add-new-contact {
   width: 456px;
@@ -122,23 +113,10 @@ body {
   letter-spacing: 0%;
 }
 
-.contacts-right-title-mobile {
-    font-weight: 700;
-    font-size: 47px;
-    line-height: 120%;
-    letter-spacing: 0%;
-  }
-
 .contacts-right-vector {
   height: 59px;
   border: solid 3px #29abe2;
 }
-
-.contacts-right-vector-mobile {
-    width: 90px;
-    border: solid 3px #29abe2;
-  }
-
 
 .contacts-right-credo {
   font-weight: 400;
@@ -149,12 +127,12 @@ body {
 }
 
 .contacts-right-credo-mobile {
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 120%;
-    letter-spacing: 0%;
-    color: #2a3647;
-  }
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  color: #2a3647;
+}
 
 .contact-line {
   width: 100%;
@@ -226,6 +204,7 @@ body {
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
+  border: 3px solid white;
 }
 
 .contact-profil-badge {
@@ -281,6 +260,9 @@ body {
 }
 
 .contacts-right {
+  max-width: 569px;
+  width: 100%;
+  max-height: 73px;
   display: flex;
   flex-direction: column;
 }
@@ -309,6 +291,20 @@ body {
   z-index: 1000;
 }
 
+.mobile-contact-details-icon {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 47px;
+    color: white;
+    /* border: 3px solid #ffffff; */
+  }
+
 .contact-profil {
   display: flex;
   flex-direction: column;
@@ -333,32 +329,11 @@ body {
   gap: 13px;
 }
 
-.contact-profil-btn-edit {
-  width: 62px;
-  height: 24px;
-  display: flex;
-  gap: 8px;
-  background-color: #f6f7f8;
-  align-items: center;
-  border: none;
-  cursor: pointer;
-}
-
-.contact-profil-btn-delete {
-  width: 81px;
-  height: 24px;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  background-color: #f6f7f8;
-  border: none;
-  cursor: pointer;
-}
-
 .contact-informations-email-phone {
   display: flex;
   gap: 59px;
-  height: 74px;
+  min-height: 74px;
+  box-sizing: border-box;
 }
 
 .contact-informations-email-phone h4 {
@@ -372,7 +347,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 22px;
-  height: 128px;
 }
 
 .contact-email-phone span {
@@ -412,6 +386,7 @@ body {
   gap: 12px;
   width: 467px;
   max-height: 594px;
+  height: 100%;
   background-color: #2a3647;
   border-color: #2a3647;
   border-radius: 30px 0 0px 30px;
@@ -498,7 +473,10 @@ body {
   align-items: center;
   justify-content: center;
   transform: translateY(-40px);
-  margin-right: 20px;
+  margin-right: 20px; 
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 70px;
+  border: 2px solid #ffffff;
 }
 
 .add-contact-information-wrapper {
@@ -603,12 +581,13 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 350px;
 }
 
 .mobile-add-contact-button-create-icon {
   display: none;
   position: fixed;
-  bottom: 100px;
+  bottom: 30px;
   right: 40px;
   width: 56px;
   height: 56px;
@@ -623,6 +602,40 @@ body {
   align-items: center;
 }
 
+.mobile-edit-contact-button {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 40px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    padding: 12px;
+    background-color: #2a3647;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    z-index: 999;
+    border: 1px solid #2a3647;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mobile-edit-contact-button img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    color: white;
+  }
+
+  .mobile-edit-contact-button:hover {
+    background-color: var(--light-blue);
+    cursor: pointer;
+    border: 1px solid var(--light-blue);
+  }
+
 .mobile-add-contact-button-create-icon img {
   width: 24px;
   height: 24px;
@@ -632,119 +645,13 @@ body {
 
 .mobile-button-wrapper {
   display: flex;
-  justify-content: flex-end;
-  width: 100%;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .arrow-back-container {
   position: fixed;
-  right: 80px;
-  top: 128px;
+  right: 40px;
+  top: 120px;
   cursor: pointer;
-}
-
-/* Contacts Media-Quieres */
-
-@media (max-width: 1230px) {
-  .contacts-right {
-    display: none;
-  }
-
-  .arrow-back-container {
-    display: block;
-  }
-
-  .add-new-contact {
-    display: none;
-  }
-
-  .contacts-left-container {
-    width: 100%;
-    height: 100%;
-  }
-
-  .contact-list {
-    width: 100%;
-    height: calc(100vh - 96px);
-    overflow-y: visible;
-    overflow-x: hidden;
-    height: auto;
-    padding: 32px 16px;
-    box-sizing: border-box;
-  }
-
-  .contact-entry {
-    max-width: 100%;
-  }
-
-  .contacts {
-    flex-direction: column;
-  }
-
-  .mobile-add-contact-button-create-icon {
-    display: flex;
-  }
-
-  .mobile-add-contact-button-create-icon:hover {
-    background-color: #29abe2;
-    border-color: #29abe2;
-  }
-
-  .add-contact-overlay {
-    flex-direction: column;
-    max-width: 450px;
-    width: 100%;
-    max-height: 800px;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .add-contact-left-container {
-    max-width: 450px;
-    width: 100%;
-    border-radius: 30px 30px 0px 0px;
-  }
-
-  .mobile-add-contact-profil-icon-container,
-  .mobile-edit-contact-profil-icon-container {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: -60px;
-    margin-bottom: -20px;
-    z-index: 999;
-  }
-
-  .mobile-profil-icon {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background-color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .mobile-add-contact-btns-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    width: 100%;
-    gap: 20px;
-  }
-
-  .add-contact-form {
-    width: 100%;
-  }
-}
-
-@media(max-width: 560px) {
-    .contacts-right-container-mobile {
-        margin-left: 20px;
-    }
 }

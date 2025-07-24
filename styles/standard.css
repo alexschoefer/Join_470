@@ -20,3 +20,13 @@ a {
   overflow: hidden;
   height: 100vh; 
 }
+
+#btn-sign-up:disabled {
+  color: #666;
+  cursor: not-allowed;
+}
+
+#btn-form:disabled {
+  color: #666;
+  cursor: not-allowed;
+}

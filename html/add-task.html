@@ -16,7 +16,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&family=Teko:wght@300..700&display=swap"
         rel="stylesheet" />
-
+    <script src="../scripts/script.js"></script>
     <script src="../scripts/include.js"></script>
     <script src="../scripts/header.js"></script>
     <script src="../scripts/template-add-task.js"></script>
@@ -37,7 +37,7 @@
                             <div class="add-task-form-left">
                                 <div class="add-task-form-left-title">
                                     <p class="label-add-task">Title<span class="red-asterix-required">*</span></p>
-                                    <input type="text" id="add-task-title-input" class="add-task-input-style"
+                                    <input type="text" id="add-task-title-input" class="add-task-input-style add-task-input-title-style"
                                         placeholder="Enter a Title" required autocomplete="off">
                                     <span id="title-required" class="required-text d_none">This field is required</span>
                                 </div>
@@ -59,7 +59,7 @@
                                             class="red-asterix-required">*</span></p>
                                     <div class="add-task-due-date-wrapper">
                                         <input type="date" title="due-date" id="add-task-due-date-input"
-                                            class="add-task-input-style" />
+                                            class="add-task-input-style add-task-input-date-style" />
                                         <span class="calendar-icon"
                                             onclick="document.getElementById('add-task-due-date-input').focus();"></span>
                                     </div>
@@ -118,7 +118,7 @@
                                     <p class="label-add-task label-corrector-bottom-category">Category<span
                                             class="red-asterix-required">*</span></p>
                                     <div class="ATcustom-dropdown-wrapper" id="categoryDropdownWrapper">
-                                        <div class="ATcustom-dropdown-selected error" id="categoryDropdownSelected">
+                                        <div class="ATcustom-dropdown-selected" id="categoryDropdownSelected">
                                             <span id="categoryDropdownSelectedText">Select a category</span>
                                             <span class="ATcustom-dropdown-arrow" id="categoryDropdownArrow"></span>
                                         </div>
@@ -127,16 +127,6 @@
                                             <!-- Optionen per JS -->
                                         </div>
                                     </div>
-                                    <!-- <select id="add-task-category" title="add-task-category"
-                                        class="add-task-input-style" required>
-                                        <option value="">Select a category</option>
-                                        <option value="Technical Task" class="label-add-task">
-                                            Technical Task
-                                        </option>
-                                        <option value="User Story" class="label-add-task">
-                                            User Story
-                                        </option>
-                                    </select> -->
                                     <span id="category-required" class="required-text d_none">This field is
                                         required</span>
                                 </div>
@@ -145,7 +135,7 @@
                                     <div class="add-task-subtask-input-wrapper">
                                         <div class="add-task-subtasks-input-style">
                                             <input type="text"
-                                                class="add-task-placeholder-style add-task-input-placeholder-style "
+                                                class="add-task-input-placeholder-style"
                                                 id="add-task-subtasks-input" placeholder="Add new subtask"
                                                 autocomplete="off" />
                                             <div id="add-task-subtasks-icon-add" class="add-task-subtasks-icon-add "
@@ -166,10 +156,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div id="allSubtasks" class="allSubtasks"></div>
                                 </div>
                             </div>
                         </div>
-                        <ul id="allSubtasks" class="allSubtasks"></ul>
                         <div class="add-task-form-buttons">
                             <div>
                                 <span class="label-add-task"><span class="red-asterix-required">*</span>This field is
@@ -195,7 +185,7 @@
                                         src="../assets/icons/add-task-iconoir_cancel.svg" alt="close-pic" />
                                 </button>
                                 <button onclick="sendAddTaskData()" type="button" id="add-task-button-create-task"
-                                    class="label-add-task add-task-button-create" disabled="true">
+                                    class="label-add-task add-task-button-create" disabled="false">
                                     <span class="add-task-button-create-text">Create Task</span>
                                     <div class="label-add-task add-task-button-create-capsule">
                                         <img class="add-task-button-create-icon"

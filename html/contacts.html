@@ -10,17 +10,20 @@
     <link rel="stylesheet" href="../styles/standard.css">
     <link rel="stylesheet" href="../styles/contacts.css">
     <link rel="stylesheet" href="../styles/fonts.css">
+    <link rel="stylesheet" href="../styles/media.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../styles/summary.css">
     <link rel="stylesheet" href="../styles/sign-up.css">
     <link rel="stylesheet" href="../styles/login.css">
+    <link rel="stylesheet" href="../styles/assets.css">
+    <script src="../script.js"></script>
     <script src="../scripts/include.js"></script>
     <script src="../scripts/header.js"></script>
     <script src="../scripts/dataRemoteStorage.js"></script>
     <script src="../scripts/contacts.js"></script>
     <script src="../scripts/template-contacts.js"></script>
     <script src="../scripts/template-mobil-contacts.js"></script>
-    <script src="../script.js"></script>
+    <script src="../scripts/signup.js"></script>
 
 </head>
 
@@ -50,20 +53,16 @@
                     </div>
                 </div>
                 <div class="contacts-right" id="contacts-right">
-                    <div class="arrow-back-container">
+                    <div class="arrow-back-container" onclick="bubblingPropagation(event)" id="arrow-back">
                         <img src="../assets/icons/arrow-left-line-icon.png" alt="Back Arrow" class="arrow-icon"
                             onclick="arrowBack()">
                     </div>
                     <div class="contacts-right-container">
                         <h2 class="contacts-right-title">Contacts</h2>
-                        <div class="contacts-right-vector"></div>
-                        <p class="contacts-right-credo">Better with a team</p>
-                    </div>
-                    <!-- Mobile-Contact-Information-Section -->
-                    <div class="contacts-right-container-mobile">
-                        <h2 class="contacts-right-title-mobile">Contacts</h2>
-                        <p class="contacts-right-credo-mobile">Better with a team</p>
-                        <div class="contacts-right-vector-mobile"></div>
+                        <div class="contacts-right-wrapper-headline">
+                            <div class="contacts-right-vector"></div>
+                            <p class="contacts-right-credo">Better with a team</p>
+                        </div>
                     </div>
                     <div id="contact-details" class="contact-detail-container"></div>
                 </div>
@@ -79,6 +78,13 @@
                 <p class="sign-up-success-message">Contact successfully created!</p>
             </div>
         </div>
+        <div class="mobile-contact-profil-btns-container d_none" id="mobile-contact-profil-btns-container">
+            <button class="mobile-contact-profil-btn-edit" onclick="editContact(currentContactIndex)">
+                <img src="../assets/icons/edit-icon.png" alt="edit-icon">Edit
+            </button>
+            <button class="mobile-profil-btn-delete" onclick="deleteContact(currentContactIndex)">
+                <img src="../assets/icons/delete-icon.png" alt="">Delete
+            </button>
+        </div>
 </body>
-
 </html>

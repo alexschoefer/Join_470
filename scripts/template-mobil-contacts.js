@@ -5,7 +5,7 @@ function addNewContactTemplateMobile() {
         <img class="add-contact-close-overlay-icon" src="../assets/icons/mobile-close-white-icon.png" alt="close-icon"
             onclick="closeAddContactOverlay()">
         <div class="add-contact-left-container">
-            <img class="add-contact-menulogo" src="../assets/img/MenuLogo.png" alt="menulogo">
+
             <div class="add-contact-headline-container">
                 <h3>Add contact</h3>
                 <span>Tasks are better with a team!</span>
@@ -14,7 +14,7 @@ function addNewContactTemplateMobile() {
         </div>
         <div class="mobile-add-contact-profil-icon-container">
             <div class="mobile-profil-icon">
-                <img src="../assets/icons/profil-icon.png" alt="profil-icon.png">
+                <img class="mobile-contact-details-icon" src="../assets/icons/profil-icon.png" alt="profil-icon.png">
             </div>
         </div>
         <div class="add-contact-right-container">
@@ -91,7 +91,6 @@ function editContactTemplateMobile(contact,index) {
                 alt="close-icon" onclick="closeEditContactOverlay()">
         </div>
         <div class="add-contact-left-container">
-            <img class="add-contact-menulogo" src="../assets/img/MenuLogo.png" alt="menulogo">
             <div class="add-contact-headline-container">
                 <h3>Edit contact</h3>
                 <div class="add-contact-vector-line"></div>
@@ -141,7 +140,7 @@ function editContactTemplateMobile(contact,index) {
                                     email adress.</p>
                             </div>
                         </div>
-                        <div>
+                        <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
                                     <input id="add-contact-phone-input" class="user-input" type="tel" name="phone"
