@@ -1,7 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
-  aktive();
-});
-function aktive() {
+function initSidebar() {
   const currentPage = window.location.pathname.split("/").pop(); // z.B. 'add-task.html'
 
   const buttons = document.querySelectorAll(".menu-selection-button");
@@ -10,12 +7,12 @@ function aktive() {
     const link = button.querySelector("a");
     if (!link) return;
 
-    const href = link.getAttribute("href").replace("./", ""); // z.B. 'add-task.html'
+    const href = link.getAttribute("href").replace("./", "");
 
     if (href === currentPage) {
       button.classList.add("active");
     } else {
-      button.classList.remove("active"); // Falls nötig, alte .active entfernen
+      button.classList.remove("active");
     }
   });
 }

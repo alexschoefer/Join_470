@@ -20,14 +20,12 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&family=Teko:wght@300..700&display=swap"
     rel="stylesheet" />
-  <script src="../scripts/summary.js"></script>
-  <script src="../scripts/include.js"></script>
-  <script src="../scripts/header.js"></script>
-  <script src="../scripts/sidebar.js"></script>
+
+
 
 </head>
 
-<body onload="render()">
+<body>
   <div class="app-layout">
     <div id="sidebar"></div>
     <div id="header"></div>
@@ -98,13 +96,19 @@
             </section>
           </div>
           <div class="summary-greating-user">
-            <h2 id="dategreating">Good morning,</h2>
-            <p>Sofia Müller</p>
+            <h2>
+              <span id="dategreating" class="greeting-text"></span>
+              <span id="username-text" class="username-text"></span>
+            </h2>
           </div>
         </div>
       </div>
     </main>
   </div>
+  <script src="../scripts/include.js"></script>
+  <script src="../scripts/header.js"></script>
+  <script src="../scripts/sidebar.js"></script>
+  <script src="../scripts/summary.js"></script>
 </body>
 
 </html>

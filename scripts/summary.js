@@ -1,5 +1,5 @@
 async function render() {
-  getCurrentDate();
+  setGreetingAndName();
   await getTasks();
   await getTasksInProgress();
   await getTasksAwaitFeedback();
@@ -8,9 +8,32 @@ async function render() {
   await getTaskUrgent();
   await getUrgentDate();
 }
-
+console.log("summary.js loaded");
 let tasksURL =
   "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/tasks.json";
+
+console.log(JSON.parse(localStorage.getItem("loggedInUser")));
+function setGreetingAndName() {
+  const greetingEl = document.getElementById("dategreating");
+  const nameEl = document.getElementById("username-text");
+
+  if (!greetingEl || !nameEl) return; // Schutz
+
+  const greeting = getCurrentGreeting();
+  const userData = JSON.parse(localStorage.getItem("loggedInUser"));
+  const userName = userData?.name;
+
+  const isGuest =
+    !userName || ["gast", "guest"].includes(userName.toLowerCase());
+
+  if (!isGuest) {
+    greetingEl.innerText = `${greeting},`;
+    nameEl.innerText = ` ${userName}`;
+  } else {
+    greetingEl.innerText = greeting;
+    nameEl.innerText = "";
+  }
+}
 
 function getCurrentGreeting() {
   const now = new Date();
@@ -144,40 +167,44 @@ async function getUrgentDate() {
     for (let key in data) {
       const aufgabe = data[key];
       if (!aufgabe) continue;
-      const d = aufgabe.dueDate?.trim();
 
-      if (
-        aufgabe.priority === "Urgent" &&
-        d &&
-        d.length === 8 &&
-        !isNaN(Number(d))
-      ) {
-        const jahr = d.slice(0, 4);
-        const monat = d.slice(4, 6);
-        const tag = d.slice(6, 8);
-        const datum = new Date(Number(jahr), Number(monat) - 1, Number(tag));
+      const d = aufgabe.date?.trim(); // ← aus 'date' statt 'dueDate'
 
-        if (frühstesDatum === null || datum < frühstesDatum) {
-          frühstesDatum = datum;
+      if (aufgabe.priority === "Urgent" && d) {
+        const datum = new Date(d); // ← direkt im ISO-Format verarbeiten
+
+        if (!isNaN(datum.getTime())) {
+          if (frühstesDatum === null || datum < frühstesDatum) {
+            frühstesDatum = datum;
+          }
         }
       }
     }
 
     if (frühstesDatum) {
-      const options = { year: "numeric", month: "long", day: "numeric" };
-      el.innerText = frühstesDatum.toLocaleDateString("en-US", options);
+      const formatted = frühstesDatum.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+
+      el.innerText = formatted;
     } else {
       el.innerText = "No Urgent Date";
     }
   } catch (err) {
-    console.log("Fehler:", err);
+    console.log("Fehler beim Laden des Datums:", err);
     el.innerText = "Fehler";
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  render();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
   const showWelcome = localStorage.getItem("showWelcomeOnce") === "true";
-  const isSmallScreen = window.innerWidth < 1020;
+  const isSmallScreen = window.innerWidth < 700;
 
   if (showWelcome && isSmallScreen) {
     localStorage.removeItem("showWelcomeOnce");
@@ -192,8 +219,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const isGuest =
       !userName || ["gast", "guest"].includes(userName.toLowerCase());
 
-    welcomeText.innerText = greeting;
-    nameText.innerText = isGuest ? "" : `, ${userName}`;
+    if (!isGuest) {
+      welcomeText.innerText = `${greeting},`;
+      nameText.innerText = ` ${userName}`;
+    } else {
+      welcomeText.innerText = greeting;
+      nameText.innerText = "";
+    }
 
     // Overlay anzeigen
     overlay.classList.remove("hidden");
