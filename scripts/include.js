@@ -5,17 +5,14 @@ async function loadComponent(id, path) {
     const html = await res.text();
     document.getElementById(id).innerHTML = html;
 
-    // Aktive Navigation setzen, wenn Sidebar geladen ist
-    if (path.includes("sidebar.html") && typeof aktive === "function") {
-      aktive();
+    if (id === "header" && typeof initHeader === "function") {
+      initHeader();
     }
-
-    // Header-Funktionen, wenn nötig
-    if (path.includes("header.html") && typeof render === "function") {
-      render();
+    if (id === "sidebar" && typeof initSidebar === "function") {
+      initSidebar();
     }
   } catch (err) {
-    console.error(`Error loading ${path}:`, err);
+    console.error(`Fehler beim Laden von ${path}:`, err);
   }
 }
 

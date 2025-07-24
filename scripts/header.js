@@ -56,4 +56,19 @@ function getInitials(name) {
 
 function logout() {
   localStorage.removeItem("loggedInUser");
+  localStorage.removeItem("showWelcomeOnce");
+}
+
+function initHeader() {
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
+  const initialsEl = document.getElementById("initials");
+
+  if (!initialsEl || !user?.name) return;
+
+  const initials = user.name
+    .split(" ")
+    .map((part) => part[0].toUpperCase())
+    .join("");
+
+  initialsEl.innerText = initials;
 }
