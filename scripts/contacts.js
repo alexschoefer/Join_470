@@ -334,18 +334,12 @@ function hideMobileContactBtns(event) {
 
 function adaptLayoutOnResize() {
     const contactIsOpen = document.getElementById('contact-details').innerHTML.trim() !== '';
-    const left = document.getElementById('contacts-left-container');
-    const list = document.getElementById('contact-list');
-    const right = document.getElementById('contacts-right');
-
-    // Immer Kontaktbereich anzeigen
-    right.style.display = 'flex';
-
-    // Wenn kein Kontakt offen ist, beende hier (aber lass den Kontaktbereich sichtbar)
-    if (!contactIsOpen) return;
-
-    // Wenn Kontakt offen: je nach Gerät Ansicht anpassen
-    const show = currentDeviceType === 'desktop';
-    left.classList.toggle('d_none', !show);
-    list.classList.toggle('d_none', !show);
+    const containerLeft = document.getElementById('contacts-left-container');
+    const contactList = document.getElementById('contact-list');
+    const contactRight = document.getElementById('contacts-right');
+    const isDesktop = currentDeviceType === 'desktop';
+    const showRight = isDesktop || contactIsOpen;
+    contactRight.style.display = showRight ? 'flex' : 'none';
+    containerLeft.classList.toggle('d_none', !isDesktop && contactIsOpen);
+    contactList.classList.toggle('d_none', !isDesktop && contactIsOpen);
 }
