@@ -1,4 +1,4 @@
-@media (1020px <= width <= 1440px) {
+@media (1020px <=width <=1440px) {
   .add-task-form-div-container {
     width: 500px;
     flex-direction: column;
@@ -19,8 +19,8 @@
     max-width: 500px;
     flex-direction: column;
     align-items: end;
-   padding-bottom: 64px;
-  padding-top: 10px;
+    padding-bottom: 64px;
+    padding-top: 10px;
   }
 
   .add-task-content {
@@ -28,21 +28,19 @@
     padding-left: 48px;
   }
 
-  .add-task-buttons-create-and-clear {}
-
-  .required-main-bottom-legend {}
-
-  .add-task-title {}
-
-
+  .add-task-buttons-create-and-clear {
+    width: 100%;
+    margin-bottom: 40px;
+    flex-direction: row;
+  }
 }
 
-@media (650px <= width <= 1019px) {
+@media (650px <=width <=1019px) {
 
   .add-task {
-  padding-left: 96px;
-  padding-right: 96px;
-}
+    padding-left: 96px;
+    padding-right: 96px;
+  }
 
   .add-task-content {
     padding-top: 0;
@@ -66,8 +64,9 @@
   }
 
   .add-task-buttons-create-and-clear {
-    flex-direction: column;
-    gap: 16px;
+    width: 100%;
+    margin-bottom: 40px;
+    flex-direction: row;
   }
 
   .add-task-form-left-title,
@@ -78,24 +77,104 @@
   .add-task-center-dividor {
     display: none;
   }
+    .app-layout {
+    height: 100%;
+  }
 }
 
-@media (500px <= width <= 650px ) {
+@media (500px <=width <=650px) {
   .add-task {
-  padding-left: 20px;
-  padding-right: 20px;
-}
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 
   .add-task-content {
     padding-top: 0;
     padding-left: 0;
   }
 
-  .add-task-h1{
+  .add-task-h1 {
     font-size: 48px;
   }
 
- .add-task-form-div-container {
+  .add-task-form-div-container {
+    width: 100%;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .add-task-form-left,
+  .add-task-form-right {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .add-task-center-dividor {
+    display: none;
+  }
+
+   .add-task-buttons-create-and-clear {
+    width: 100%;
+    margin-bottom: 40px;
+    flex-direction: row;
+  }
+
+  .add-task-form-left-title,
+  .add-task-form-left-description {
+    height: auto;
+  }
+
+  .add-task-center-dividor {
+    display: none;
+  }
+    .app-layout {
+    height: 100%;
+  }
+}
+
+@media (380px <=width <=499px) {
+  .label-add-task {
+    font-size: 16px;
+  }
+
+  .label-add-task-black {
+    font-size: 16px;
+  }
+
+  .add-task-input-style {
+    font-size: 16px;
+  }
+
+  .add-task-input-textarea-style::placeholder,
+  .add-task-input-title-style::placeholder,
+  .add-task-input-placeholder-style::placeholder,
+  .add-task-input-date-style {
+    font-size: 16px;
+  }
+
+  .add-task-placeholder-black::placeholder {
+    font-size: 16px;
+  }
+
+  .ATcustom-dropdown-selected {
+    font-size: 16px;
+  }
+
+  .add-task {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .add-task-content {
+    padding-top: 0;
+    padding-left: 0;
+  }
+
+  .add-task-h1 {
+    font-size: 48px;
+  }
+
+  .add-task-form-div-container {
     width: 100%;
     flex-direction: column;
     gap: 12px;
@@ -124,101 +203,242 @@
   .add-task-center-dividor {
     display: none;
   }
-}
 
-@media (5px <= width <= 499px ) {
-.label-add-task{
-font-size: 16px;
-}
-.label-add-task-black{
-font-size: 16px;
-}
-.add-task-input-style{
-  font-size: 16px;
-}
-.add-task-input-textarea-style::placeholder,
-.add-task-input-title-style::placeholder,
-.add-task-input-placeholder-style::placeholder,
-.add-task-input-date-style {
-  font-size: 16px;
-}
-.add-task-placeholder-black::placeholder {
-  font-size: 16px;
-}
-.ATcustom-dropdown-selected {
-  font-size: 16px;
-}
-
-.add-task {
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-  .add-task-content {
-    padding-top: 0;
-    padding-left: 0;
-  }
-
-  .add-task-h1{
-    font-size: 48px;
-  }
-
- .add-task-form-div-container {
-    width: 100%;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .add-task-form-left,
-  .add-task-form-right {
-    width: 100%;
-    min-width: 0;
-  }
-
-  .add-task-center-dividor {
-    display: none;
-  }
-
-  .add-task-buttons-create-and-clear {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .add-task-form-left-title,
-  .add-task-form-left-description {
-    height: auto;
-  }
-
-  .add-task-center-dividor {
-    display: none;
-  }
   .add-task-priority-buttons {
-  height: 40px;
+    height: 40px;
+  }
+
+  .add-task-priority-button {
+    width: 120px;
+    height: 40px;
+    padding-top: 16px;
+    padding-right: 10px;
+    padding-bottom: 16px;
+    padding-left: 10px;
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+  .ATContact-option-name {
+    font-size: 16px;
+  }
+
+  .ATContact-option-intials-container {
+    width: 32px;
+    height: 32px;
+  }
+
+  .ATcustom-dropdown {
+    width: 100%;
+    padding: 0;
+  }
+
+
+  .ATContact-option-initials {
+    font-size: 10px;
+    font-weight: 300;
+  }
+
+  .add-task-form-left {
+    width: 100%;
+  }
+
+  .add-task-form-right {
+    width: 100%;
+  }
+
+  .ATcustom-dropdown,
+  .ATcustom-dropdown-category {
+    width: 100%;
+  }
+
+   .add-task-buttons-create-and-clear {
+    width: 100%;
+    margin-bottom: 40px;
+    flex-direction: row;
+  }
+
+  .app-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+    .app-layout {
+    height: 100%;
+  }
 }
-.add-task-priority-button {
-  width: 120px;
-  height: 40px;
-  padding-top: 16px;
-  padding-right: 10px;
-  padding-bottom: 16px;
-  padding-left: 10px;
-  font-weight: 400;
-  font-size: 16px;
-}
-.ATContact-option-name {
-  font-size: 16px;
-}
-.ATContact-option-intials-container {
-  width: 32px;
-  height: 32px;
-}
-.ATcustom-dropdown {
-  width: 100%;
-  padding: 0;
-}
-.ATcustom-dropdown-option {
-  padding-right: 0;
-  padding-left: 0;
-}
+
+@media (200px <=width <=379px) {
+  .label-add-task {
+    font-size: 16px;
+  }
+
+  .label-add-task-black {
+    font-size: 16px;
+  }
+
+  .add-task-input-style {
+    font-size: 16px;
+  }
+
+  .add-task-input-textarea-style::placeholder,
+  .add-task-input-title-style::placeholder,
+  .add-task-input-placeholder-style::placeholder,
+  .add-task-input-date-style {
+    font-size: 16px;
+  }
+
+  .add-task-placeholder-black::placeholder {
+    font-size: 16px;
+  }
+
+  .ATcustom-dropdown-selected {
+    font-size: 16px;
+  }
+
+  .add-task {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .add-task-content {
+    padding-top: 0;
+    padding-left: 0;
+  }
+
+  .add-task-h1 {
+    font-size: 48px;
+  }
+
+  .add-task-form-div-container {
+    width: 100%;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .add-task-form-left,
+  .add-task-form-right {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .add-task-center-dividor {
+    display: none;
+  }
+
+  .add-task-buttons-create-and-clear {
+    width: 100%;
+    margin-bottom: 40px;
+    flex-direction: row;
+  }
+
+  .add-task-form-left-title,
+  .add-task-form-left-description {
+    height: auto;
+  }
+
+  .add-task-center-dividor {
+    display: none;
+  }
+
+  .add-task-priority-buttons {
+    height: 40px;
+  }
+
+  .add-task-priority-button {
+    width: 120px;
+    height: 40px;
+    padding-top: 16px;
+    padding-right: 10px;
+    padding-bottom: 16px;
+    padding-left: 10px;
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+  .ATContact-option-name {
+    font-size: 16px;
+  }
+
+  .ATContact-option-intials-container {
+    width: 32px;
+    height: 32px;
+  }
+
+  .ATcustom-dropdown {
+    width: 100%;
+    padding: 0;
+  }
+
+
+  .ATContact-option-initials {
+    font-size: 10px;
+    font-weight: 300;
+  }
+
+  .add-task-form-left {
+    width: 100%;
+  }
+
+  .add-task-form-right {
+    width: 100%;
+  }
+
+  .ATcustom-dropdown,
+  .ATcustom-dropdown-category {
+    width: 100%;
+  }
+
+  .add-task-buttons-create-and-clear {
+    width: 100%;
+    margin-bottom: 40px;
+    flex-direction: row;
+  }
+
+  .add-task-buttons-create-and-clear-conmtainer {
+    display: flex;
+
+  }
+
+  .app-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .add-task-priority-buttons {
+    display: flex;
+    justify-content: space-between;
+    height: 56px;
+    gap: 2px;
+
+  }
+
+  .add-task-priority-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 76px;
+    width: 76px;
+  }
+
+  .add-task-form-buttons {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+    padding-bottom: 64px;
+    padding-top: 10px;
+  }
+
+  .app-layout {
+    height: 100%;
+  }
+
+  .add-task-input-placeholder-style {
+    width: 100%;
+  }
 
 }
