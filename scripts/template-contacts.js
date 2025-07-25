@@ -2,7 +2,7 @@ function getCaptialLetterHeaderTemplate(letter) {
     return `
         <div class="capital-letter">${letter}</div>
         <div class="contact-line"></div>                       
-    `;
+    `
 }
 
 function getContactEntryTemplate(contact, index) {
@@ -16,7 +16,7 @@ function getContactEntryTemplate(contact, index) {
             <div class="contact-email">${contact.email}</div>
         </div>
     </div>
-    `;
+    `
 }
 
 function showContactInformationsTemplate(contact, index) {
@@ -56,7 +56,7 @@ function showContactInformationsTemplate(contact, index) {
 
 function addNewContactTemplate() {
     return `
-<div class="overlay">
+<div class="contact-overlay">
     <div class="add-contact-overlay">
         <div>
             <img class="add-contact-close-overlay-icon" src="../assets/icons/close.png" alt="close-icon"
@@ -157,7 +157,7 @@ function addNewContactTemplate() {
 
 function editContactTemplate(contact,index) {
     return `
-  <div class="overlay">
+  <div class="contact-overlay">
     <div class="add-contact-overlay">
         <div>
             <img class="add-contact-close-overlay-icon" src="../assets/icons/close.png" alt="close-icon"
@@ -222,7 +222,7 @@ function editContactTemplate(contact,index) {
                                         placeholder="Phone" autocomplete="off" value="${contact.phone || ''}"
                                         onfocus="clearErrorMessage(this)" onblur="validateContactFormsInput(this)">
                                     <div>
-                                        <img class="phone-icon" src="../assets/icons/call-icon.png" alt="call-icon">
+                                        <img class="phone-icon" src="../assets/icons/call-icon.png" alt="phone-icon">
                                     </div>
                                 </div>
                             </div>

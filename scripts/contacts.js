@@ -138,6 +138,7 @@ function arrowBack() {
     refreshContacts();
 }
 
+
 function getContactInformationMobile(contact, index) {
     document.getElementById('contact-list')?.classList.add('d_none');
     document.getElementById('contacts-left-container')?.classList.add('d_none');
@@ -148,6 +149,7 @@ function getContactInformationMobile(contact, index) {
     let contactDetails = document.getElementById('contact-details');
     contactDetails.innerHTML = showContactInformationsTemplate(contact, index);
 }
+
 
 function renderAddContactOverlay() {
     isOverlayOpen = true;
@@ -238,14 +240,13 @@ async function refreshContacts() {
 async function createContactForRemoteStorage(event) {
     event.preventDefault();
     let nameInput = document.getElementById('add-contact-name-input');
-    let emailInput = document.getElementById('add-contact-email-input');
+    let emailInput = document.getElementById('usermail-input');
     let phoneInput = document.getElementById('add-contact-phone-input');
     let initial = createUserInitial(nameInput.value);
     let profilcolor = getProfilColorIcon();
     postContactsToRemoteStorage(nameInput.value, emailInput.value, phoneInput.value, initial, profilcolor);
     closeAddContactOverlay();
     showCreateContactSuccess();
-
 }
 
 function createUserInitial(nameInput) {

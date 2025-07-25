@@ -30,3 +30,11 @@ a {
   color: #666;
   cursor: not-allowed;
 }
+
+html,
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+}
