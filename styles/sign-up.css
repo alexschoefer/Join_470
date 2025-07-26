@@ -42,7 +42,7 @@
   flex-grow: 1;
 }
 
-#login-headline {
+#signup-headline {
   font-weight: 700;
   font-size: 61px;
   line-height: 120%;
@@ -136,6 +136,8 @@
   top: 40px;
   left: 60px;
   z-index: 10;
+  display: flex;
+  gap: 12px;
 }
 
 .input-container {
