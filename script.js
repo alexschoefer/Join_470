@@ -49,6 +49,8 @@ function updateDeviceType() {
  * On desktop: shows all sections. In the mobile view hides the left container and contact list if a contact is open.
  */
 function adaptLayoutOnResize() {
+    const contactDetails = document.getElementById('contact-details');
+    if(!contactDetails) return; 
     const contactIsOpen = document.getElementById('contact-details').innerHTML.trim() !== '';
     const containerLeft = document.getElementById('contacts-left-container');
     const contactList = document.getElementById('contact-list');
@@ -133,10 +135,9 @@ function isValidEmail(email) {
 
 /**
  * Help-function - Enables or disables the sign-up button based on the provided state.
- *
  * @param {boolean} enabled - If true, the sign-up button is enabled; if false, it is disabled.
  */
-function setSignUpButtonState(enabled) {
+function setButtonState(enabled) {
     const button = document.getElementById('btn-form') ;
     button.disabled = !enabled;
 }
