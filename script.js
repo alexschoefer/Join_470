@@ -7,12 +7,22 @@ let lastEditedContact = null;
 let lastEditedIndex = null;
 let currentContactIndex = null;
 
-// Initial einmal festlegen
+/**
+ * On DOMContentLoaded event, calls updateDeviceType to initialize the device type based on the current window size.
+ */
 document.addEventListener('DOMContentLoaded', updateDeviceType);
 
-// Laufend prüfen beim Resizen
+
+/**
+ * Adds a listener for window resize events to update the device type dynamically whenever the window size changes.
+ */
 window.addEventListener('resize', updateDeviceType);
 
+
+/**
+ * Updates the current device type based on the current window width. Triggers layout adaptation and overlay re-rendering when the device type changes.
+ * Updates the displayed contact information if a contact is currently selected.
+ */
 function updateDeviceType() {
     const width = window.innerWidth;
     const newType = width < 1230 ? 'mobile' : 'desktop';
@@ -33,10 +43,37 @@ function updateDeviceType() {
     }
 }
 
+
+/**
+ * Adjusts the layout of the contact view depending on the device type (desktop or mobile) and whether a contact is currently selected.
+ * On desktop: shows all sections. In the mobile view hides the left container and contact list if a contact is open.
+ */
+function adaptLayoutOnResize() {
+    const contactIsOpen = document.getElementById('contact-details').innerHTML.trim() !== '';
+    const containerLeft = document.getElementById('contacts-left-container');
+    const contactList = document.getElementById('contact-list');
+    const contactRight = document.getElementById('contacts-right');
+    const isDesktop = currentDeviceType === 'desktop';
+    const showRight = isDesktop || contactIsOpen;
+    contactRight.style.display = showRight ? 'flex' : 'none';
+    containerLeft.classList.toggle('d_none', !isDesktop && contactIsOpen);
+    contactList.classList.toggle('d_none', !isDesktop && contactIsOpen);
+}
+
+
+/**
+ * Stops the propagation of the given event to parent elements
+ * @param {Event} event - The event object to stop propagation on
+ */
 function bubblingPropagation(event) {
     event.stopPropagation();
 }
 
+
+/**
+ * Clears the error message and removes the error styling for a given input element
+ * @param {HTMLInputElement} input - The input element whose error message should be cleared
+ */
 function clearErrorMessage(input) {
     let errorMessage = document.getElementById(input.id + '-validation-message');
     let wrapper = input.closest('.user-input-wrapper');
@@ -48,13 +85,19 @@ function clearErrorMessage(input) {
     }
 }
 
+
+/**
+ * Validates the contact form section by checking if all inputs are filled and if the email input has a valid format.
+ * Enables or disables the sign-up/create/edit button based on the validation result.
+ */
 function validateContactSectionForms() {
     const filled = areAllInputsFilled();
     const emailInput = document.getElementById('usermail-input');
     const emailOK = isValidEmail(emailInput.value);
     const formValid = filled && emailOK;
-    setSignUpButtonState(formValid);
+    setButtonState(formValid);
 }
+
 
 /**
  * Help function - Checks whether all input fields with the class "user-input" have been filled out.
@@ -96,4 +139,40 @@ function isValidEmail(email) {
 function setSignUpButtonState(enabled) {
     const button = document.getElementById('btn-form') ;
     button.disabled = !enabled;
+}
+
+
+/**
+ * Creates the user initials form the given username
+ * @param {String} nameInput - The full name input string
+ * @returns {string} The initials 
+ */
+function createUserInitial(nameInput) {
+    let initial = nameInput.trim().split(' ');
+    let firstLetterInitial = initial[0].charAt(0).toUpperCase();
+    let secondLetterInitial = initial[1].charAt(0).toUpperCase();
+    return firstLetterInitial + secondLetterInitial;
+}
+
+
+/**
+ * Returns a random color from the given colors array
+ * @returns {string} A random color value
+ */
+function getProfilColorIcon() {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+
+/**
+ * Handles the back navigation from the contact detail view to the contact list
+ */
+function arrowBack() {
+    document.getElementById('contact-list').classList.remove('d_none');
+    document.getElementById('contacts-left-container').classList.remove('d_none');
+    document.getElementById('contacts-right').style.display = 'none';
+    document.getElementById('contact-details').innerHTML = "";
+    let arrowBackRef = document.getElementById('arrow-back');
+    arrowBackRef.style.display = 'none';
+    refreshContacts();
 }
