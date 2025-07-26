@@ -1,8 +1,14 @@
 @media (1020px <=width <=1440px) {
+
   .add-task-form-div-container {
     width: 500px;
     flex-direction: column;
     gap: 32px;
+  }
+
+  .required-main-bottom-legend {
+    width: 100%;
+    justify-content: start;
   }
 
   .add-task-form-left,
@@ -37,16 +43,30 @@
 
 @media (650px <=width <=1019px) {
 
+  .add-task-form-left-description {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
   .add-task {
     padding-left: 96px;
     padding-right: 96px;
+  }
+
+  .add-task-form-buttons {
+    flex-direction: column;
+    padding-bottom: 0;
+  }
+
+  .required-main-bottom-legend {
+    width: 100%;
+    justify-content: start;
   }
 
   .add-task-content {
     padding-top: 0;
     padding-left: 0;
   }
-
 
   .add-task-form-div-container {
     flex-direction: column;
@@ -65,8 +85,16 @@
 
   .add-task-buttons-create-and-clear {
     width: 100%;
-    margin-bottom: 40px;
+    height: 100%;
     flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .add-task-buttons-create-and-clear-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: end;
   }
 
   .add-task-form-left-title,
@@ -77,12 +105,29 @@
   .add-task-center-dividor {
     display: none;
   }
-    .app-layout {
+
+  .app-layout {
     height: 100%;
   }
 }
 
 @media (500px <=width <=650px) {
+  .add-task-form-left-description {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .add-task-form-buttons {
+    flex-direction: column;
+    padding-bottom: 0;
+  }
+
+
+  .required-main-bottom-legend {
+    width: 100%;
+    justify-content: start;
+  }
+
   .add-task {
     padding-left: 20px;
     padding-right: 20px;
@@ -113,10 +158,18 @@
     display: none;
   }
 
-   .add-task-buttons-create-and-clear {
+  .add-task-buttons-create-and-clear {
     width: 100%;
-    margin-bottom: 40px;
+    height: 100%;
     flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .add-task-buttons-create-and-clear-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: end;
   }
 
   .add-task-form-left-title,
@@ -127,12 +180,38 @@
   .add-task-center-dividor {
     display: none;
   }
-    .app-layout {
+
+  .app-layout {
     height: 100%;
   }
+
+  .add-task-title {
+    width: 278px;
+    height: 112px;
+    gap: 1px;
+    display: flex;
+    align-items: start;
+    align-items: center;
+  }
+
 }
 
 @media (380px <=width <=499px) {
+  .add-task-form-left-description {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .required-main-bottom-legend {
+    width: 100%;
+    justify-content: start;
+  }
+
+  .add-task-form-buttons {
+    flex-direction: column;
+    padding-bottom: 52px;
+  }
+
   .label-add-task {
     font-size: 16px;
   }
@@ -252,10 +331,11 @@
     width: 100%;
   }
 
-   .add-task-buttons-create-and-clear {
+  .add-task-buttons-create-and-clear {
     width: 100%;
     margin-bottom: 40px;
     flex-direction: row;
+    padding-top: 10px;
   }
 
   .app-layout {
@@ -263,12 +343,28 @@
     flex-direction: column;
     height: 100vh;
   }
-    .app-layout {
+
+  .app-layout {
     height: 100%;
   }
+
+  .add-task-title {
+    width: 278px;
+    height: 112px;
+    gap: 1px;
+    display: flex;
+    align-items: start;
+    align-items: center;
+  }
+
 }
 
 @media (200px <=width <=379px) {
+  .add-task-form-left-description {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
   .label-add-task {
     font-size: 16px;
   }
@@ -391,14 +487,12 @@
 
   .add-task-buttons-create-and-clear {
     width: 100%;
-    margin-bottom: 40px;
-    flex-direction: row;
+    margin-bottom: 110px;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-top: 10px;
   }
 
-  .add-task-buttons-create-and-clear-conmtainer {
-    display: flex;
-
-  }
 
   .app-layout {
     display: flex;
@@ -415,11 +509,12 @@
   }
 
   .add-task-priority-button {
+    padding: 4px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 76px;
+    height: 56px;
     width: 76px;
   }
 
@@ -439,6 +534,20 @@
 
   .add-task-input-placeholder-style {
     width: 100%;
+  }
+
+  .required-main-bottom-legend {
+    width: 100%;
+    justify-content: start;
+  }
+
+  .add-task-title {
+    width: 278px;
+    height: 112px;
+    gap: 1px;
+    display: flex;
+    align-items: start;
+    align-items: center;
   }
 
 }
