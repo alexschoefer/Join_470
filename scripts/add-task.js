@@ -107,7 +107,7 @@ function addTaskInit() {
 async function sendAddTaskData() {
     saveUserInputsForFirebase();
     startTaskAddedFinishAnimation();
-     setTimeout(() => {
+    setTimeout(() => {
         resetAddTaskForm();
     }, 1100);
 }
@@ -149,12 +149,15 @@ async function getNextTaskId() {
     return existingIds.length > 0 ? Math.max(...existingIds) + 1 : 1;
 }
 
-async function postAddTaskDataToFirebase(title, description, date, priority, status, assignTo, category, subtasks, colorTo) {
-    const nextId = await getNextTaskId();
-     const assigned = assignTo.map((name, i) => ({
+function combineAssignedWithColors(assignTo, colorTo) {
+    return assignTo.map((name, i) => ({
         name: name,
-        color: colorTo[i] || "#CCCCCC"}));
-    const newTask = {
+        color: colorTo[i] || "#CCCCCC"
+    }));
+}
+
+function buildTaskData(nextId, title, description, date, priority, status, assigned, category, subtasks) {
+    return {
         title,
         description,
         priority,
@@ -163,18 +166,24 @@ async function postAddTaskDataToFirebase(title, description, date, priority, sta
         subtasks,
         assigned,
         category,
-        id: nextId,
-        colorTo
+        id: nextId
     };
+}
+
+async function postAddTaskDataToFirebase(title, description, date, priority, status, assignTo, category, subtasks, colorTo) {
+    const nextId = await getNextTaskId();
+    const assigned = combineAssignedWithColors(assignTo, colorTo);
+    const newTask = buildTaskData(nextId, title, description, date, priority, status, assigned, category, subtasks);
+    return await sendTaskToFirebase(nextId, newTask);
+}
+
+async function sendTaskToFirebase(nextId, newTask) {
     let response = await fetch(`${fetchURLDataBase}/tasks/${nextId}.json`, {
         method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newTask),
     });
-    const responseData = await response.json();
-    return responseData;
+    return await response.json();
 }
 
 function getSubtasksArray() {
@@ -294,9 +303,9 @@ function validateDueDate() {
 }
 
 function validateCategory() {
-     console.log('validateCategory aufgerufen');
+    console.log('validateCategory aufgerufen');
     const selectedText = ATcategory.textContent;
-     console.log('Kategorie:', selectedText);
+    console.log('Kategorie:', selectedText);
     const defaultText = 'Select a category';
     if (selectedText === defaultText) {
         categoryDropdownSelected.classList.add('error');
@@ -381,7 +390,7 @@ function checkRequiredFieldsAndToggleButton() {
     const titleFilled = ATTitleRef.value.trim() != "";
     const dueDateFilled = ATDueDateRef.value.trim() != "";
     const categoryFilled = ATcategory.textContent.trim() != "Select a category";
-    if (titleFilled && dueDateFilled && categoryFilled) {       
+    if (titleFilled && dueDateFilled && categoryFilled) {
         ATButtonAddTaskRef.disabled = false;
     } else {
         ATButtonAddTaskRef.disabled = true;
@@ -410,8 +419,8 @@ async function createAddTaskContacts(data) {
     assignedCheckbox = [];
     for (const key in data) {
         const contact = data[key];
-        resultContactList.push({ email: contact.email, initial: contact.initial, name: contact.name, phone: contact.phone, color: contact.profilcolor});
-        assignedCheckbox.push({ checkbox: false }); 
+        resultContactList.push({ email: contact.email, initial: contact.initial, name: contact.name, phone: contact.phone, color: contact.profilcolor });
+        assignedCheckbox.push({ checkbox: false });
     }
     await loadAddTaskAssignedTo(resultContactList);
 }
@@ -426,7 +435,7 @@ function getAssignedContacts() {
     return assigned;
 }
 
-function getAssignedColor(){
+function getAssignedColor() {
     const color = [];
     assignedCheckbox.forEach((item, i) => {
         if (item.checkbox) {
