@@ -1,5 +1,5 @@
-const fetchURLDataBase =
-  "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/";
+// const fetchURLDataBase =
+//   "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/";
 
 let standartTasks = [
   {
@@ -125,76 +125,74 @@ async function editTasksToRemoteStorage(path, data) {
 
 // Dummy Kontakte
 let contactsDummy = [
+  {
+    name: "Thomas Müller",
+    email: "thomas@mueller.de",
+    phone: "+49 111 222 333",
+    initial: "TM",
+    profilcolor: "#FF7A00",
+  },
+  {
+    name: "Max Mustermann",
+    email: "max@mustermann.de",
+    phone: "+49 111 222 334",
+    initial: "MM",
+    profilcolor: "#FF5EB3",
+  },
+  {
+    name: "Marianne Musterfrau",
+    email: "marianne@musterfrau.de",
+    phone: "+49 111 222 335",
+    initial: "MM",
+    profilcolor: "#9327FF",
+  },
+  {
+    name: "Mark Zuckerberg",
+    email: "mark@zuckerberg.com",
+    phone: "+1 111 222 336",
+    initial: "MZ",
+    profilcolor: "#FF745E",
+  },
+  {
+    name: "Bill Gates",
+    email: "bill@gates.com",
+    phone: "+1 111 222 337",
+    initial: "BG",
+    profilcolor: "#0038FF",
+  },
+  {
+    name: "Developer Akademie",
+    email: "info@developerakademie.com",
+    initial: "DA",
+    profilcolor: "#FF745E",
+  },
 
-    {
-        "name": "Thomas Müller",
-        "email": "thomas@mueller.de",
-        "phone": "+49 111 222 333",
-        "initial": "TM",
-        "profilcolor": "#FF7A00"
-    },
-    {
-        "name": "Max Mustermann",
-        "email": "max@mustermann.de",
-        "phone": "+49 111 222 334",
-        "initial": "MM",
-        "profilcolor": "#FF5EB3"
-    },
-    {
-        "name": "Marianne Musterfrau",
-        "email": "marianne@musterfrau.de",
-        "phone": "+49 111 222 335",
-        "initial": "MM",
-        "profilcolor": "#9327FF"
-    },
-    {
-        "name": "Mark Zuckerberg",
-        "email": "mark@zuckerberg.com",
-        "phone": "+1 111 222 336",
-        "initial": "MZ",
-        "profilcolor": "#FF745E"
-    },
-    {
-        "name": "Bill Gates",
-        "email": "bill@gates.com",
-        "phone": "+1 111 222 337",
-        "initial": "BG",
-        "profilcolor": "#0038FF"
-    },
-    {
-        "name": "Developer Akademie",
-        "email": "info@developerakademie.com",
-        "initial": "DA",
-        "profilcolor": "#FF745E"
-    },
-
-    {
-        "name": "Alex Schöfer",
-        "email": "alex@schoefer.de",
-        "phone": "+49 222 222 221",
-        "initial": "AS",
-        "profilcolor": "#1FD7C1"
-    },
-    {
-        "name": "Certan Viorel",
-        "email": "certan@viorel.de",
-        "phone": "+49 222 222 222",
-        "initial": "CV",
-        "profilcolor": "#FFE62B"
-    },
-    {
-        "name": "Nikolaos Loukataris",
-        "email": "nikolaos@loukataris.at",
-        "phone": "+49 222 222 223",
-        "initial": "NL",
-        "profilcolor": "#C3FF2B"
-    },
-    {
-        "name": "Branislav Bardon",
-        "email": "bransilav@bardon.de",
-        "phone": "+49 222 222 224",
-        "initial": "BB",
-        "profilcolor": "#FF7A00"
-    }
+  {
+    name: "Alex Schöfer",
+    email: "alex@schoefer.de",
+    phone: "+49 222 222 221",
+    initial: "AS",
+    profilcolor: "#1FD7C1",
+  },
+  {
+    name: "Certan Viorel",
+    email: "certan@viorel.de",
+    phone: "+49 222 222 222",
+    initial: "CV",
+    profilcolor: "#FFE62B",
+  },
+  {
+    name: "Nikolaos Loukataris",
+    email: "nikolaos@loukataris.at",
+    phone: "+49 222 222 223",
+    initial: "NL",
+    profilcolor: "#C3FF2B",
+  },
+  {
+    name: "Branislav Bardon",
+    email: "bransilav@bardon.de",
+    phone: "+49 222 222 224",
+    initial: "BB",
+    profilcolor: "#FF7A00",
+  },
 ];
-

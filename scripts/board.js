@@ -269,154 +269,99 @@ function deleteTasksOfOverlay(id) {
   });
 }
 
-
 function editTaskOfOverlay(id) {
-  let taskOverlay = document.getElementById("task-card-container");
-  let taskCardContainer = document.getElementById("task-overlay");
-  let editButton = document.getElementsByClassName("edit")[0];
+  const taskOverlay = document.getElementById("task-card-container");
+  const taskCardContainer = document.getElementById("task-overlay");
+  const editButton = document.getElementsByClassName("edit")[0];
 
   if (taskCardContainer) {
     editButton.addEventListener("click", () => {
       taskOverlay.innerHTML = "";
       taskOverlay.innerHTML = editTasksOfBoard(id);
 
-      // 🧠 FUNCȚIE CARE SE APELEAZĂ ÎNTOTDEAUNA
       function initAddTaskForm(id) {
-        if (typeof window.addTaskInit === "function") {
-          window.addTaskInit();
-        }
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            if (typeof window.addTaskInit === "function") {
+              window.addTaskInit();
+            }
 
-        setTimeout(() => {
-          const oldBtn = document.getElementById("add-task-button-create-task");
-          if (oldBtn) {
-            const newBtn = oldBtn.cloneNode(true);
-            newBtn.onclick = () => valueTasksToEditTasks(id);
-            oldBtn.replaceWith(newBtn);
+            const oldBtn = document.getElementById(
+              "add-task-button-create-task"
+            );
+            if (oldBtn) {
+              const newBtn = oldBtn.cloneNode(true);
+              newBtn.onclick = () => valueTasksToEditTasks(id);
+              oldBtn.replaceWith(newBtn);
+            }
+
             preFillTaskForm(id);
-          }
-        }, 300);
+          });
+        });
       }
+      const oldScript = document.getElementById("add-task-script");
+      if (oldScript) {
+        oldScript.remove();
+        console.log();
+      }
+      const scriptAlreadyLoaded = document.getElementById("add-task-script");
 
-      // 🧠 ÎNCARCĂ SCRIPT DOAR DACĂ NU EXISTĂ
-      if (!document.getElementById("add-task-script")) {
-        let s = document.createElement("script");
+      if (!scriptAlreadyLoaded) {
+        const s = document.createElement("script");
         s.id = "add-task-script";
         s.src = "../scripts/add-task.js";
         s.async = false;
-        s.onload = () => initAddTaskForm(id); // ← după ce se încarcă, inițializează
+        s.onload = () => initAddTaskForm(id);
         document.body.appendChild(s);
       } else {
-        initAddTaskForm(id); // ← deja încărcat, inițializează direct
+        initAddTaskForm(id);
       }
     });
   }
 }
 
-// function editTaskOfOverlay(id) {
-//   const taskOverlay = document.getElementById("task-card-container");
-//   const taskCardContainer = document.getElementById("task-overlay");
-//   const editButton = document.getElementsByClassName("edit")[0];
-
-//   if (taskCardContainer) {
-//     editButton.addEventListener("click", () => {
-//       taskOverlay.innerHTML = "";
-//       taskOverlay.innerHTML = editTasksOfBoard(id);
-
-//       function initAddTaskForm(id) {
-//         // Așteptăm două cadre de randare ca DOM-ul să fie gata
-//         requestAnimationFrame(() => {
-//           requestAnimationFrame(() => {
-//             if (typeof window.addTaskInit === "function") {
-//               window.addTaskInit();
-//             }
-
-//             const oldBtn = document.getElementById("add-task-button-create-task");
-//             if (oldBtn) {
-//               const newBtn = oldBtn.cloneNode(true);
-//               newBtn.onclick = () => valueTasksToEditTasks(id);
-//               oldBtn.replaceWith(newBtn);
-//             }
-
-//             preFillTaskForm(id);
-//           });
-//         });
-//       }
-//      const oldScript = document.getElementById("add-task-script");
-//       if (oldScript) {
-//         oldScript.remove();
-//         console.log();
-        
-//       }
-//       const scriptAlreadyLoaded = document.getElementById("add-task-script");
-
-//       if (!scriptAlreadyLoaded) {
-//         const s = document.createElement("script");
-//         s.id = "add-task-script";
-//         s.src = "../scripts/add-task.js";
-//         s.async = false;
-//         s.onload = () => initAddTaskForm(id);
-//         document.body.appendChild(s);
-//       } else {
-//         initAddTaskForm(id);
-//       }
-//     });
-//   }
-// }
-
-
-// async function valueTasksToEditTasks(id) {
-//   let title = document.getElementById("add-task-title-input").value;
-//   let description = document.getElementById(
-//     "add-task-description-textarea"
-//   ).value;
-//   let date = document.getElementById("add-task-due-date-input").value;
-//   let subtasks = document.getElementById("add-task-subtasks-input").value;
-//   updateTasks = {
-//     title: title,
-//     description: description,
-//     date: date,
-//     subtasks: subtasks,
-//   };
-//   await editTasksToRemoteStorage(`/tasks/${id}`, updateTasks);
-//   closeContainerOverlay();
-// }
-
 function preFillTaskForm(id) {
   const task = tasks.find((t) => t.id === id);
   if (!task) return;
   document.getElementById("add-task-title-input").value = task.title;
-  document.getElementById("add-task-description-textarea").value = task.description;
+  document.getElementById("add-task-description-textarea").value =
+    task.description;
   const dateInput = document.getElementById("add-task-due-date-input");
   dateInput.value = task.date;
   if (dateInput.value) dateInput.classList.add("date-selected");
   addTaskPrioButtonClick(task.priority);
   const categoryText = document.getElementById("categoryDropdownSelectedText");
   categoryText.textContent = task.category;
-    getContactsFromRemoteStorage().then(() => {
+  getContactsFromRemoteStorage().then(() => {
     resultContactList.forEach((contact, i) => {
       if (task.assigned.includes(contact.name)) {
         assignedCheckbox[i].checkbox = true;
-        const checkboxDiv = document.getElementById('ATContact-option-checkbox' + i);
+        const checkboxDiv = document.getElementById(
+          "ATContact-option-checkbox" + i
+        );
         if (checkboxDiv) {
-          checkboxDiv.classList.remove('ATContact-option-checkbox');
-          checkboxDiv.classList.add('ATContact-option-checkbox-checked');
+          checkboxDiv.classList.remove("ATContact-option-checkbox");
+          checkboxDiv.classList.add("ATContact-option-checkbox-checked");
         }
       }
     });
     updateChosenInitials();
   });
 
-  subtasks = task.subtasks.map(st => st.title);
+  subtasks = task.subtasks.map((st) => st.title);
   subtaskRender();
 }
-
 
 // --------------------------------------------------------------------------------------------------
 async function valueTasksToEditTasks(id) {
   const title = document.getElementById("add-task-title-input").value.trim();
-  const description = document.getElementById("add-task-description-textarea").value.trim();
+  const description = document
+    .getElementById("add-task-description-textarea")
+    .value.trim();
   const date = document.getElementById("add-task-due-date-input").value.trim();
-  const category = document.getElementById("categoryDropdownSelectedText").textContent.trim();
+  const category = document
+    .getElementById("categoryDropdownSelectedText")
+    .textContent.trim();
 
   const assigned = getAssignedContacts(); // folosește funcția existentă
   const priority = prioButtonState;
@@ -449,18 +394,18 @@ async function valueTasksToEditTasks(id) {
     description,
     date: date,
     priority,
-    status: tasks.find(t => t.id === id)?.status || "toDo",
+    status: tasks.find((t) => t.id === id)?.status || "toDo",
     category,
     assigned,
     subtasks: subtasksArray,
   };
   await editTasksToRemoteStorage(`/tasks/${id}`, updatedTask);
- const index = tasks.findIndex(t => t.id === id);
+  const index = tasks.findIndex((t) => t.id === id);
   if (index !== -1) {
     tasks[index] = updatedTask;
   }
   closeContainerOverlay();
-  updateTask(); 
+  updateTask();
 }
 
 // --------------------------------------------------------------------------------------------------
@@ -475,10 +420,14 @@ function getImageForPriority(priority) {
 }
 
 function generateAssignedCardOverlay(assignedList) {
+  if (!Array.isArray(assignedList)) return "";
+
   let result = "";
   for (let i = 0; i < assignedList.length; i++) {
-    let name = assignedList[i];
-     if (typeof name !== 'string' || !name.trim()) continue;
+    let person = assignedList[i];
+    let name = person?.name;
+    if (typeof name !== "string" || !name.trim()) continue;
+
     let initials = name
       .split(" ")
       .map((w) => w[0])
@@ -486,33 +435,38 @@ function generateAssignedCardOverlay(assignedList) {
       .toUpperCase();
 
     result += `
-        <div class="assigned-content">
-          <span class="logo">${initials}</span>
-          <span class="name">${name}</span>
-        </div>
-      `;
+      <div class="assigned-content">
+        <span class="logo">${initials}</span>
+        <span class="name">${name}</span>
+      </div>
+    `;
   }
 
   return result;
 }
+
 function getInitialsList(assignedList) {
+  if (!Array.isArray(assignedList)) return ""; // dacă nu e listă, ieșim
+
   return assignedList
-  // .filter(name => typeof name === 'string')
-    .map((fullName) => { // person
-      let initials = fullName  //person.name 
+    .filter((person) => person && typeof person.name === "string")
+    .map((person) => {
+      let initials = person.name
         .trim()
         .split(/\s+/)
         .map((w) => w[0])
         .join("")
         .toUpperCase();
 
-      return `<div class="assignees">
-    <span>${initials}</span>
-    </div>
-    `;
+      return `
+        <div class="assignees">
+          <span>${initials}</span>
+        </div>
+      `;
     })
     .join("");
 }
+
 function updateSubtaskProgress(subtasksVolume, container) {
   let total = subtasksVolume.length;
   let completed = subtasksVolume.filter((t) => t.done === true).length;
