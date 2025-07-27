@@ -5,30 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-
-    <script src="../scripts/template-summary.js"></script>
-    <script src="./scripts/signup.js"></script>
-    <script src="./script.js"></script>
-    <script src="./scripts/login.js"></script>
-
     <link rel="shortcut icon" href="../assets/img/MenuLogo.png" type="image/x-icon">
-
+    <!-- CSS-Styling -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../styles/standard.css">
     <link rel="stylesheet" href="../styles/assets.css#">
     <link rel="stylesheet" href="../styles/fonts.css">
     <link rel="stylesheet" href="../styles/login.css">
+    <link rel="stylesheet" href="../styles/standard.css">
+    <link rel="stylesheet" href="../styles/login-mobile.css">
     <link rel="stylesheet" href="./styles/sign-up.css">
+    <!-- JavaScript -->
+    <script src="../scripts/template-summary.js"></script>
+    <script src="./scripts/signup.js"></script>
+    <script src="./script.js"></script>
+    <script src="./scripts/login.js"></script>
+
 </head>
 
 <body onload="startLogoAnimation()">
     <div class="login-wrapper">
-        <div class="login-registration-container">
-            <span id="login-registration-slogan">Not a Join user?</span>
-            <a class="btn-sign-up" href="./html/sign.html">Sign up</a>
-        </div>
         <img id="start-logo-img" class="start-logo-img logo-animation-start" src="./assets/img/MainLogo.png" alt="">
-
         <div id="login-main-container" class="login-main-container hidden">
             <div class="login-headline-container">
                 <h1 id="login-headline">Log in</h1>
@@ -75,11 +72,17 @@
 
                 <div class="btn-login-container">
                     <button id="btn-login">Log in</button>
-                    <a id="btn-login-guest" onclick="guestLogin(event)" href="./html/summary.html">Guest Log in</a>
+                    <button class="btn-login-guest" onclick="guestLogin(event)">
+                        Guest Log in
+                    </button>
                 </div>
             </form>
         </div>
-
+        <!-- Sign-Up-Content -->
+        <div class="login-registration-container">
+            <span id="login-registration-slogan">Not a Join user?</span>
+            <a class="btn-sign-up" href="./html/sign.html">Sign up</a>
+        </div>
         <!-- footer-content -->
         <footer class="footer-login">
             <a class="nav-login-privacy-legal" href="./html/privacy-policy.html">Privacy Police</a>
@@ -89,5 +92,7 @@
 
     </div>
 </body>
+
+
 
 </html>
