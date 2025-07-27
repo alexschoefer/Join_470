@@ -44,6 +44,20 @@ a {
   }
 }
 
+
+#btn-form:disabled {
+  color: #666;
+  cursor: not-allowed;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+}
+=======
 @keyframes moveLogoMobile {
   from {
     top: 50%;
@@ -56,3 +70,4 @@ a {
     transform: translate(0, 0) scale(0.6);
   }
 }
+

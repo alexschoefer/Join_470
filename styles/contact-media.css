@@ -1,9 +1,3 @@
-/* @media (min-width: 1361px) {
-  .arrow-back-container {
-    display: none;
-  }
-} */
-
 @media (max-width: 1360px) {
   .contacts-right-container {
     flex-direction: column;
@@ -267,10 +261,9 @@
 }
 
 @media (max-width: 450px) {
-
-    .add-contact-headline-container h3 {
-        height: 50px;
-    }
+  .add-contact-headline-container h3 {
+    height: 50px;
+  }
 
   .contact-profil-name {
     font-size: 27px;
@@ -302,7 +295,6 @@
   .mobile-contact-profil-btns-container,
   .mobile-edit-contact-button,
   .mobile-add-contact-button-create-icon {
-    margin-bottom: 60px;
     margin-left: 60px;
   }
 
@@ -333,11 +325,11 @@
 }
 
 @media (max-width: 375px) {
-
-    .mobile-add-contact-profil-icon-container, .mobile-edit-contact-profil-icon-container {
-        margin-top: -40px;
-        margin-bottom: -30px;
-    }
+  .mobile-add-contact-profil-icon-container,
+  .mobile-edit-contact-profil-icon-container {
+    margin-top: -40px;
+    margin-bottom: -30px;
+  }
 
   .add-contact-overlay {
     max-width: 350px;
@@ -369,13 +361,12 @@
 }
 
 @media (max-width: 350px) {
-
-    .add-contact-input-wrapper {
-        width: 100%;
-        max-width: 290px;
-        box-sizing: border-box;
-        padding: 0 10px;
-      }
+  .add-contact-input-wrapper {
+    width: 100%;
+    max-width: 290px;
+    box-sizing: border-box;
+    padding: 0 10px;
+  }
 
   .add-contact-overlay {
     max-width: 300px;
@@ -386,7 +377,8 @@
     font-size: 14px;
   }
 
-  .input-wrapper, .user-input-wrapper {
+  .input-wrapper,
+  .user-input-wrapper {
     width: 100%;
     max-width: 290px;
     box-sizing: border-box;
@@ -401,12 +393,15 @@
     font-size: 16px;
   }
 
-  .create-contact-btn {
+  .create-contact-btn,
+  .save-contact-btn,
+  .delete-btn {
     font-size: 18px;
   }
 
-  .mobile-add-contact-profil-icon-container, .mobile-edit-contact-profil-icon-container {
+  .mobile-add-contact-profil-icon-container,
+  .mobile-edit-contact-profil-icon-container {
     margin-top: -40px;
     margin-bottom: -40px;
-}
+  }
 }

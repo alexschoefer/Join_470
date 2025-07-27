@@ -170,7 +170,7 @@ function validateSignUpForm() {
     const emailOK = isValidEmail(emailInput.value);
     const checkboxOK = isPrivacyPolicyChecked();
     const formValid = filled && emailOK && checkboxOK && !isEmailAlreadyUsed;
-    setSignUpButtonState(formValid);
+    setButtonState(formValid);
 }
 
 
