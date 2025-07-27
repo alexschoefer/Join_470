@@ -74,7 +74,7 @@ function createCardElement(task) {
   let html = generateTodoHTML(
     task,
     getImageForPriority(task.priority),
-    getInitialsList(task.assigned),
+    getInitialsList(task.assigned.name),
     getColoredLabels(task.category)
   );
   let template = document.createElement("template");
@@ -269,35 +269,199 @@ function deleteTasksOfOverlay(id) {
   });
 }
 
+
 function editTaskOfOverlay(id) {
   let taskOverlay = document.getElementById("task-card-container");
   let taskCardContainer = document.getElementById("task-overlay");
   let editButton = document.getElementsByClassName("edit")[0];
+
   if (taskCardContainer) {
     editButton.addEventListener("click", () => {
       taskOverlay.innerHTML = "";
       taskOverlay.innerHTML = editTasksOfBoard(id);
+
+      // 🧠 FUNCȚIE CARE SE APELEAZĂ ÎNTOTDEAUNA
+      function initAddTaskForm(id) {
+        if (typeof window.addTaskInit === "function") {
+          window.addTaskInit();
+        }
+
+        setTimeout(() => {
+          const oldBtn = document.getElementById("add-task-button-create-task");
+          if (oldBtn) {
+            const newBtn = oldBtn.cloneNode(true);
+            newBtn.onclick = () => valueTasksToEditTasks(id);
+            oldBtn.replaceWith(newBtn);
+            preFillTaskForm(id);
+          }
+        }, 300);
+      }
+
+      // 🧠 ÎNCARCĂ SCRIPT DOAR DACĂ NU EXISTĂ
+      if (!document.getElementById("add-task-script")) {
+        let s = document.createElement("script");
+        s.id = "add-task-script";
+        s.src = "../scripts/add-task.js";
+        s.async = false;
+        s.onload = () => initAddTaskForm(id); // ← după ce se încarcă, inițializează
+        document.body.appendChild(s);
+      } else {
+        initAddTaskForm(id); // ← deja încărcat, inițializează direct
+      }
     });
   }
 }
-async function valueTasksToEditTasks(id) {
-  let title = document.getElementById("add-task-title-input").value;
-  let description = document.getElementById(
-    "add-task-description-textarea"
-  ).value;
-  let date = document.getElementById("add-task-due-date-input").value;
-  let subtasks = document.getElementById("add-task-subtasks-input").value;
-  updateTasks = {
-    title: title,
-    description: description,
-    date: date,
-    subtasks: subtasks,
-  };
-  await editTasksToRemoteStorage(`/tasks/${id}`, updateTasks);
-  closeContainerOverlay();
+
+// function editTaskOfOverlay(id) {
+//   const taskOverlay = document.getElementById("task-card-container");
+//   const taskCardContainer = document.getElementById("task-overlay");
+//   const editButton = document.getElementsByClassName("edit")[0];
+
+//   if (taskCardContainer) {
+//     editButton.addEventListener("click", () => {
+//       taskOverlay.innerHTML = "";
+//       taskOverlay.innerHTML = editTasksOfBoard(id);
+
+//       function initAddTaskForm(id) {
+//         // Așteptăm două cadre de randare ca DOM-ul să fie gata
+//         requestAnimationFrame(() => {
+//           requestAnimationFrame(() => {
+//             if (typeof window.addTaskInit === "function") {
+//               window.addTaskInit();
+//             }
+
+//             const oldBtn = document.getElementById("add-task-button-create-task");
+//             if (oldBtn) {
+//               const newBtn = oldBtn.cloneNode(true);
+//               newBtn.onclick = () => valueTasksToEditTasks(id);
+//               oldBtn.replaceWith(newBtn);
+//             }
+
+//             preFillTaskForm(id);
+//           });
+//         });
+//       }
+//      const oldScript = document.getElementById("add-task-script");
+//       if (oldScript) {
+//         oldScript.remove();
+//         console.log();
+        
+//       }
+//       const scriptAlreadyLoaded = document.getElementById("add-task-script");
+
+//       if (!scriptAlreadyLoaded) {
+//         const s = document.createElement("script");
+//         s.id = "add-task-script";
+//         s.src = "../scripts/add-task.js";
+//         s.async = false;
+//         s.onload = () => initAddTaskForm(id);
+//         document.body.appendChild(s);
+//       } else {
+//         initAddTaskForm(id);
+//       }
+//     });
+//   }
+// }
+
+
+// async function valueTasksToEditTasks(id) {
+//   let title = document.getElementById("add-task-title-input").value;
+//   let description = document.getElementById(
+//     "add-task-description-textarea"
+//   ).value;
+//   let date = document.getElementById("add-task-due-date-input").value;
+//   let subtasks = document.getElementById("add-task-subtasks-input").value;
+//   updateTasks = {
+//     title: title,
+//     description: description,
+//     date: date,
+//     subtasks: subtasks,
+//   };
+//   await editTasksToRemoteStorage(`/tasks/${id}`, updateTasks);
+//   closeContainerOverlay();
+// }
+
+function preFillTaskForm(id) {
+  const task = tasks.find((t) => t.id === id);
+  if (!task) return;
+  document.getElementById("add-task-title-input").value = task.title;
+  document.getElementById("add-task-description-textarea").value = task.description;
+  const dateInput = document.getElementById("add-task-due-date-input");
+  dateInput.value = task.date;
+  if (dateInput.value) dateInput.classList.add("date-selected");
+  addTaskPrioButtonClick(task.priority);
+  const categoryText = document.getElementById("categoryDropdownSelectedText");
+  categoryText.textContent = task.category;
+    getContactsFromRemoteStorage().then(() => {
+    resultContactList.forEach((contact, i) => {
+      if (task.assigned.includes(contact.name)) {
+        assignedCheckbox[i].checkbox = true;
+        const checkboxDiv = document.getElementById('ATContact-option-checkbox' + i);
+        if (checkboxDiv) {
+          checkboxDiv.classList.remove('ATContact-option-checkbox');
+          checkboxDiv.classList.add('ATContact-option-checkbox-checked');
+        }
+      }
+    });
+    updateChosenInitials();
+  });
+
+  subtasks = task.subtasks.map(st => st.title);
+  subtaskRender();
 }
 
+
 // --------------------------------------------------------------------------------------------------
+async function valueTasksToEditTasks(id) {
+  const title = document.getElementById("add-task-title-input").value.trim();
+  const description = document.getElementById("add-task-description-textarea").value.trim();
+  const date = document.getElementById("add-task-due-date-input").value.trim();
+  const category = document.getElementById("categoryDropdownSelectedText").textContent.trim();
+
+  const assigned = getAssignedContacts(); // folosește funcția existentă
+  const priority = prioButtonState;
+  const subtasksArray = getSubtasksArray(); // ia și subtaskurile din DOM
+
+  let isValid = true;
+
+  if (!title) {
+    document.getElementById("add-task-title-input").classList.add("error");
+    document.getElementById("title-required").classList.remove("d_none");
+    isValid = false;
+  }
+
+  if (!date) {
+    document.getElementById("add-task-due-date-input").classList.add("error");
+    document.getElementById("due-date-required").classList.remove("d_none");
+    isValid = false;
+  }
+
+  if (category === "Select a category") {
+    document.getElementById("categoryDropdownSelected").classList.add("error");
+    document.getElementById("category-required").classList.remove("d_none");
+    isValid = false;
+  }
+
+  if (!isValid) return;
+  const updatedTask = {
+    id,
+    title,
+    description,
+    date: date,
+    priority,
+    status: tasks.find(t => t.id === id)?.status || "toDo",
+    category,
+    assigned,
+    subtasks: subtasksArray,
+  };
+  await editTasksToRemoteStorage(`/tasks/${id}`, updatedTask);
+ const index = tasks.findIndex(t => t.id === id);
+  if (index !== -1) {
+    tasks[index] = updatedTask;
+  }
+  closeContainerOverlay();
+  updateTask(); 
+}
 
 // --------------------------------------------------------------------------------------------------
 
@@ -314,6 +478,7 @@ function generateAssignedCardOverlay(assignedList) {
   let result = "";
   for (let i = 0; i < assignedList.length; i++) {
     let name = assignedList[i];
+     if (typeof name !== 'string' || !name.trim()) continue;
     let initials = name
       .split(" ")
       .map((w) => w[0])
@@ -332,8 +497,9 @@ function generateAssignedCardOverlay(assignedList) {
 }
 function getInitialsList(assignedList) {
   return assignedList
-    .map((name) => {
-      let initials = name
+  // .filter(name => typeof name === 'string')
+    .map((fullName) => { // person
+      let initials = fullName  //person.name 
         .trim()
         .split(/\s+/)
         .map((w) => w[0])
