@@ -6,6 +6,7 @@ let tasksPriority;
 let currentDraggedElement = null;
 let subtasksContent;
 let colorLabels;
+let contactColor;
 let searchInput = document.getElementById("searchInput");
 let currentFilter = "";
 let toDoContainer = document.querySelector(".to-do");
@@ -166,6 +167,8 @@ async function updateTask() {
     let container = document.getElementById(col);
     container.innerHTML = "";
     filtered.forEach((task) => {
+      contactColor = JSON.stringify(
+        task.color);
       tasksPriority = getImageForPriority(task.priority);
       let assigned = getInitialsList(task.assigned);
       colorLabels = getColoredLabels(task.category);
@@ -173,7 +176,8 @@ async function updateTask() {
         task,
         tasksPriority,
         assigned,
-        colorLabels
+        colorLabels,
+        contactColor
       );
       openTaskDetails(task);
       let lastTask = container.lastElementChild;
@@ -436,12 +440,12 @@ function generateAssignedCardOverlay(assignedList) {
 
     result += `
       <div class="assigned-content">
+
         <span class="logo">${initials}</span>
         <span class="name">${name}</span>
       </div>
     `;
   }
-
   return result;
 }
 
@@ -449,20 +453,24 @@ function getInitialsList(assignedList) {
   if (!Array.isArray(assignedList)) return ""; // dacă nu e listă, ieșim
 
   return assignedList
+
     .filter((person) => person && typeof person.name === "string")
     .map((person) => {
       let initials = person.name
+
         .trim()
         .split(/\s+/)
         .map((w) => w[0])
         .join("")
         .toUpperCase();
 
+
       return `
         <div class="assignees">
           <span>${initials}</span>
         </div>
       `;
+
     })
     .join("");
 }
