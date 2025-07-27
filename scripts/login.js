@@ -1,31 +1,29 @@
 function startLogoAnimation() {
   const logo = document.getElementById("start-logo-img");
   const loginContainerRef = document.getElementById("login-main-container");
-  setTimeout(() => {
-    logo.classList.add("logo-animation-end");
-    logo.classList.remove("start-logo-img");
-    logo.classList.add("main-logo-img");
-  }, 100);
-
+  const wrapper = document.querySelector(".login-wrapper");
+  if (currentDeviceType === 'mobile') {
+    wrapper.classList.add("mobile-background");
+    logo.classList.add("logo-animation-move-mobile");
+  } else {
+    wrapper.classList.remove("mobile-background");
+    logo.classList.add("logo-animation-move-desktop");
+  }
   setTimeout(() => {
     loginContainerRef.classList.remove("hidden");
     loginContainerRef.classList.add("show");
-  }, 1000);
+    wrapper.classList.remove("login-wrapper-start");
+    wrapper.classList.remove("mobile-background");
+  }, 1600);
 }
 
 async function loginUser(event) {
   event.preventDefault();
   let email = document.getElementById("login-usermail-input").value.trim();
-  let password = document
-    .getElementById("login-userpassword-input")
-    .value.trim();
+  let password = document.getElementById("login-userpassword-input").value.trim();
   let response = await fetch(fetchURLDataBase + "/users.json");
   let users = await response.json();
-  let userLogin =
-    users &&
-    Object.values(users).find(
-      (user) => user.email === email && user.password === password
-    );
+  let userLogin = users && Object.values(users).find((user) => user.email === email && user.password === password);
   if (userLogin) {
     await saveLoginUserDataToLocalStorage(email);
     localStorage.setItem("showWelcomeOnce", "true");
@@ -38,9 +36,7 @@ async function loginUser(event) {
 async function saveLoginUserDataToLocalStorage(email) {
   let response = await fetch(fetchURLDataBase + "/contacts.json");
   let loginUserDetails = await response.json();
-  let loggedInUser =
-    loginUserDetails &&
-    Object.values(loginUserDetails).find((user) => user.email === email);
+  let loggedInUser = loginUserDetails && Object.values(loginUserDetails).find((user) => user.email === email);
   if (loggedInUser) {
     localStorage.setItem(
       "loggedInUser",
@@ -69,9 +65,7 @@ function validateLoginInput(input) {
 }
 
 function showLoginError() {
-  let errorMessage = document.getElementById(
-    "login-userpassword-input-validation-message"
-  );
+  let errorMessage = document.getElementById("login-userpassword-input-validation-message");
   errorMessage.classList.remove("d_none");
   let emailInput = document.getElementById("login-usermail-input");
   let passwordInput = document.getElementById("login-userpassword-input");
@@ -115,5 +109,5 @@ function guestLogin(event) {
   localStorage.setItem("showWelcomeOnce", "true");
 
   // ➡ Manuell zur Zielseite weiterleiten
-  window.location.href = event.currentTarget.href;
+  window.location.href = "./html/summary.html";
 }
