@@ -1,11 +1,3 @@
-html,
-body {
-  overflow-x: hidden;
-  overflow-y: auto;
-  margin: 0;
-  padding: 0;
-}
-
 .overlay {
   position: fixed;
   top: 0;

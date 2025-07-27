@@ -18,6 +18,16 @@
   cursor: pointer;
 }
 
+#btn-sign-up:disabled {
+  color: #666;
+  cursor: not-allowed;
+}
+
+#btn-form:disabled {
+  color: #666;
+  cursor: not-allowed;
+}
+
 .mobile-contact-profil-btn-edit {
   width: 62px;
   height: 24px;
