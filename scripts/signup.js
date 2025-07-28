@@ -101,51 +101,6 @@ function clearErrorMessage(input) {
     }
 }
 
-/**
- * Changes the icon in the input field for password
- * 
- * If the length of the input is bigger than 0 then a new icon will be placed in the input field
- * Otherwise if the field is empty, it shows a default lock icon.
- * 
- * @param {HTMLInputElement} input 
- */
-function changePasswordIcon(input) {
-    const container = input.closest('.input-container');
-    const icon = container.querySelector('.password-icon');
-
-    if (input.value.trim().length > 0) {
-        icon.src = "../assets/icons/visibility-off-icon.png";
-        icon.classList.add('visibility-off-icon');
-    } else {
-        icon.src = "../assets/icons/lock-icon.png";
-        icon.classList.remove('visibility-off-icon');
-    }
-}
-
-/**
- * Toggles the visibility of a password input field.
- * 
- * Switches the input type between "password" and "text" based on its current state,
- * allowing the user to show or hide the entered password. Also updates the icon accordingly.
- *
- * This function only toggles the input if it contains a non-empty value.
- *
- * @param {HTMLImageElement} iconElement - The eye icon element that was clicked to toggle visibility.
- */
-function toggleInputTypePassword(iconElement) {
-    const container = iconElement.closest('.input-container');
-    const input = container.querySelector('input');
-
-    if (input.type === 'password' && input.value.trim().length > 0) {
-        input.type = 'text';
-        iconElement.src = "../assets/icons/visibility-icon.png";
-    } else if (input.type === 'text' && input.value.trim().length > 0) {
-        input.type = 'password';
-        iconElement.src = "../assets/icons/visibility-off-icon.png";
-    }
-}
-
-
 
 /**
  * Help-functions - Checks if the button for privacy police is clicked

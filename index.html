@@ -17,23 +17,16 @@
 
     <!-- JavaScript -->
     <script src="../scripts/template-summary.js"></script>
-    <script src="./scripts/signup.js"></script>
     <script src="./scripts/login.js"></script>
     <script src="./script.js"></script>
 </head>
 
 <body onload="startLogoAnimation()">
-    <!-- Animiertes Logo -->
     <img id="start-logo-animation" class="start-logo-img logo-animation-start" src="./assets/img/MainLogo.png"
         alt="main-logo-animation-start" />
-
-    <!-- Wrapper mit mobile-background -->
     <div id="login-wrapper" class="login-wrapper login-wrapper-start">
-        <!-- Statisches Logo -->
         <img id="start-logo-final" class="start-logo-img d_none" src="./assets/img/MainLogo.png"
             alt="Startlogo final"/>
-
-        <!-- Login-Inhalt (versteckt beim Start) -->
         <div id="login-content-wrapper" class="d_none">
             <!-- Login Container -->
             <div id="login-main-container" class="login-main-container hidden">
@@ -41,16 +34,14 @@
                     <h1 id="login-headline">Log in</h1>
                     <div class="login-underline"></div>
                 </div>
-
                 <form onsubmit="loginUser(event); return false;">
                     <div class="user-login-input-container">
-                        <!-- Email -->
                         <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
-                                    <input id="login-usermail-input" class="user-input" type="email" name="email"
-                                        placeholder="Email" />
-                                    <div><img src="../assets/icons/mail-icon.png" alt="email-icon" /></div>
+                                    <input id="login-usermail-input" class="user-input" type="email" name="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
+                                        placeholder="Email" autocomplete="off" onfocus="clearErrorMessage(this)" onblur="validateLoginInput(this)"/>
+                                    <div><img src="../assets/icons/mail-icon.png" alt="email-icon"></div>
                                 </div>
                             </div>
                             <div class="input-validation-container">
@@ -58,14 +49,16 @@
                                     This field is required.</p>
                             </div>
                         </div>
-
-                        <!-- Passwort -->
                         <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
                                     <input id="login-userpassword-input" class="user-input" type="password"
-                                        name="password" placeholder="Password" />
-                                    <div><img src="../assets/icons/lock-icon.png" alt="lock-icon" /></div>
+                                        name="password" placeholder="Password" oninput="changePasswordIcon(this)" onfocus="clearErrorMessage(this)" onblur="validateLoginInput(this)"/>
+                                    <div>
+                                        <img onclick="toggleInputTypePassword(this)" id="password-icon"
+                                        class="password-icon" src="../assets/icons/lock-icon.png"
+                                        alt="password-icon">
+                                    </div>
                                 </div>
                             </div>
                             <div class="input-validation-container">
@@ -74,21 +67,16 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Buttons -->
                     <div class="btn-login-container">
                         <button id="btn-login">Log in</button>
                         <button class="btn-login-guest" onclick="guestLogin(event)">Guest Log in</button>
                     </div>
                 </form>
             </div>
-
-            <!-- Registrierung -->
             <div class="login-registration-container">
                 <span id="login-registration-slogan">Not a Join user?</span>
                 <a class="btn-sign-up" href="./html/sign.html">Sign up</a>
             </div>
-
             <!-- Footer -->
             <footer class="footer-login">
                 <a class="nav-login-privacy-legal" href="./html/privacy-policy.html">Privacy Policy</a>
