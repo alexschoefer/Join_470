@@ -40,65 +40,6 @@ let subtasksObject = {};
 let assignedCheckbox = [];
 let resultContactList = [];
 
-ATTitleRef.addEventListener('input', checkRequiredFieldsAndToggleButton);
-ATDueDateRef.addEventListener('input', checkRequiredFieldsAndToggleButton);
-ATTitleRef.addEventListener('blur', validateTitle);
-ATDueDateRef.addEventListener('blur', validateDueDate);
-ATSubtaskInput.addEventListener('focus', showClearAndDoneButtons);
-ATSubtaskInput.addEventListener('blur', hideClearAndDoneButtons);
-
-ATSubtaskInput.addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') {
-        event.preventDefault();
-        addTaskAddSubtask();
-    }
-});
-
-// dies muss geklärt werden, event listener funktioniert nicht auf button disabled!!!!
-ATButtonAddTaskRef.addEventListener('click', function (event) {
-    if (!validateAddTaskInputs()) {
-        event.preventDefault();
-    }
-    else {
-        sendAddTaskData();
-    }
-});
-
-categoryDropdownSelected.addEventListener('click', function (event) {
-    event.stopPropagation();
-    categoryDropdownOpen = !categoryDropdownOpen;
-    categoryDropdownMenu.style.display = categoryDropdownOpen ? 'block' : 'none';
-    categoryDropdownArrow.classList.toggle('open', categoryDropdownOpen);
-});
-
-dropdownSelected.addEventListener('click', function (event) {
-    event.stopPropagation();
-    dropdownOpen = !dropdownOpen;
-    dropdownMenu.style.display = dropdownOpen ? 'block' : 'none';
-    dropdownArrow.classList.toggle('open', dropdownOpen);
-});
-
-ATdueDateInput.addEventListener('input', function () {
-    if (this.value) {
-        this.classList.add('date-selected');
-    } else {
-        this.classList.remove('date-selected');
-    }
-});
-
-document.addEventListener('click', function (e) {
-    if (!customDropdownWrapper.contains(e.target)) {
-        dropdownMenu.style.display = 'none';
-        dropdownArrow.classList.remove('open');
-        dropdownOpen = false;
-    }
-    if (!categoryDropdownWrapper.contains(e.target)) {
-        categoryDropdownMenu.style.display = 'none';
-        categoryDropdownArrow.classList.remove('open');
-        categoryDropdownOpen = false;
-    }
-});
-
 function addTaskInit() {
     getContactsFromRemoteStorage();
     loadCategoryOptions();
@@ -448,8 +389,18 @@ function getAssignedColor() {
 async function loadAddTaskAssignedTo(result) {
     const optionToRender = document.getElementById('add-task-assigned-to-select');
     optionToRender.innerHTML = "";
+    const loggedUserString = localStorage.getItem("loggedInUser");
+    let loggedUserName = "";
+    if (loggedUserString) {
+        const loggedUser = JSON.parse(loggedUserString);
+        loggedUserName = loggedUser.name;
+    }
     result.forEach((contact, i) => {
-        optionToRender.innerHTML += getAssignedContactTemplate(contact, i);
+        if (loggedUserName === contact.name) {
+            optionToRender.innerHTML += getAssignedContactTemplate(contact, i, "(You)");
+        } else {
+            optionToRender.innerHTML += getAssignedContactTemplate(contact, i, "");
+        }
     });
 }
 
