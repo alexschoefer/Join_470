@@ -25,8 +25,8 @@ function showAllContacts(allContacts) {
 
 /**
  * Synchronizes dummy contacts with the remote storage. Loads all existing contacts from the remote database.
- *  If a contact with the same email already exists, it is updated.
- *  Otherwise, the contact is added to the remote storage.
+ * If a contact with the same email already exists, it is updated.
+ * Otherwise, the contact is added to the remote storage.
  */
 async function getAllContacts() {
     let existingContacts = await checkExistingContact();
@@ -58,13 +58,7 @@ async function postContactsToRemoteStorage(name, email, phone, initial, profilco
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-            name: name,
-            email: email,
-            phone: phone || "",
-            initial: initial,
-            profilcolor: profilcolor
-        })
+        body: JSON.stringify({name: name, email: email, phone: phone || "", initial: initial, profilcolor: profilcolor})
     });
     return await response.json();
 }
@@ -130,16 +124,6 @@ async function loadAllContactsFromRemoteStorage() {
         id,
         ...contact
     }));
-}
-
-
-/**
- * Help function - Sorts an array of contact objects alphabetically by their name
- * @param {*} allContacts - The array of contact objects to sort
- * @returns - The sorted array of contacts
- */
-function sortContactsAlphabetically(allContacts) {
-    return allContacts.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 
@@ -226,9 +210,7 @@ function renderAddContactOverlay() {
     currentOverlayType = 'add';
     currentOverlayMode = currentDeviceType;
     const container = document.getElementById('addNewContactOverlayContainer');
-    container.innerHTML = currentDeviceType === 'mobile'
-        ? addNewContactTemplateMobile()
-        : addNewContactTemplate();
+    container.innerHTML = currentDeviceType === 'mobile' ? addNewContactTemplateMobile() : addNewContactTemplate();
 }
 
 
@@ -290,9 +272,7 @@ function renderEditContactOverlay(contact, index) {
     lastEditedContact = contact;
     lastEditedIndex = index;
     const container = document.getElementById('editContactOverlayContainer');
-    container.innerHTML = currentDeviceType === 'mobile'
-        ? editContactTemplateMobile(contact, index)
-        : editContactTemplate(contact, index);
+    container.innerHTML = currentDeviceType === 'mobile' ? editContactTemplateMobile(contact, index) : editContactTemplate(contact, index);
 }
 
 
@@ -393,32 +373,12 @@ async function getChangesFromContact(id, event, profilcolor, initial) {
     let emailInput = document.getElementById('add-contact-email-input');
     let phoneInput = document.getElementById('add-contact-phone-input');
     let initialInput = createUserInitial(nameInput.value);
-    const updatedContact = {
-        name: nameInput.value,
-        email: emailInput.value,
-        phone: phoneInput.value,
-        profilcolor: profilcolor,
-        initial: initialInput
+    const updatedContact = {name: nameInput.value, email: emailInput.value, phone: phoneInput.value, profilcolor: profilcolor, initial: initialInput
     };
     await updateContactInRemoteStorage(id, updatedContact);
     closeEditContactOverlay();
     await refreshContacts();
     selectedContact.innerHTML = "";
-}
-
-
-/**
- * Shows a success message if the new contact is created
- */
-async function showCreateContactSuccess() {
-    const overlay = document.getElementById('success-message-overlay');
-    overlay.classList.remove('d_none');
-    overlay.classList.add('show');
-    setTimeout(() => {
-        overlay.classList.add('d_none');
-        overlay.classList.remove('show');
-    }, 800);
-    await initContacts();
 }
 
 
@@ -435,22 +395,4 @@ function changeContact() {
         btnContainer.classList.add('slide-in');
         document.addEventListener('click', hideMobileContactBtns);
     }, 10);
-}
-
-
-/**
- * Hides the mobile contact action buttons when clicking outside the button container
- * @param {MouseEvent} event - The click event outside triggered  on the document
- */
-function hideMobileContactBtns(event) {
-    const btnContainer = document.getElementById('mobile-contact-profil-btns-container');
-    const isClickInsideMenu = btnContainer.contains(event.target);
-    if (!isClickInsideMenu) {
-        btnContainer.classList.remove('slide-in');
-        setTimeout(() => {
-            btnContainer.classList.add('d_none');
-        }, 400); 
-        document.getElementById('mobile-button-wrapper').classList.remove('d_none');
-        document.removeEventListener('click', hideMobileContactBtns);
-    }
 }
