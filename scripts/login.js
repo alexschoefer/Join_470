@@ -1,22 +1,73 @@
+/**
+ * 
+ */
 function startLogoAnimation() {
-  const logo = document.getElementById("start-logo-img");
-  const loginContainerRef = document.getElementById("login-main-container");
-  const wrapper = document.querySelector(".login-wrapper");
-  if (currentDeviceType === 'mobile') {
-    wrapper.classList.add("mobile-background");
-    logo.classList.add("logo-animation-move-mobile");
-  } else {
-    wrapper.classList.remove("mobile-background");
-    logo.classList.add("logo-animation-move-desktop");
-  }
+  const animatedLogo = document.getElementById("start-logo-animation");
+  const finalLogo = document.getElementById("start-logo-final");
+  const loginContainer = document.getElementById("login-main-container");
+  const contentWrapper = document.getElementById("login-content-wrapper");
+  const wrapper = document.getElementById("login-wrapper");
+  setLogoSource(animatedLogo);
+  startAnimation(animatedLogo, wrapper);
   setTimeout(() => {
-    loginContainerRef.classList.remove("hidden");
-    loginContainerRef.classList.add("show");
-    wrapper.classList.remove("login-wrapper-start");
-    wrapper.classList.remove("mobile-background");
+    showLoginContent(contentWrapper, loginContainer, animatedLogo, finalLogo, wrapper);
   }, 1600);
 }
 
+
+/**
+ * 
+ * @returns 
+ */
+function isMobile() {
+  return window.innerWidth <= 750;
+}
+
+
+/**
+ * 
+ * @param {*} logo 
+ */
+function setLogoSource(logo) {
+  logo.src = isMobile() ? "./assets/img/MenuLogo.png" : "./assets/img/MainLogo.png";
+}
+
+
+/**
+ * 
+ * @param {*} logo 
+ * @param {*} wrapper 
+ */
+function startAnimation(logo, wrapper) {
+  if (isMobile()) {
+    wrapper.classList.add("mobile-background");
+    logo.classList.add("logo-animation-move-mobile");
+  } else {
+    logo.classList.add("logo-animation-move-desktop");
+  }
+}
+
+
+/**
+ * 
+ * @param {*} contentWrapper 
+ * @param {*} loginContainer 
+ * @param {*} animatedLogo 
+ * @param {*} finalLogo 
+ * @param {*} wrapper 
+ */
+function showLoginContent(contentWrapper, loginContainer, animatedLogo, finalLogo, wrapper) {
+  contentWrapper.classList.remove("d_none");
+  loginContainer.classList.replace("hidden", "show");
+  animatedLogo.classList.add("d_none");
+  finalLogo.classList.remove("d_none");
+  wrapper.classList.remove("login-wrapper-start", "mobile-background");
+}
+
+/**
+ * 
+ * @param {*} event 
+ */
 async function loginUser(event) {
   event.preventDefault();
   let email = document.getElementById("login-usermail-input").value.trim();
@@ -33,6 +84,10 @@ async function loginUser(event) {
   }
 }
 
+/**
+ * 
+ * @param {*} email 
+ */
 async function saveLoginUserDataToLocalStorage(email) {
   let response = await fetch(fetchURLDataBase + "/contacts.json");
   let loginUserDetails = await response.json();
@@ -50,6 +105,11 @@ async function saveLoginUserDataToLocalStorage(email) {
   }
 }
 
+
+/**
+ * 
+ * @param {*} input 
+ */
 function validateLoginInput(input) {
   let errorMessage = document.getElementById(input.id + "-validation-message");
   let wrapper = input.closest(".user-input-wrapper");
@@ -64,6 +124,9 @@ function validateLoginInput(input) {
   }
 }
 
+/**
+ * 
+ */
 function showLoginError() {
   let errorMessage = document.getElementById("login-userpassword-input-validation-message");
   errorMessage.classList.remove("d_none");
@@ -75,6 +138,11 @@ function showLoginError() {
   passwordWrapper.classList.add("input-error");
 }
 
+
+/**
+ * 
+ * @param {*} input 
+ */
 function checkRequiredLoginEmail(input) {
   let errorMessage = document.getElementById(input.id + "-validation-message");
   let wrapper = input.closest(".user-input-wrapper");
