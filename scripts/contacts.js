@@ -47,10 +47,10 @@ async function getAllContacts() {
  * @async
  * @param {string} name - The full name of the contact
  * @param {string} email - The email address of the contact
- * @param {string} phone - The phone number of the contact (optional)
+ * @param {string} phone - The phone number of the contact
  * @param {string} initial - The contact's initials
  * @param {string} profilcolor - The contact's profile color
- * @returns {Promise<Object>} A promise that resolves to the server response (e.g., new contact's ID)
+ * @returns {Promise<Object>} A promise that resolves to the server response 
  */
 async function postContactsToRemoteStorage(name, email, phone, initial, profilcolor) {
     let response = await fetch(fetchURLDataBase + '/contacts' + '.json', {
@@ -216,8 +216,7 @@ function renderAddContactOverlay() {
 
 /**
  * Toggles the active visual state for the selected contact element.
- * Removes the active state from all other contact entries and applies it
- * to the specified element.
+ * Removes the active state from all other contact entries and applies it to the specified element.
  * @param {*} element - The contact DOM element to activate
  */
 function toggleActiveContact(element) {
@@ -360,11 +359,11 @@ function validateContactFormsInput(input) {
 
 
 /**
- * Updates a contact's information in the remote storage based on user input
+ * Updates a contact's information in the remote storage based on user input changes
  * @param {*} id - The user id of the contact to update
- * @param {*} event - The form submission event
+ * @param {Event} event - The form submission event
  * @param {*} profilcolor - The contact´s profil color
- * @param {*} initial - The initial of the user
+ * @param {String} initial - The initial of the user
  */
 async function getChangesFromContact(id, event, profilcolor, initial) {
     let selectedContact = document.getElementById('contact-details');
