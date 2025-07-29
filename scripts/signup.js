@@ -1,4 +1,3 @@
-// const fetchURLDataBase = "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/"
 let isEmailAlreadyUsed = false;
 
 /**
@@ -24,6 +23,7 @@ function validateSignupInput(input) {
     validateSignUpForm();
 }
 
+
 /**
  * Help-function - Checking the required input email
  * 
@@ -47,6 +47,7 @@ function checkRequiredInputEmail(input) {
         checkEmailAlreadyExist(input);
 }
 
+
 /** 
  * Help-function - Checking the given email adress for the sign up in the database.
  * 
@@ -67,6 +68,7 @@ async function checkEmailAlreadyExist(input) {
     }
 }
 
+
 /**
  * Help-function - Displays an error message when the entered email address already exists in the database.
  *
@@ -82,6 +84,7 @@ function showEmailAlreadyExistError(input) {
     errorMessage.classList.remove('d_none');
     wrapper.classList.add('input-error');
 }
+
 
 /** 
  * Help-function - Clears all error messages by the input fields
@@ -101,51 +104,6 @@ function clearErrorMessage(input) {
     }
 }
 
-/**
- * Changes the icon in the input field for password
- * 
- * If the length of the input is bigger than 0 then a new icon will be placed in the input field
- * Otherwise if the field is empty, it shows a default lock icon.
- * 
- * @param {HTMLInputElement} input 
- */
-function changePasswordIcon(input) {
-    const container = input.closest('.input-container');
-    const icon = container.querySelector('.password-icon');
-
-    if (input.value.trim().length > 0) {
-        icon.src = "../assets/icons/visibility-off-icon.png";
-        icon.classList.add('visibility-off-icon');
-    } else {
-        icon.src = "../assets/icons/lock-icon.png";
-        icon.classList.remove('visibility-off-icon');
-    }
-}
-
-/**
- * Toggles the visibility of a password input field.
- * 
- * Switches the input type between "password" and "text" based on its current state,
- * allowing the user to show or hide the entered password. Also updates the icon accordingly.
- *
- * This function only toggles the input if it contains a non-empty value.
- *
- * @param {HTMLImageElement} iconElement - The eye icon element that was clicked to toggle visibility.
- */
-function toggleInputTypePassword(iconElement) {
-    const container = iconElement.closest('.input-container');
-    const input = container.querySelector('input');
-
-    if (input.type === 'password' && input.value.trim().length > 0) {
-        input.type = 'text';
-        iconElement.src = "../assets/icons/visibility-icon.png";
-    } else if (input.type === 'text' && input.value.trim().length > 0) {
-        input.type = 'password';
-        iconElement.src = "../assets/icons/visibility-off-icon.png";
-    }
-}
-
-
 
 /**
  * Help-functions - Checks if the button for privacy police is clicked
@@ -155,6 +113,7 @@ function toggleInputTypePassword(iconElement) {
 function isPrivacyPolicyChecked() {
     return document.getElementById('checkbox-privacy-policy').checked;
 }
+
 
 /**
  * Validates the entire sign-up form to determine if the "Sign Up" button should be enabled.
@@ -192,6 +151,7 @@ function checkConfirmPassword() {
     }
 }
 
+
 /**
  * Help-function: Handle the user inputs username, useremail and password
  * 
@@ -207,6 +167,7 @@ function saveUserInputsForRemoteStorage(event) {
     let userpassword = document.getElementById('userpassword-input');
     postUserDataToRemoteStorage(username, usermail, userpassword);
 }
+
 
 /**
  * Sends the user's registration data to the remote firebase database
@@ -240,6 +201,7 @@ async function postUserDataToRemoteStorage(username, usermail, userpassword) {
     return responseToJson = await response.json();
 }
 
+
 /**
  * Help-function - Reset all input fields
  * 
@@ -253,8 +215,9 @@ function resetRegistration() {
     document.getElementById('userpassword-input').value = '';
     document.getElementById('confirm-userpassword-input').value = '';
     document.getElementById('checkbox-privacy-policy').checked = false;
-    setSignUpButtonState(false);
+    setButtonState(false);
 }
+
 
 /**
  * Displays a success overlay and redirects the user to the login page after a short delay.
@@ -272,6 +235,7 @@ function forwardingToLoginPage() {
     }, 800);
 }
 
+
 /**
  * Handles the change event for the privacy policy checkbox.
  * 
@@ -284,6 +248,7 @@ function handlePrivacyPolicyChange() {
     checkIcon.classList.toggle('d_none', !isChecked);
     validateSignUpForm();
 }
+
 
 /**
  * Help-function - Reset the privacy police checkbox
