@@ -6,6 +6,7 @@
  * showLoginContent(): Replaces the animated logo with login container
  */
 function startLogoAnimation() {
+
   const animatedJoinLogo = document.getElementById("start-logo-animation");
   const finalJoinLogo = document.getElementById("start-logo-final");
   const loginContainer = document.getElementById("login-main-container");
@@ -80,10 +81,16 @@ function showLoginContent(contentWrapper, loginContainer, animatedJoinLogo, fina
 async function loginUser(event) {
   event.preventDefault();
   let email = document.getElementById("login-usermail-input").value.trim();
-  let password = document.getElementById("login-userpassword-input").value.trim();
+  let password = document
+    .getElementById("login-userpassword-input")
+    .value.trim();
   let response = await fetch(fetchURLDataBase + "/users.json");
   let users = await response.json();
-  let userLogin = users && Object.values(users).find((user) => user.email === email && user.password === password);
+  let userLogin =
+    users &&
+    Object.values(users).find(
+      (user) => user.email === email && user.password === password
+    );
   if (userLogin) {
     await saveLoginUserDataToLocalStorage(email);
     localStorage.setItem("showWelcomeOnce", "true");
@@ -103,7 +110,9 @@ async function loginUser(event) {
 async function saveLoginUserDataToLocalStorage(email) {
   let response = await fetch(fetchURLDataBase + "/contacts.json");
   let loginUserDetails = await response.json();
-  let loggedInUser = loginUserDetails && Object.values(loginUserDetails).find((user) => user.email === email);
+  let loggedInUser =
+    loginUserDetails &&
+    Object.values(loginUserDetails).find((user) => user.email === email);
   if (loggedInUser) {
     localStorage.setItem(
       "loggedInUser",
@@ -142,7 +151,9 @@ function validateLoginInput(input) {
  * Shows an error message by login with wrong user data
  */
 function showLoginError() {
-  let errorMessage = document.getElementById("login-userpassword-input-validation-message");
+  let errorMessage = document.getElementById(
+    "login-userpassword-input-validation-message"
+  );
   errorMessage.classList.remove("d_none");
   let emailInput = document.getElementById("login-usermail-input");
   let passwordInput = document.getElementById("login-userpassword-input");
