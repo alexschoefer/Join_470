@@ -164,6 +164,7 @@ function areAllInputsFilled() {
     return true;
 }
 
+
 /**
  * Help-function - Validates a given user-email 
  * 
@@ -177,6 +178,7 @@ function isValidEmail(email) {
     let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     return emailRegex.test(email.trim());
 }
+
 
 /**
  * Help-function - Enables or disables the sign-up button based on the provided state.
@@ -225,6 +227,207 @@ function arrowBack() {
 
 
 /**
+ * Kombiniert zwei Arrays (Namen und Farben) zu einem Array von Objekten mit name und color.
+ * 
+ * @param {string[]} assignTo - Array mit Namen der zugewiesenen Personen.
+ * @param {string[]} colorTo - Array mit Farben, die den Personen zugeordnet sind.
+ * @returns {Object[]} Array von Objekten mit { name, color }
+ */
+function combineAssignedWithColors(assignTo, colorTo) {
+    return assignTo.map((name, i) => ({
+        name: name,
+        color: colorTo[i] || "#CCCCCC"
+    }));
+}
+
+
+/**
+ * Baut ein Task-Objekt aus den übergebenen Parametern.
+ * @param {number} nextId - Die ID für die neue Task.
+ * @param {string} title - Der Titel der Task.
+ * @param {string} description - Die Beschreibung der Task.
+ * @param {string} date - Das Fälligkeitsdatum.
+ * @param {string} priority - Die Priorität.
+ * @param {string} status - Der Status.
+ * @param {Object[]} assigned - Array der zugewiesenen Personen.
+ * @param {string} category - Die Kategorie.
+ * @param {Object[]} subtasks - Array der Subtasks.
+ * @returns {Object} Das Task-Objekt.
+ */
+function buildTaskData(nextId, title, description, date, priority, status, assigned, category, subtasks) {
+    return {
+        title,
+        description,
+        priority,
+        status,
+        dueDate: date,
+        subtasks,
+        assigned,
+        category,
+        id: nextId
+    };
+}
+
+
+/**
+ * Holt die nächste freie Task-ID aus der Datenbank.
+ * @async
+ * @returns {Promise<number>} Die nächste freie ID.
+ */
+async function getNextTaskId() {
+    let res = await fetch(fetchURLDataBase + "/tasks.json");
+    let data = await res.json();
+    let existingIds = data ? Object.keys(data).map((id) => parseInt(id)) : [];
+    return existingIds.length > 0 ? Math.max(...existingIds) + 1 : 1;
+}
+
+
+/**
+ * Holt die nächste freie ID für eine neue Task, basierend auf der Anzahl der vorhandenen Tasks.
+ * @async
+ * @returns {Promise<number>} Die nächste freie ID (Anzahl der Tasks + 1).
+ */
+async function checkIdAmount() {
+    let response = await fetch(fetchURLDataBase + "/tasks" + ".json");
+    let data = await response.json();
+    let id = Object.keys(data).length + 1;
+    return id;
+}
+
+
+/**
+ * Gibt ein Array der Namen aller aktuell ausgewählten Kontakte zurück.
+ * @returns {string[]} Array mit den Namen der ausgewählten Kontakte.
+ */
+function getAssignedContacts() {
+    const assigned = [];
+    assignedCheckbox.forEach((item, i) => {
+        if (item.checkbox) {
+            assigned.push(resultContactList[i].name);
+        }
+    });
+    return assigned;
+}
+
+
+/**
+ * Gibt ein Array der ausgewählten Farben der zugewiesenen Kontakte zurück.
+ * @returns {string[]} Array mit den Farben der ausgewählten Kontakte.
+ */
+function getAssignedColor() {
+    const color = [];
+    assignedCheckbox.forEach((item, i) => {
+        if (item.checkbox) {
+            color.push(resultContactList[i].color);
+        }
+    });
+    return color;
+}
+
+
+/**
+ * Sammelt alle eingegebenen Subtasks aus dem DOM und gibt sie als Array von Objekten zurück.
+ * @returns {Object[]} Array von Subtask-Objekten mit { title, done }
+ */
+function getSubtasksArray() {
+    const subtaskInputs = document.querySelectorAll(".ATSubtask-container");
+    subtasks = [];
+    subtaskInputs.forEach((input) => {
+        const value = input.value.trim();
+        if (value) {
+            subtasks.push({ title: value, done: false });
+        }
+    });
+    return subtasks;
+}
+
+
+/**
+ * Validiert das Titel-Eingabefeld für eine neue Aufgabe.
+ * Zeigt eine Fehlermeldung an, wenn das Feld leer ist.
+ * @returns {boolean} true, wenn das Feld ausgefüllt ist, sonst false.
+ */
+function validateTitle() {
+    if (!ATTitleRef.value.trim()) {
+        ATTitleRef.classList.add('error');
+        document.getElementById('title-required').classList.remove('d_none');
+        return false;
+    } else {
+        ATTitleRef.classList.remove('error');
+        document.getElementById('title-required').classList.add('d_none');
+        return true;
+    }
+}
+
+
+/**
+ * Validiert das Fälligkeitsdatum-Eingabefeld für eine neue Aufgabe.
+ * Zeigt eine Fehlermeldung an, wenn das Feld leer ist.
+ * @returns {boolean} true, wenn das Feld ausgefüllt ist, sonst false.
+ */
+function validateDueDate() {
+    if (!ATDueDateRef.value.trim()) {
+        ATDueDateRef.classList.add('error');
+        document.getElementById('due-date-required').classList.remove('d_none');
+        return false;
+    } else {
+        ATDueDateRef.classList.remove('error');
+        document.getElementById('due-date-required').classList.add('d_none');
+        return true;
+    }
+}
+
+
+/**
+ * Validiert, ob eine Kategorie ausgewählt wurde.
+ * Zeigt eine Fehlermeldung an, wenn die Standard-Kategorie noch ausgewählt ist.
+ * @returns {boolean} true, wenn eine Kategorie ausgewählt ist, sonst false.
+ */
+function validateCategory() {
+    console.log('validateCategory aufgerufen');
+    const selectedText = ATcategory.textContent;
+    console.log('Kategorie:', selectedText);
+    const defaultText = 'Select a category';
+    if (selectedText === defaultText) {
+        categoryDropdownSelected.classList.add('error');
+        categoryRequired.classList.remove('d_none');
+        return false;
+    } else {
+        categoryDropdownSelected.classList.remove('error');
+        categoryRequired.classList.add('d_none');
+        return true;
+    }
+}
+
+
+/**
+ * Validiert alle Eingabefelder für das Hinzufügen einer Aufgabe.
+ * @returns {boolean} true, wenn alle Felder gültig sind, sonst false.
+ */
+function validateAddTaskInputs() {
+    let valid = true;
+    if (!validateTitle()) valid = false;
+    if (!validateDueDate()) valid = false;
+    if (!validateCategory()) valid = false;
+    return valid;
+}
+
+
+/**
+ * Überprüft, ob alle Pflichtfelder ausgefüllt sind, und aktiviert/deaktiviert den "Add Task"-Button entsprechend.
+ */
+function checkRequiredFieldsAndToggleButton() {
+    const titleFilled = ATTitleRef.value.trim() != "";
+    const dueDateFilled = ATDueDateRef.value.trim() != "";
+    const categoryFilled = ATcategory.textContent.trim() != "Select a category";
+    if (titleFilled && dueDateFilled && categoryFilled) {
+        ATButtonAddTaskRef.disabled = false;
+    } else {
+        ATButtonAddTaskRef.disabled = true;
+    }
+}
+
+=======
  * Hides the mobile contact action buttons when clicking outside the button container
  * @param {MouseEvent} event - The click event outside triggered  on the document
  */

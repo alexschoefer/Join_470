@@ -12,7 +12,6 @@ ATSubtaskInput.addEventListener('keydown', function (event) {
     }
 });
 
-// dies muss geklärt werden, event listener funktioniert nicht auf button disabled!!!!
 ATButtonAddTaskRef.addEventListener('click', function (event) {
     if (!validateAddTaskInputs()) {
         event.preventDefault();
@@ -55,4 +54,10 @@ document.addEventListener('click', function (e) {
         categoryDropdownArrow.classList.remove('open');
         categoryDropdownOpen = false;
     }
+});
+
+document.querySelector('.calendar-icon').addEventListener('click', function () {
+    const input = document.getElementById('add-task-due-date-input');
+    input.focus();
+    if (input.showPicker) input.showPicker();
 });
