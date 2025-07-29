@@ -79,7 +79,7 @@
 }
 
 .burger-menu-button-help {
-  display: flex;
+  display: none;
   justify-content: flex-start;
   align-items: center;
   height: 46px;
