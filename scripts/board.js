@@ -389,7 +389,7 @@ async function valueTasksToEditTasks(id) {
     document.getElementById("category-required").classList.remove("d_none");
     isValid = false;
   }
-  const selected = getAssignedContacts(); // poartă fie string (nume), fie obiect contact
+  const selected = getAssignedContacts();
   const assignedWithColor = selected.map((item) => {
     const name = typeof item === "string" ? item : item.name;
     const dummy = contactsDummy.find((c) => c.name === name);
@@ -455,7 +455,7 @@ function generateAssignedCardOverlay(assignedList) {
 }
 
 function getInitialsList(assignedList) {
-  if (!Array.isArray(assignedList)) return ""; // dacă nu e listă, ieșim
+  if (!Array.isArray(assignedList)) return "";
 
   return assignedList
 
