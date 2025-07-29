@@ -89,6 +89,51 @@ function clearErrorMessage(input) {
 
 
 /**
+ * Changes the icon in the input field for password
+ * 
+ * If the length of the input is bigger than 0 then a new icon will be placed in the input field
+ * Otherwise if the field is empty, it shows a default lock icon.
+ * 
+ * @param {HTMLInputElement} input 
+ */
+function changePasswordIcon(input) {
+    const container = input.closest('.input-container');
+    const icon = container.querySelector('.password-icon');
+
+    if (input.value.trim().length > 0) {
+        icon.src = "../assets/icons/visibility-off-icon.png";
+        icon.classList.add('visibility-off-icon');
+    } else {
+        icon.src = "../assets/icons/lock-icon.png";
+        icon.classList.remove('visibility-off-icon');
+    }
+}
+
+/**
+ * Toggles the visibility of a password input field.
+ * 
+ * Switches the input type between "password" and "text" based on its current state,
+ * allowing the user to show or hide the entered password. Also updates the icon accordingly.
+ *
+ * This function only toggles the input if it contains a non-empty value.
+ *
+ * @param {HTMLImageElement} iconElement - The eye icon element that was clicked to toggle visibility.
+ */
+function toggleInputTypePassword(iconElement) {
+    const container = iconElement.closest('.input-container');
+    const input = container.querySelector('input');
+
+    if (input.type === 'password' && input.value.trim().length > 0) {
+        input.type = 'text';
+        iconElement.src = "../assets/icons/visibility-icon.png";
+    } else if (input.type === 'text' && input.value.trim().length > 0) {
+        input.type = 'password';
+        iconElement.src = "../assets/icons/visibility-off-icon.png";
+    }
+}
+
+
+/**
  * Validates the contact form section by checking if all inputs are filled and if the email input has a valid format.
  * Enables or disables the sign-up/create/edit button based on the validation result.
  */
@@ -382,3 +427,44 @@ function checkRequiredFieldsAndToggleButton() {
     }
 }
 
+=======
+ * Hides the mobile contact action buttons when clicking outside the button container
+ * @param {MouseEvent} event - The click event outside triggered  on the document
+ */
+function hideMobileContactBtns(event) {
+    const btnContainer = document.getElementById('mobile-contact-profil-btns-container');
+    const isClickInsideMenu = btnContainer.contains(event.target);
+    if (!isClickInsideMenu) {
+        btnContainer.classList.remove('slide-in');
+        setTimeout(() => {
+            btnContainer.classList.add('d_none');
+        }, 400); 
+        document.getElementById('mobile-button-wrapper').classList.remove('d_none');
+        document.removeEventListener('click', hideMobileContactBtns);
+    }
+}
+
+
+/**
+ * Shows a success message if the new contact is created
+ */
+async function showCreateContactSuccess() {
+    const overlay = document.getElementById('success-message-overlay');
+    overlay.classList.remove('d_none');
+    overlay.classList.add('show');
+    setTimeout(() => {
+        overlay.classList.add('d_none');
+        overlay.classList.remove('show');
+    }, 800);
+    await initContacts();
+}
+
+
+/**
+ * Help function - Sorts an array of contact objects alphabetically by their name
+ * @param {*} allContacts - The array of contact objects to sort
+ * @returns - The sorted array of contacts
+ */
+function sortContactsAlphabetically(allContacts) {
+    return allContacts.sort((a, b) => a.name.localeCompare(b.name));
+}

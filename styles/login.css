@@ -1,4 +1,4 @@
-.start-logo-img {
+/* .start-logo-img {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -15,7 +15,28 @@
   transform: translate(-50%, -50%);
   width: 247px;
   height: auto;
-}
+} */
+
+/* Logo, das animiert wird */
+#start-logo-animation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 247px;
+    height: auto;
+    z-index: 10;
+  }
+  
+  /* Finales statisches Logo nach Animation */
+  #start-logo-final {
+    position: absolute;
+    top: 40px;
+    left: 30px;
+    width: 64px;
+    height: auto;
+    z-index: 10;
+  }
 
 .logo-animation-move-desktop {
   animation: logo-move 1.5s ease-in-out forwards;
@@ -26,7 +47,7 @@
 }
 
 .login-wrapper.mobile-background {
-  background-color: #2a3647; /* dunkler Hintergrund für mobile */
+  background-color: #2a3647;
 }
 
 .logo-animation-start {

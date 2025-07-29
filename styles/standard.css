@@ -7,6 +7,12 @@
   font-style: normal;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 body {
   overflow-x: hidden;
@@ -29,22 +35,6 @@ a {
   height: 100vh; 
 }
 
-@keyframes logo-move {
-  0% {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 247px;
-  }
-  100% {
-    top: 80px;
-    left: 77px;
-    transform: translate(0, 0);
-    width: 150px;
-  }
-}
-
-
 #btn-form:disabled {
   color: #666;
   cursor: not-allowed;
@@ -58,16 +48,33 @@ body {
   padding: 0;
 }
 
+@keyframes logo-move {
+  from {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 247px;
+  }
+  to {
+    top: 40px;
+    left: 30px;
+    transform: none;
+    width: 64px;
+  }
+}
+
 @keyframes moveLogoMobile {
   from {
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%);
+    width: 247px;
   }
   to {
     top: 40px;
-    left: 20px;
-    transform: translate(0, 0) scale(0.6);
+    left: 20px; /* ggf. anpassen für kleinere Screens */
+    transform: none;
+    width: 48px;
   }
 }
 

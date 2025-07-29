@@ -2,97 +2,88 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-    <link rel="shortcut icon" href="../assets/img/MenuLogo.png" type="image/x-icon">
-    <!-- CSS-Styling -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="../styles/standard.css">
-    <link rel="stylesheet" href="../styles/assets.css#">
-    <link rel="stylesheet" href="../styles/fonts.css">
-    <link rel="stylesheet" href="../styles/login.css">
-    <link rel="stylesheet" href="../styles/standard.css">
-    <link rel="stylesheet" href="../styles/login-mobile.css">
-    <link rel="stylesheet" href="./styles/sign-up.css">
+    <link rel="shortcut icon" href="../assets/img/MenuLogo.png" type="image/x-icon" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../styles/standard.css" />
+    <link rel="stylesheet" href="../styles/assets.css" />
+    <link rel="stylesheet" href="../styles/fonts.css" />
+    <link rel="stylesheet" href="../styles/login.css" />
+    <link rel="stylesheet" href="../styles/login-mobile.css" />
+    <link rel="stylesheet" href="./styles/sign-up.css" />
+
     <!-- JavaScript -->
     <script src="../scripts/template-summary.js"></script>
-    <script src="./scripts/signup.js"></script>
-    <script src="./script.js"></script>
     <script src="./scripts/login.js"></script>
-
+    <script src="./script.js"></script>
 </head>
 
 <body onload="startLogoAnimation()">
-    <div class="login-wrapper">
-        <img id="start-logo-img" class="start-logo-img logo-animation-start" src="./assets/img/MainLogo.png" alt="">
-        <div id="login-main-container" class="login-main-container hidden">
-            <div class="login-headline-container">
-                <h1 id="login-headline">Log in</h1>
-                <div class="login-underline"></div>
+    <img id="start-logo-animation" class="start-logo-img logo-animation-start" src="./assets/img/MainLogo.png"
+        alt="main-logo-animation-start" />
+    <div id="login-wrapper" class="login-wrapper login-wrapper-start">
+        <img id="start-logo-final" class="start-logo-img d_none" src="./assets/img/MainLogo.png"
+            alt="Startlogo final"/>
+        <div id="login-content-wrapper" class="d_none">
+            <!-- Login Container -->
+            <div id="login-main-container" class="login-main-container hidden">
+                <div class="login-headline-container">
+                    <h1 id="login-headline">Log in</h1>
+                    <div class="login-underline"></div>
+                </div>
+                <form onsubmit="loginUser(event); return false;">
+                    <div class="user-login-input-container">
+                        <div class="input-wrapper">
+                            <div class="user-input-wrapper">
+                                <div class="input-container">
+                                    <input id="login-usermail-input" class="user-input" type="email" name="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
+                                        placeholder="Email" autocomplete="off" onfocus="clearErrorMessage(this)" onblur="validateLoginInput(this)"/>
+                                    <div><img src="../assets/icons/mail-icon.png" alt="email-icon"></div>
+                                </div>
+                            </div>
+                            <div class="input-validation-container">
+                                <p id="login-usermail-input-validation-message" class="input-validation-message d_none">
+                                    This field is required.</p>
+                            </div>
+                        </div>
+                        <div class="input-wrapper">
+                            <div class="user-input-wrapper">
+                                <div class="input-container">
+                                    <input id="login-userpassword-input" class="user-input" type="password"
+                                        name="password" placeholder="Password" oninput="changePasswordIcon(this)" onfocus="clearErrorMessage(this)" onblur="validateLoginInput(this)"/>
+                                    <div>
+                                        <img onclick="toggleInputTypePassword(this)" id="password-icon"
+                                        class="password-icon" src="../assets/icons/lock-icon.png"
+                                        alt="password-icon">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-validation-container">
+                                <p id="login-userpassword-input-validation-message"
+                                    class="input-validation-message d_none">Check your email and password.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-login-container">
+                        <button id="btn-login">Log in</button>
+                        <button class="btn-login-guest" onclick="guestLogin(event)">Guest Log in</button>
+                    </div>
+                </form>
             </div>
-            <form onsubmit="loginUser(event); return false;">
-                <div class="user-login-input-container">
-                    <!-- E-mail-Input -->
-                    <div class="input-wrapper">
-                        <div class="user-input-wrapper">
-                            <div class="input-container">
-                                <input id="login-usermail-input" class="user-input" type="email" name="email"
-                                    pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" placeholder="Email" autocomplete="off"
-                                    onfocus="clearErrorMessage(this)"
-                                    onblur="validateLoginInput(this), checkRequiredLoginEmail(this)">
-                                <div>
-                                    <img src="../assets/icons/mail-icon.png" alt="person-icon">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-validation-container">
-                            <p id="login-usermail-input-validation-message" class="input-validation-message d_none">This
-                                field is required.</p>
-                        </div>
-                    </div>
-                    <!-- Password-Input -->
-                    <div class="input-wrapper">
-                        <div class="user-input-wrapper">
-                            <div class="input-container">
-                                <input id="login-userpassword-input" class="user-input" type="password" name="password"
-                                    placeholder="Password" autocomplete="off" onfocus="clearErrorMessage(this)"
-                                    onblur="validateLoginInput(this)">
-                                <div>
-                                    <img src="../assets/icons/lock-icon.png" alt="person-icon">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-validation-container">
-                            <p id="login-userpassword-input-validation-message" class="input-validation-message d_none">
-                                Check your email and password. Please try again.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="btn-login-container">
-                    <button id="btn-login">Log in</button>
-                    <button class="btn-login-guest" onclick="guestLogin(event)">
-                        Guest Log in
-                    </button>
-                </div>
-            </form>
+            <div class="login-registration-container">
+                <span id="login-registration-slogan">Not a Join user?</span>
+                <a class="btn-sign-up" href="./html/sign.html">Sign up</a>
+            </div>
+            <!-- Footer -->
+            <footer class="footer-login">
+                <a class="nav-login-privacy-legal" href="./html/privacy-policy.html">Privacy Policy</a>
+                <a class="nav-login-privacy-legal" href="./html/legal-notice.html">Legal Notice</a>
+            </footer>
         </div>
-        <!-- Sign-Up-Content -->
-        <div class="login-registration-container">
-            <span id="login-registration-slogan">Not a Join user?</span>
-            <a class="btn-sign-up" href="./html/sign.html">Sign up</a>
-        </div>
-        <!-- footer-content -->
-        <footer class="footer-login">
-            <a class="nav-login-privacy-legal" href="./html/privacy-policy.html">Privacy Police</a>
-            <a class="nav-login-privacy-legal" href="./html/legal-notice.html">Legal
-                Notice</a>
-        </footer>
-
     </div>
 </body>
-
-
 
 </html>

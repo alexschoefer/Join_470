@@ -1,23 +1,19 @@
-/* Ganzer Bildschirm */
 .page-container {
     height: 100vh;
     display: flex;
     flex-direction: column;
   }
   
-  /* Horizontale Struktur: Sidebar + rechter Bereich */
   .content-row {
     display: flex;
     height: 100vh; 
   }
   
-  /* Sidebar fix links */
   #sidebar {
     height: 100vh;
     background-color: #f0f0f0;
   }
   
-  /* Rechter Bereich: Header + Content */
   .right-content {
     display: flex;
     flex-direction: column;
@@ -25,7 +21,6 @@
     overflow: hidden;
   }
   
-  /* Hauptinhalt */
   .help-main-container {
     display: flex;
     flex-direction: column;
@@ -35,22 +30,34 @@
     font-size: 16px;
     font-weight: 400;
     line-height: 120%;
-    max-height: calc(100vh - 80px);
+    max-height: calc(100vh - 120px);
     overflow-y: auto;
     margin-bottom: 40px;
   }
   
-  /* Headline-Bereich */
   .help-headline-container {
+    position: relative;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    align-items: center;
     width: 1014px;
     height: 73px;
     gap: 30px;
   }
 
+  .highlight-join {
+    color: #00BEE8; 
+    font-weight: 600; 
+  }
+
   #arrow-icon {
-    position: fixed;
+    position: absolute;
+    right: 0;
+    top: 30%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 32px;  
+    height: 32px;
   }
   
   #help-headline {
@@ -75,7 +82,7 @@
 
   .help-explanation-join-container {
     width: 1014px;
-    height: 190px;
+    height: 238px;
   }
 
   .help-using-container {
