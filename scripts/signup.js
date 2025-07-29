@@ -1,4 +1,3 @@
-// const fetchURLDataBase = "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/"
 let isEmailAlreadyUsed = false;
 
 /**
@@ -24,6 +23,7 @@ function validateSignupInput(input) {
     validateSignUpForm();
 }
 
+
 /**
  * Help-function - Checking the required input email
  * 
@@ -47,6 +47,7 @@ function checkRequiredInputEmail(input) {
         checkEmailAlreadyExist(input);
 }
 
+
 /** 
  * Help-function - Checking the given email adress for the sign up in the database.
  * 
@@ -67,6 +68,7 @@ async function checkEmailAlreadyExist(input) {
     }
 }
 
+
 /**
  * Help-function - Displays an error message when the entered email address already exists in the database.
  *
@@ -82,6 +84,7 @@ function showEmailAlreadyExistError(input) {
     errorMessage.classList.remove('d_none');
     wrapper.classList.add('input-error');
 }
+
 
 /** 
  * Help-function - Clears all error messages by the input fields
@@ -110,6 +113,7 @@ function clearErrorMessage(input) {
 function isPrivacyPolicyChecked() {
     return document.getElementById('checkbox-privacy-policy').checked;
 }
+
 
 /**
  * Validates the entire sign-up form to determine if the "Sign Up" button should be enabled.
@@ -147,6 +151,7 @@ function checkConfirmPassword() {
     }
 }
 
+
 /**
  * Help-function: Handle the user inputs username, useremail and password
  * 
@@ -162,6 +167,7 @@ function saveUserInputsForRemoteStorage(event) {
     let userpassword = document.getElementById('userpassword-input');
     postUserDataToRemoteStorage(username, usermail, userpassword);
 }
+
 
 /**
  * Sends the user's registration data to the remote firebase database
@@ -195,6 +201,7 @@ async function postUserDataToRemoteStorage(username, usermail, userpassword) {
     return responseToJson = await response.json();
 }
 
+
 /**
  * Help-function - Reset all input fields
  * 
@@ -208,8 +215,9 @@ function resetRegistration() {
     document.getElementById('userpassword-input').value = '';
     document.getElementById('confirm-userpassword-input').value = '';
     document.getElementById('checkbox-privacy-policy').checked = false;
-    setSignUpButtonState(false);
+    setButtonState(false);
 }
+
 
 /**
  * Displays a success overlay and redirects the user to the login page after a short delay.
@@ -227,6 +235,7 @@ function forwardingToLoginPage() {
     }, 800);
 }
 
+
 /**
  * Handles the change event for the privacy policy checkbox.
  * 
@@ -239,6 +248,7 @@ function handlePrivacyPolicyChange() {
     checkIcon.classList.toggle('d_none', !isChecked);
     validateSignUpForm();
 }
+
 
 /**
  * Help-function - Reset the privacy police checkbox
