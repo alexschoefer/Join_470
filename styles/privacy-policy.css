@@ -12,6 +12,7 @@
   padding-top: 50px;
   padding-left: 96px;
   padding-right: 96px;
+  padding-bottom: 50px;
 }
 
 @media (max-width: 1020px) {
@@ -22,6 +23,7 @@
     padding-top: 50px;
     padding-left: 16px;
     padding-right: 16px;
+    padding-bottom: 50px;
   }
   .privacy-policy-content h1 {
     font-size: 61px;
