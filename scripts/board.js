@@ -72,13 +72,14 @@ searchInput.addEventListener("input", () => {
   updateBoardContent();
 });
 function createCardElement(task) {
-  let html = generateTodoHTML(
+  const assignedHtml = getInitialsList(task.assigned);
+  const html = generateTodoHTML(
     task,
     getImageForPriority(task.priority),
-    getInitialsList(task.assigned.name),
+    assignedHtml,
     getColoredLabels(task.category)
   );
-  let template = document.createElement("template");
+  const template = document.createElement("template");
   template.innerHTML = html.trim();
   return template.content.firstElementChild;
 }
@@ -86,18 +87,9 @@ function createCardElement(task) {
 function openAddTaskOverlay() {
   if (!container) return;
   container.innerHTML = addTasks();
-  let old = document.getElementById("add-task-script");
-  if (old) old.remove();
-  let s = document.createElement("script");
-  s.id = "add-task-script";
-  s.src = "../scripts/add-task.js";
-  s.async = false;
-  s.onload = () => {
-    if (typeof window.addTaskInit === "function") {
-      window.addTaskInit();
-    }
-  };
-  document.body.appendChild(s);
+  if (typeof window.addTaskInit === "function") {
+    window.addTaskInit();
+  }
   container.classList.add("show-from-right");
   shadow.style.display = "block";
 }
@@ -272,16 +264,9 @@ function deleteTasksOfOverlay(id) {
   });
 }
 
-//------------------------------------------------------------------------------------
-//unter sind die Funktionen für das Editieren von Tasks
-
 function initAddTaskForm(id) {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      if (typeof window.addTaskInit === "function") {
-        window.addTaskInit();
-      }
-
       const oldBtn = document.getElementById("add-task-button-create-task");
       if (oldBtn) {
         const newBtn = oldBtn.cloneNode(true);
@@ -293,6 +278,7 @@ function initAddTaskForm(id) {
     });
   });
 }
+
 function editTaskOfOverlay(id) {
   let currentEditId = id;
   const taskOverlay = document.getElementById("task-card-container");
@@ -308,23 +294,17 @@ function editTaskOfOverlay(id) {
 }
 
 function injectAddTask(currentEditId) {
-  const old = document.getElementById("add-task-script");
-  const script = document.createElement("script");
-  if (!old) {
-    script.id = "add-task-script";
-    script.src = "../scripts/add-task.js";
-    script.onload = () => {
-      initAddTaskForm(currentEditId);
-    };
+  if (typeof window.addTaskInit === "function") {
+    window.addTaskInit();
   }
-  document.body.appendChild(script);
+  requestAnimationFrame(() => {
+    initAddTaskForm(currentEditId);
+  });
   shadow.style.display = "block";
   container.classList.add("show-from-right");
 }
 
 function preFillTaskForm(id) {
-  console.log(tasks);
-
   let task = tasks.find((t) => t?.id === id);
 
   if (!task) return;
@@ -332,14 +312,14 @@ function preFillTaskForm(id) {
   document.getElementById("add-task-description-textarea").value =
     task.description;
   const dateInput = document.getElementById("add-task-due-date-input");
-  dateInput.value = task.date;
+  dateInput.value = task.dueDate;
   if (dateInput.value) dateInput.classList.add("date-selected");
   addTaskPrioButtonClick(task.priority);
   const categoryText = document.getElementById("categoryDropdownSelectedText");
   categoryText.textContent = task.category;
   getContactsFromRemoteStorage().then(() => {
     resultContactList.forEach((contact, i) => {
-      if (task.assigned.includes(contact.name)) {
+      if (task.assigned.some((a) => a.name === contact.name)) {
         assignedCheckbox[i].checkbox = true;
         const checkboxDiv = document.getElementById(
           "ATContact-option-checkbox" + i
@@ -362,7 +342,9 @@ async function valueTasksToEditTasks(id) {
   const description = document
     .getElementById("add-task-description-textarea")
     .value.trim();
-  const date = document.getElementById("add-task-due-date-input").value.trim();
+  const dueDate = document
+    .getElementById("add-task-due-date-input")
+    .value.trim();
   const category = document
     .getElementById("categoryDropdownSelectedText")
     .textContent.trim();
@@ -378,7 +360,7 @@ async function valueTasksToEditTasks(id) {
     isValid = false;
   }
 
-  if (!date) {
+  if (!dueDate) {
     document.getElementById("add-task-due-date-input").classList.add("error");
     document.getElementById("due-date-required").classList.remove("d_none");
     isValid = false;
@@ -402,7 +384,7 @@ async function valueTasksToEditTasks(id) {
     id,
     title,
     description,
-    date: date,
+    dueDate: dueDate,
     priority,
     status: tasks.find((t) => t?.id === id)?.status || "toDo",
     category,
@@ -417,8 +399,6 @@ async function valueTasksToEditTasks(id) {
   closeContainerOverlay();
   updateTask();
 }
-
-// --------------------------------------------------------------------------------------------------
 
 function getImageForPriority(priority) {
   let imageMap = {
