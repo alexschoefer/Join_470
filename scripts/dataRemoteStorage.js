@@ -9,7 +9,7 @@ let standartTasks = [
       "As a user, I want the website to remember my selected theme even after I close the browser.",
     priority: "Medium",
     status: "toDo",
-    date: "2024-04-16",
+    dueDate: "2024-04-16",
     subtasks: [
       { title: "Save selected theme in localStorage", done: true },
       { title: "Save selected theme in localStorage", done: false },
@@ -17,10 +17,10 @@ let standartTasks = [
     ],
     assigned: [
       { name: "Alan Turing", color: "#0038FF" },
-      { name: "Shafi Goldwasser", color: "#9327FF" }
+      { name: "Shafi Goldwasser", color: "#9327FF" },
     ],
     category: "User Story",
-    colorTo: ["#0038FF", "#9327FF"]
+    colorTo: ["#0038FF", "#9327FF"],
   },
   {
     id: 1,
@@ -28,17 +28,17 @@ let standartTasks = [
     description: "Build start page with recipe recommendation.",
     priority: "Low",
     status: "inProgress",
-    date: "2024-04-16",
+    dueDate: "2024-04-16",
     subtasks: [
       { title: "mplement Recipe Recommendation", done: true },
       { title: "Start page Layout", done: false },
     ],
     assigned: [
       { name: "Shafi Goldwasser", color: "#FF7A00" },
-      { name: "Grace Hopper", color: "#FFE62B" }
+      { name: "Grace Hopper", color: "#FFE62B" },
     ],
     category: "User Story",
-    colorTo: ["#FF7A00", "#FFE62B"]
+    colorTo: ["#FF7A00", "#FFE62B"],
   },
   {
     id: 2,
@@ -47,17 +47,17 @@ let standartTasks = [
       "As a user, I want to receive a visual confirmation when I switch themes.",
     priority: "Urgent",
     status: "awaitFeedback",
-    date: "2025-06-20",
+    dueDate: "2025-06-20",
     subtasks: [
       { title: "Display toast or icon when theme is changed", done: true },
       { title: "Ensure message does not interrupt interaction", done: false },
     ],
     assigned: [
       { name: "Grace Hopper", color: "#1FD7C1" },
-      { name: "Ada Lovelace", color: "#0038FF" }
+      { name: "Ada Lovelace", color: "#0038FF" },
     ],
     category: "Technical Task",
-    colorTo: ["#1FD7C1", "#0038FF"]
+    colorTo: ["#1FD7C1", "#0038FF"],
   },
   {
     id: 3,
@@ -66,7 +66,7 @@ let standartTasks = [
       "Improve code maintainability by extracting theme toggle functionality into a reusable and testable module.",
     priority: "Medium",
     status: "done",
-    date: "2024-04-16",
+    dueDate: "2024-04-16",
     subtasks: [
       { title: "mplement Recipe Recommendation", done: true },
       { title: "Remove duplicate code from components", done: true },
@@ -75,10 +75,10 @@ let standartTasks = [
     ],
     assigned: [
       { name: "Shafi Goldwasser", color: "#FFE62B" },
-      { name: "Tim Berners", color: "#1FD7C1" }
+      { name: "Tim Berners", color: "#1FD7C1" },
     ],
     category: "Technical Task",
-    colorTo: ["#FFE62B", "#1FD7C1"]
+    colorTo: ["#FFE62B", "#1FD7C1"],
   },
   {
     id: 4,
@@ -87,7 +87,7 @@ let standartTasks = [
       "Description: Implement CSS variables for easier theming and consistent styling between dark and light modes.",
     priority: "Low",
     status: "toDo",
-    date: "2024-04-16",
+    dueDate: "2024-04-16",
     subtasks: [
       { title: "mplement Recipe Recommendation", done: true },
       { title: "Define CSS variables for colors and fonts", done: true },
@@ -97,11 +97,11 @@ let standartTasks = [
     assigned: [
       { name: "Margaret Hamilton", color: "#FF7A00" },
       { name: "Alan Turing", color: "#FFE62B" },
-      { name: "Ada Lovelace", color: "#9327FF" }
+      { name: "Ada Lovelace", color: "#9327FF" },
     ],
     category: "Technical Task",
-    colorTo: ["#FF7A00", "#FFE62B", "#9327FF"]
-  }
+    colorTo: ["#FF7A00", "#FFE62B", "#9327FF"],
+  },
 ];
 
 async function getTasksFromRemoteStorage(path) {
