@@ -1,0 +1,156 @@
+@media (max-width: 1450px) {
+  .help-headline-container,
+  .help-introduction-container,
+  .help-explanation-join-container,
+  .help-using-container,
+  .help-instruction-container {
+    width: 90%;
+  }
+
+  .help-main-container {
+    padding: 32px 24px;
+    margin-left: 0;
+  }
+
+  .help-using-container {
+    height: 1050px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 950px) {
+  .help-headline-container {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    gap: 16px;
+  }
+
+  #help-headline {
+    font-size: 48px;
+  }
+
+  .help-subtitle,
+  .help-enumeration {
+    font-size: 22px;
+    margin-top: 30px;
+  }
+
+  .help-instruction-headline {
+    font-size: 18px;
+  }
+
+  .help-instruction-text {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 750px) {
+  .help-main-container {
+    padding: 24px 16px;
+  }
+
+  .help-introduction-container {
+    font-size: 16px;
+    height: 76px;
+  }
+
+  .help-explanation-join-container {
+    margin-bottom: 32px;
+    height: 390px;
+  }
+
+  .help-subtitle-conclusion {
+    width: auto;
+  }
+
+  .help-instruction-container {
+    gap: 12px;
+  }
+
+  .help-enumeration {
+    font-size: 20px;
+  }
+
+  .help-instruction-headline {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  #help-headline {
+    font-size: 38px;
+  }
+
+  .help-explanation-join-container {
+    height: 420px;
+  }
+
+  .help-subtitle {
+    font-size: 20px;
+  }
+
+  .help-instruction-headline {
+    font-size: 15px;
+  }
+
+  .help-instruction-text {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 375px) {
+  .help-main-container {
+    gap: 16px;
+  }
+
+  .help-subtitle,
+  .help-enumeration {
+    margin-top: 80px;
+  }
+
+  .help-enumeration {
+    font-size: 18px;
+  }
+
+  .help-subtitle-conclusion-h2 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 320px) {
+  .help-using-container,
+  .help-introduction-container {
+    font-size: 14px;
+  }
+
+  .help-headline-container {
+    gap: 12px;
+    font-size: 14px;
+  }
+
+  .help-explanation-join-container {
+    font-size: 14px;
+  }
+
+  #help-headline {
+    font-size: 32px;
+  }
+
+  .help-subtitle {
+    font-size: 18px;
+    margin-top: 70px;
+  }
+
+  .help-instruction-headline {
+    font-size: 14px;
+  }
+
+  .help-instruction-text {
+    font-size: 12px;
+  }
+
+  .help-subtitle-conclusion-h2 {
+    font-size: 20px;
+  }
+}
