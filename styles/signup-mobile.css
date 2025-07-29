@@ -1,0 +1,100 @@
+@media (max-width: 950px) {
+  .main-logo-img {
+    width: 64px;
+    height: auto;
+    top: 40px;
+    left: 30px;
+    gap: 10px;
+    position: absolute;
+  }
+}
+
+@media (max-width: 650px) {
+  .sign-up-main-container {
+    width: 450px;
+  }
+
+  .arrow-icon {
+    position: absolute;
+    display: flex;
+    top: 20px;
+    left: -30px;
+  }
+
+  .footer-sign-up {
+    margin-top: 80px;
+  }
+}
+
+@media (max-width: 450px) {
+  #signup-headline {
+    font-size: 47px;
+  }
+
+  .sign-up-main-container {
+    width: 350px;
+    padding: 32px 16px;
+  }
+
+  .sign-up-input-container {
+    width: 350px;
+  }
+
+  .input-wrapper {
+    max-width: 300px;
+  }
+
+  .user-input {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 375px) {
+  .main-content-signup {
+    padding-top: 100px;
+  }
+
+  .main-logo-img {
+    width: 32px;
+    height: auto;
+    top: 20px;
+    left: 30px;
+    gap: 10px;
+    position: absolute;
+  }
+
+  .arrow-icon {
+    position: absolute;
+    display: flex;
+    top: 10px;
+    left: -40px;
+  }
+
+  #signup-headline {
+    font-size: 40px;
+  }
+
+  .sign-up-main-container {
+    width: 300px;
+  }
+
+  .sign-up-input-container {
+    width: 300px;
+  }
+
+  .input-wrapper {
+    max-width: 280px;
+  }
+
+  .footer-sign-up {
+    margin-top: 20px;
+  }
+
+  .user-input {
+    font-size: 16px;
+  }
+
+  input::placeholder {
+    font-size: 16px;
+  }
+}

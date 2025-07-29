@@ -325,9 +325,16 @@ div#task-card-container {
   -ms-transition: 0.6s;
   -o-transition: 0.6s;
   padding: 48px 40px 48px 40px;
-  /* trebuie sa sterg de aici  si sa gasesc cumva sa adaug pentru editContainer*/
 }
-
+div.add-task-form-div div.add-task-form-div-container {
+display: block;
+}
+div.add-task-form-div div.add-task-form-buttons{
+margin-top: 0;
+}
+div.add-task-form-div .add-task-form-right{
+  margin-top: 24px;
+}
 div.card-name-overlay {
   display: flex;
   justify-content: space-between;

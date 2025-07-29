@@ -1,3 +1,8 @@
+/**
+ * Toggles the visibility of the burger menu.
+ * Adds event listeners to close the menu on outside click or link click.
+ * @returns {void}
+ */
 function ShowBurgerMenu() {
   const menu = document.getElementById("burger-menu");
   menu.classList.toggle("d_none");
@@ -10,12 +15,21 @@ function ShowBurgerMenu() {
   }
 }
 
+/**
+ * Hides the burger menu and removes the outside click listener.
+ * @returns {void}
+ */
 function CloseBurgerMenu() {
   const menu = document.getElementById("burger-menu");
   menu.classList.add("d_none");
   document.removeEventListener("click", closeWhenClickedOutside);
 }
 
+/**
+ * Closes the burger menu if the click occurs outside the menu or guest icon.
+ * @param {MouseEvent} event - The click event.
+ * @returns {void}
+ */
 function closeWhenClickedOutside(event) {
   const menu = document.getElementById("burger-menu");
   const guestIcon = document.getElementById("profileCircle");
@@ -24,10 +38,15 @@ function closeWhenClickedOutside(event) {
   }
 }
 
+/**
+ * Sets the user's initials in the header based on localStorage data.
+ * Defaults to "G" if no name is found or parsing fails.
+ * Updates the #initials element with the result.
+ * @returns {void}
+ */
 function render() {
   const userData = localStorage.getItem("loggedInUser");
   let initials = "G";
-
   if (userData) {
     try {
       const parsedData = JSON.parse(userData);
@@ -35,16 +54,20 @@ function render() {
         initials = getInitials(parsedData.name);
       }
     } catch (err) {
-      console.error("Fehler beim Parsen von loginUser:", err);
+      console.error("Error parsing loggedInUser:", err);
     }
   }
-
   const initialsElement = document.getElementById("initials");
   if (initialsElement) {
     initialsElement.textContent = initials;
   }
 }
 
+/**
+ * Extracts up to two uppercase initials from a full name.
+ * @param {string} name - The full name (e.g. "Jane Doe").
+ * @returns {string} The resulting initials (e.g. "JD").
+ */
 function getInitials(name) {
   const nameParts = name.trim().split(" ");
   let initials = "";
@@ -54,21 +77,29 @@ function getInitials(name) {
   return initials;
 }
 
+/**
+ * Logs the user out by clearing related localStorage entries.
+ * Removes "loggedInUser" and "showWelcomeOnce".
+ * @returns {void}
+ */
 function logout() {
   localStorage.removeItem("loggedInUser");
   localStorage.removeItem("showWelcomeOnce");
 }
 
+/**
+ * Initializes the header by displaying the user's initials.
+ * Extracts initials from the logged-in user's name in localStorage.
+ * Updates the #initials element.
+ * @returns {void}
+ */
 function initHeader() {
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
   const initialsEl = document.getElementById("initials");
-
   if (!initialsEl || !user?.name) return;
-
   const initials = user.name
     .split(" ")
     .map((part) => part[0].toUpperCase())
     .join("");
-
   initialsEl.innerText = initials;
 }

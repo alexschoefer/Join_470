@@ -1,16 +1,20 @@
 function startLogoAnimation() {
   const logo = document.getElementById("start-logo-img");
   const loginContainerRef = document.getElementById("login-main-container");
-  setTimeout(() => {
-    logo.classList.add("logo-animation-end");
-    logo.classList.remove("start-logo-img");
-    logo.classList.add("main-logo-img");
-  }, 100);
-
+  const wrapper = document.querySelector(".login-wrapper");
+  if (currentDeviceType === "mobile") {
+    wrapper.classList.add("mobile-background");
+    logo.classList.add("logo-animation-move-mobile");
+  } else {
+    wrapper.classList.remove("mobile-background");
+    logo.classList.add("logo-animation-move-desktop");
+  }
   setTimeout(() => {
     loginContainerRef.classList.remove("hidden");
     loginContainerRef.classList.add("show");
-  }, 1000);
+    wrapper.classList.remove("login-wrapper-start");
+    wrapper.classList.remove("mobile-background");
+  }, 1600);
 }
 
 async function loginUser(event) {
@@ -115,5 +119,5 @@ function guestLogin(event) {
   localStorage.setItem("showWelcomeOnce", "true");
 
   // ➡ Manuell zur Zielseite weiterleiten
-  window.location.href = event.currentTarget.href;
+  window.location.href = "./html/summary.html";
 }
