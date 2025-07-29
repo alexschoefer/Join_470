@@ -1,5 +1,9 @@
 /**
- * 
+ * Starts the animation of the Join logo by opening the login screen
+ * Calls some help function:
+ * setLogoSource(element): Sets logo source based on device type (mobile or desktop)
+ * startAnimation(logoElement, wrapperElement): Adds animation classes
+ * showLoginContent(): Replaces the animated logo with login container
  */
 function startLogoAnimation() {
   const animatedJoinLogo = document.getElementById("start-logo-animation");
@@ -16,8 +20,8 @@ function startLogoAnimation() {
 
 
 /**
- * 
- * @returns 
+ * Checks if the currently window width is for the mobile or desktop device
+ * @returns {boolean} Returns true if the viewport width is 750px or less, otherwise false
  */
 function isMobile() {
   return window.innerWidth <= 750;
@@ -25,8 +29,8 @@ function isMobile() {
 
 
 /**
- * 
- * @param {*} logo 
+ * Set the source of the img element depending on the current device type
+ * @param {HTMLImageElement} animatedJoinLogo - The img element representing the animated Join logo
  */
 function setLogoSource(animatedJoinLogo) {
   animatedJoinLogo.src = isMobile() ? "./assets/img/MenuLogo.png" : "./assets/img/MainLogo.png";
@@ -34,9 +38,9 @@ function setLogoSource(animatedJoinLogo) {
 
 
 /**
- * 
- * @param {*} logo 
- * @param {*} wrapper 
+ * Starts the logo animation depending on the device type (mobile or desktop)
+ * @param {HTMLImageElement} animatedJoinLogo - The animated logo image element to animate
+ * @param {HTMLElement} loginWrapper - The container element for the login content in case of a mobile device
  */
 function startAnimation(animatedJoinLogo, loginWrapper) {
   if (isMobile()) {
@@ -49,12 +53,12 @@ function startAnimation(animatedJoinLogo, loginWrapper) {
 
 
 /**
- * 
- * @param {*} contentWrapper 
- * @param {*} loginContainer 
- * @param {*} animatedLogo 
- * @param {*} finalLogo 
- * @param {*} wrapper 
+ * Displays the user login content container after the logo animation has ending
+* @param {HTMLElement} contentWrapper - The container holding the main login content
+ * @param {HTMLElement} loginContainer - The container holding the login form
+ * @param {HTMLElement} animatedJoinLogo - The animated logo shown during the intro
+ * @param {HTMLElement} finalJoinLogo - The static logo shown after the animation
+ * @param {HTMLElement} loginWrapper - The wrapper for the entire login section
  */
 function showLoginContent(contentWrapper, loginContainer, animatedJoinLogo, finalJoinLogo, loginWrapper) {
   contentWrapper.classList.remove("d_none");
@@ -64,9 +68,14 @@ function showLoginContent(contentWrapper, loginContainer, animatedJoinLogo, fina
   loginWrapper.classList.remove("login-wrapper-start", "mobile-background");
 }
 
+
 /**
- * 
- * @param {*} event 
+ * Handles the user long
+ * Fetches user data from the remoteStorage(Firebase) and verifies the login data
+ * If login data are valid: Saves login data to localStorage and redirects to the summary page.
+ * If invalid, displays a login error message.
+ * @async
+ * @param {Event} event - The form submit event triggered by the login attempt.
  */
 async function loginUser(event) {
   event.preventDefault();
@@ -84,9 +93,12 @@ async function loginUser(event) {
   }
 }
 
+
 /**
- * 
- * @param {*} email 
+ * Saves the login user details to localStorage for the current session
+ * Fetches the full contacts list from the remoteStorage (Firebase) and searches for the user by the given email adresse
+ * If found, the user's email, the username, his/her profile color and initials are stored in localStorage under the key loggedInUser
+ * @param {string} email - The email address of the logged-in user
  */
 async function saveLoginUserDataToLocalStorage(email) {
   let response = await fetch(fetchURLDataBase + "/contacts.json");
@@ -107,7 +119,8 @@ async function saveLoginUserDataToLocalStorage(email) {
 
 
 /**
- * 
+ * Validates the user login inputs
+ * If the login input data are invalid, a error message are displayed
  * @param {*} input 
  */
 function validateLoginInput(input) {
@@ -124,8 +137,9 @@ function validateLoginInput(input) {
   }
 }
 
+
 /**
- * 
+ * Shows an error message by login with wrong user data
  */
 function showLoginError() {
   let errorMessage = document.getElementById("login-userpassword-input-validation-message");
@@ -140,8 +154,8 @@ function showLoginError() {
 
 
 /**
- * 
- * @param {*} input 
+ * Validates the email input field and displays an error message if the email format is invalid
+ * @param {HTMLInputElement} input - The email input element for validation
  */
 function checkRequiredLoginEmail(input) {
   let errorMessage = document.getElementById(input.id + "-validation-message");
@@ -158,11 +172,15 @@ function checkRequiredLoginEmail(input) {
   }
 }
 
-function guestLogin(event) {
-  // ⛔ Weiterleitung kurz stoppen, damit wir vorher localStorage setzen
-  event.preventDefault();
 
-  // Dummy-User setzen (optional)
+/**
+ * Handles the guest login 
+ * By login as guest user the guest user data will be stored in the localStorage
+ * Redirects the user to summary page
+ * @param {Event} event - The event object from the button click or form submission
+ */
+function guestLogin(event) {
+  event.preventDefault();
   localStorage.setItem(
     "loggedInUser",
     JSON.stringify({
@@ -172,10 +190,6 @@ function guestLogin(event) {
       initial: "G",
     })
   );
-
-  // ✅ Begrüßungs-Flag setzen
   localStorage.setItem("showWelcomeOnce", "true");
-
-  // ➡ Manuell zur Zielseite weiterleiten
   window.location.href = "./html/summary.html";
 }
