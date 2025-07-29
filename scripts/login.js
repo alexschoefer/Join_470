@@ -2,15 +2,15 @@
  * 
  */
 function startLogoAnimation() {
-  const animatedLogo = document.getElementById("start-logo-animation");
-  const finalLogo = document.getElementById("start-logo-final");
+  const animatedJoinLogo = document.getElementById("start-logo-animation");
+  const finalJoinLogo = document.getElementById("start-logo-final");
   const loginContainer = document.getElementById("login-main-container");
   const contentWrapper = document.getElementById("login-content-wrapper");
-  const wrapper = document.getElementById("login-wrapper");
-  setLogoSource(animatedLogo);
-  startAnimation(animatedLogo, wrapper);
+  const loginWrapper = document.getElementById("login-wrapper");
+  setLogoSource(animatedJoinLogo);
+  startAnimation(animatedJoinLogo, loginWrapper);
   setTimeout(() => {
-    showLoginContent(contentWrapper, loginContainer, animatedLogo, finalLogo, wrapper);
+    showLoginContent(contentWrapper, loginContainer, animatedJoinLogo, finalJoinLogo, loginWrapper);
   }, 1600);
 }
 
@@ -28,8 +28,8 @@ function isMobile() {
  * 
  * @param {*} logo 
  */
-function setLogoSource(logo) {
-  logo.src = isMobile() ? "./assets/img/MenuLogo.png" : "./assets/img/MainLogo.png";
+function setLogoSource(animatedJoinLogo) {
+  animatedJoinLogo.src = isMobile() ? "./assets/img/MenuLogo.png" : "./assets/img/MainLogo.png";
 }
 
 
@@ -38,12 +38,12 @@ function setLogoSource(logo) {
  * @param {*} logo 
  * @param {*} wrapper 
  */
-function startAnimation(logo, wrapper) {
+function startAnimation(animatedJoinLogo, loginWrapper) {
   if (isMobile()) {
-    wrapper.classList.add("mobile-background");
-    logo.classList.add("logo-animation-move-mobile");
+    loginWrapper.classList.add("mobile-background");
+    animatedJoinLogo.classList.add("logo-animation-move-mobile");
   } else {
-    logo.classList.add("logo-animation-move-desktop");
+    animatedJoinLogo.classList.add("logo-animation-move-desktop");
   }
 }
 
@@ -56,12 +56,12 @@ function startAnimation(logo, wrapper) {
  * @param {*} finalLogo 
  * @param {*} wrapper 
  */
-function showLoginContent(contentWrapper, loginContainer, animatedLogo, finalLogo, wrapper) {
+function showLoginContent(contentWrapper, loginContainer, animatedJoinLogo, finalJoinLogo, loginWrapper) {
   contentWrapper.classList.remove("d_none");
   loginContainer.classList.replace("hidden", "show");
-  animatedLogo.classList.add("d_none");
-  finalLogo.classList.remove("d_none");
-  wrapper.classList.remove("login-wrapper-start", "mobile-background");
+  animatedJoinLogo.classList.add("d_none");
+  finalJoinLogo.classList.remove("d_none");
+  loginWrapper.classList.remove("login-wrapper-start", "mobile-background");
 }
 
 /**
