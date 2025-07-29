@@ -40,11 +40,19 @@ let subtasksObject = {};
 let assignedCheckbox = [];
 let resultContactList = [];
 
+
+/**
+ * Initialisiert das Add-Task-Formular, lädt Kontakte und Kategorien.
+ */
 function addTaskInit() {
     getContactsFromRemoteStorage();
     loadCategoryOptions();
 }
 
+
+/**
+ * Initialisiert das Add-Task-Formular, lädt Kontakte und Kategorien.
+ */
 async function sendAddTaskData() {
     saveUserInputsForFirebase();
     startTaskAddedFinishAnimation();
@@ -53,6 +61,11 @@ async function sendAddTaskData() {
     }, 1100);
 }
 
+
+/**
+ * Sammelt alle Benutzereingaben aus dem Formular und sendet sie an Firebase.
+ * @async
+ */
 async function saveUserInputsForFirebase() {
     let title = ATTitleRef.value;
     let description = ATDescriptionRef.value;
@@ -63,7 +76,7 @@ async function saveUserInputsForFirebase() {
     let colorTo = getAssignedColor();
     let category = ATcategory.textContent;
     let subtasks = getSubtasksArray();
-    let responseData = await postAddTaskDataToFirebase(
+    await postAddTaskDataToFirebase(
         title,
         description,
         date,
@@ -76,41 +89,21 @@ async function saveUserInputsForFirebase() {
     );
 }
 
-async function checkIdAmount() {
-    let response = await fetch(fetchURLDataBase + "/tasks" + ".json");
-    let data = await response.json();
-    let id = Object.keys(data).length + 1;
-    return id;
-}
 
-async function getNextTaskId() {
-    let res = await fetch(fetchURLDataBase + "/tasks.json");
-    let data = await res.json();
-    let existingIds = data ? Object.keys(data).map((id) => parseInt(id)) : [];
-    return existingIds.length > 0 ? Math.max(...existingIds) + 1 : 1;
-}
-
-function combineAssignedWithColors(assignTo, colorTo) {
-    return assignTo.map((name, i) => ({
-        name: name,
-        color: colorTo[i] || "#CCCCCC"
-    }));
-}
-
-function buildTaskData(nextId, title, description, date, priority, status, assigned, category, subtasks) {
-    return {
-        title,
-        description,
-        priority,
-        status,
-        dueDate: date,
-        subtasks,
-        assigned,
-        category,
-        id: nextId
-    };
-}
-
+/**
+ * Sendet die neue Task an Firebase.
+ * @async
+ * @param {string} title
+ * @param {string} description
+ * @param {string} date
+ * @param {string} priority
+ * @param {string} status
+ * @param {string[]} assignTo
+ * @param {string} category
+ * @param {Object[]} subtasks
+ * @param {string[]} colorTo
+ * @returns {Promise<Object>} Die gespeicherte Task
+ */
 async function postAddTaskDataToFirebase(title, description, date, priority, status, assignTo, category, subtasks, colorTo) {
     const nextId = await getNextTaskId();
     const assigned = combineAssignedWithColors(assignTo, colorTo);
@@ -118,6 +111,14 @@ async function postAddTaskDataToFirebase(title, description, date, priority, sta
     return await sendTaskToFirebase(nextId, newTask);
 }
 
+
+/**
+ * Sendet ein Task-Objekt an Firebase.
+ * @async
+ * @param {number} nextId - Die ID der neuen Task.
+ * @param {Object} newTask - Das Task-Objekt.
+ * @returns {Promise<Object>} Die gespeicherte Task
+ */
 async function sendTaskToFirebase(nextId, newTask) {
     let response = await fetch(`${fetchURLDataBase}/tasks/${nextId}.json`, {
         method: "PUT",
@@ -127,18 +128,11 @@ async function sendTaskToFirebase(nextId, newTask) {
     return await response.json();
 }
 
-function getSubtasksArray() {
-    const subtaskInputs = document.querySelectorAll(".ATSubtask-container");
-    subtasks = [];
-    subtaskInputs.forEach((input) => {
-        const value = input.value.trim();
-        if (value) {
-            subtasks.push({ title: value, done: false });
-        }
-    });
-    return subtasks;
-}
 
+/**
+ * Setzt den Status der Prio-Buttons und ruft die passende Styling-Funktion auf.
+ * @param {string} state - "Urgent", "Medium" oder "Low"
+ */
 function addTaskPrioButtonClick(state) {
     prioButtonState = state;
     if (state == 'Urgent') {
@@ -179,22 +173,30 @@ function holdButtonLow() {
     ATButtonLowRef.classList.add('add-task-priority-button-low');
 }
 
-function resetAddTaskSubtaskInput() {
-    ATSubtaskInput.value = "";
-}
 
+/**
+ * Fügt ein neues Subtask hinzu, setzt das Subtask-Eingabefeld zurück. und rendert die Liste neu.
+ */
 function addTaskAddSubtask() {
     subtasksToArray();
-    resetAddTaskSubtaskInput();
+    ATSubtaskInput.value = "";
     ADSShowIcons();
 }
 
+
+/**
+ * Holt den aktuellen Wert aus dem Subtask-Eingabefeld und fügt ihn dem Subtask-Array hinzu.
+ */
 function subtasksToArray() {
     const inputData = document.getElementById("add-task-subtasks-input").value;
     subtasks.push(inputData);
     subtaskRender();
 }
 
+
+/**
+ * Rendert alle Subtasks im DOM.
+ */
 function subtaskRender() {
     allSubtasks.innerHTML = "";
     for (let i = 0; i < subtasks.length; i++) {
@@ -206,11 +208,20 @@ function subtaskRender() {
     ADSShowIcons();
 }
 
+
+/**
+ * Entfernt ein Subtask anhand des Index und rendert die Liste neu.
+ * @param {number} index - Index des zu löschenden Subtasks.
+ */
 function deleteAddTaskSubtask(index) {
     subtasks.splice(index, 1);
     subtaskRender(index);
 }
 
+
+/**
+ * Startet die Abschlussanimation nach dem Hinzufügen einer Task.
+ */
 function startTaskAddedFinishAnimation() {
     const animationContainer = document.getElementById("add-task-finish-animation");
     animationContainer.classList.remove('d_none');
@@ -219,58 +230,20 @@ function startTaskAddedFinishAnimation() {
     }, 1000);
 }
 
-function validateTitle() {
-    if (!ATTitleRef.value.trim()) {
-        ATTitleRef.classList.add('error');
-        document.getElementById('title-required').classList.remove('d_none');
-        return false;
-    } else {
-        ATTitleRef.classList.remove('error');
-        document.getElementById('title-required').classList.add('d_none');
-        return true;
-    }
-}
 
-function validateDueDate() {
-    if (!ATDueDateRef.value.trim()) {
-        ATDueDateRef.classList.add('error');
-        document.getElementById('due-date-required').classList.remove('d_none');
-        return false;
-    } else {
-        ATDueDateRef.classList.remove('error');
-        document.getElementById('due-date-required').classList.add('d_none');
-        return true;
-    }
-}
-
-function validateCategory() {
-    console.log('validateCategory aufgerufen');
-    const selectedText = ATcategory.textContent;
-    console.log('Kategorie:', selectedText);
-    const defaultText = 'Select a category';
-    if (selectedText === defaultText) {
-        categoryDropdownSelected.classList.add('error');
-        categoryRequired.classList.remove('d_none');
-        return false;
-    } else {
-        categoryDropdownSelected.classList.remove('error');
-        categoryRequired.classList.add('d_none');
-        return true;
-    }
-}
-function validateAddTaskInputs() {
-    let valid = true;
-    if (!validateTitle()) valid = false;
-    if (!validateDueDate()) valid = false;
-    if (!validateCategory()) valid = false;
-    return valid;
-}
-
+/**
+ * Leert das Subtask-Eingabefeld und zeigt das Plus-Icon wieder an.
+ */
 function clearAddTaskSubtask() {
     ATSubtaskInput.value = "";
     ATSubtasksIconAddRef.classList.remove('d_none');
 }
 
+
+/**
+ * Setzt den aktuellen Subtask als "done" zurück in die normale Ansicht.
+ * @param {number} id - Die ID des Subtasks.
+ */
 function getDoneAddTaskSubtask(id) {
     const ATSubSubtaskContainerRef = document.getElementById('ATSubtask-container-' + id);
     const addTaskSubtasksIconDoneRef = document.getElementById('add-task-subtasks-icon-done-' + id);
@@ -284,6 +257,11 @@ function getDoneAddTaskSubtask(id) {
     addTaskSubtasksIconDoneRef.classList.add('d_none');
 }
 
+
+/**
+ * Aktiviert den Bearbeitungsmodus für ein Subtask.
+ * @param {number} id - Die ID des Subtasks.
+ */
 function editAddTaskSubtask(id) {
     const ATSubSubtaskContainerRef = document.getElementById('ATSubtask-container-' + id);
     const ATSubSubtaskIconEditRef = document.getElementById('add-task-subtasks-icon-edit-' + id);
@@ -297,21 +275,37 @@ function editAddTaskSubtask(id) {
     addTaskSubtasksIconDoneRef.classList.remove('d_none');
 }
 
+
+/**
+ * Zeigt die "Clear" und "Done" Buttons für das Subtask-Eingabefeld an.
+ */
 function showClearAndDoneButtons() {
     ATSubtasksInputDivRef.classList.remove('d_none');
     ATSubtasksIconAddRef.classList.add('d_none');
 }
 
+
+/**
+ * Blendet die "Clear" und "Done" Buttons für das Subtask-Eingabefeld aus.
+ */
 function hideClearAndDoneButtons() {
     ATSubtasksInputDivRef.classList.add('d_none');
     ATSubtasksIconAddRef.classList.remove('d_none');
 }
 
+
+/**
+ * Setzt den Fokus in das Subtask-Eingabefeld und blendet das Plus-Icon aus.
+ */
 function getFocusInSubtasksInput() {
     document.getElementById('add-task-subtasks-input').focus();
     ATSubtasksIconAddRef.classList.add('d_none');
 }
 
+
+/**
+ * Steuert das Anzeigen und Verstecken der Subtask-Icons beim Hovern über Subtasks.
+ */
 function ADSShowIcons() {
     document.querySelectorAll('.add-task-subtask-style').forEach(container => {
         const icons = container.querySelector('.add-task-subtasks-icons');
@@ -327,114 +321,10 @@ function ADSShowIcons() {
     });
 }
 
-function checkRequiredFieldsAndToggleButton() {
-    const titleFilled = ATTitleRef.value.trim() != "";
-    const dueDateFilled = ATDueDateRef.value.trim() != "";
-    const categoryFilled = ATcategory.textContent.trim() != "Select a category";
-    if (titleFilled && dueDateFilled && categoryFilled) {
-        ATButtonAddTaskRef.disabled = false;
-    } else {
-        ATButtonAddTaskRef.disabled = true;
-    }
-}
 
-document.querySelector('.calendar-icon').addEventListener('click', function () {
-    const input = document.getElementById('add-task-due-date-input');
-    input.focus();
-    if (input.showPicker) input.showPicker();
-});
-
-async function getContactsFromRemoteStorage() {
-    let response = await fetch(fetchURLDataBase + '/contacts' + '.json', {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        }
-    });
-    const data = await response.json();
-    await createAddTaskContacts(data);
-}
-
-async function createAddTaskContacts(data) {
-    resultContactList = [];
-    assignedCheckbox = [];
-    for (const key in data) {
-        const contact = data[key];
-        resultContactList.push({ email: contact.email, initial: contact.initial, name: contact.name, phone: contact.phone, color: contact.profilcolor });
-        assignedCheckbox.push({ checkbox: false });
-    }
-    await loadAddTaskAssignedTo(resultContactList);
-}
-
-function getAssignedContacts() {
-    const assigned = [];
-    assignedCheckbox.forEach((item, i) => {
-        if (item.checkbox) {
-            assigned.push(resultContactList[i].name);
-        }
-    });
-    return assigned;
-}
-
-function getAssignedColor() {
-    const color = [];
-    assignedCheckbox.forEach((item, i) => {
-        if (item.checkbox) {
-            color.push(resultContactList[i].color);
-        }
-    });
-    return color;
-}
-
-async function loadAddTaskAssignedTo(result) {
-    const optionToRender = document.getElementById('add-task-assigned-to-select');
-    optionToRender.innerHTML = "";
-    const loggedUserString = localStorage.getItem("loggedInUser");
-    let loggedUserName = "";
-    if (loggedUserString) {
-        const loggedUser = JSON.parse(loggedUserString);
-        loggedUserName = loggedUser.name;
-    }
-    result.forEach((contact, i) => {
-        if (loggedUserName === contact.name) {
-            optionToRender.innerHTML += getAssignedContactTemplate(contact, i, "(You)");
-        } else {
-            optionToRender.innerHTML += getAssignedContactTemplate(contact, i, "");
-        }
-    });
-}
-
-async function assignedCheckboxClick(event, id) {
-    event.stopPropagation();
-    const ATContactOptionCheckboxRef = document.getElementById('ATContact-option-checkbox' + id);
-    if (!assignedCheckbox[id].checkbox) {
-        ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox');
-        ATContactOptionCheckboxRef.classList.add('ATContact-option-checkbox-checked');
-        assignedCheckbox[id].checkbox = true;
-    } else {
-        ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox-checked');
-        ATContactOptionCheckboxRef.classList.add('ATContact-option-checkbox');
-        assignedCheckbox[id].checkbox = false;
-    }
-    updateChosenInitials();
-}
-
-function updateChosenInitials() {
-    const parent = chosenDiv.closest('.add-task-form-right-select-contacts');
-    chosenDiv.innerHTML = '';
-    let hasInitials = false;
-    assignedCheckbox.forEach((item, i) => {
-        if (item.checkbox) {
-            hasInitials = true;
-            const contact = resultContactList[i];
-            chosenDiv.innerHTML += getInitialsTemplate(contact);
-        }
-    });
-    if (parent) {
-        parent.classList.toggle('has-initials', hasInitials);
-    }
-}
-
+/**
+ * Setzt das gesamte Add-Task-Formular zurück.
+ */
 function resetAddTaskForm() {
     ATTitleRef.value = "";
     ATDescriptionRef.value = "";
@@ -447,6 +337,12 @@ function resetAddTaskForm() {
     loadCategoryOptions();
 }
 
+
+/**
+ * Erstellt eine Kategorie-Option für das Dropdown-Menü.
+ * @param {Object} cat - Kategorie-Objekt mit value und label.
+ * @returns {HTMLElement} Das erzeugte Option-Element.
+ */
 function createCategoryOption(cat) {
     const option = document.createElement('div');
     option.className = 'ATcustom-dropdown-option';
@@ -462,6 +358,10 @@ function createCategoryOption(cat) {
     return option;
 }
 
+
+/**
+ * Lädt die verfügbaren Kategorien in das Dropdown-Menü.
+ */
 function loadCategoryOptions() {
     categoryDropdownMenu.innerHTML = '';
     const categories = [
