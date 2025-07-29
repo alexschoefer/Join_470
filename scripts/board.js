@@ -13,7 +13,7 @@ let toDoContainer = document.querySelector(".to-do");
 let inProgressContainer = document.querySelector(".in-progress");
 let awaitFeedbackContainer = document.querySelector(".await-feedback");
 let doneContainer = document.querySelector(".done");
-
+let addTaskScriptInjected = false;
 function updateBoardContent() {
   let cols = [
     { container: toDoContainer, emptyText: "No tasks To do" },
@@ -167,8 +167,7 @@ async function updateTask() {
     let container = document.getElementById(col);
     container.innerHTML = "";
     filtered.forEach((task) => {
-      contactColor = JSON.stringify(
-        task.color);
+      contactColor = JSON.stringify(task.color);
       tasksPriority = getImageForPriority(task.priority);
       let assigned = getInitialsList(task.assigned);
       colorLabels = getColoredLabels(task.category);
@@ -273,59 +272,61 @@ function deleteTasksOfOverlay(id) {
   });
 }
 
+//------------------------------------------------------------------------------------
+//unter sind die Funktionen für das Editieren von Tasks
+
+function initAddTaskForm(id) {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      if (typeof window.addTaskInit === "function") {
+        window.addTaskInit();
+      }
+
+      const oldBtn = document.getElementById("add-task-button-create-task");
+      if (oldBtn) {
+        const newBtn = oldBtn.cloneNode(true);
+        newBtn.onclick = () => valueTasksToEditTasks(id);
+        oldBtn.replaceWith(newBtn);
+      }
+
+      preFillTaskForm(id);
+    });
+  });
+}
 function editTaskOfOverlay(id) {
+  let currentEditId = id;
   const taskOverlay = document.getElementById("task-card-container");
   const taskCardContainer = document.getElementById("task-overlay");
   const editButton = document.getElementsByClassName("edit")[0];
-
   if (taskCardContainer) {
     editButton.addEventListener("click", () => {
       taskOverlay.innerHTML = "";
       taskOverlay.innerHTML = editTasksOfBoard(id);
-
-      function initAddTaskForm(id) {
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            if (typeof window.addTaskInit === "function") {
-              window.addTaskInit();
-            }
-
-            const oldBtn = document.getElementById(
-              "add-task-button-create-task"
-            );
-            if (oldBtn) {
-              const newBtn = oldBtn.cloneNode(true);
-              newBtn.onclick = () => valueTasksToEditTasks(id);
-              oldBtn.replaceWith(newBtn);
-            }
-
-            preFillTaskForm(id);
-          });
-        });
-      }
-      const oldScript = document.getElementById("add-task-script");
-      if (oldScript) {
-        oldScript.remove();
-        console.log();
-      }
-      const scriptAlreadyLoaded = document.getElementById("add-task-script");
-
-      if (!scriptAlreadyLoaded) {
-        const s = document.createElement("script");
-        s.id = "add-task-script";
-        s.src = "../scripts/add-task.js";
-        s.async = false;
-        s.onload = () => initAddTaskForm(id);
-        document.body.appendChild(s);
-      } else {
-        initAddTaskForm(id);
-      }
+      injectAddTask(currentEditId);
     });
   }
 }
 
+function injectAddTask(currentEditId) {
+  const old = document.getElementById("add-task-script");
+  const script = document.createElement("script");
+  if (!old) {
+    script.id = "add-task-script";
+    script.src = "../scripts/add-task.js";
+    script.onload = () => {
+      initAddTaskForm(currentEditId);
+    };
+  }
+  document.body.appendChild(script);
+  shadow.style.display = "block";
+  container.classList.add("show-from-right");
+}
+
 function preFillTaskForm(id) {
-  const task = tasks.find((t) => t.id === id);
+  console.log(tasks);
+
+  let task = tasks.find((t) => t?.id === id);
+
   if (!task) return;
   document.getElementById("add-task-title-input").value = task.title;
   document.getElementById("add-task-description-textarea").value =
@@ -356,7 +357,6 @@ function preFillTaskForm(id) {
   subtaskRender();
 }
 
-// --------------------------------------------------------------------------------------------------
 async function valueTasksToEditTasks(id) {
   const title = document.getElementById("add-task-title-input").value.trim();
   const description = document
@@ -366,10 +366,9 @@ async function valueTasksToEditTasks(id) {
   const category = document
     .getElementById("categoryDropdownSelectedText")
     .textContent.trim();
-
-  const assigned = getAssignedContacts(); // folosește funcția existentă
+  const assigned = getAssignedContacts();
   const priority = prioButtonState;
-  const subtasksArray = getSubtasksArray(); // ia și subtaskurile din DOM
+  const subtasksArray = getSubtasksArray();
 
   let isValid = true;
 
@@ -390,6 +389,13 @@ async function valueTasksToEditTasks(id) {
     document.getElementById("category-required").classList.remove("d_none");
     isValid = false;
   }
+  const selected = getAssignedContacts(); // poartă fie string (nume), fie obiect contact
+  const assignedWithColor = selected.map((item) => {
+    const name = typeof item === "string" ? item : item.name;
+    const dummy = contactsDummy.find((c) => c.name === name);
+    const color = dummy ? dummy.profilcolor : "#000000";
+    return { name, color };
+  });
 
   if (!isValid) return;
   const updatedTask = {
@@ -398,13 +404,13 @@ async function valueTasksToEditTasks(id) {
     description,
     date: date,
     priority,
-    status: tasks.find((t) => t.id === id)?.status || "toDo",
+    status: tasks.find((t) => t?.id === id)?.status || "toDo",
     category,
-    assigned,
+    assigned: assignedWithColor,
     subtasks: subtasksArray,
   };
   await editTasksToRemoteStorage(`/tasks/${id}`, updatedTask);
-  const index = tasks.findIndex((t) => t.id === id);
+  const index = tasks.findIndex((t) => t?.id === id);
   if (index !== -1) {
     tasks[index] = updatedTask;
   }
@@ -439,9 +445,8 @@ function generateAssignedCardOverlay(assignedList) {
       .toUpperCase();
 
     result += `
-      <div class="assigned-content">
-
-        <span class="logo">${initials}</span>
+      <div class="assigned-content" >
+        <span class="logo" style="background-color: ${person.color}">${initials}</span>
         <span class="name">${name}</span>
       </div>
     `;
@@ -457,20 +462,16 @@ function getInitialsList(assignedList) {
     .filter((person) => person && typeof person.name === "string")
     .map((person) => {
       let initials = person.name
-
         .trim()
         .split(/\s+/)
         .map((w) => w[0])
         .join("")
         .toUpperCase();
-
-
       return `
-        <div class="assignees">
+        <div class="assignees" style="background-color: ${person.color}">
           <span>${initials}</span>
         </div>
       `;
-
     })
     .join("");
 }

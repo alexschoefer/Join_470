@@ -1,116 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Board</title>
-    <link rel="stylesheet" href="../styles/standard.css" />
-    <link rel="stylesheet" href="../styles/assets.css" />
-    <link rel="stylesheet" href="../styles/board.css" />
-    <link rel="stylesheet" href="../styles/media.css" />
-    <link rel="stylesheet" href="../styles/fonts.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&family=Teko:wght@300..700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../style.css" />
-    <link rel="stylesheet" href="../styles/add-task.css" />
-    <script src="../scripts/template-add-task.js"></script>
-    <script src="../scripts/include.js"></script>
-    <script src="../scripts/header.js"></script>
-  </head>
 
-  <body onload="init()">
-    <main class="main-content">
-      <div id="shadow-container" onclick="closeContainerOverlay()"></div>
-      <div id="sidebar"></div>
-      <section id="board-content">
-        <div id="header"></div>
-        <div class="board-container">
-          <div class="board-find-task">
-            <h1>Board</h1>
-            <div class="task-search">
-              <div class="input-search">
-                <input id="searchInput" type="text" placeholder="Find Task" />
-                <button class="search">
-                  <span class="border-img">
-                    <img src="../assets/icons/search.png" />
-                  </span>
-                </button>
-              </div>
-              <button class="add-task">
-                <span>Add task</span>
-                <span class="img-add-task"
-                  ><img src="../assets/icons/add.png"
-                /></span>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Board</title>
+  <link rel="stylesheet" href="../styles/standard.css" />
+  <link rel="stylesheet" href="../styles/assets.css" />
+  <link rel="stylesheet" href="../styles/board.css" />
+  <!-- <link rel="stylesheet" href="../styles/media.css" /> -->
+  <link rel="stylesheet" href="../styles/fonts.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&family=Teko:wght@300..700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../styles/add-task.css" />
+  <script src="../scripts/template-add-task.js"></script>
+  <script src="../scripts/include.js"></script>
+  <script src="../scripts/header.js"></script>
+</head>
+
+<body onload="init()">
+  <main class="main-content">
+    <div id="shadow-container" onclick="closeContainerOverlay()"></div>
+    <div id="sidebar"></div>
+    <section id="board-content">
+      <div id="header"></div>
+      <div class="board-container">
+        <div class="board-find-task">
+          <h1>Board</h1>
+          <div class="task-search">
+            <div class="input-search">
+              <input id="searchInput" type="text" placeholder="Find Task" />
+              <button class="search">
+                <span class="border-img">
+                  <img src="../assets/icons/search.png" />
+                </span>
               </button>
             </div>
+            <button class="add-task">
+              <span>Add task</span>
+              <span class="img-add-task"><img src="../assets/icons/add.png" /></span>
+            </button>
           </div>
-          <section id="all-task">
-            <div class="board-task-column to-do">
-              <div class="task-title">
-                <h2>To do</h2>
-                <div class="add-task-icon"></div>
-              </div>
-              <div
-                class="card-drag-drop-container drag-area"
-                id="toDo"
-                ondrop="moveTo('toDo')"
-                ondragleave="removeHighlight('toDo')"
-                ondragover="allowDrop(event); highlight('toDo')"
-              ></div>
-            </div>
-
-            <div class="board-task-column in-progress">
-              <div class="task-title">
-                <h2>In progress</h2>
-                <div class="add-task-icon"></div>
-              </div>
-              <div
-                class="card-drag-drop-container drag-area"
-                id="inProgress"
-                ondrop="moveTo('inProgress')"
-                ondragleave="removeHighlight('inProgress')"
-                ondragover="allowDrop(event); highlight('inProgress')"
-              ></div>
-            </div>
-
-            <div class="board-task-column await-feedback">
-              <div class="task-title">
-                <h2>Await feedback</h2>
-                <div class="add-task-icon"></div>
-              </div>
-              <div
-                class="card-drag-drop-container drag-area"
-                id="awaitFeedback"
-                ondrop="moveTo('awaitFeedback')"
-                ondragleave="removeHighlight('awaitFeedback')"
-                ondragover="allowDrop(event); highlight('awaitFeedback')"
-              ></div>
-            </div>
-
-            <div class="board-task-column done">
-              <div class="task-title">
-                <h2>Done</h2>
-              </div>
-              <div
-                class="card-drag-drop-container drag-area"
-                id="done"
-                ondrop="moveTo('done')"
-                ondragleave="removeHighlight('done')"
-                ondragover="allowDrop(event); highlight('done')"
-              ></div>
-            </div>
-          </section>
-          <div id="task-card-container"></div>
         </div>
-      </section>
-    </main>
-    <script src="../script.js"></script>
-    <script src="../scripts/dataRemoteStorage.js"></script>
-    <script src="../scripts/template-board.js"></script>
-    <script src="../scripts/board.js"></script>
-  </body>
+        <section id="all-task">
+          <div class="board-task-column to-do">
+            <div class="task-title">
+              <h2>To do</h2>
+              <div class="add-task-icon"></div>
+            </div>
+            <div class="card-drag-drop-container drag-area" id="toDo" ondrop="moveTo('toDo')"
+              ondragleave="removeHighlight('toDo')" ondragover="allowDrop(event); highlight('toDo')"></div>
+          </div>
+
+          <div class="board-task-column in-progress">
+            <div class="task-title">
+              <h2>In progress</h2>
+              <div class="add-task-icon"></div>
+            </div>
+            <div class="card-drag-drop-container drag-area" id="inProgress" ondrop="moveTo('inProgress')"
+              ondragleave="removeHighlight('inProgress')" ondragover="allowDrop(event); highlight('inProgress')"></div>
+          </div>
+
+          <div class="board-task-column await-feedback">
+            <div class="task-title">
+              <h2>Await feedback</h2>
+              <div class="add-task-icon"></div>
+            </div>
+            <div class="card-drag-drop-container drag-area" id="awaitFeedback" ondrop="moveTo('awaitFeedback')"
+              ondragleave="removeHighlight('awaitFeedback')" ondragover="allowDrop(event); highlight('awaitFeedback')">
+            </div>
+          </div>
+
+          <div class="board-task-column done">
+            <div class="task-title">
+              <h2>Done</h2>
+            </div>
+            <div class="card-drag-drop-container drag-area" id="done" ondrop="moveTo('done')"
+              ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done')"></div>
+          </div>
+        </section>
+        <div id="task-card-container"></div>
+      </div>
+    </section>
+  </main>
+  <script src="../script.js"></script>
+  <script src="../scripts/dataRemoteStorage.js"></script>
+  <script src="../scripts/template-board.js"></script>
+  <script src="../scripts/board.js"></script>
+</body>
+
 </html>
