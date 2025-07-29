@@ -427,7 +427,7 @@ function checkRequiredFieldsAndToggleButton() {
     }
 }
 
-=======
+/**
  * Hides the mobile contact action buttons when clicking outside the button container
  * @param {MouseEvent} event - The click event outside triggered  on the document
  */
