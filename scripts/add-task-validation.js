@@ -1,7 +1,7 @@
 /**
- * Validiert das Titel-Eingabefeld für eine neue Aufgabe.
- * Zeigt eine Fehlermeldung an, wenn das Feld leer ist.
- * @returns {boolean} true, wenn das Feld ausgefüllt ist, sonst false.
+ * Validates the title input field for a new task.
+ * Shows an error message if the field is empty.
+ * @returns {boolean} true if the field is filled, otherwise false.
  */
 function validateTitle() {
     if (!ATTitleRef.value.trim()) {
@@ -17,9 +17,9 @@ function validateTitle() {
 
 
 /**
- * Validiert das Fälligkeitsdatum-Eingabefeld für eine neue Aufgabe.
- * Zeigt eine Fehlermeldung an, wenn das Feld leer ist.
- * @returns {boolean} true, wenn das Feld ausgefüllt ist, sonst false.
+ * Validates the due date input field for a new task.
+ * Shows an error message if the field is empty.
+ * @returns {boolean} true if the field is filled, otherwise false.
  */
 function validateDueDate() {
     if (!ATDueDateRef.value.trim()) {
@@ -35,9 +35,9 @@ function validateDueDate() {
 
 
 /**
- * Validiert, ob eine Kategorie ausgewählt wurde.
- * Zeigt eine Fehlermeldung an, wenn die Standard-Kategorie noch ausgewählt ist.
- * @returns {boolean} true, wenn eine Kategorie ausgewählt ist, sonst false.
+ * Validates whether a category has been selected.
+ * Shows an error message if the default category is still selected.
+ * @returns {boolean} true if a category is selected, otherwise false.
  */
 function validateCategory() {
     console.log('validateCategory aufgerufen');
@@ -57,8 +57,8 @@ function validateCategory() {
 
 
 /**
- * Validiert alle Eingabefelder für das Hinzufügen einer Aufgabe.
- * @returns {boolean} true, wenn alle Felder gültig sind, sonst false.
+ * Validates all input fields for adding a task.
+ * @returns {boolean} true if all fields are valid, otherwise false.
  */
 function validateAddTaskInputs() {
     let valid = true;

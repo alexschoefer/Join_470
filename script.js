@@ -217,10 +217,11 @@ function arrowBack() {
 
 
 /**
- * Kombiniert zwei Arrays (Namen und Farben) zu einem Array von Objekten mit name und color.
- * @param {string[]} assignTo - Array mit Namen der zugewiesenen Personen.
- * @param {string[]} colorTo - Array mit Farben, die den Personen zugeordnet sind.
- * @returns {Object[]} Array von Objekten mit { name, color }
+ * Combines two arrays (names and colors) into an array of objects with name and color.
+ * 
+ * @param {string[]} assignTo - Array with the names of the assigned persons.
+ * @param {string[]} colorTo - Array with the colors assigned to the persons.
+ * @returns {Object[]} Array of objects with { name, color }
  */
 function combineAssignedWithColors(assignTo, colorTo) {
     return assignTo.map((name, i) => ({
@@ -259,9 +260,9 @@ function buildTaskData(nextId, title, description, date, priority, status, assig
 
 
 /**
- * Holt die nächste freie Task-ID aus der Datenbank.
+ * Fetches the next free task ID from the database.
  * @async
- * @returns {Promise<number>} Die nächste freie ID.
+ * @returns {Promise<number>} The next free ID.
  */
 async function getNextTaskId() {
     let res = await fetch(fetchURLDataBase + "/tasks.json");
@@ -272,9 +273,9 @@ async function getNextTaskId() {
 
 
 /**
- * Holt die nächste freie ID für eine neue Task, basierend auf der Anzahl der vorhandenen Tasks.
+ * Fetches the next free ID for a new task, based on the number of existing tasks.
  * @async
- * @returns {Promise<number>} Die nächste freie ID (Anzahl der Tasks + 1).
+ * @returns {Promise<number>} The next free ID (number of tasks + 1).
  */
 async function checkIdAmount() {
     let response = await fetch(fetchURLDataBase + "/tasks" + ".json");
@@ -285,8 +286,8 @@ async function checkIdAmount() {
 
 
 /**
- * Gibt ein Array der Namen aller aktuell ausgewählten Kontakte zurück.
- * @returns {string[]} Array mit den Namen der ausgewählten Kontakte.
+ * Returns an array of the names of all currently selected contacts.
+ * @returns {string[]} Array with the names of the selected contacts.
  */
 function getAssignedContacts() {
     const assigned = [];
@@ -300,8 +301,8 @@ function getAssignedContacts() {
 
 
 /**
- * Gibt ein Array der ausgewählten Farben der zugewiesenen Kontakte zurück.
- * @returns {string[]} Array mit den Farben der ausgewählten Kontakte.
+ * Returns an array of the selected colors of the assigned contacts.
+ * @returns {string[]} Array with the colors of the selected contacts.
  */
 function getAssignedColor() {
     const color = [];
@@ -315,8 +316,8 @@ function getAssignedColor() {
 
 
 /**
- * Sammelt alle eingegebenen Subtasks aus dem DOM und gibt sie als Array von Objekten zurück.
- * @returns {Object[]} Array von Subtask-Objekten mit { title, done }
+ * Collects all entered subtasks from the DOM and returns them as an array of objects.
+ * @returns {Object[]} Array of subtask objects with { title, done }
  */
 function getSubtasksArray() {
     const subtaskInputs = document.querySelectorAll(".ATSubtask-container");
@@ -332,7 +333,7 @@ function getSubtasksArray() {
 
 
 /**
- * Überprüft, ob alle Pflichtfelder ausgefüllt sind, und aktiviert/deaktiviert den "Add Task"-Button entsprechend.
+ * Checks whether all required fields are filled and enables/disables the "Add Task" button accordingly.
  */
 function checkRequiredFieldsAndToggleButton() {
     const titleFilled = ATTitleRef.value.trim() != "";
