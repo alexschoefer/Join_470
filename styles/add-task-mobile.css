@@ -488,7 +488,7 @@
   .add-task-buttons-create-and-clear {
     width: 100%;
     margin-bottom: 110px;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-end;
     padding-top: 10px;
   }

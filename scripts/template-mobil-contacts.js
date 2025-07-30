@@ -23,7 +23,7 @@ function addNewContactTemplateMobile() {
                                 <div class="input-wrapper">
                                     <div class="user-input-wrapper">
                                         <div class="input-container">
-                                            <input id="add-contact-name-input" class="user-input" type="text" name="name"
+                                            <input id="username-input" class="user-input" type="text" name="name"
                                                 placeholder="Name" autocomplete="off" onfocus="clearErrorMessage(this)"
                                                 onblur="validateContactFormsInput(this)">
                                             <div>
@@ -33,7 +33,7 @@ function addNewContactTemplateMobile() {
                                         </div>
                                     </div>
                                     <div class="input-validation-container">
-                                        <p id="add-contact-name-input-validation-message"
+                                        <p id="username-input-validation-message"
                                             class="input-validation-message d_none"
                                             data-default-message="This field is required.">This field is required.</p>
                                     </div>
@@ -59,7 +59,7 @@ function addNewContactTemplateMobile() {
                                 <div class="input-wrapper">
                                     <div class="user-input-wrapper">
                                         <div class="input-container">
-                                            <input id="add-contact-phone-input" class="user-input" type="tel" name="phone"
+                                            <input id="userphone-input" class="user-input" type="tel" name="phone"
                                                 placeholder="Phone" autocomplete="off" onfocus="clearErrorMessage(this)"
                                                 onblur="validateContactFormsInput(this)">
                                             <div>
@@ -68,7 +68,7 @@ function addNewContactTemplateMobile() {
                                         </div>
                                     </div>
                                     <div class="input-validation-container">
-                                        <p id="add-contact-phone-input-validation-message"
+                                        <p id="userphone-input-validation-message"
                                             class="input-validation-message d_none"
                                             data-default-message="Please enter a valid phone number.">Please enter a valid phone
                                             number.</p>
@@ -118,7 +118,7 @@ function editContactTemplateMobile(contact,index) {
                                     <div class="input-wrapper">
                                         <div class="user-input-wrapper">
                                             <div class="input-container">
-                                                <input id="add-contact-name-input" class="user-input" type="text" name="name"
+                                                <input id="username-input" class="user-input" type="text" name="name"
                                                     placeholder="Name" value="${contact.name}" autocomplete="off"
                                                     onfocus="clearErrorMessage(this)" onblur="validateContactFormsInput(this)">
                                                 <div>
@@ -127,7 +127,7 @@ function editContactTemplateMobile(contact,index) {
                                             </div>
                                         </div>
                                         <div class="input-validation-container">
-                                            <p id="add-contact-name-input-validation-message"
+                                            <p id="username-input-validation-message"
                                                 class="input-validation-message d_none"
                                                 data-default-message="This field is required.">This field is required.</p>
                                         </div>
@@ -135,7 +135,7 @@ function editContactTemplateMobile(contact,index) {
                                     <div class="input-wrapper">
                                         <div class="user-input-wrapper">
                                             <div class="input-container">
-                                                <input id="add-contact-email-input" class="user-input" type="email" name="email"
+                                                <input id="usermail-input" class="user-input" type="email" name="email"
                                                     placeholder="Email" autocomplete="off" value="${contact.email}"
                                                     onfocus="clearErrorMessage(this)" onblur="validateContactFormsInput(this)">
                                                 <div>
@@ -144,7 +144,7 @@ function editContactTemplateMobile(contact,index) {
                                             </div>
                                         </div>
                                         <div class="input-validation-container">
-                                            <p id="add-contact-email-input-validation-message"
+                                            <p id="usermail-input-validation-message"
                                                 class="input-validation-message d_none"
                                                 data-default-message="Please enter a valid email address.">Please enter a valid
                                                 email adress.</p>
@@ -153,7 +153,7 @@ function editContactTemplateMobile(contact,index) {
                                     <div class="input-wrapper">
                                         <div class="user-input-wrapper">
                                             <div class="input-container">
-                                                <input id="add-contact-phone-input" class="user-input" type="tel" name="phone"
+                                                <input id="userphone-input" class="user-input" type="tel" name="phone"
                                                     placeholder="Phone" autocomplete="off" value="${contact.phone || ''}"
                                                     onfocus="clearErrorMessage(this)" onblur="validateContactFormsInput(this)">
                                                 <div>
@@ -162,7 +162,7 @@ function editContactTemplateMobile(contact,index) {
                                             </div>
                                         </div>
                                         <div class="input-validation-container">
-                                            <p id="add-contact-phone-input-validation-message"
+                                            <p id="userphone-input-validation-message"
                                                 class="input-validation-message d_none"
                                                 data-default-message="Please enter a valid phone number.">Please enter a valid phone
                                                 number.</p>
@@ -173,7 +173,7 @@ function editContactTemplateMobile(contact,index) {
                                         <button type="button" class="delete-btn" onclick="deleteContact(${index})">
                                             Delete
                                         </button>
-                                        <button type="submit" class="save-contact-btn">
+                                        <button type="submit" class="save-contact-btn" id="btn-form">
                                             Save
                                             <img class="add-task-button-check-icon" src="../assets/icons/check-icon.png"
                                                 alt="check-icon">

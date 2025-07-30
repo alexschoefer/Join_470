@@ -214,8 +214,8 @@ async function getUrgentDate() {
     const res = await fetch(tasksURL);
     const data = await res.json();
     const urgentDates = Object.values(data)
-      .filter((t) => t?.priority === "Urgent" && t.date)
-      .map((t) => new Date(t.date))
+      .filter((t) => t?.priority === "Urgent" && t.dueDate)
+      .map((t) => new Date(t.dueDate))
       .filter((d) => !isNaN(d))
       .sort((a, b) => a - b);
     el.innerText = urgentDates.length
