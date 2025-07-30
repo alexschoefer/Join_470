@@ -118,7 +118,7 @@ function addNewContactTemplate() {
                         <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
-                                    <input id="add-contact-phone-input" class="user-input" type="tel" name="phone"
+                                    <input id="userphone-input" class="user-input" type="tel" name="phone"
                                         placeholder="Phone" autocomplete="off" onfocus="clearErrorMessage(this)"
                                         onblur="validateContactFormsInput(this)">
                                     <div>
@@ -127,7 +127,7 @@ function addNewContactTemplate() {
                                 </div>
                             </div>
                             <div class="input-validation-container">
-                                <p id="add-contact-phone-input-validation-message"
+                                <p id="userphone-input-validation-message"
                                     class="input-validation-message d_none"
                                     data-default-message="Please enter a valid phone number.">Please enter a valid phone
                                     number.</p>
@@ -218,7 +218,7 @@ function editContactTemplate(contact,index) {
                         <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
-                                    <input id="add-contact-phone-input" class="user-input" type="tel" name="phone"
+                                    <input id="userphone-input" class="user-input" type="tel" name="phone"
                                         placeholder="Phone" autocomplete="off" value="${contact.phone || ''}"
                                         onfocus="clearErrorMessage(this)" onblur="validateContactFormsInput(this)">
                                     <div>
@@ -227,7 +227,7 @@ function editContactTemplate(contact,index) {
                                 </div>
                             </div>
                                 <div class="input-validation-container">
-                                    <p id="add-contact-phone-input-validation-message"
+                                    <p id="userphone-input-validation-message"
                                         class="input-validation-message d_none"
                                         data-default-message="Please enter a valid phone number.">Please enter a valid
                                         phone number.</p>

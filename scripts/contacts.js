@@ -327,9 +327,9 @@ async function refreshContacts() {
  */
 async function createContactForRemoteStorage(event) {
     event.preventDefault();
-    let nameInput = document.getElementById('add-contact-name-input');
+    let nameInput = document.getElementById('username-input');
     let emailInput = document.getElementById('usermail-input');
-    let phoneInput = document.getElementById('add-contact-phone-input');
+    let phoneInput = document.getElementById('userphone-input');
     let initial = createUserInitial(nameInput.value);
     let profilcolor = getProfilColorIcon();
     postContactsToRemoteStorage(nameInput.value, emailInput.value, phoneInput.value, initial, profilcolor);
@@ -368,9 +368,9 @@ function validateContactFormsInput(input) {
 async function getChangesFromContact(id, event, profilcolor, initial) {
     let selectedContact = document.getElementById('contact-details');
     event.preventDefault();
-    let nameInput = document.getElementById('add-contact-name-input');
-    let emailInput = document.getElementById('add-contact-email-input');
-    let phoneInput = document.getElementById('add-contact-phone-input');
+    let nameInput = document.getElementById('username-input');
+    let emailInput = document.getElementById('usermail-input');
+    let phoneInput = document.getElementById('userphone-input');
     let initialInput = createUserInitial(nameInput.value);
     const updatedContact = {name: nameInput.value, email: emailInput.value, phone: phoneInput.value, profilcolor: profilcolor, initial: initialInput
     };

@@ -111,12 +111,9 @@ function changePasswordIcon(input) {
 
 /**
  * Toggles the visibility of a password input field.
- * 
  * Switches the input type between "password" and "text" based on its current state,
  * allowing the user to show or hide the entered password. Also updates the icon accordingly.
- *
  * This function only toggles the input if it contains a non-empty value.
- *
  * @param {HTMLImageElement} iconElement - The eye icon element that was clicked to toggle visibility.
  */
 function toggleInputTypePassword(iconElement) {
@@ -147,11 +144,9 @@ function validateContactSectionForms() {
 
 
 /**
- * Help function - Checks whether all input fields with the class "user-input" have been filled out.
- * 
+ * Help function - Checks whether all input fields with the class "user-input" have been filled out
  * Iterates through all relevant input fields and returns false if any of them are empty
- * (after trimming whitespace). Returns true only if all fields contain a value.
- * 
+ * Returns true only if all fields contain a value.
  * @returns {boolean} Returns true if all input fields are filled, otherwise false.
  */
 function areAllInputsFilled() {
@@ -167,9 +162,7 @@ function areAllInputsFilled() {
 
 /**
  * Help-function - Validates a given user-email 
- * 
  * Trims the input and checks it against a regular expression pattern for basic email structure.
- * 
  * @param {string} email - The email adress to validate.
  * @returns Returns true if the email is valid, otherwise false.
  */
