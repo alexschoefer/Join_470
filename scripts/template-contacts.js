@@ -83,7 +83,7 @@ function addNewContactTemplate() {
                         <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
-                                    <input id="add-contact-name-input" class="user-input" type="text" name="name"
+                                    <input id="username-input" class="user-input" type="text" name="name"
                                         placeholder="Name" autocomplete="off" onfocus="clearErrorMessage(this)"
                                         onblur="validateContactFormsInput(this)">
                                     <div>
@@ -93,7 +93,7 @@ function addNewContactTemplate() {
                                 </div>
                             </div>
                             <div class="input-validation-container">
-                                <p id="add-contact-name-input-validation-message"
+                                <p id="username-input-validation-message"
                                     class="input-validation-message d_none"
                                     data-default-message="This field is required.">This field is required.</p>
                             </div>
