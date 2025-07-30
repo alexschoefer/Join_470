@@ -5,13 +5,17 @@
  */
 function ShowBurgerMenu() {
   const menu = document.getElementById("burger-menu");
+  const profileCircle = document.getElementById("profileCircle");
   menu.classList.toggle("d_none");
   if (!menu.classList.contains("d_none")) {
+    profileCircle.classList.add("active");
     document.addEventListener("click", closeWhenClickedOutside);
     const links = menu.querySelectorAll("a");
     links.forEach((link) => {
       link.addEventListener("click", CloseBurgerMenu);
     });
+  } else {
+    profileCircle.classList.remove("active");
   }
 }
 
@@ -21,7 +25,9 @@ function ShowBurgerMenu() {
  */
 function CloseBurgerMenu() {
   const menu = document.getElementById("burger-menu");
+  const profileCircle = document.getElementById("profileCircle");
   menu.classList.add("d_none");
+  profileCircle.classList.remove("active");
   document.removeEventListener("click", closeWhenClickedOutside);
 }
 

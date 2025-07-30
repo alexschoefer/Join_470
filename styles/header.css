@@ -56,7 +56,8 @@
   font-size: 16px;
   font-weight: 400;
   color: #cdcdcd;
-  padding: 10px;
+  padding: 15px;
+  gap: 5px;
 }
 .burger-menu-button {
   display: flex;
@@ -68,9 +69,13 @@
   text-decoration: none;
   font-family: "Inter", sans-serif;
   text-align: left;
-  border-radius: 10px;
   box-sizing: border-box;
   transition: background-color 0.2s ease;
+  padding: 7px;
+}
+
+.burger-menu-button:hover {
+  background-color: #2d476b;
 }
 
 .burger-menu-button-help {
@@ -83,9 +88,12 @@
   text-decoration: none;
   font-family: "Inter", sans-serif;
   text-align: left;
-  border-radius: 10px;
   box-sizing: border-box;
   transition: background-color 0.2s ease;
+  padding: 7px;
+}
+.burger-menu-button-help:hover {
+  background-color: #2d476b;
 }
 
 .profile-circle {
@@ -103,6 +111,10 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   user-select: none;
+}
+.profile-circle.active,
+.profile-circle:hover {
+  background-color: rgba(0, 0, 0, 0.11);
 }
 
 .header-logo {
@@ -142,8 +154,8 @@
     text-decoration: none;
     font-family: "Inter", sans-serif;
     text-align: left;
-    border-radius: 10px;
     box-sizing: border-box;
     transition: background-color 0.2s ease;
+    padding: 7px;
   }
 }
