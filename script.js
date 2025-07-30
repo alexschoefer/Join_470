@@ -1,6 +1,6 @@
 const fetchURLDataBase = "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/";
-let currentDeviceType = ''; // 'mobile' oder 'desktop'
-let currentOverlayMode = ''; // Overlay-Status ('mobile' oder 'desktop')
+let currentDeviceType = ''; 
+let currentOverlayMode = '';
 let isOverlayOpen = false;
 let currentOverlayType = null;
 let lastEditedContact = null;
@@ -90,10 +90,8 @@ function clearErrorMessage(input) {
 
 /**
  * Changes the icon in the input field for password
- * 
  * If the length of the input is bigger than 0 then a new icon will be placed in the input field
  * Otherwise if the field is empty, it shows a default lock icon.
- * 
  * @param {HTMLInputElement} input 
  */
 function changePasswordIcon(input) {
@@ -111,12 +109,8 @@ function changePasswordIcon(input) {
 
 /**
  * Toggles the visibility of a password input field.
- * 
- * Switches the input type between "password" and "text" based on its current state,
- * allowing the user to show or hide the entered password. Also updates the icon accordingly.
- *
+ * Switches the input type between "password" and "text" based on its current state, allowing the user to show or hide the entered password. Also updates the icon accordingly.
  * This function only toggles the input if it contains a non-empty value.
- *
  * @param {HTMLImageElement} iconElement - The eye icon element that was clicked to toggle visibility.
  */
 function toggleInputTypePassword(iconElement) {
@@ -147,11 +141,9 @@ function validateContactSectionForms() {
 
 
 /**
- * Help function - Checks whether all input fields with the class "user-input" have been filled out.
- * 
+ * Help function - Checks whether all input fields with the class "user-input" have been filled out
  * Iterates through all relevant input fields and returns false if any of them are empty
- * (after trimming whitespace). Returns true only if all fields contain a value.
- * 
+ * Returns true only if all fields contain a value.
  * @returns {boolean} Returns true if all input fields are filled, otherwise false.
  */
 function areAllInputsFilled() {
@@ -167,9 +159,7 @@ function areAllInputsFilled() {
 
 /**
  * Help-function - Validates a given user-email 
- * 
  * Trims the input and checks it against a regular expression pattern for basic email structure.
- * 
  * @param {string} email - The email adress to validate.
  * @returns Returns true if the email is valid, otherwise false.
  */
@@ -228,7 +218,6 @@ function arrowBack() {
 
 /**
  * Kombiniert zwei Arrays (Namen und Farben) zu einem Array von Objekten mit name und color.
- * 
  * @param {string[]} assignTo - Array mit Namen der zugewiesenen Personen.
  * @param {string[]} colorTo - Array mit Farben, die den Personen zugeordnet sind.
  * @returns {Object[]} Array von Objekten mit { name, color }
@@ -353,23 +342,6 @@ function checkRequiredFieldsAndToggleButton() {
         ATButtonAddTaskRef.disabled = false;
     } else {
         ATButtonAddTaskRef.disabled = true;
-    }
-}
-
-/**
- * Hides the mobile contact action buttons when clicking outside the button container
- * @param {MouseEvent} event - The click event outside triggered  on the document
- */
-function hideMobileContactBtns(event) {
-    const btnContainer = document.getElementById('mobile-contact-profil-btns-container');
-    const isClickInsideMenu = btnContainer.contains(event.target);
-    if (!isClickInsideMenu) {
-        btnContainer.classList.remove('slide-in');
-        setTimeout(() => {
-            btnContainer.classList.add('d_none');
-        }, 400); 
-        document.getElementById('mobile-button-wrapper').classList.remove('d_none');
-        document.removeEventListener('click', hideMobileContactBtns);
     }
 }
 
