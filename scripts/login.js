@@ -81,16 +81,10 @@ function showLoginContent(contentWrapper, loginContainer, animatedJoinLogo, fina
 async function loginUser(event) {
   event.preventDefault();
   let email = document.getElementById("login-usermail-input").value.trim();
-  let password = document
-    .getElementById("login-userpassword-input")
-    .value.trim();
+  let password = document.getElementById("login-userpassword-input").value.trim();
   let response = await fetch(fetchURLDataBase + "/users.json");
   let users = await response.json();
-  let userLogin =
-    users &&
-    Object.values(users).find(
-      (user) => user.email === email && user.password === password
-    );
+  let userLogin = users && Object.values(users).find((user) => user.email === email && user.password === password);
   if (userLogin) {
     await saveLoginUserDataToLocalStorage(email);
     localStorage.setItem("showWelcomeOnce", "true");
