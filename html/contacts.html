@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../styles/assets.css">
     <link rel="stylesheet" href="../styles/contact-media.css">
     <script src="../script.js"></script>
+    <script src="../scripts/auth.js"></script>
     <script src="../scripts/include.js"></script>
     <script src="../scripts/header.js"></script>
     <script src="../scripts/sidebar.js"></script>
@@ -25,11 +26,10 @@
     <script src="../scripts/template-contacts.js"></script>
     <script src="../scripts/template-mobil-contacts.js"></script>
     <script src="../scripts/contact-addon.js"></script>
-    <script src="../scripts/signup.js"></script>
-
+    
 </head>
 
-<body onload="initContacts()">
+<body onload="checksAuthentication(); initContacts();">
     <div class="app-layout">
         <div id="sidebar"></div>
         <div id="header"></div>

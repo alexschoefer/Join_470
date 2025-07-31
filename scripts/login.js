@@ -85,11 +85,13 @@ async function loginUser(event) {
   let response = await fetch(fetchURLDataBase + "/users.json");
   let users = await response.json();
   let userLogin = users && Object.values(users).find((user) => user.email === email && user.password === password);
-  if (userLogin) {
+  if(userLogin){
     await saveLoginUserDataToLocalStorage(email);
+    const contacts = await loadAllContactsFromRemoteStorage();
+    localStorage.setItem("cachedContacts", JSON.stringify(contacts));
     localStorage.setItem("showWelcomeOnce", "true");
-    window.location.href = "./html/summary.html";
-  } else {
+    showLoginSuccessMessage(); 
+  }else{
     showLoginError();
   }
 }
@@ -104,9 +106,7 @@ async function loginUser(event) {
 async function saveLoginUserDataToLocalStorage(email) {
   let response = await fetch(fetchURLDataBase + "/contacts.json");
   let loginUserDetails = await response.json();
-  let loggedInUser =
-    loginUserDetails &&
-    Object.values(loginUserDetails).find((user) => user.email === email);
+  let loggedInUser = loginUserDetails && Object.values(loginUserDetails).find((user) => user.email === email);
   if (loggedInUser) {
     localStorage.setItem(
       "loggedInUser",
@@ -145,9 +145,7 @@ function validateLoginInput(input) {
  * Shows an error message by login with wrong user data
  */
 function showLoginError() {
-  let errorMessage = document.getElementById(
-    "login-userpassword-input-validation-message"
-  );
+  let errorMessage = document.getElementById("login-userpassword-input-validation-message");
   errorMessage.classList.remove("d_none");
   let emailInput = document.getElementById("login-usermail-input");
   let passwordInput = document.getElementById("login-userpassword-input");
@@ -197,4 +195,20 @@ function guestLogin(event) {
   );
   localStorage.setItem("showWelcomeOnce", "true");
   window.location.href = "./html/summary.html";
+}
+
+
+/**
+ * Displays a success overlay and redirects the user to the login page after a short delay.
+ *
+ * Shows the success message about the registration
+ * Then, after 800 milliseconds, navigates the user to the login page.
+ */
+function showLoginSuccessMessage() {
+  const overlay = document.getElementById('login-success-overlay');
+  overlay.classList.remove('d_none');
+  overlay.classList.add('show');
+  setTimeout(() => {
+      window.location.href = '../html/summary.html';
+  }, 800);
 }

@@ -229,7 +229,6 @@ function forwardingToLoginPage() {
     const overlay = document.getElementById('sign-up-success-overlay');
     overlay.classList.remove('d_none');
     overlay.classList.add('show');
-
     setTimeout(() => {
         window.location.href = '../index.html';
     }, 800);

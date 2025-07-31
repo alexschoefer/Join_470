@@ -2,14 +2,23 @@ let allContacts = [];
 let colors = ['#FF7A00', '#FF5EB3', '#FF5EB3', '#9327FF', '#FF4646', '#C3FF2B', '#FF745E', '#FFE62B', '#00BEE8', '#0038FF'];
 
 /**
- * Initializes the contacts view by synchronizing and displaying contact data
- * @async
+ * Initializes the contacts view
+ * Loads cached contacts from localStorage (if available) and displays them immediately for faster perceived loading time
+ * If no cached contact data is available, a loading indicator is displayed until fresh data is loaded
  */
 async function initContacts() {
-    await getAllContacts(); 
-    allContacts = await loadAllContactsFromRemoteStorage(); 
+    const savedContactsinStorage = localStorage.getItem("cachedContacts");
+    if(savedContactsinStorage) {
+      allContacts = JSON.parse(savedContactsinStorage);
+      showAllContacts(allContacts);
+    }else{
+      document.getElementById('contact-list').innerHTML = '<div class="loader">Loading contacts...</div>';
+    }
+    const freshContacts = await loadAllContactsFromRemoteStorage();
+    localStorage.setItem("cachedContacts", JSON.stringify(freshContacts));
+    allContacts = freshContacts;
     showAllContacts(allContacts); 
-}
+  }
 
 
 /**
@@ -106,21 +115,6 @@ async function checkExistingContact() {
     const data = await response.json();
     if (!data) return [];
     return Object.entries(data).map(([id, contact]) => ({
-        id,
-        ...contact
-    }));
-}
-
-
-/**
- *  Loads all contacts from remote storage and returns them as an array
- * @async
- * @returns - Array of contact objects including id and contact data
- */
-async function loadAllContactsFromRemoteStorage() {
-    const response = await fetch(fetchURLDataBase + '/contacts' + '.json');
-    const contactsData = await response.json();
-    return Object.entries(contactsData).map(([id, contact]) => ({
         id,
         ...contact
     }));
