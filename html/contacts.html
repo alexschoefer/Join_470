@@ -26,7 +26,7 @@
     <script src="../scripts/template-contacts.js"></script>
     <script src="../scripts/template-mobil-contacts.js"></script>
     <script src="../scripts/contact-addon.js"></script>
-    
+
 </head>
 
 <body onload="checksAuthentication(); initContacts();">
@@ -74,10 +74,10 @@
         <div id="addNewContactOverlayContainer"></div>
         <!-- Edit-Contact-Section -->
         <div id="editContactOverlayContainer"></div>
-        <!-- Create-Contact-Overlay-Success -->
-        <div id="success-message-overlay" class="sign-up-success-overlay d_none">
-            <div class="sign-up-success-container slide-in">
-                <p class="sign-up-success-message">Contact successfully created!</p>
+        <!-- Feedback Overlay -->
+        <div id="success-message-overlay" class="success-message-overlay d_none">
+            <div class="contact-success-container slide-in">
+                <p id="feedback-message" class="contact-success-message"></p>
             </div>
         </div>
         <div class="mobile-contact-profil-btns-container d_none" id="mobile-contact-profil-btns-container">

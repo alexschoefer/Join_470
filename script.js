@@ -348,18 +348,22 @@ function checkRequiredFieldsAndToggleButton() {
 
 
 /**
- * Shows a success message if the new contact is created
+ * Displays a temporary success message in the feedback overlay
+ * @param {string} message - The message to display (given in the function)
  */
-async function showCreateContactSuccess() {
+async function showCreateContactSuccess(message) {
+    console.log('Overlay function triggered with message:', message);
     const overlay = document.getElementById('success-message-overlay');
+    const messageBox = document.getElementById('feedback-message');
+    messageBox.innerText = message;
     overlay.classList.remove('d_none');
     overlay.classList.add('show');
     setTimeout(() => {
-        overlay.classList.add('d_none');
-        overlay.classList.remove('show');
+      overlay.classList.add('d_none');
+      overlay.classList.remove('show');
     }, 800);
     await initContacts();
-}
+  }
 
 
 /**

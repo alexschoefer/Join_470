@@ -87,6 +87,7 @@ async function loginUser(event) {
   let userLogin = users && Object.values(users).find((user) => user.email === email && user.password === password);
   if(userLogin){
     await saveLoginUserDataToLocalStorage(email);
+    await getAllContacts();
     const contacts = await loadAllContactsFromRemoteStorage();
     localStorage.setItem("cachedContacts", JSON.stringify(contacts));
     localStorage.setItem("showWelcomeOnce", "true");
@@ -99,12 +100,12 @@ async function loginUser(event) {
 
 /**
  * Saves the login user details to localStorage for the current session
- * Fetches the full contacts list from the remoteStorage (Firebase) and searches for the user by the given email adresse
+ * Fetches the full user list from the remoteStorage (Firebase) and searches for the user by the given email adresse
  * If found, the user's email, the username, his/her profile color and initials are stored in localStorage under the key loggedInUser
  * @param {string} email - The email address of the logged-in user
  */
 async function saveLoginUserDataToLocalStorage(email) {
-  let response = await fetch(fetchURLDataBase + "/contacts.json");
+  let response = await fetch(fetchURLDataBase + "/users.json");
   let loginUserDetails = await response.json();
   let loggedInUser = loginUserDetails && Object.values(loginUserDetails).find((user) => user.email === email);
   if (loggedInUser) {
@@ -194,7 +195,7 @@ function guestLogin(event) {
     })
   );
   localStorage.setItem("showWelcomeOnce", "true");
-  window.location.href = "./html/summary.html";
+  showLoginSuccessMessage();
 }
 
 

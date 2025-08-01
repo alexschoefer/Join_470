@@ -290,7 +290,7 @@ function closeEditContactOverlay() {
 
 
 /**
- * Deletes an selected contact by its index in the firebase remote storage
+ * Deletes an selected contact by its index in the firebase remote storage and shows a message if the contact is deleted.
  * @param {number} index - The index of the contact to delete in the allContacts array
  */
 async function deleteContact(index) {
@@ -298,7 +298,8 @@ async function deleteContact(index) {
     await fetch(`${fetchURLDataBase}/contacts/${deleteContact.id}.json`, {
         method: "DELETE",
     });
-    closeEditContactOverlay();      
+    closeEditContactOverlay();
+    showCreateContactSuccess("Contact successfully deleted!");      
     await refreshContacts();          
     clearContactInformations();
 }
@@ -335,9 +336,9 @@ async function createContactForRemoteStorage(event) {
     let phoneInput = document.getElementById('userphone-input');
     let initial = createUserInitial(nameInput.value);
     let profilcolor = getProfilColorIcon();
-    postContactsToRemoteStorage(nameInput.value, emailInput.value, phoneInput.value, initial, profilcolor);
+    await postContactsToRemoteStorage(nameInput.value, emailInput.value, phoneInput.value, initial, profilcolor);
     closeAddContactOverlay();
-    showCreateContactSuccess();
+    showCreateContactSuccess("Contact successfully created!");
 }
 
 
