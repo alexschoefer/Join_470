@@ -177,7 +177,7 @@ function editTasksOfBoard(id) {
                                     <p class="label-add-task label-corrector-bottom-category">Category<span
                                             class="red-asterix-required">*</span></p>
                                     <div class="ATcustom-dropdown-wrapper" id="categoryDropdownWrapper">
-                                        <div class="ATcustom-dropdown-selected error" id="categoryDropdownSelected">
+                                        <div class="ATcustom-dropdown-selected" id="categoryDropdownSelected">
                                             <span id="categoryDropdownSelectedText">Select a category</span>
                                             <span class="ATcustom-dropdown-arrow" id="categoryDropdownArrow"></span>
                                         </div>
@@ -341,7 +341,7 @@ function addTasks() {
                                     <p class="label-add-task label-corrector-bottom-category">Category<span
                                             class="red-asterix-required">*</span></p>
                                     <div class="ATcustom-dropdown-wrapper" id="categoryDropdownWrapper">
-                                        <div class="ATcustom-dropdown-selected error" id="categoryDropdownSelected">
+                                        <div class="ATcustom-dropdown-selected" id="categoryDropdownSelected">
                                             <span id="categoryDropdownSelectedText">Select a category</span>
                                             <span class="ATcustom-dropdown-arrow" id="categoryDropdownArrow"></span>
                                         </div>

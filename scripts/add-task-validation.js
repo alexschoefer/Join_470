@@ -40,9 +40,7 @@ function validateDueDate() {
  * @returns {boolean} true if a category is selected, otherwise false.
  */
 function validateCategory() {
-    console.log('validateCategory aufgerufen');
     const selectedText = ATcategory.textContent;
-    console.log('Kategorie:', selectedText);
     const defaultText = 'Select a category';
     if (selectedText === defaultText) {
         categoryDropdownSelected.classList.add('error');
