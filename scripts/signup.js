@@ -2,10 +2,8 @@ let isEmailAlreadyUsed = false;
 
 /**
  * Validates a single input field in the signup form.
- * 
  * Displays an error message if the field is empty, and removes it if the input is valid.
  * Also triggers re-validation of the entire signup form to update the submit button state.
- *
  * @param {HTMLInputElement} input - The input field to be validated.
  */
 function validateSignupInput(input) {
@@ -26,11 +24,9 @@ function validateSignupInput(input) {
 
 /**
  * Help-function - Checking the required input email
- * 
  * Displays an error message if the email is not valid by the function isValidEmail
  * Also triggers re-validation of the entire signup form to update the submit button state.
  * Triggers an asynchronous check to see if the email already exists in the database.
- * 
  * @param {HTMLInputElement} input - The input field to be validated.
  */
 function checkRequiredInputEmail(input) {
@@ -50,10 +46,8 @@ function checkRequiredInputEmail(input) {
 
 /** 
  * Help-function - Checking the given email adress for the sign up in the database.
- * 
  * If the given email adress is already by a user in the database an error message by the calling function showEmailAlreadyExistError
  * Otherwise the error is cleared. The overall form validation is updated.
- * 
  * @param {HTMLInputElement} input - The email input field that is checking in the database. 
  */
 async function checkEmailAlreadyExist(input) {
@@ -71,10 +65,8 @@ async function checkEmailAlreadyExist(input) {
 
 /**
  * Help-function - Displays an error message when the entered email address already exists in the database.
- *
  * Updates the validation message element with an appropriate error text,
  * makes it visible, and applies a visual error style to the input wrapper.
- *
  * @param {HTMLInputElement} input - The email input field that triggered the error.
  */
 function showEmailAlreadyExistError(input) {
@@ -88,9 +80,7 @@ function showEmailAlreadyExistError(input) {
 
 /** 
  * Help-function - Clears all error messages by the input fields
- * 
  * Hides the associated validation message element. Removes the error styling from the input wrapper.
- *  
  * @param {HTMLInputElement} input - 
  */
 function clearErrorMessage(input) {
@@ -107,7 +97,6 @@ function clearErrorMessage(input) {
 
 /**
  * Help-functions - Checks if the button for privacy police is clicked
- * 
  * @returns {boolean} Returns true if the privacy policy checkbox is checked, otherwise false.
  */
 function isPrivacyPolicyChecked() {
@@ -117,10 +106,8 @@ function isPrivacyPolicyChecked() {
 
 /**
  * Validates the entire sign-up form to determine if the "Sign Up" button should be enabled.
- * 
  * Checking: All input fields are filled out, the email input has a valid format, the privacy policy checkbox is checked.
  * At least => The email is not already used (based on the `isEmailAlreadyUsed` flag).
- * 
  * Based on these conditions, it enables or disables the sign-up button.
  */
 function validateSignUpForm() {
@@ -135,7 +122,6 @@ function validateSignUpForm() {
 
 /**
  * Validates if the password and confirm password inputs match.
- *
  * If the values do not match, a validation message is shown.
  * If they match, the validation message is hidden.
  */
@@ -154,10 +140,8 @@ function checkConfirmPassword() {
 
 /**
  * Help-function: Handle the user inputs username, useremail and password
- * 
  * Prevents the default form submission
  * Triggers the function to post the input values into firebase database.
- * 
  * @param {Event} event - The form submission event. 
  */
 function saveUserInputsForRemoteStorage(event) {
@@ -171,10 +155,8 @@ function saveUserInputsForRemoteStorage(event) {
 
 /**
  * Sends the user's registration data to the remote firebase database
- * 
  * Performs a POST request to store a new user object containing name, email, and password.
  * After the request is complete, it triggers the registration success overlay and resets the registration form
- * 
  * @async
  * @param {HTMLInputElement} username - The input element containing the user's name.
  * @param {HTMLInputElement} usermail - The input element containing the user's email.
@@ -204,10 +186,8 @@ async function postUserDataToRemoteStorage(username, usermail, userpassword) {
 
 /**
  * Help-function - Reset all input fields
- * 
  * After a successfull registration all input fields are reseted. 
  * The sign up button also disabled again. 
- * 
  */
 function resetRegistration() {
     document.getElementById('username-input').value = '';
@@ -221,7 +201,6 @@ function resetRegistration() {
 
 /**
  * Displays a success overlay and redirects the user to the login page after a short delay.
- *
  * Shows the success message about the registration
  * Then, after 800 milliseconds, navigates the user to the login page.
  */
@@ -251,7 +230,6 @@ function handlePrivacyPolicyChange() {
 
 /**
  * Help-function - Reset the privacy police checkbox
- * 
  * Unchecks the checkbox input and adds the "d_none" class to the icon element
  */
 function resetCheckbox() {

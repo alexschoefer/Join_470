@@ -73,7 +73,7 @@ function showLoginContent(contentWrapper, loginContainer, animatedJoinLogo, fina
 /**
  * Handles the user long
  * Fetches user data from the remoteStorage(Firebase) and verifies the login data
- * If login data are valid: Saves login data to localStorage and redirects to the summary page.
+ * If login data are valid: Gets all contacts and saves login data to localStorage and redirects to the summary page.
  * If invalid, displays a login error message.
  * @async
  * @param {Event} event - The form submit event triggered by the login attempt.
