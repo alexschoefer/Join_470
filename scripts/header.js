@@ -91,6 +91,7 @@ function getInitials(name) {
 function logout() {
   localStorage.removeItem("loggedInUser");
   localStorage.removeItem("showWelcomeOnce");
+  localStorage.removeItem("cachedContacts");
 }
 
 /**

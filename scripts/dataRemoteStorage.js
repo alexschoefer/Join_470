@@ -1,6 +1,3 @@
-// const fetchURLDataBase =
-//   "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/";
-
 let standartTasks = [
   {
     id: 0,
@@ -141,10 +138,7 @@ async function editTasksToRemoteStorage(path, data) {
   });
   return (response = await response.json());
 }
-// deleteTasksToRemoteStorage("/tasks/0");
-// standartTasksToRemoteStorage("/tasks", standartTasks);
 
-// Dummy Kontakte
 let contactsDummy = [
   {
     name: "Thomas Müller",
