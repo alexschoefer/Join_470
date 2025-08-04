@@ -1,3 +1,8 @@
+/**
+ * Returns an HTML template string for the "Add New Contact" overlay form for mobile device
+ * 
+ * @returns {string} The HTML string representing the add contact overlay
+ */
 function addNewContactTemplateMobile() {
     return `
         <div class="contact-overlay">
@@ -90,6 +95,20 @@ function addNewContactTemplateMobile() {
     `
 }
 
+
+/**
+ * Returns an HTML template string for the "Edit a Contact" overlay form for the mobile device
+ * 
+ * @param {Object} contact - The contact object containing existing information.
+ * @param {string} contact.id - A unique identifier for the contact.
+ * @param {string} contact.name - The contact's full name.
+ * @param {string} contact.email - The contact's email address.
+ * @param {string} [contact.phone] - The contact's phone number (optional).
+ * @param {string} contact.profilcolor - The background color of the contact's profile icon.
+ * @param {string} contact.initial - The initial(s) shown in the profile icon.
+ * @param {number} index - The contact's index in the contact list, used for deletion.
+ * @returns {string} The HTML string for the edit contact overlay.
+ */
 function editContactTemplateMobile(contact,index) {
     return `
             <div class="contact-overlay">

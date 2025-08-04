@@ -1,10 +1,10 @@
-function getCaptialLetterHeaderTemplate(letter) {
-    return `
-        <div class="capital-letter">${letter}</div>
-        <div class="contact-line"></div>                       
-    `
-}
 
+/**
+ * Generates an HTML template string for the contact list with a capital letter and a separator line.
+
+ * @param {string} letter - A single capital letter to be displayed in the header.
+ * @returns {string} The HTML string containing the capital letter and a separator line.
+ */
 function getContactEntryTemplate(contact, index) {
     return `
     <div id="contact-entry" class="contact-entry" onclick="getContactInformations(${index}, event)">
@@ -19,6 +19,19 @@ function getContactEntryTemplate(contact, index) {
     `
 }
 
+
+/**
+ * Generates an HTML template string displaying detailed contact information,including the contact name, the initials of the contact, email, phone number, and action buttons
+ *
+ * @param {Object} contact - The contact object containing information to display.
+ * @param {string} contact.profilcolor - The background color used for the contact's icon.
+ * @param {string} contact.initial - The initial(s) of the contact to display in the icon.
+ * @param {string} contact.name - The full name of the contact.
+ * @param {string} [contact.email] - The contact's email address (optional).
+ * @param {string} [contact.phone] - The contact's phone number (optional).
+ * @param {number} index - The index of the contact in the list, used for identifying which contact to edit or delete.
+ * @returns {string} The HTML string containing the formatted contact information.
+ */
 function showContactInformationsTemplate(contact, index) {
     return `
         <div id="contact" class="contact">
@@ -54,6 +67,12 @@ function showContactInformationsTemplate(contact, index) {
     `;
 }
 
+
+/**
+ * Returns an HTML template string for the "Add New Contact" overlay form for desktop device
+ * 
+ * @returns {string} The HTML string representing the add contact overlay
+ */
 function addNewContactTemplate() {
     return `
 <div class="contact-overlay">
@@ -155,6 +174,19 @@ function addNewContactTemplate() {
 }
 
 
+/**
+ * Returns an HTML template string for the "Edit a Contact" overlay form for the desktop device
+ * 
+ * @param {Object} contact - The contact object containing existing information.
+ * @param {string} contact.id - A unique identifier for the contact.
+ * @param {string} contact.name - The contact's full name.
+ * @param {string} contact.email - The contact's email address.
+ * @param {string} [contact.phone] - The contact's phone number (optional).
+ * @param {string} contact.profilcolor - The background color of the contact's profile icon.
+ * @param {string} contact.initial - The initial(s) shown in the profile icon.
+ * @param {number} index - The contact's index in the contact list, used for deletion.
+ * @returns {string} The HTML string for the edit contact overlay.
+ */
 function editContactTemplate(contact,index) {
     return `
   <div class="contact-overlay">
