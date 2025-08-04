@@ -1,9 +1,30 @@
 
+
+
 /**
  * Generates an HTML template string for the contact list with a capital letter and a separator line.
 
  * @param {string} letter - A single capital letter to be displayed in the header.
  * @returns {string} The HTML string containing the capital letter and a separator line.
+ */
+function getCaptialLetterHeaderTemplate(letter) {
+    return `
+        <div class="capital-letter">${letter}</div>
+        <div class="contact-line"></div>                       
+    `
+}
+
+
+/**
+ * Generates an HTML template string for a single contact entry in the contact list including a profile badge with initials, the contact's name, and email address
+ *
+ * @param {Object} contact - The contact object containing information to display.
+ * @param {string} contact.profilcolor - The background color for the contact's profile icon.
+ * @param {string} contact.initial - The initials to display in the profile icon.
+ * @param {string} contact.name - The full name of the contact.
+ * @param {string} contact.email - The contact's email address.
+ * @param {number} index - The index of the contact in the list, used to identify which contact to show on click.
+ * @returns {string} The HTML string representing the contact entry.
  */
 function getContactEntryTemplate(contact, index) {
     return `
@@ -187,7 +208,7 @@ function addNewContactTemplate() {
  * @param {number} index - The contact's index in the contact list, used for deletion.
  * @returns {string} The HTML string for the edit contact overlay.
  */
-function editContactTemplate(contact,index) {
+function editContactTemplate(contact, index) {
     return `
   <div class="contact-overlay">
     <div class="add-contact-overlay">
