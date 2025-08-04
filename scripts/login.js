@@ -183,8 +183,9 @@ function checkRequiredLoginEmail(input) {
  * Redirects the user to summary page
  * @param {Event} event - The event object from the button click or form submission
  */
-function guestLogin(event) {
+async function guestLogin(event) {
   event.preventDefault();
+  await getAllContacts();
   localStorage.setItem(
     "loggedInUser",
     JSON.stringify({
