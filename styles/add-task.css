@@ -6,11 +6,6 @@
   transition: transform 0.5s ease;
 }
 
-.add-task-main-content {
-  width: 100%;
-  height: 100%;
-}
-
 .add-task {
   width: 100%;
   height: 100%;
@@ -333,7 +328,6 @@
   padding-right: 16px;
   padding-bottom: 6px;
   border-width: 1px;
-  /* border-radius: 10px; */
   font-family: Inter;
   font-weight: 400;
   font-size: 20px;
@@ -429,12 +423,11 @@
 
 .allSubtasks {
   width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  flex-direction: column;
-  align-items: flex-end;
+  max-height: 186px;
+  overflow-y: auto;
+  display: block;
   list-style: disc;
-  padding-left: 20px;
+  padding-left: 16px;
 }
 
 .ATSubLi {

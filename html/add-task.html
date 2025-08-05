@@ -17,21 +17,22 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&family=Teko:wght@300..700&display=swap"
         rel="stylesheet" />
+    <script src="../scripts/auth.js"></script>
     <script src="../scripts/include.js"></script>
     <script src="../scripts/header.js"></script>
     <script src="../scripts/sidebar.js"></script>
     <script src="../scripts/template-add-task.js"></script>
 </head>
 
-<body onload="addTaskInit()">
+<body onload="checksAuthentication(); addTaskInit()">
     <div class="app-layout">
         <div id="sidebar"></div>
         <div id="header"></div>
-        <main id="add-task-main-content" class="add-task-main-content">
+        <main class="main-content">
             <div class="add-task">
                 <div class="add-task-content">
                     <div class="add-task-title">
-                        <label for="ATF" class="add-task-h1">Add Task</label>
+                        <h1 class="add-task-h1">Add Task</h1>
                     </div>
                     <form action="" class="add-task-form" id="ATF">
                         <div class="add-task-form-div-container">
@@ -42,7 +43,8 @@
                                     <input type="text" id="add-task-title-input"
                                         class="add-task-input-style add-task-input-title-style"
                                         placeholder="Enter a Title" required autocomplete="off">
-                                    <span id="title-required" class="required-text d_none">This field is required</span>
+                                    <span id="title-required" class="required-text d_none">This field is
+                                        required</span>
                                 </div>
                                 <div class="add-task-form-left-description">
                                     <p for="add-task-description" class="label-add-task label-corrector-bottom">
@@ -162,7 +164,8 @@
                         </div>
                         <div class="add-task-form-buttons">
                             <div class="required-main-bottom-legend">
-                                <span class="label-add-task"><span class="red-asterix-required">*</span>This field is
+                                <span class="label-add-task"><span class="red-asterix-required">*</span>This field
+                                    is
                                     required
                                 </span>
                             </div>
@@ -201,6 +204,8 @@
             </div>
         </main>
     </div>
+    </main>
+
     <script src="../script.js" defer></script>
     <script src="../scripts/add-task-validation.js" defer></script>
     <script src="../scripts/add-task-contacts.js" defer></script>

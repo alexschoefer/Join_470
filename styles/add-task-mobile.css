@@ -1,14 +1,22 @@
 @media (1020px <=width <=1440px) {
 
+  .add-task {
+    overflow-y: hidden;
+  }
+
   .add-task-form-div-container {
-    width: 500px;
+    width: 517px;
+    height: 400%;
     flex-direction: column;
     gap: 32px;
+    overflow-y: auto;
   }
 
   .required-main-bottom-legend {
     width: 100%;
     justify-content: start;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   .add-task-form-left,
@@ -31,7 +39,6 @@
 
   .add-task-content {
     padding-top: 48px;
-    padding-left: 48px;
   }
 
   .add-task-buttons-create-and-clear {
@@ -39,9 +46,18 @@
     margin-bottom: 40px;
     flex-direction: row;
   }
+
+  .ATcustom-dropdown,
+  .ATcustom-dropdown-category {
+    width: 100%;
+  }
 }
 
 @media (650px <=width <=1019px) {
+
+  .add-task {
+    overflow-y: hidden;
+  }
 
   .add-task-form-left-description {
     padding-top: 20px;
@@ -51,16 +67,20 @@
   .add-task {
     padding-left: 96px;
     padding-right: 96px;
+    overflow-y: hidden;
   }
 
   .add-task-form-buttons {
     flex-direction: column;
     padding-bottom: 0;
+    align-items: end;
   }
 
   .required-main-bottom-legend {
     width: 100%;
     justify-content: start;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   .add-task-content {
@@ -70,7 +90,9 @@
 
   .add-task-form-div-container {
     flex-direction: column;
+    height: 126%;
     gap: 24px;
+    overflow-y: auto;
   }
 
   .add-task-form-left,
@@ -88,13 +110,14 @@
     height: 100%;
     flex-direction: row;
     justify-content: flex-end;
+    align-items: flex-start;
   }
 
   .add-task-buttons-create-and-clear-container {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: end;
+    justify-content: start;
   }
 
   .add-task-form-left-title,
@@ -109,6 +132,17 @@
   .app-layout {
     height: 100%;
   }
+
+  .ATcustom-dropdown,
+  .ATcustom-dropdown-category {
+    width: 100%;
+  }
+
+  .add-task-title {
+    height: 130px;
+    display: flex;
+    align-items: end;
+  }
 }
 
 @media (500px <=width <=650px) {
@@ -118,14 +152,18 @@
   }
 
   .add-task-form-buttons {
+    height: 40px;
     flex-direction: column;
     padding-bottom: 0;
+    align-items: end;
   }
 
 
   .required-main-bottom-legend {
     width: 100%;
     justify-content: start;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   .add-task {
@@ -146,6 +184,7 @@
     width: 100%;
     flex-direction: column;
     gap: 12px;
+    overflow-y: auto;
   }
 
   .add-task-form-left,
@@ -194,6 +233,11 @@
     align-items: center;
   }
 
+  .ATcustom-dropdown,
+  .ATcustom-dropdown-category {
+    width: 100%;
+  }
+
 }
 
 @media (380px <=width <=499px) {
@@ -205,6 +249,8 @@
   .required-main-bottom-legend {
     width: 100%;
     justify-content: start;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   .add-task-form-buttons {
@@ -257,6 +303,7 @@
     width: 100%;
     flex-direction: column;
     gap: 12px;
+    overflow-y: auto;
   }
 
   .add-task-form-left,
@@ -410,6 +457,7 @@
     width: 100%;
     flex-direction: column;
     gap: 12px;
+    overflow-y: auto;
   }
 
   .add-task-form-left,
@@ -539,6 +587,8 @@
   .required-main-bottom-legend {
     width: 100%;
     justify-content: start;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   .add-task-title {
