@@ -810,7 +810,7 @@ textarea {
   border-radius: 10px;
   padding: 16px;
   background-color: var(--main-color);
-  animation: moveUp 0.3s ease forwards;
+  animation: moveUp 0.125s ease forwards;
 }
 
 .add-task-finish-ovelay-text {
