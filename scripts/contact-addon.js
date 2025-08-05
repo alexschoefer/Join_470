@@ -74,7 +74,6 @@ function resetDummySync() {
  * @param {string} message - The message to display (given in the function)
  */
 async function showCreateContactSuccess(message) {
-    console.log('Overlay function triggered with message:', message);
     const overlay = document.getElementById('success-message-overlay');
     const messageBox = document.getElementById('feedback-message');
     messageBox.innerText = message;
