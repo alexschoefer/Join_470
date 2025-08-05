@@ -348,18 +348,22 @@ function checkRequiredFieldsAndToggleButton() {
 
 
 /**
- * Shows a success message if the new contact is created
+ * Displays a temporary success message in the feedback overlay
+ * @param {string} message - The message to display (given in the function)
  */
-async function showCreateContactSuccess() {
+async function showCreateContactSuccess(message) {
+    console.log('Overlay function triggered with message:', message);
     const overlay = document.getElementById('success-message-overlay');
+    const messageBox = document.getElementById('feedback-message');
+    messageBox.innerText = message;
     overlay.classList.remove('d_none');
     overlay.classList.add('show');
     setTimeout(() => {
-        overlay.classList.add('d_none');
-        overlay.classList.remove('show');
+      overlay.classList.add('d_none');
+      overlay.classList.remove('show');
     }, 800);
     await initContacts();
-}
+  }
 
 
 /**
@@ -369,4 +373,19 @@ async function showCreateContactSuccess() {
  */
 function sortContactsAlphabetically(allContacts) {
     return allContacts.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+
+/**
+ *  Loads all contacts from remote storage and returns them as an array
+ * @async
+ * @returns - Array of contact objects including id and contact data
+ */
+async function loadAllContactsFromRemoteStorage() {
+    const response = await fetch(fetchURLDataBase + '/contacts' + '.json');
+    const contactsData = await response.json();
+    return Object.entries(contactsData).map(([id, contact]) => ({
+        id,
+        ...contact
+    }));
 }

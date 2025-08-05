@@ -18,7 +18,7 @@ function hideMobileContactBtns(event) {
         btnContainer.classList.remove('slide-in');
         setTimeout(() => {
             btnContainer.classList.add('d_none');
-        }, 400); 
+        }, 400);
         document.getElementById('mobile-button-wrapper').classList.remove('d_none');
         document.removeEventListener('click', hideMobileContactBtns);
     }
@@ -38,10 +38,12 @@ async function getChangesFromContact(id, event, profilcolor, initial) {
     let emailInput = document.getElementById('usermail-input');
     let phoneInput = document.getElementById('userphone-input');
     let initialInput = createUserInitial(nameInput.value);
-    const updatedContact = {name: nameInput.value, email: emailInput.value, phone: phoneInput.value, profilcolor: profilcolor, initial: initialInput
+    const updatedContact = {
+        name: nameInput.value, email: emailInput.value, phone: phoneInput.value, profilcolor: profilcolor, initial: initialInput
     };
     await updateContactInRemoteStorage(id, updatedContact);
     closeEditContactOverlay();
+    showCreateContactSuccess("Contact successfully updated!");
     await refreshContacts();
     clearContactInformations();
 }
@@ -59,4 +61,9 @@ function changeContact() {
         btnContainer.classList.add('slide-in');
         document.addEventListener('click', hideMobileContactBtns);
     }, 10);
+}
+
+
+function resetDummySync() {
+    localStorage.removeItem("cachedContacts");
 }

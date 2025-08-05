@@ -73,7 +73,7 @@ function showLoginContent(contentWrapper, loginContainer, animatedJoinLogo, fina
 /**
  * Handles the user long
  * Fetches user data from the remoteStorage(Firebase) and verifies the login data
- * If login data are valid: Saves login data to localStorage and redirects to the summary page.
+ * If login data are valid: Gets all contacts and saves login data to localStorage and redirects to the summary page.
  * If invalid, displays a login error message.
  * @async
  * @param {Event} event - The form submit event triggered by the login attempt.
@@ -85,11 +85,14 @@ async function loginUser(event) {
   let response = await fetch(fetchURLDataBase + "/users.json");
   let users = await response.json();
   let userLogin = users && Object.values(users).find((user) => user.email === email && user.password === password);
-  if (userLogin) {
+  if(userLogin){
     await saveLoginUserDataToLocalStorage(email);
+    await getAllContacts();
+    const contacts = await loadAllContactsFromRemoteStorage();
+    localStorage.setItem("cachedContacts", JSON.stringify(contacts));
     localStorage.setItem("showWelcomeOnce", "true");
-    window.location.href = "./html/summary.html";
-  } else {
+    showLoginSuccessMessage(); 
+  }else{
     showLoginError();
   }
 }
@@ -97,16 +100,14 @@ async function loginUser(event) {
 
 /**
  * Saves the login user details to localStorage for the current session
- * Fetches the full contacts list from the remoteStorage (Firebase) and searches for the user by the given email adresse
+ * Fetches the full user list from the remoteStorage (Firebase) and searches for the user by the given email adresse
  * If found, the user's email, the username, his/her profile color and initials are stored in localStorage under the key loggedInUser
  * @param {string} email - The email address of the logged-in user
  */
 async function saveLoginUserDataToLocalStorage(email) {
-  let response = await fetch(fetchURLDataBase + "/contacts.json");
+  let response = await fetch(fetchURLDataBase + "/users.json");
   let loginUserDetails = await response.json();
-  let loggedInUser =
-    loginUserDetails &&
-    Object.values(loginUserDetails).find((user) => user.email === email);
+  let loggedInUser = loginUserDetails && Object.values(loginUserDetails).find((user) => user.email === email);
   if (loggedInUser) {
     localStorage.setItem(
       "loggedInUser",
@@ -145,9 +146,7 @@ function validateLoginInput(input) {
  * Shows an error message by login with wrong user data
  */
 function showLoginError() {
-  let errorMessage = document.getElementById(
-    "login-userpassword-input-validation-message"
-  );
+  let errorMessage = document.getElementById("login-userpassword-input-validation-message");
   errorMessage.classList.remove("d_none");
   let emailInput = document.getElementById("login-usermail-input");
   let passwordInput = document.getElementById("login-userpassword-input");
@@ -184,8 +183,9 @@ function checkRequiredLoginEmail(input) {
  * Redirects the user to summary page
  * @param {Event} event - The event object from the button click or form submission
  */
-function guestLogin(event) {
+async function guestLogin(event) {
   event.preventDefault();
+  await getAllContacts();
   localStorage.setItem(
     "loggedInUser",
     JSON.stringify({
@@ -196,5 +196,21 @@ function guestLogin(event) {
     })
   );
   localStorage.setItem("showWelcomeOnce", "true");
-  window.location.href = "./html/summary.html";
+  showLoginSuccessMessage();
+}
+
+
+/**
+ * Displays a success overlay and redirects the user to the login page after a short delay.
+ *
+ * Shows the success message about the registration
+ * Then, after 800 milliseconds, navigates the user to the login page.
+ */
+function showLoginSuccessMessage() {
+  const overlay = document.getElementById('login-success-overlay');
+  overlay.classList.remove('d_none');
+  overlay.classList.add('show');
+  setTimeout(() => {
+      window.location.href = '../html/summary.html';
+  }, 800);
 }
