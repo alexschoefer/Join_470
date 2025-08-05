@@ -30,17 +30,22 @@ function validateSignupInput(input) {
  * @param {HTMLInputElement} input - The input field to be validated.
  */
 function checkRequiredInputEmail(input) {
-    let email = input.value.trim();
-    let errorMessage = document.getElementById('usermail-input-validation-message');
-    let wrapper = input.closest('.user-input-wrapper');
-        if (!isValidEmail(email)) {
-            errorMessage.classList.remove('d_none');
-            wrapper.classList.add('input-error');
-        } else {
-            errorMessage.classList.add('d_none');
-            wrapper.classList.remove('input-error');
-        }
-        checkEmailAlreadyExist(input);
+    const email = input.value.trim();
+    const errorMessage = document.getElementById('usermail-input-validation-message');
+    const wrapper = input.closest('.user-input-wrapper');
+    if(email === '') {
+        errorMessage.innerText = 'This field is required.';
+        errorMessage.classList.remove('d_none');
+        wrapper.classList.add('input-error');
+    }else if(!isValidEmail(email)) {
+        errorMessage.innerText = 'Please enter a valid email address.';
+        errorMessage.classList.remove('d_none');
+        wrapper.classList.add('input-error');
+    }else {
+        errorMessage.classList.add('d_none');
+        wrapper.classList.remove('input-error');
+    }
+    validateSignUpForm();
 }
 
 
