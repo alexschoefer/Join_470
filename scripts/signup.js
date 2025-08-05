@@ -45,6 +45,7 @@ function checkRequiredInputEmail(input) {
         errorMessage.classList.add('d_none');
         wrapper.classList.remove('input-error');
     }
+    checkEmailAlreadyExist(input);
     validateSignUpForm();
 }
 
@@ -77,7 +78,7 @@ async function checkEmailAlreadyExist(input) {
 function showEmailAlreadyExistError(input) {
     let errorMessage = document.getElementById('usermail-input-validation-message');
     let wrapper = input.closest('.user-input-wrapper');
-    errorMessage.innerHTML = 'An account already exists for this e-mail address. Please check.';
+    errorMessage.innerHTML = 'An account already exists for this email address. Please check.';
     errorMessage.classList.remove('d_none');
     wrapper.classList.add('input-error');
 }
