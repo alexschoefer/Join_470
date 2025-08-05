@@ -348,25 +348,6 @@ function checkRequiredFieldsAndToggleButton() {
 
 
 /**
- * Displays a temporary success message in the feedback overlay
- * @param {string} message - The message to display (given in the function)
- */
-async function showCreateContactSuccess(message) {
-    console.log('Overlay function triggered with message:', message);
-    const overlay = document.getElementById('success-message-overlay');
-    const messageBox = document.getElementById('feedback-message');
-    messageBox.innerText = message;
-    overlay.classList.remove('d_none');
-    overlay.classList.add('show');
-    setTimeout(() => {
-      overlay.classList.add('d_none');
-      overlay.classList.remove('show');
-    }, 800);
-    await initContacts();
-  }
-
-
-/**
  * Help function - Sorts an array of contact objects alphabetically by their name
  * @param {*} allContacts - The array of contact objects to sort
  * @returns - The sorted array of contacts

@@ -48,7 +48,7 @@ function addNewContactTemplateMobile() {
                                         <div class="input-container">
                                             <input id="usermail-input" class="user-input" type="email" name="email"
                                                 placeholder="Email" autocomplete="off" onfocus="clearErrorMessage(this)"
-                                                onblur="validateContactFormsInput(this)">
+                                                onblur="validateContactFormsInput(this), checkRequiredInputContactEmail(this)">
                                             <div>
                                                 <img class="email-icon" src="../assets/icons/mail-icon.png" alt="mail-icon">
                                             </div>
@@ -156,7 +156,7 @@ function editContactTemplateMobile(contact,index) {
                                             <div class="input-container">
                                                 <input id="usermail-input" class="user-input" type="email" name="email"
                                                     placeholder="Email" autocomplete="off" value="${contact.email}"
-                                                    onfocus="clearErrorMessage(this)" onblur="validateContactFormsInput(this)">
+                                                    onfocus="clearErrorMessage(this)" onblur="validateContactFormsInput(this), checkRequiredInputContactEmail(this)">
                                                 <div>
                                                     <img class="email-icon" src="../assets/icons/mail-icon.png" alt="mail-icon">
                                                 </div>
