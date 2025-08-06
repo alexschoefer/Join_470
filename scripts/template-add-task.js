@@ -26,12 +26,12 @@ function getInitialsTemplate(contact) {
 
 function getAssignedContactTemplate(contact, i, you) {
     return `
-        <div class="ATcustom-dropdown-option" data-index="${i}">
+        <div class="ATcustom-dropdown-option" data-index="${i}" onclick="assignedCheckboxClick(event, ${i})">
             <div class="ATContact-option-intials-container" style="background-color: ${contact.color};">
                 <div class="ATContact-option-initials">${contact.initial}</div>
             </div>
             <div class="ATContact-option-name">${contact.name} ${you}</div>
-            <div id="ATContact-option-checkbox${i}" class="ATContact-option-checkbox" onclick="assignedCheckboxClick(event, ${i})"></div>
+            <div id="ATContact-option-checkbox${i}" class="ATContact-option-checkbox"></div>
         </div>
     `;
 }

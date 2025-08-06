@@ -103,6 +103,7 @@
   .add-task-form-div-container {
     height: calc(100vh - 353px);
     flex-direction: column;
+    justify-content: flex-start;
     gap: 24px;
     overflow-y: auto;
   }
@@ -449,12 +450,8 @@
     height: calc(100vh - 80px);
   }
 
-.add-task-content{
-   height: calc(100% - 300px);
-}
-
   .add-task {
-    height: calc(100% - 300px);
+    height: calc(100% - 273px);
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -501,7 +498,7 @@
   }
 
   .add-task-form-div-container {
-    height: 80%;
+    height: 100%;
     width: 100%;
     flex-direction: column;
     justify-content: start;
@@ -622,7 +619,7 @@
     align-items: end;
     flex-direction: column;
     padding-bottom: 160px;
-    padding-top: 10px;
+    padding-top: 26px;
   }
 
   .app-layout {
