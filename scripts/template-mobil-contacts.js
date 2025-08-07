@@ -1,3 +1,8 @@
+/**
+ * Returns an HTML template string for the "Add New Contact" overlay form for mobile device
+ * 
+ * @returns {string} The HTML string representing the add contact overlay
+ */
 function addNewContactTemplateMobile() {
     return `
         <div class="contact-overlay">
@@ -23,7 +28,7 @@ function addNewContactTemplateMobile() {
                                 <div class="input-wrapper">
                                     <div class="user-input-wrapper">
                                         <div class="input-container">
-                                            <input id="add-contact-name-input" class="user-input" type="text" name="name"
+                                            <input id="username-input" class="user-input" type="text" name="name"
                                                 placeholder="Name" autocomplete="off" onfocus="clearErrorMessage(this)"
                                                 onblur="validateContactFormsInput(this)">
                                             <div>
@@ -33,7 +38,7 @@ function addNewContactTemplateMobile() {
                                         </div>
                                     </div>
                                     <div class="input-validation-container">
-                                        <p id="add-contact-name-input-validation-message"
+                                        <p id="username-input-validation-message"
                                             class="input-validation-message d_none"
                                             data-default-message="This field is required.">This field is required.</p>
                                     </div>
@@ -43,7 +48,7 @@ function addNewContactTemplateMobile() {
                                         <div class="input-container">
                                             <input id="usermail-input" class="user-input" type="email" name="email"
                                                 placeholder="Email" autocomplete="off" onfocus="clearErrorMessage(this)"
-                                                onblur="validateContactFormsInput(this)">
+                                                onblur="validateContactFormsInput(this), checkRequiredInputContactEmail(this)">
                                             <div>
                                                 <img class="email-icon" src="../assets/icons/mail-icon.png" alt="mail-icon">
                                             </div>
@@ -59,7 +64,7 @@ function addNewContactTemplateMobile() {
                                 <div class="input-wrapper">
                                     <div class="user-input-wrapper">
                                         <div class="input-container">
-                                            <input id="add-contact-phone-input" class="user-input" type="tel" name="phone"
+                                            <input id="userphone-input" class="user-input" type="tel" name="phone"
                                                 placeholder="Phone" autocomplete="off" onfocus="clearErrorMessage(this)"
                                                 onblur="validateContactFormsInput(this)">
                                             <div>
@@ -68,7 +73,7 @@ function addNewContactTemplateMobile() {
                                         </div>
                                     </div>
                                     <div class="input-validation-container">
-                                        <p id="add-contact-phone-input-validation-message"
+                                        <p id="userphone-input-validation-message"
                                             class="input-validation-message d_none"
                                             data-default-message="Please enter a valid phone number.">Please enter a valid phone
                                             number.</p>
@@ -90,6 +95,20 @@ function addNewContactTemplateMobile() {
     `
 }
 
+
+/**
+ * Returns an HTML template string for the "Edit a Contact" overlay form for the mobile device
+ * 
+ * @param {Object} contact - The contact object containing existing information.
+ * @param {string} contact.id - A unique identifier for the contact.
+ * @param {string} contact.name - The contact's full name.
+ * @param {string} contact.email - The contact's email address.
+ * @param {string} [contact.phone] - The contact's phone number (optional).
+ * @param {string} contact.profilcolor - The background color of the contact's profile icon.
+ * @param {string} contact.initial - The initial(s) shown in the profile icon.
+ * @param {number} index - The contact's index in the contact list, used for deletion.
+ * @returns {string} The HTML string for the edit contact overlay.
+ */
 function editContactTemplateMobile(contact,index) {
     return `
             <div class="contact-overlay">
@@ -118,7 +137,7 @@ function editContactTemplateMobile(contact,index) {
                                     <div class="input-wrapper">
                                         <div class="user-input-wrapper">
                                             <div class="input-container">
-                                                <input id="add-contact-name-input" class="user-input" type="text" name="name"
+                                                <input id="username-input" class="user-input" type="text" name="name"
                                                     placeholder="Name" value="${contact.name}" autocomplete="off"
                                                     onfocus="clearErrorMessage(this)" onblur="validateContactFormsInput(this)">
                                                 <div>
@@ -127,7 +146,7 @@ function editContactTemplateMobile(contact,index) {
                                             </div>
                                         </div>
                                         <div class="input-validation-container">
-                                            <p id="add-contact-name-input-validation-message"
+                                            <p id="username-input-validation-message"
                                                 class="input-validation-message d_none"
                                                 data-default-message="This field is required.">This field is required.</p>
                                         </div>
@@ -135,16 +154,16 @@ function editContactTemplateMobile(contact,index) {
                                     <div class="input-wrapper">
                                         <div class="user-input-wrapper">
                                             <div class="input-container">
-                                                <input id="add-contact-email-input" class="user-input" type="email" name="email"
+                                                <input id="usermail-input" class="user-input" type="email" name="email"
                                                     placeholder="Email" autocomplete="off" value="${contact.email}"
-                                                    onfocus="clearErrorMessage(this)" onblur="validateContactFormsInput(this)">
+                                                    onfocus="clearErrorMessage(this)" onblur="validateContactFormsInput(this), checkRequiredInputContactEmail(this)">
                                                 <div>
                                                     <img class="email-icon" src="../assets/icons/mail-icon.png" alt="mail-icon">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="input-validation-container">
-                                            <p id="add-contact-email-input-validation-message"
+                                            <p id="usermail-input-validation-message"
                                                 class="input-validation-message d_none"
                                                 data-default-message="Please enter a valid email address.">Please enter a valid
                                                 email adress.</p>
@@ -153,7 +172,7 @@ function editContactTemplateMobile(contact,index) {
                                     <div class="input-wrapper">
                                         <div class="user-input-wrapper">
                                             <div class="input-container">
-                                                <input id="add-contact-phone-input" class="user-input" type="tel" name="phone"
+                                                <input id="userphone-input" class="user-input" type="tel" name="phone"
                                                     placeholder="Phone" autocomplete="off" value="${contact.phone || ''}"
                                                     onfocus="clearErrorMessage(this)" onblur="validateContactFormsInput(this)">
                                                 <div>
@@ -162,7 +181,7 @@ function editContactTemplateMobile(contact,index) {
                                             </div>
                                         </div>
                                         <div class="input-validation-container">
-                                            <p id="add-contact-phone-input-validation-message"
+                                            <p id="userphone-input-validation-message"
                                                 class="input-validation-message d_none"
                                                 data-default-message="Please enter a valid phone number.">Please enter a valid phone
                                                 number.</p>
@@ -173,7 +192,7 @@ function editContactTemplateMobile(contact,index) {
                                         <button type="button" class="delete-btn" onclick="deleteContact(${index})">
                                             Delete
                                         </button>
-                                        <button type="submit" class="save-contact-btn">
+                                        <button type="submit" class="save-contact-btn" id="btn-form">
                                             Save
                                             <img class="add-task-button-check-icon" src="../assets/icons/check-icon.png"
                                                 alt="check-icon">

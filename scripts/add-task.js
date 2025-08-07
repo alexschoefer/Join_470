@@ -1,100 +1,6 @@
-function addTaskInit() {
-  window.ATTitleRef = document.getElementById("add-task-title-input");
-  window.ATDescriptionRef = document.getElementById(
-    "add-task-description-textarea"
-  );
-  window.ATDueDateRef = document.getElementById("add-task-due-date-input");
-  window.ATButtonPrioButtonUrgentRef = document.getElementById(
-    "add-task-prio-button-urgent"
-  );
-  window.ATButtonPrioButtonMediumRef = document.getElementById(
-    "add-task-prio-button-medium"
-  );
-  window.ATButtonPrioButtonLowRef = document.getElementById(
-    "add-task-prio-button-low"
-  );
-  window.ATAssignToRef = document.getElementById("add-task-assign-to");
-  window.ATSubtasksRef = document.getElementById("add-task-subtasks");
-  window.ATSubtaskInput = document.getElementById("add-task-subtasks-input");
-  window.ATButtonAddTaskRef = document.getElementById(
-    "add-task-button-create-task"
-  );
-  window.ATButtonCancelRef = document.getElementById("add-task-cancel-button");
-  window.allSubtasks = document.getElementById("allSubtasks");
-  window.ATButtonUrgentRef = document.getElementById(
-    "add-task-prio-button-urgent"
-  );
-  window.ATButtonUrgentPicRef = document.getElementById(
-    "add-task-prio-button-urgent-picture"
-  );
-  window.ATButtonMediumRef = document.getElementById(
-    "add-task-prio-button-medium"
-  );
-  window.ATButtonMediumPicRef = document.getElementById(
-    "add-task-prio-button-medium-picture"
-  );
-  window.ATButtonLowRef = document.getElementById("add-task-prio-button-low");
-  window.ATButtonLowPicRef = document.getElementById(
-    "add-task-prio-button-low-picture"
-  );
-  window.ATSubtasksInputDivRef = document.getElementById(
-    "add-task-subtasks-input-div"
-  );
-  window.ATSubtasksIconAddRef = document.getElementById(
-    "add-task-subtasks-icon-add"
-  );
-  window.dropdownSelected = document.getElementById("customDropdownSelected");
-  window.dropdownMenu = document.getElementById("add-task-assigned-to-select");
-  window.dropdownArrow = document.getElementById("customDropdownArrow");
-  window.dropdownSelectedText = document.getElementById(
-    "customDropdownSelectedText"
-  );
-  window.chosenDiv = document.getElementById(
-    "add-task-assigned-to-chosen-initials"
-  );
-  window.categoryDropdownSelected = document.getElementById(
-    "categoryDropdownSelected"
-  );
-  window.categoryDropdownMenu = document.getElementById(
-    "add-task-category-select"
-  );
-  window.categoryDropdownArrow = document.getElementById(
-    "categoryDropdownArrow"
-  );
-  window.categoryDropdownWrapper = document.getElementById(
-    "categoryDropdownWrapper"
-  );
-  window.categoryRequired = document.getElementById("category-required");
-  window.customDropdownWrapper = document.getElementById(
-    "customDropdownWrapper"
-  );
-  window.ATdueDateInput = document.getElementById("add-task-due-date-input");
-  window.ATcategory = document.getElementById("categoryDropdownSelectedText");
-
-  window.categoryDropdownOpen = false;
-  window.dropdownOpen = false;
-  window.prioButtonState = "Medium";
-  window.subtasks = [""];
-  window.subtasksObject = {};
-  window.assignedCheckbox = [];
-  window.resultContactList = [];
-  // if (typeof addTaskValidationInit === "function") addTaskValidationInit();
-  if (typeof addTaskEventInit === "function") addTaskEventInit();
-
-  getContactsFromRemoteStorage();
-  loadCategoryOptions();
-}
-
 /**
- * Initialisiert das Add-Task-Formular, lädt Kontakte und Kategorien.
- */
-// function addTaskInit() {
-// getContactsFromRemoteStorage();
-// loadCategoryOptions();
-// }
-
-/**
- * Initialisiert das Add-Task-Formular, lädt Kontakte und Kategorien.
+ * Sends the entered task data to Firebase and starts the finish animation.
+ * @async
  */
 async function sendAddTaskData() {
   saveUserInputsForFirebase();
@@ -105,7 +11,7 @@ async function sendAddTaskData() {
 }
 
 /**
- * Sammelt alle Benutzereingaben aus dem Formular und sendet sie an Firebase.
+ * Collects all user inputs from the form and sends them to Firebase.
  * @async
  */
 async function saveUserInputsForFirebase() {
@@ -132,7 +38,7 @@ async function saveUserInputsForFirebase() {
 }
 
 /**
- * Sendet die neue Task an Firebase.
+ * Sends the new task to Firebase.
  * @async
  * @param {string} title
  * @param {string} description
@@ -143,7 +49,7 @@ async function saveUserInputsForFirebase() {
  * @param {string} category
  * @param {Object[]} subtasks
  * @param {string[]} colorTo
- * @returns {Promise<Object>} Die gespeicherte Task
+ * @returns {Promise<Object>} The saved task
  */
 async function postAddTaskDataToFirebase(
   title,
@@ -173,11 +79,11 @@ async function postAddTaskDataToFirebase(
 }
 
 /**
- * Sendet ein Task-Objekt an Firebase.
+ * Sends a task object to Firebase.
  * @async
- * @param {number} nextId - Die ID der neuen Task.
- * @param {Object} newTask - Das Task-Objekt.
- * @returns {Promise<Object>} Die gespeicherte Task
+ * @param {number} nextId - The ID of the new task.
+ * @param {Object} newTask - The task object.
+ * @returns {Promise<Object>} The saved task
  */
 async function sendTaskToFirebase(nextId, newTask) {
   let response = await fetch(`${fetchURLDataBase}/tasks/${nextId}.json`, {
@@ -189,8 +95,8 @@ async function sendTaskToFirebase(nextId, newTask) {
 }
 
 /**
- * Setzt den Status der Prio-Buttons und ruft die passende Styling-Funktion auf.
- * @param {string} state - "Urgent", "Medium" oder "Low"
+ * Sets the state of the prio buttons and calls the corresponding styling function.
+ * @param {string} state - "Urgent", "Medium" or "Low"
  */
 function addTaskPrioButtonClick(state) {
   prioButtonState = state;
@@ -249,7 +155,7 @@ function holdButtonLow() {
 }
 
 /**
- * Fügt ein neues Subtask hinzu, setzt das Subtask-Eingabefeld zurück. und rendert die Liste neu.
+ * Adds a new subtask, resets the subtask input field, and re-renders the list.
  */
 function addTaskAddSubtask() {
   subtasksToArray();
@@ -258,7 +164,7 @@ function addTaskAddSubtask() {
 }
 
 /**
- * Holt den aktuellen Wert aus dem Subtask-Eingabefeld und fügt ihn dem Subtask-Array hinzu.
+ * Gets the current value from the subtask input field and adds it to the subtask array.
  */
 function subtasksToArray() {
   const inputData = document.getElementById("add-task-subtasks-input").value;
@@ -267,7 +173,7 @@ function subtasksToArray() {
 }
 
 /**
- * Rendert alle Subtasks im DOM.
+ * Renders all subtasks in the DOM.
  */
 function subtaskRender() {
   allSubtasks.innerHTML = "";
@@ -281,8 +187,8 @@ function subtaskRender() {
 }
 
 /**
- * Entfernt ein Subtask anhand des Index und rendert die Liste neu.
- * @param {number} index - Index des zu löschenden Subtasks.
+ * Removes a subtask by index and re-renders the list.
+ * @param {number} index - Index of the subtask to delete.
  */
 function deleteAddTaskSubtask(index) {
   subtasks.splice(index, 1);
@@ -290,7 +196,7 @@ function deleteAddTaskSubtask(index) {
 }
 
 /**
- * Startet die Abschlussanimation nach dem Hinzufügen einer Task.
+ * Starts the finish animation after adding a task.
  */
 function startTaskAddedFinishAnimation() {
   const animationContainer = document.getElementById(
@@ -305,7 +211,7 @@ function startTaskAddedFinishAnimation() {
 }
 
 /**
- * Leert das Subtask-Eingabefeld und zeigt das Plus-Icon wieder an.
+ * Clears the subtask input field and shows the plus icon again.
  */
 function clearAddTaskSubtask() {
   ATSubtaskInput.value = "";
@@ -313,8 +219,8 @@ function clearAddTaskSubtask() {
 }
 
 /**
- * Setzt den aktuellen Subtask als "done" zurück in die normale Ansicht.
- * @param {number} id - Die ID des Subtasks.
+ * Sets the current subtask as "done" and returns to the normal view.
+ * @param {number} id - The ID of the subtask.
  */
 function getDoneAddTaskSubtask(id) {
   const ATSubSubtaskContainerRef = document.getElementById(
@@ -338,8 +244,8 @@ function getDoneAddTaskSubtask(id) {
 }
 
 /**
- * Aktiviert den Bearbeitungsmodus für ein Subtask.
- * @param {number} id - Die ID des Subtasks.
+ * Activates the edit mode for a subtask.
+ * @param {number} id - The ID of the subtask.
  */
 function editAddTaskSubtask(id) {
   const ATSubSubtaskContainerRef = document.getElementById(
@@ -363,7 +269,7 @@ function editAddTaskSubtask(id) {
 }
 
 /**
- * Zeigt die "Clear" und "Done" Buttons für das Subtask-Eingabefeld an.
+ * Shows the "Clear" and "Done" buttons for the subtask input field.
  */
 function showClearAndDoneButtons() {
   ATSubtasksInputDivRef.classList.remove("d_none");
@@ -371,7 +277,7 @@ function showClearAndDoneButtons() {
 }
 
 /**
- * Blendet die "Clear" und "Done" Buttons für das Subtask-Eingabefeld aus.
+ * Hides the "Clear" and "Done" buttons for the subtask input field.
  */
 function hideClearAndDoneButtons() {
   ATSubtasksInputDivRef.classList.add("d_none");
@@ -379,7 +285,7 @@ function hideClearAndDoneButtons() {
 }
 
 /**
- * Setzt den Fokus in das Subtask-Eingabefeld und blendet das Plus-Icon aus.
+ * Sets the focus in the subtask input field and hides the plus icon.
  */
 function getFocusInSubtasksInput() {
   document.getElementById("add-task-subtasks-input").focus();
@@ -387,7 +293,7 @@ function getFocusInSubtasksInput() {
 }
 
 /**
- * Steuert das Anzeigen und Verstecken der Subtask-Icons beim Hovern über Subtasks.
+ * Controls the display and hiding of subtask icons when hovering over subtasks.
  */
 function ADSShowIcons() {
   document.querySelectorAll(".add-task-subtask-style").forEach((container) => {
@@ -405,7 +311,7 @@ function ADSShowIcons() {
 }
 
 /**
- * Setzt das gesamte Add-Task-Formular zurück.
+ * Resets the entire Add Task form.
  */
 function resetAddTaskForm() {
   ATTitleRef.value = "";
@@ -420,9 +326,9 @@ function resetAddTaskForm() {
 }
 
 /**
- * Erstellt eine Kategorie-Option für das Dropdown-Menü.
- * @param {Object} cat - Kategorie-Objekt mit value und label.
- * @returns {HTMLElement} Das erzeugte Option-Element.
+ * Creates a category option for the dropdown menu.
+ * @param {Object} cat - Category object with value and label.
+ * @returns {HTMLElement} The created option element.
  */
 function createCategoryOption(cat) {
   const option = document.createElement("div");
@@ -440,7 +346,7 @@ function createCategoryOption(cat) {
 }
 
 /**
- * Lädt die verfügbaren Kategorien in das Dropdown-Menü.
+ * Loads the available categories into the dropdown menu.
  */
 function loadCategoryOptions() {
   categoryDropdownMenu.innerHTML = "";

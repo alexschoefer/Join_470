@@ -136,7 +136,6 @@ async function editTasksToRemoteStorage(path, data) {
   return (response = await response.json());
 }
 
-// Dummy Kontakte
 let contactsDummy = [
   {
     name: "Thomas Müller",

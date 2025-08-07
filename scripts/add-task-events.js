@@ -1,3 +1,10 @@
+/**
+ * Initializes all event listeners for the Add Task form.
+ * 
+ * This includes input validation, button clicks, dropdown handling,
+ * subtask input events, calendar icon interaction, and closing dropdowns
+ * when clicking outside.
+ */
 function addTaskEventInit() {
   ATTitleRef.addEventListener("input", checkRequiredFieldsAndToggleButton);
   ATDueDateRef.addEventListener("input", checkRequiredFieldsAndToggleButton);

@@ -3,15 +3,19 @@
  * Adds event listeners to close the menu on outside click or link click.
  * @returns {void}
  */
-function ShowBurgerMenu() {
+function showBurgerMenu() {
   const menu = document.getElementById("burger-menu");
+  const profileCircle = document.getElementById("profileCircle");
   menu.classList.toggle("d_none");
   if (!menu.classList.contains("d_none")) {
+    profileCircle.classList.add("active");
     document.addEventListener("click", closeWhenClickedOutside);
     const links = menu.querySelectorAll("a");
     links.forEach((link) => {
-      link.addEventListener("click", CloseBurgerMenu);
+      link.addEventListener("click", closeBurgerMenu);
     });
+  } else {
+    profileCircle.classList.remove("active");
   }
 }
 
@@ -19,9 +23,11 @@ function ShowBurgerMenu() {
  * Hides the burger menu and removes the outside click listener.
  * @returns {void}
  */
-function CloseBurgerMenu() {
+function closeBurgerMenu() {
   const menu = document.getElementById("burger-menu");
+  const profileCircle = document.getElementById("profileCircle");
   menu.classList.add("d_none");
+  profileCircle.classList.remove("active");
   document.removeEventListener("click", closeWhenClickedOutside);
 }
 
@@ -34,7 +40,7 @@ function closeWhenClickedOutside(event) {
   const menu = document.getElementById("burger-menu");
   const guestIcon = document.getElementById("profileCircle");
   if (!menu.contains(event.target) && !guestIcon.contains(event.target)) {
-    CloseBurgerMenu();
+    closeBurgerMenu();
   }
 }
 
@@ -65,8 +71,8 @@ function render() {
 
 /**
  * Extracts up to two uppercase initials from a full name.
- * @param {string} name - The full name (e.g. "Jane Doe").
- * @returns {string} The resulting initials (e.g. "JD").
+ * @param {string} name - The full name.
+ * @returns {string} The resulting initials.
  */
 function getInitials(name) {
   const nameParts = name.trim().split(" ");
@@ -85,6 +91,7 @@ function getInitials(name) {
 function logout() {
   localStorage.removeItem("loggedInUser");
   localStorage.removeItem("showWelcomeOnce");
+  localStorage.removeItem("cachedContacts");
 }
 
 /**

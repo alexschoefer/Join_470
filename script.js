@@ -1,11 +1,12 @@
 const fetchURLDataBase = "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/";
-let currentDeviceType = ''; // 'mobile' oder 'desktop'
-let currentOverlayMode = ''; // Overlay-Status ('mobile' oder 'desktop')
+let currentDeviceType = ''; 
+let currentOverlayMode = '';
 let isOverlayOpen = false;
 let currentOverlayType = null;
 let lastEditedContact = null;
 let lastEditedIndex = null;
 let currentContactIndex = null;
+let typeOfScreen = "";
 
 /**
  * On DOMContentLoaded event, calls updateDeviceType to initialize the device type based on the current window size.
@@ -35,7 +36,7 @@ function updateDeviceType() {
                 renderEditContactOverlay(lastEditedContact, lastEditedIndex);
             }
         }
-        adaptLayoutOnResize();
+        adaptLayoutOnResize(newType);
         if (currentContactIndex !== null && document.getElementById('contact-details').innerHTML.trim()) {
             const contactEntry = document.querySelectorAll('.contact-entry')[currentContactIndex];
             if (contactEntry) getContactInformations(currentContactIndex, { currentTarget: contactEntry });
@@ -48,7 +49,8 @@ function updateDeviceType() {
  * Adjusts the layout of the contact view depending on the device type (desktop or mobile) and whether a contact is currently selected.
  * On desktop: shows all sections. In the mobile view hides the left container and contact list if a contact is open.
  */
-function adaptLayoutOnResize() {
+function adaptLayoutOnResize(newType) {
+    typeOfScreen = newType;
     const contactDetails = document.getElementById('contact-details');
     if(!contactDetails) return; 
     const contactIsOpen = document.getElementById('contact-details').innerHTML.trim() !== '';
@@ -90,10 +92,8 @@ function clearErrorMessage(input) {
 
 /**
  * Changes the icon in the input field for password
- * 
  * If the length of the input is bigger than 0 then a new icon will be placed in the input field
  * Otherwise if the field is empty, it shows a default lock icon.
- * 
  * @param {HTMLInputElement} input 
  */
 function changePasswordIcon(input) {
@@ -111,12 +111,8 @@ function changePasswordIcon(input) {
 
 /**
  * Toggles the visibility of a password input field.
- * 
- * Switches the input type between "password" and "text" based on its current state,
- * allowing the user to show or hide the entered password. Also updates the icon accordingly.
- *
+ * Switches the input type between "password" and "text" based on its current state, allowing the user to show or hide the entered password. Also updates the icon accordingly.
  * This function only toggles the input if it contains a non-empty value.
- *
  * @param {HTMLImageElement} iconElement - The eye icon element that was clicked to toggle visibility.
  */
 function toggleInputTypePassword(iconElement) {
@@ -147,11 +143,9 @@ function validateContactSectionForms() {
 
 
 /**
- * Help function - Checks whether all input fields with the class "user-input" have been filled out.
- * 
+ * Help function - Checks whether all input fields with the class "user-input" have been filled out
  * Iterates through all relevant input fields and returns false if any of them are empty
- * (after trimming whitespace). Returns true only if all fields contain a value.
- * 
+ * Returns true only if all fields contain a value.
  * @returns {boolean} Returns true if all input fields are filled, otherwise false.
  */
 function areAllInputsFilled() {
@@ -167,9 +161,7 @@ function areAllInputsFilled() {
 
 /**
  * Help-function - Validates a given user-email 
- * 
  * Trims the input and checks it against a regular expression pattern for basic email structure.
- * 
  * @param {string} email - The email adress to validate.
  * @returns Returns true if the email is valid, otherwise false.
  */
@@ -227,11 +219,11 @@ function arrowBack() {
 
 
 /**
- * Kombiniert zwei Arrays (Namen und Farben) zu einem Array von Objekten mit name und color.
+ * Combines two arrays (names and colors) into an array of objects with name and color.
  * 
- * @param {string[]} assignTo - Array mit Namen der zugewiesenen Personen.
- * @param {string[]} colorTo - Array mit Farben, die den Personen zugeordnet sind.
- * @returns {Object[]} Array von Objekten mit { name, color }
+ * @param {string[]} assignTo - Array with the names of the assigned persons.
+ * @param {string[]} colorTo - Array with the colors assigned to the persons.
+ * @returns {Object[]} Array of objects with { name, color }
  */
 function combineAssignedWithColors(assignTo, colorTo) {
     return assignTo.map((name, i) => ({
@@ -270,9 +262,9 @@ function buildTaskData(nextId, title, description, date, priority, status, assig
 
 
 /**
- * Holt die nächste freie Task-ID aus der Datenbank.
+ * Fetches the next free task ID from the database.
  * @async
- * @returns {Promise<number>} Die nächste freie ID.
+ * @returns {Promise<number>} The next free ID.
  */
 async function getNextTaskId() {
     let res = await fetch(fetchURLDataBase + "/tasks.json");
@@ -283,9 +275,9 @@ async function getNextTaskId() {
 
 
 /**
- * Holt die nächste freie ID für eine neue Task, basierend auf der Anzahl der vorhandenen Tasks.
+ * Fetches the next free ID for a new task, based on the number of existing tasks.
  * @async
- * @returns {Promise<number>} Die nächste freie ID (Anzahl der Tasks + 1).
+ * @returns {Promise<number>} The next free ID (number of tasks + 1).
  */
 async function checkIdAmount() {
     let response = await fetch(fetchURLDataBase + "/tasks" + ".json");
@@ -296,8 +288,8 @@ async function checkIdAmount() {
 
 
 /**
- * Gibt ein Array der Namen aller aktuell ausgewählten Kontakte zurück.
- * @returns {string[]} Array mit den Namen der ausgewählten Kontakte.
+ * Returns an array of the names of all currently selected contacts.
+ * @returns {string[]} Array with the names of the selected contacts.
  */
 function getAssignedContacts() {
     const assigned = [];
@@ -311,8 +303,8 @@ function getAssignedContacts() {
 
 
 /**
- * Gibt ein Array der ausgewählten Farben der zugewiesenen Kontakte zurück.
- * @returns {string[]} Array mit den Farben der ausgewählten Kontakte.
+ * Returns an array of the selected colors of the assigned contacts.
+ * @returns {string[]} Array with the colors of the selected contacts.
  */
 function getAssignedColor() {
     const color = [];
@@ -326,8 +318,8 @@ function getAssignedColor() {
 
 
 /**
- * Sammelt alle eingegebenen Subtasks aus dem DOM und gibt sie als Array von Objekten zurück.
- * @returns {Object[]} Array von Subtask-Objekten mit { title, done }
+ * Collects all entered subtasks from the DOM and returns them as an array of objects.
+ * @returns {Object[]} Array of subtask objects with { title, done }
  */
 function getSubtasksArray() {
     const subtaskInputs = document.querySelectorAll(".ATSubtask-container");
@@ -343,7 +335,7 @@ function getSubtasksArray() {
 
 
 /**
- * Überprüft, ob alle Pflichtfelder ausgefüllt sind, und aktiviert/deaktiviert den "Add Task"-Button entsprechend.
+ * Checks whether all required fields are filled and enables/disables the "Add Task" button accordingly.
  */
 function checkRequiredFieldsAndToggleButton() {
     const titleFilled = ATTitleRef.value.trim() != "";
@@ -356,38 +348,6 @@ function checkRequiredFieldsAndToggleButton() {
     }
 }
 
-/**
- * Hides the mobile contact action buttons when clicking outside the button container
- * @param {MouseEvent} event - The click event outside triggered  on the document
- */
-function hideMobileContactBtns(event) {
-    const btnContainer = document.getElementById('mobile-contact-profil-btns-container');
-    const isClickInsideMenu = btnContainer.contains(event.target);
-    if (!isClickInsideMenu) {
-        btnContainer.classList.remove('slide-in');
-        setTimeout(() => {
-            btnContainer.classList.add('d_none');
-        }, 400); 
-        document.getElementById('mobile-button-wrapper').classList.remove('d_none');
-        document.removeEventListener('click', hideMobileContactBtns);
-    }
-}
-
-
-/**
- * Shows a success message if the new contact is created
- */
-async function showCreateContactSuccess() {
-    const overlay = document.getElementById('success-message-overlay');
-    overlay.classList.remove('d_none');
-    overlay.classList.add('show');
-    setTimeout(() => {
-        overlay.classList.add('d_none');
-        overlay.classList.remove('show');
-    }, 800);
-    await initContacts();
-}
-
 
 /**
  * Help function - Sorts an array of contact objects alphabetically by their name
@@ -396,4 +356,19 @@ async function showCreateContactSuccess() {
  */
 function sortContactsAlphabetically(allContacts) {
     return allContacts.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+
+/**
+ *  Loads all contacts from remote storage and returns them as an array
+ * @async
+ * @returns - Array of contact objects including id and contact data
+ */
+async function loadAllContactsFromRemoteStorage() {
+    const response = await fetch(fetchURLDataBase + '/contacts' + '.json');
+    const contactsData = await response.json();
+    return Object.entries(contactsData).map(([id, contact]) => ({
+        id,
+        ...contact
+    }));
 }

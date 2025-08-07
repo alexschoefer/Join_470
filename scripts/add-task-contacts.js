@@ -1,5 +1,5 @@
 /**
- * Lädt alle Kontakte aus dem Remote-Storage (Firebase) und erstellt die Kontaktliste für das Add-Task-Formular.
+ * Loads all contacts from remote storage (Firebase) and creates the contact list for the Add Task form.
  * @async
  * @returns {Promise<void>}
  */
@@ -16,9 +16,9 @@ async function getContactsFromRemoteStorage() {
 
 
 /**
- * Erstellt die Kontaktliste und das zugehörige Checkbox-Array für das Add-Task-Formular.
+ * Creates the contact list and the corresponding checkbox array for the Add Task form.
  * @async
- * @param {Object} data - Die Kontaktdaten aus der Datenbank.
+ * @param {Object} data - The contact data from the database.
  * @returns {Promise<void>}
  */
 async function createAddTaskContacts(data) {
@@ -34,9 +34,9 @@ async function createAddTaskContacts(data) {
 
 
 /**
- * Rendert die Kontakt-Auswahlliste im Add-Task-Formular und markiert den eingeloggten User mit "(You)".
+ * Renders the contact selection list in the Add Task form and marks the logged-in user with "(You)".
  * @async
- * @param {Object[]} result - Array der Kontaktobjekte.
+ * @param {Object[]} result - Array of contact objects.
  * @returns {Promise<void>}
  */
 async function loadAddTaskAssignedTo(result) {
@@ -59,13 +59,16 @@ async function loadAddTaskAssignedTo(result) {
 
 
 /**
- * Handhabt das Klicken auf eine Kontakt-Checkbox im Add-Task-Formular.
+ * Handles the click on a contact checkbox in the Add Task form.
  * @async
- * @param {Event} event - Das Click-Event.
- * @param {number} id - Der Index des Kontakts in der Liste.
+ * @param {Event} event - The click event.
+ * @param {number} id - The index of the contact in the list.
  * @returns {Promise<void>}
  */
 async function assignedCheckboxClick(event, id) {
+    if (typeof typeOfScreen === 'string' && typeOfScreen.includes('mobile')) {
+        return changeContactBackgroun(event, id);
+    }
     event.stopPropagation();
     const ATContactOptionCheckboxRef = document.getElementById('ATContact-option-checkbox' + id);
     if (!assignedCheckbox[id].checkbox) {
@@ -80,9 +83,30 @@ async function assignedCheckboxClick(event, id) {
     updateChosenInitials();
 }
 
+function changeContactBackgroun(event, id){
+     event.stopPropagation();
+      const ATContactOptionCheckboxRef = document.getElementById('ATContact-option-checkbox' + id);
+      const ATcustomDropdownMobileOption = document.getElementById('ATcustom-dropdown-Mobile-option-' + id);
+      const ATContactOptionName = document.getElementById('ATContact-option-name-' + id);
+    if (!assignedCheckbox[id].checkbox) {
+        ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox');
+        ATContactOptionCheckboxRef.classList.add('ATContact-option-checkbox-checked');
+        assignedCheckbox[id].checkbox = true;
+        ATcustomDropdownMobileOption.classList.add("blueBackground");
+        ATContactOptionName.style.color = "#FFFFFF";
+    } else {
+        ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox-checked');
+        ATContactOptionCheckboxRef.classList.add('ATContact-option-checkbox');
+        assignedCheckbox[id].checkbox = false;
+        ATcustomDropdownMobileOption.classList.remove("blueBackground");
+        ATContactOptionName.style.color = "";
+    }
+    updateChosenInitials();
+}
+
 
 /**
- * Aktualisiert die Anzeige der Initialen der ausgewählten Kontakte im Add-Task-Formular.
+ * Updates the display of the initials of the selected contacts in the Add Task form.
  */
 function updateChosenInitials() {
     const parent = chosenDiv.closest('.add-task-form-right-select-contacts');
@@ -97,5 +121,11 @@ function updateChosenInitials() {
     });
     if (parent) {
         parent.classList.toggle('has-initials', hasInitials);
+    }
+}
+
+function changeContactsBackgroundColor(){
+    if(typeOfScreen == "mobile"){
+        
     }
 }

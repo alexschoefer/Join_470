@@ -2,14 +2,23 @@ let allContacts = [];
 let colors = ['#FF7A00', '#FF5EB3', '#FF5EB3', '#9327FF', '#FF4646', '#C3FF2B', '#FF745E', '#FFE62B', '#00BEE8', '#0038FF'];
 
 /**
- * Initializes the contacts view by synchronizing and displaying contact data
- * @async
+ * Initializes the contacts view
+ * Loads cached contacts from localStorage (if available) and displays them immediately for faster perceived loading time
+ * If no cached contact data is available, a loading indicator is displayed until fresh data is loaded
  */
 async function initContacts() {
-    await getAllContacts(); 
-    allContacts = await loadAllContactsFromRemoteStorage(); 
+    const savedContactsinStorage = localStorage.getItem("cachedContacts");
+    if(savedContactsinStorage) {
+      allContacts = JSON.parse(savedContactsinStorage);
+      showAllContacts(allContacts);
+    }else{
+      document.getElementById('contact-list').innerHTML = '<div class="loader">Loading contacts...</div>';
+    }
+    const freshContacts = await loadAllContactsFromRemoteStorage();
+    localStorage.setItem("cachedContacts", JSON.stringify(freshContacts));
+    allContacts = freshContacts;
     showAllContacts(allContacts); 
-}
+  }
 
 
 /**
@@ -106,21 +115,6 @@ async function checkExistingContact() {
     const data = await response.json();
     if (!data) return [];
     return Object.entries(data).map(([id, contact]) => ({
-        id,
-        ...contact
-    }));
-}
-
-
-/**
- *  Loads all contacts from remote storage and returns them as an array
- * @async
- * @returns - Array of contact objects including id and contact data
- */
-async function loadAllContactsFromRemoteStorage() {
-    const response = await fetch(fetchURLDataBase + '/contacts' + '.json');
-    const contactsData = await response.json();
-    return Object.entries(contactsData).map(([id, contact]) => ({
         id,
         ...contact
     }));
@@ -296,26 +290,37 @@ function closeEditContactOverlay() {
 
 
 /**
- * Deletes an selected contact by its index in the firebase remote storage
+ * Deletes an selected contact by its index in the firebase remote storage and shows a message if the contact is deleted.
  * @param {number} index - The index of the contact to delete in the allContacts array
  */
 async function deleteContact(index) {
-    let selectedContact = document.getElementById('contact-details');
     let deleteContact = allContacts[index];
     await fetch(`${fetchURLDataBase}/contacts/${deleteContact.id}.json`, {
         method: "DELETE",
     });
     closeEditContactOverlay();
-    await refreshContacts();
-    selectedContact.innerHTML = "";
+    showCreateContactSuccess("Contact successfully deleted!");      
+    await refreshContacts();          
+    clearContactInformations();
+    await checkDeleteContactInTasks(deleteContact.name);
 }
 
-
 /**
- * Refreshes the contact list by loading all contacts from remote storage
+ * Clears the contact information view and resets the layout for showing the full contact list
+ * 
  */
-async function refreshContacts() {
-    allContacts = await loadAllContactsFromRemoteStorage();
+function clearContactInformations() {
+    document.getElementById('contact-details').innerHTML = "";
+    document.getElementById('contact-list')?.classList.remove('d_none');
+    document.getElementById('contacts-left-container')?.classList.remove('d_none');
+    document.getElementById('contacts-right')?.style.removeProperty('display');
+    document.getElementById('arrow-back')?.style.setProperty('display', 'none');
+    const mobileBtns = document.getElementById('mobile-contact-profil-btns-container');
+    const mobileWrapper = document.getElementById('mobile-button-wrapper');
+    mobileBtns?.classList.remove('slide-in');
+    mobileBtns?.classList.add('d_none');
+    mobileWrapper?.classList.remove('d_none');
+    document.removeEventListener('click', hideMobileContactBtns);
     showAllContacts(allContacts);
 }
 
@@ -327,15 +332,16 @@ async function refreshContacts() {
  */
 async function createContactForRemoteStorage(event) {
     event.preventDefault();
-    let nameInput = document.getElementById('add-contact-name-input');
+    let nameInput = document.getElementById('username-input');
     let emailInput = document.getElementById('usermail-input');
-    let phoneInput = document.getElementById('add-contact-phone-input');
+    let phoneInput = document.getElementById('userphone-input');
     let initial = createUserInitial(nameInput.value);
     let profilcolor = getProfilColorIcon();
-    postContactsToRemoteStorage(nameInput.value, emailInput.value, phoneInput.value, initial, profilcolor);
+    await postContactsToRemoteStorage(nameInput.value, emailInput.value, phoneInput.value, initial, profilcolor);
     closeAddContactOverlay();
-    showCreateContactSuccess();
+    showCreateContactSuccess("Contact successfully created!");
 }
+
 
 /**
  * Validates a single input field of the user input. In case of an empty input field it shows the error message
@@ -355,43 +361,4 @@ function validateContactFormsInput(input) {
         }
     }
     validateContactSectionForms();
-}
-
-
-/**
- * Updates a contact's information in the remote storage based on user input changes
- * @param {*} id - The user id of the contact to update
- * @param {Event} event - The form submission event
- * @param {*} profilcolor - The contact´s profil color
- * @param {String} initial - The initial of the user
- */
-async function getChangesFromContact(id, event, profilcolor, initial) {
-    let selectedContact = document.getElementById('contact-details');
-    event.preventDefault();
-    let nameInput = document.getElementById('add-contact-name-input');
-    let emailInput = document.getElementById('add-contact-email-input');
-    let phoneInput = document.getElementById('add-contact-phone-input');
-    let initialInput = createUserInitial(nameInput.value);
-    const updatedContact = {name: nameInput.value, email: emailInput.value, phone: phoneInput.value, profilcolor: profilcolor, initial: initialInput
-    };
-    await updateContactInRemoteStorage(id, updatedContact);
-    closeEditContactOverlay();
-    await refreshContacts();
-    selectedContact.innerHTML = "";
-}
-
-
-/**
- * Displays the edit/delete button container for a contact on mobile view
- */
-function changeContact() {
-    const btnContainer = document.getElementById('mobile-contact-profil-btns-container');
-    const editButton = document.querySelector('.mobile-button-wrapper');
-    const mobileBtnWrapper = document.getElementById('mobile-button-wrapper');
-    mobileBtnWrapper.classList.add('d_none');
-    btnContainer.classList.remove('d_none');
-    setTimeout(() => {
-        btnContainer.classList.add('slide-in');
-        document.addEventListener('click', hideMobileContactBtns);
-    }, 10);
 }
