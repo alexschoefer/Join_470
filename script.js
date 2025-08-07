@@ -6,6 +6,7 @@ let currentOverlayType = null;
 let lastEditedContact = null;
 let lastEditedIndex = null;
 let currentContactIndex = null;
+let typeOfScreen = "";
 
 /**
  * On DOMContentLoaded event, calls updateDeviceType to initialize the device type based on the current window size.
@@ -35,7 +36,7 @@ function updateDeviceType() {
                 renderEditContactOverlay(lastEditedContact, lastEditedIndex);
             }
         }
-        adaptLayoutOnResize();
+        adaptLayoutOnResize(newType);
         if (currentContactIndex !== null && document.getElementById('contact-details').innerHTML.trim()) {
             const contactEntry = document.querySelectorAll('.contact-entry')[currentContactIndex];
             if (contactEntry) getContactInformations(currentContactIndex, { currentTarget: contactEntry });
@@ -48,7 +49,8 @@ function updateDeviceType() {
  * Adjusts the layout of the contact view depending on the device type (desktop or mobile) and whether a contact is currently selected.
  * On desktop: shows all sections. In the mobile view hides the left container and contact list if a contact is open.
  */
-function adaptLayoutOnResize() {
+function adaptLayoutOnResize(newType) {
+    typeOfScreen = newType;
     const contactDetails = document.getElementById('contact-details');
     if(!contactDetails) return; 
     const contactIsOpen = document.getElementById('contact-details').innerHTML.trim() !== '';

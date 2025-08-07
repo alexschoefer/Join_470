@@ -1051,3 +1051,13 @@ textarea {
 .label-corrector-bottom {
   padding-bottom: 8px;
 }
+
+.blueBackground{
+  background-color: var(--main-color);
+  border-radius: 10px;
+  border: solid #fff 1px;
+}
+
+.blueBackground:hover{
+  background-color: var(--dark-blue);
+}
