@@ -302,6 +302,7 @@ async function deleteContact(index) {
     showCreateContactSuccess("Contact successfully deleted!");      
     await refreshContacts();          
     clearContactInformations();
+    await checkDeleteContactInTasks(deleteContact.name);
 }
 
 /**
