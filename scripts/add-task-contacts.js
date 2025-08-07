@@ -66,6 +66,9 @@ async function loadAddTaskAssignedTo(result) {
  * @returns {Promise<void>}
  */
 async function assignedCheckboxClick(event, id) {
+    if (typeof typeOfScreen === 'string' && typeOfScreen.includes('mobile')) {
+        return changeContactBackgroun(event, id);
+    }
     event.stopPropagation();
     const ATContactOptionCheckboxRef = document.getElementById('ATContact-option-checkbox' + id);
     if (!assignedCheckbox[id].checkbox) {
@@ -76,6 +79,27 @@ async function assignedCheckboxClick(event, id) {
         ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox-checked');
         ATContactOptionCheckboxRef.classList.add('ATContact-option-checkbox');
         assignedCheckbox[id].checkbox = false;
+    }
+    updateChosenInitials();
+}
+
+function changeContactBackgroun(event, id){
+     event.stopPropagation();
+      const ATContactOptionCheckboxRef = document.getElementById('ATContact-option-checkbox' + id);
+      const ATcustomDropdownMobileOption = document.getElementById('ATcustom-dropdown-Mobile-option-' + id);
+      const ATContactOptionName = document.getElementById('ATContact-option-name-' + id);
+    if (!assignedCheckbox[id].checkbox) {
+        ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox');
+        ATContactOptionCheckboxRef.classList.add('ATContact-option-checkbox-checked');
+        assignedCheckbox[id].checkbox = true;
+        ATcustomDropdownMobileOption.classList.add("blueBackground");
+        ATContactOptionName.style.color = "#FFFFFF";
+    } else {
+        ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox-checked');
+        ATContactOptionCheckboxRef.classList.add('ATContact-option-checkbox');
+        assignedCheckbox[id].checkbox = false;
+        ATcustomDropdownMobileOption.classList.remove("blueBackground");
+        ATContactOptionName.style.color = "";
     }
     updateChosenInitials();
 }
@@ -97,5 +121,11 @@ function updateChosenInitials() {
     });
     if (parent) {
         parent.classList.toggle('has-initials', hasInitials);
+    }
+}
+
+function changeContactsBackgroundColor(){
+    if(typeOfScreen == "mobile"){
+        
     }
 }
