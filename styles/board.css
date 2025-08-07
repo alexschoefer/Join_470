@@ -1,6 +1,5 @@
 .main-content {
   display: flex;
-  height: 100vh;
   overflow: auto;
 }
 
@@ -9,7 +8,7 @@ div#shadow-container {
   width: 100%;
   height: 100vh;
   background-color: rgb(0 0 0 / 18%);
-  z-index: 5;
+  z-index: 10;
   display: none;
 }
 
@@ -33,10 +32,12 @@ div.board-find-task {
 }
 
 div.board-container {
-  align-items: center;
-  margin-left: 64px;
-  margin-right: 64px;
+  box-sizing: border-box;      
+  width: 100%;
   max-width: 1440px;
+  padding-left: 64px;
+  padding-right: 64px;
+  padding-bottom: 50px;
 
 }
 
@@ -48,7 +49,8 @@ div.board-find-task h1 {
 div.task-search {
   display: flex;
   align-items: center;
-  gap: 32px;
+  margin-left: auto;
+  margin-right: 32px;
 }
 
 div.input-search {
@@ -64,7 +66,7 @@ div.input-search {
 
 div.input-search input {
   height: 32px;
-  width: 232px;
+  width: 100%;
   border: none;
 }
 
@@ -177,6 +179,7 @@ div.task-title h2 {
 
 div.add-task-icon {
   background-image: url(../assets/icons/add-task-plus.png);
+  background-repeat: no-repeat;
   width: 24px;
   height: 24px;
   cursor: pointer;
@@ -195,6 +198,7 @@ div.not-task {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
 div.not-task p {
@@ -204,6 +208,7 @@ div.not-task p {
 }
 
 div.card {
+  position: relative;
   width: 100%;
   height: auto;
   background-color: #fff;
@@ -477,12 +482,12 @@ div.subtasks {
 div.subtasks-input {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 15px;
 }
 
 div.subtask-container {
   padding: 6px 16px 6px 16px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 16px;
   height: 32px;
@@ -497,6 +502,7 @@ input.checkbox {
   border-radius: 3px;
   position: relative;
   transition: all 0.2s ease;
+  flex: 0 0 auto;
 }
 
 input.checkbox:checked::after {
@@ -527,6 +533,9 @@ span.edit div.icon-edit {
   display: inline-block;
   width: 16px;
   height: 18px;
+}
+.allSubtasks{
+  padding-left: 0 !important;
 }
 
 span.delete div.icon-delete {
@@ -602,8 +611,11 @@ div.add-task-form-div {
   background-color: #fff;
   overflow: auto;
   max-height: 685px;
-  margin-top: 24px;
+  margin-top: 10px;
 }
+.ATSubLi{
+  margin-right: -6px !important;
+} 
 
 div.add-task-form-left {
   height: auto;
@@ -667,8 +679,8 @@ div.add-task-content{
   padding-top: 0;
 }
 div.add-task-form-div-container{
-  padding-left: 34px !important;
-  padding-right: 34px !important;
+  /* padding-left: 34px !important; */
+  /* padding-right: 34px !important; */
   margin-left: 0px;
 }
 .add-task-form-buttons{
@@ -689,4 +701,80 @@ div.add-task-form-div-container{
     gap: 19px !important;
     padding: 16px !important;
     justify-content: space-between;
+}
+div.card:hover{
+  transform: rotate(7deg);
+  -webkit-transform: rotate(7deg);
+  -moz-transform: rotate(7deg);
+  -ms-transform: rotate(7deg);
+  -o-transform: rotate(7deg);
+}
+.no-scroll {
+  overflow: hidden;
+}
+.card-name-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: space-between;
+}
+div.card-drop-down-button img{
+  width: 26px;
+  height: 24px;
+}
+div.card-drop-down-button{
+  cursor: pointer;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  display: none;
+  
+}
+div.card-drop-down-button:hover img{
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+}
+.card-action-menu {
+  position: absolute;
+  background: #2A3647;
+  color: white;
+  border-radius: 12px 0px 12px 12px;
+  padding: 12px;
+  min-width: 160px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  font-size: 14px;
+  z-index: 101;
+  -webkit-border-radius: 12px 0px 12px 12px;
+  -moz-border-radius: 12px 0px 12px 12px;
+  -ms-border-radius: 12px 0px 12px 12px;
+  -o-border-radius: 12px 0px 12px 12px;
+}
+
+.card-action-menu .menu-header {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.card-action-menu .menu-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  cursor: pointer;
+  border-radius: 8px;
+  user-select: none;
+}
+
+.card-action-menu .menu-option:hover {
+  background: #091931;
+}
+
+.card-action-menu .arrow {
+  font-size: 12px;
+  line-height: 1;
 }

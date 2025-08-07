@@ -57,16 +57,21 @@ function generateTodoHTML(task, priorityImg, assigned, color) {
            task
          )}' ondragstart="startDragging(${task.id})">
                 <div class="card-content">
+                    <div class="card-name-container">
                   <span style="background-color: ${color}" class="card-name"> ${
     task.category
   }</span>
+  <div class="card-drop-down-button">
+  <img src="../assets/icons/drop-down.png" />
+  </div>
+                </div>
                   <div class="card-description">
                     <h4>${task.title}</h4>
                     <p>${task.description}</p>
                   </div>
                   <div class="progress-bar">
                     <div class="bar"><span class="col-bar"></span></div>
-                    <span id="nr-progress-tasks"></span>
+                    <span id="nr-progress-tasks">0/0</span>
                   </div>
                   <div class="assignees-priority"> 
                   <div class="card-assigned-initials">
@@ -389,10 +394,10 @@ function addTasks() {
                                             </div>
                                         </div>
                                     </div>
+                                    <ul id="allSubtasks" class="allSubtasks"></ul>
                                 </div>
                             </div>
                         </div>
-                        <ul id="allSubtasks" class="allSubtasks"></ul>
                         <div class="add-task-form-buttons">
                             <div>
                                 <span class="label-add-task"><span class="red-asterix-required">*</span>This field is
