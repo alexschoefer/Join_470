@@ -1,6 +1,3 @@
-
-
-
 /**
  * Generates an HTML template string for the contact list with a capital letter and a separator line.
 
@@ -143,7 +140,7 @@ function addNewContactTemplate() {
                                 <div class="input-container">
                                     <input id="usermail-input" class="user-input" type="email" name="email"
                                         placeholder="Email" autocomplete="off" onfocus="clearErrorMessage(this)"
-                                        onblur="validateContactFormsInput(this)">
+                                        onblur="validateContactFormsInput(this), checkRequiredInputContactEmail(this)">
                                     <div>
                                         <img class="email-icon" src="../assets/icons/mail-icon.png" alt="mail-icon">
                                     </div>
@@ -256,7 +253,7 @@ function editContactTemplate(contact, index) {
                                 <div class="input-container">
                                     <input id="usermail-input" class="user-input" type="email" name="email"
                                         placeholder="Email" autocomplete="off" value="${contact.email}"
-                                        onfocus="clearErrorMessage(this)" onblur="validateContactFormsInput(this)">
+                                        onfocus="clearErrorMessage(this)" onblur="validateContactFormsInput(this), checkRequiredInputContactEmail(this)">
                                     <div>
                                         <img class="email-icon" src="../assets/icons/mail-icon.png" alt="mail-icon">
                                     </div>
