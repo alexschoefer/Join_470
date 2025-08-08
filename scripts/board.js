@@ -105,10 +105,23 @@ searchInput.addEventListener("input", () => {
  * and updates UI handlers.
  * @async
  */
+// async function init() {
+//   tasks = (await getTasksFromRemoteStorage("/tasks")) || standartTasks;
+//   if (!(await getTasksFromRemoteStorage("/tasks"))) {
+//     await saveTasksToRemoteStorage("/tasks", tasks);
+//   }
+//   updateTask();
+//   openTaskDetails();
+//   attachAddTaskHandlers();
+// }
 async function init() {
-  tasks = (await getTasksFromRemoteStorage("/tasks")) || standartTasks;
-  if (!(await getTasksFromRemoteStorage("/tasks"))) {
+  pushDummyTasksToRemoteStorage();
+  let loadedTasks = await getTasksFromRemoteStorage("/tasks");
+  if (!loadedTasks || loadedTasks.length === 0) {
+    tasks = standartTasks;
     await saveTasksToRemoteStorage("/tasks", tasks);
+  } else {
+    tasks = loadedTasks;
   }
   updateTask();
   openTaskDetails();
@@ -231,14 +244,31 @@ function getColoredLabels(category) {
  * @param {Object[]} subtasks - Array of subtask objects
  * @param {Element} container - Card element containing subtask UI
  */
+// function updateSubtaskProgress(subtasks, container) {
+//   let total = subtasks.length;
+//   let doneCount = subtasks.filter((s) => s.done).length;
+//   let pct = total ? (doneCount / total) * 100 : 0;
+//   container.querySelector(".col-bar").style.width = pct + "%";
+//   container.querySelector(
+//     "#nr-progress-tasks"
+//   ).textContent = `${doneCount}/${total} Subtasks`;
+// }
+
 function updateSubtaskProgress(subtasks, container) {
+  // Sicherstellen, dass subtasks ein Array ist
+  if (!Array.isArray(subtasks)) {
+    subtasks = []; // Leeres Array, um Absturz zu vermeiden
+  }
+
   let total = subtasks.length;
   let doneCount = subtasks.filter((s) => s.done).length;
   let pct = total ? (doneCount / total) * 100 : 0;
-  container.querySelector(".col-bar").style.width = pct + "%";
-  container.querySelector(
-    "#nr-progress-tasks"
-  ).textContent = `${doneCount}/${total} Subtasks`;
+
+  const bar = container.querySelector(".col-bar");
+  const progressText = container.querySelector("#nr-progress-tasks");
+
+  if (bar) bar.style.width = pct + "%";
+  if (progressText) progressText.textContent = `${doneCount}/${total} Subtasks`;
 }
 
 /**
