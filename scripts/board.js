@@ -277,6 +277,9 @@ function updateSubtaskProgress(subtasks, container) {
  * @returns {string} HTML markup string
  */
 function generateSubtaskHTML(subtasks) {
+  if (!Array.isArray(subtasks) || subtasks.length === 0) {
+    return "";
+  }
   return subtasks
     .map(
       (st, i) => `
