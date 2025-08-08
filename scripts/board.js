@@ -91,7 +91,11 @@ function updateBoardContent() {
 }
 
 
-// Search input filter handling
+/**
+ * Adds a real-time search filter to the board content based on user input. Listens for input events on the search field. 
+ * If the entered query is at least 3 characters long, it sets the global `currentFilter` variable to the lowercase, trimmed input.
+ * Otherwise, it clears the filter. Then it updates the board content accordingly.
+ */
 searchInput.addEventListener("input", () => {
   let q = searchInput.value.trim().toLowerCase();
   currentFilter = q.length >= 3 ? q : "";
