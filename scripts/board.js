@@ -1,10 +1,3 @@
-/**
- * Kanban-style task board management script.
- * Provides functions to initialize the board, render tasks, handle drag-and-drop,
- * filter/search tasks, and manage task states and subtasks.
- */
-
-// Containers and state variables
 let container = document.getElementById("task-card-container");
 let currentOpenMenu = null;
 let shadow = document.getElementById("shadow-container");
@@ -21,6 +14,7 @@ let inProgressContainer = document.querySelector(".in-progress");
 let awaitFeedbackContainer = document.querySelector(".await-feedback");
 let doneContainer = document.querySelector(".done");
 let addTaskScriptInjected = false;
+
 
 /**
  * Creates and appends a task card element to the appropriate column.
@@ -40,6 +34,7 @@ function appendTaskToBoard(task) {
   updateSubtaskProgress(task.subtasks, card);
 }
 
+
 /**
  * Clears existing task and placeholder nodes from each provided column.
  * @param {{container: Element}[]} cols - Array of column objects
@@ -52,6 +47,7 @@ function clearColumns(cols) {
       .forEach((n) => n.remove());
   });
 }
+
 
 /**
  * Generates a DOM element for a task card based on its data.
@@ -83,6 +79,7 @@ function processTasks(list, filter, cb) {
     .forEach(cb);
 }
 
+
 /**
  * Refreshes the task board by clearing and re-appending tasks based on current filter.
  */
@@ -93,6 +90,7 @@ function updateBoardContent() {
   insertTemplateIfEmpty();
 }
 
+
 // Search input filter handling
 searchInput.addEventListener("input", () => {
   let q = searchInput.value.trim().toLowerCase();
@@ -100,20 +98,12 @@ searchInput.addEventListener("input", () => {
   updateBoardContent();
 });
 
+
 /**
  * Initializes application: loads tasks, saves defaults if missing,
  * and updates UI handlers.
  * @async
  */
-// async function init() {
-//   tasks = (await getTasksFromRemoteStorage("/tasks")) || standartTasks;
-//   if (!(await getTasksFromRemoteStorage("/tasks"))) {
-//     await saveTasksToRemoteStorage("/tasks", tasks);
-//   }
-//   updateTask();
-//   openTaskDetails();
-//   attachAddTaskHandlers();
-// }
 async function init() {
   pushDummyTasksToRemoteStorage();
   let loadedTasks = await getTasksFromRemoteStorage("/tasks");
@@ -127,6 +117,7 @@ async function init() {
   openTaskDetails();
   attachAddTaskHandlers();
 }
+
 
 /**
  * Populates a column container with tasks matching its status.
@@ -152,6 +143,7 @@ function populateColumn(col) {
     });
 }
 
+
 /**
  * Updates all columns, drag settings, placeholders, and dropdown menus.
  * @async
@@ -162,6 +154,7 @@ async function updateTask() {
   insertTemplateIfEmpty();
   attachDropdownsToCards();
 }
+
 
 /**
  * Attaches click handlers to "Add Task" buttons to open overlay or navigate.
@@ -182,6 +175,7 @@ function attachAddTaskHandlers() {
   plusButtons.forEach((btn) => btn.addEventListener("click", handler));
 }
 
+
 /**
  * Converts internal status names to human-readable labels.
  * @param {string} name - Status key
@@ -196,6 +190,7 @@ function formatName(name) {
   };
   return map[name] || name;
 }
+
 
 /**
  * Customizes "Add Task" form submit to handle editing existing tasks.
@@ -214,6 +209,7 @@ function initAddTaskForm(id) {
   });
 }
 
+
 /**
  * Maps priority levels to corresponding icon image URLs.
  * @param {string} priority - Priority label (e.g., "Medium", "Low", "Urgent")
@@ -228,6 +224,7 @@ function getImageForPriority(priority) {
   return imageMap[priority] || imageMap.Low;
 }
 
+
 /**
  * Returns a hex color code for a given task category.
  * @param {string} category - Task category name
@@ -239,21 +236,12 @@ function getColoredLabels(category) {
   return "";
 }
 
+
 /**
  * Updates the visual progress bar and text for subtasks within a task card.
  * @param {Object[]} subtasks - Array of subtask objects
  * @param {Element} container - Card element containing subtask UI
  */
-// function updateSubtaskProgress(subtasks, container) {
-//   let total = subtasks.length;
-//   let doneCount = subtasks.filter((s) => s.done).length;
-//   let pct = total ? (doneCount / total) * 100 : 0;
-//   container.querySelector(".col-bar").style.width = pct + "%";
-//   container.querySelector(
-//     "#nr-progress-tasks"
-//   ).textContent = `${doneCount}/${total} Subtasks`;
-// }
-
 function updateSubtaskProgress(subtasks, container) {
   // Sicherstellen, dass subtasks ein Array ist
   if (!Array.isArray(subtasks)) {
@@ -270,6 +258,7 @@ function updateSubtaskProgress(subtasks, container) {
   if (bar) bar.style.width = pct + "%";
   if (progressText) progressText.textContent = `${doneCount}/${total} Subtasks`;
 }
+
 
 /**
  * Generates HTML string for a list of subtasks with checkboxes.
@@ -293,6 +282,7 @@ function generateSubtaskHTML(subtasks) {
     .join("");
 }
 
+
 /**
  * Closes the currently open action menu if present.
  */
@@ -302,6 +292,7 @@ function closeCurrentActionMenu() {
     currentOpenMenu = null;
   }
 }
+
 
 /**
  * Positions an action menu relative to its trigger button and card.
@@ -316,6 +307,7 @@ function positionMenu(menu, btn, card) {
   menu.style.right = `${offsetRight}px`;
 }
 
+
 /**
  * Sets up click listener to close menu when clicking outside.
  * @param {MouseEvent} ev - Click event
@@ -328,6 +320,7 @@ function outsideClick(ev, menu, btn) {
     document.removeEventListener("click", (ev) => outsideClick(ev, menu, btn));
   }
 }
+
 
 /**
  * Builds HTML options for moving a task between statuses.
@@ -365,6 +358,7 @@ function buildMoveOptions(currentStatus) {
     .join("");
 }
 
+
 /**
  * Attaches click listeners to menu options to move tasks between statuses.
  * @param {Element} menu - Action menu element
@@ -390,6 +384,7 @@ function attachMenuListeners(menu, card) {
   });
 }
 
+
 /**
  * Safely retrieves the status field from a card's data-task JSON.
  * @param {Element} card - Task card element
@@ -403,30 +398,3 @@ function getTaskStatus(card) {
   }
 }
 
-/**
- * Creates and returns a "Move to" action menu for a card.
- * @param {Element} card - Task card element
- * @returns {Element} Action menu element
- */
-function createActionMenu(card) {
-  let menu = document.createElement("div");
-  menu.className = "card-action-menu";
-  let optionsHTML = buildMoveOptions(getTaskStatus(card));
-  menu.innerHTML = `<div class="menu-header">Move to</div>${optionsHTML}`;
-  attachMenuListeners(menu, card);
-  return menu;
-}
-
-/**
- * Finds all cards and attaches dropdown menus.
- */
-function attachDropdownsToCards() {
-  document.querySelectorAll(".card").forEach(attachToCardDropdown);
-}
-
-// Initialize on page load and bind resize events
-window.addEventListener("load", () => {
-  init();
-  updateDraggables();
-  updateBoardContent();
-});
