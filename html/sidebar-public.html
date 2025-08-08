@@ -1,0 +1,23 @@
+<!-- sidebar-public.html -->
+
+<head>
+    <link rel="stylesheet" href="../styles/sidebar.css">
+</head>
+
+<body>
+    <aside class="aside-content">
+        <div class="go-back-container">
+            <button class="go-back-button" onclick="goBack()">⬅️ Zurück</button>
+        </div>
+    </aside>
+
+    <script>
+        function goBack() {
+            if (document.referrer) {
+                history.back();
+            } else {
+                location.href = '../index.html'; // Fallback zum Login
+            }
+        }
+    </script>
+</body>

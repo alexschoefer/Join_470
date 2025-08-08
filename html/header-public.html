@@ -1,0 +1,23 @@
+<!-- header-public.html -->
+
+<head>
+    <link rel="stylesheet" href="../styles/header.css">
+</head>
+
+<body>
+    <header class="header-content">
+        <div class="go-back-container">
+            <button class="go-back-button" onclick="goBack()">⬅️ Zurück</button>
+        </div>
+    </header>
+
+    <script>
+        function goBack() {
+            if (document.referrer) {
+                history.back();
+            } else {
+                location.href = '../index.html'; // Fallback
+            }
+        }
+    </script>
+</body>

@@ -1,32 +1,41 @@
-/**
- * Loads an HTML file asynchronously and inserts it into the given element.
- * Also calls initHeader() or initSidebar() if the ID matches.
- * Logs an error if loading fails.
- * @param {string} id - The ID of the target DOM element.
- * @param {string} path - The path to the HTML file.
- * @returns {Promise<void>}
- */
 async function loadComponent(id, path) {
   try {
-    const res = await fetch(path);
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const isPublic = urlParams.get("public") === "1";
+
+    let finalPath = path;
+
+    // Sidebar austauschen, wenn public=1
+    if (isPublic && id === "sidebar") {
+      finalPath = "./sidebar-public.html";
+    }
+
+    const res = await fetch(finalPath);
     if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
     const html = await res.text();
-    document.getElementById(id).innerHTML = html;
-    if (id === "header" && typeof initHeader === "function") {
-      initHeader();
+    el.innerHTML = html;
+
+    if (id === "header") {
+      if (typeof initHeader === "function") initHeader();
+
+      // Help-Icon & Profilkreis nur bei public=1 entfernen
+      if (isPublic) {
+        const helpIcon = el.querySelector("#help-icon");
+        const profileCircle = el.querySelector("#profileCircle");
+        if (helpIcon) helpIcon.remove();
+        if (profileCircle) profileCircle.remove();
+      }
     }
-    if (id === "sidebar" && typeof initSidebar === "function") {
-      initSidebar();
-    }
+
+    if (id === "sidebar" && typeof initSidebar === "function") initSidebar();
   } catch (err) {
     console.error(`Error loading ${path}:`, err);
   }
 }
 
-/**
- * Loads the header and sidebar components after the DOM is ready.
- * Uses loadComponent() to fetch and inject HTML content.
- */
 document.addEventListener("DOMContentLoaded", async () => {
   await loadComponent("header", "./header.html");
   await loadComponent("sidebar", "./sidebar.html");
