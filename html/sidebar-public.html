@@ -1,23 +1,34 @@
-<!-- sidebar-public.html -->
-
 <head>
-    <link rel="stylesheet" href="../styles/sidebar.css">
+  <link rel="stylesheet" href="../styles/sidebar.css" />
+  <script src="../scripts/sidebar-public.js" defer></script>
 </head>
 
 <body>
-    <aside class="aside-content">
-        <div class="go-back-container">
-            <button class="go-back-button" onclick="goBack()">⬅️ Zurück</button>
-        </div>
-    </aside>
-
-    <script>
-        function goBack() {
-            if (document.referrer) {
-                history.back();
-            } else {
-                location.href = '../index.html'; // Fallback zum Login
-            }
-        }
-    </script>
+  <aside class="aside-content">
+    <div class="aside-center-it">
+      <div class="menuLogo-container">
+        <img src="../assets/img/MenuLogo.png" alt="" />
+      </div>
+      <div onclick="goTo(event)" class="menu-selection-button">
+        <img
+          class="menu-selection-icons"
+          src="../assets/icons/goBackIcon.png"
+          alt=""
+        />
+        <a href="../index.html">Log In</a>
+      </div>
+    </div>
+    <div class="legal-information-container">
+      <a
+        class="legal-information-button-public-btn"
+        href="./privacy-policy.html?public=1"
+        >Privacy Policy</a
+      >
+      <a
+        class="legal-information-button-public-btn"
+        href="./legal-notice.html?public=1"
+        >Legal Notice</a
+      >
+    </div>
+  </aside>
 </body>
