@@ -21,9 +21,10 @@
   <script src="../scripts/include.js"></script>
   <script src="../scripts/header.js"></script>
   <script src="../scripts/sidebar.js"></script>
+  <script src="../scripts/auth.js"></script>
 </head>
 
-<body>
+<body onload="checksAuthentication()">
   <div class="app-layout">
     <div id="sidebar"></div>
     <div id="header"></div>
@@ -45,7 +46,8 @@
             <p>Email: branislavbardon@hotmail.de</p>
           </div>
           <div>
-            <h3>Contribution - Inter[opsz,wght].ttf: Copyright 2016 The Inter Project Authors (https://github.com/rsms/inter)</h3>
+            <h3>Contribution - Inter[opsz,wght].ttf: Copyright 2016 The Inter Project Authors
+              (https://github.com/rsms/inter)</h3>
           </div>
           <div>
             <h3>Acceptance of terms</h3>
