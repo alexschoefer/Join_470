@@ -67,41 +67,101 @@ async function loadAddTaskAssignedTo(result) {
  */
 async function assignedCheckboxClick(event, id) {
     if (typeof typeOfScreen === 'string' && typeOfScreen.includes('mobile')) {
-        return changeContactBackgroun(event, id);
+        return changeContactBackground(event, id);
     }
     event.stopPropagation();
     const ATContactOptionCheckboxRef = document.getElementById('ATContact-option-checkbox' + id);
     if (!assignedCheckbox[id].checkbox) {
-        ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox');
-        ATContactOptionCheckboxRef.classList.add('ATContact-option-checkbox-checked');
-        assignedCheckbox[id].checkbox = true;
+        assignedCheckboxClickYes(id, ATContactOptionCheckboxRef);
     } else {
-        ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox-checked');
-        ATContactOptionCheckboxRef.classList.add('ATContact-option-checkbox');
-        assignedCheckbox[id].checkbox = false;
+        assignedCheckboxClickNo(id, ATContactOptionCheckboxRef);
     }
     updateChosenInitials();
 }
 
-function changeContactBackgroun(event, id){
-     event.stopPropagation();
-      const ATContactOptionCheckboxRef = document.getElementById('ATContact-option-checkbox' + id);
-      const ATcustomDropdownMobileOption = document.getElementById('ATcustom-dropdown-Mobile-option-' + id);
-      const ATContactOptionName = document.getElementById('ATContact-option-name-' + id);
+
+/**
+ * Sets the checkbox state to checked for the given contact,
+ * updates the checkbox element's classes accordingly.
+ * 
+ * @param {number} id - The index of the contact in the list.
+ * @param {HTMLElement} ATContactOptionCheckboxRef - The reference.
+ */
+function assignedCheckboxClickYes(id, ATContactOptionCheckboxRef) {
+    ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox');
+    ATContactOptionCheckboxRef.classList.add('ATContact-option-checkbox-checked');
+    assignedCheckbox[id].checkbox = true;
+}
+
+
+/**
+ * Sets the checkbox state to unchecked for the given contact,
+ * updates the checkbox element's classes accordingly.
+ * 
+ * @param {number} id - The index of the contact in the list.
+ * @param {HTMLElement} ATContactOptionCheckboxRef - The reference.
+ */
+function assignedCheckboxClickNo(id, ATContactOptionCheckboxRef) {
+    ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox-checked');
+    ATContactOptionCheckboxRef.classList.add('ATContact-option-checkbox');
+    assignedCheckbox[id].checkbox = false;
+}
+
+
+/**
+ * Toggles the background and text color of a contact option in the mobile Add Task dropdown,
+ * and updates the assigned state for the contact.
+ * 
+ * @param {Event} event - The click event.
+ * @param {number} id - The index of the contact in the list.
+ */
+function changeContactBackground(event, id) {
+    event.stopPropagation();
+    const ATContactOptionCheckboxRef = document.getElementById('ATContact-option-checkbox' + id);
+    const ATcustomDropdownMobileOption = document.getElementById('ATcustom-dropdown-Mobile-option-' + id);
+    const ATContactOptionName = document.getElementById('ATContact-option-name-' + id);
     if (!assignedCheckbox[id].checkbox) {
-        ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox');
+      changeContactBackgroundYes(id, ATContactOptionCheckboxRef, ATcustomDropdownMobileOption ,ATContactOptionName);
+    } else {
+       changeContactBackgroundNo(id, ATContactOptionCheckboxRef, ATcustomDropdownMobileOption ,ATContactOptionName);
+    }
+    updateChosenInitials();
+}
+
+
+/**
+ * Marks the contact as assigned in the mobile dropdown,
+ * updates checkbox, background, and text color.
+ *
+ * @param {number} id - The index of the contact in the list.
+ * @param {HTMLElement} ATContactOptionCheckboxRef - The checkbox element.
+ * @param {HTMLElement} ATcustomDropdownMobileOption - The dropdown option element.
+ * @param {HTMLElement} ATContactOptionName - The contact name element.
+ */
+function changeContactBackgroundYes(id, ATContactOptionCheckboxRef, ATcustomDropdownMobileOption ,ATContactOptionName){
+  ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox');
         ATContactOptionCheckboxRef.classList.add('ATContact-option-checkbox-checked');
         assignedCheckbox[id].checkbox = true;
         ATcustomDropdownMobileOption.classList.add("blueBackground");
         ATContactOptionName.style.color = "#FFFFFF";
-    } else {
-        ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox-checked');
+}
+
+
+/**
+ * Marks the contact as unassigned in the mobile dropdown,
+ * updates checkbox, background, and text color.
+ *
+ * @param {number} id - The index of the contact in the list.
+ * @param {HTMLElement} ATContactOptionCheckboxRef - The checkbox element.
+ * @param {HTMLElement} ATcustomDropdownMobileOption - The dropdown option element.
+ * @param {HTMLElement} ATContactOptionName - The contact name element.
+ */
+function changeContactBackgroundNo(id, ATContactOptionCheckboxRef, ATcustomDropdownMobileOption ,ATContactOptionName){
+     ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox-checked');
         ATContactOptionCheckboxRef.classList.add('ATContact-option-checkbox');
         assignedCheckbox[id].checkbox = false;
         ATcustomDropdownMobileOption.classList.remove("blueBackground");
         ATContactOptionName.style.color = "";
-    }
-    updateChosenInitials();
 }
 
 
@@ -121,11 +181,5 @@ function updateChosenInitials() {
     });
     if (parent) {
         parent.classList.toggle('has-initials', hasInitials);
-    }
-}
-
-function changeContactsBackgroundColor(){
-    if(typeOfScreen == "mobile"){
-        
     }
 }

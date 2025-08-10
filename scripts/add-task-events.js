@@ -11,6 +11,7 @@ function addTaskEventInit() {
   initCalendarIconEvent();
 }
 
+
 /**
  * Initializes input validation events for title and due date.
  */
@@ -20,6 +21,7 @@ function initInputValidationEvents() {
   ATTitleRef.addEventListener("blur", validateTitle);
   ATDueDateRef.addEventListener("blur", validateDueDate);
 }
+
 
 /**
  * Initializes events for the subtask input field.
@@ -35,6 +37,7 @@ function initSubtaskInputEvents() {
   });
 }
 
+
 /**
  * Initializes the event for the Add Task button.
  */
@@ -47,6 +50,7 @@ function initAddTaskButtonEvent() {
     }
   });
 }
+
 
 /**
  * Initializes dropdown open/close events.
@@ -67,6 +71,7 @@ function initDropdownEvents() {
   });
 }
 
+
 /**
  * Initializes the due date input event for styling.
  */
@@ -79,6 +84,7 @@ function initDueDateInputEvent() {
     }
   });
 }
+
 
 /**
  * Initializes document click events to close dropdowns when clicking outside.
@@ -97,6 +103,7 @@ function initDocumentClickEvents() {
     }
   });
 }
+
 
 /**
  * Initializes the calendar icon click event to focus the date input.

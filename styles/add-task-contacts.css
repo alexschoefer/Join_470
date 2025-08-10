@@ -191,3 +191,13 @@
   border: 1.5px solid var(--main-blue, #29abe2);
   background-color: #fff;
 }
+
+.blueBackground{
+  background-color: var(--main-color);
+  border-radius: 10px;
+  border: solid #fff 1px;
+}
+
+.blueBackground:hover{
+  background-color: var(--dark-blue);
+}

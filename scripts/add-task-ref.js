@@ -10,6 +10,7 @@ function addTaskInit() {
   loadCategoryOptions();
 }
 
+
 /**
  * Initializes all DOM element references for the Add Task form.
  */
@@ -48,6 +49,7 @@ function initAddTaskRefs() {
   window.ATdueDateInput = document.getElementById("add-task-due-date-input");
   window.ATcategory = document.getElementById("categoryDropdownSelectedText");
 }
+
 
 /**
  * Initializes all state variables for the Add Task form.
