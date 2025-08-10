@@ -1,0 +1,192 @@
+
+.add-task-subtask-input-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 48px;
+  border-radius: 10px;
+  border: 1px solid #D1D1D1;
+  background-color: #fff;
+  position: relative;
+}
+
+.add-task-subtask-input-wrapper:focus-within {
+  border: 1px solid var(--main-blue, #29abe2) !important;
+}
+
+.add-task-subtasks-icons {
+  width: 56px;
+  height: 24px;
+  gap: 4px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.ATSubtask-container:has(.add-task-subtasks-icons:hover) {
+  background-color: #f1f1f1;
+}
+
+.add-task-subtasks-icon-delete {
+  background-image: url(../assets/icons/add-task-subtasks-delete.svg);
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.add-task-subtasks-icon-delete:hover {
+  background-image: url(../assets/icons/add-task-subtasks-delete-hover.svg);
+}
+
+.add-task-subtasks-icon-edit {
+  background-image: url(../assets/icons/add-task-subtasks-edit.svg);
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.add-task-subtasks-icon-edit:hover {
+  background-image: url(../assets/icons/add-task-subtasks-edit-hover.svg);
+}
+
+.add-task-subtask-style {
+  width: 100%;
+  height: 32px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 6px;
+  padding-right: 16px;
+  padding-bottom: 6px;
+  border-width: 1px;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  cursor: pointer;
+}
+
+.add-task-subtask-style:hover {
+  background-color: #f1f1f1;
+  animation-timing-function: ease-out;
+  animation-duration: 100ms;
+  border-radius: 10px;
+}
+
+.add-task-subtask-style:focus-within {
+  border-bottom: 1px solid var(--main-blue, #29abe2);
+  border-radius: 0;
+  background-color: var(--white);
+}
+
+.add-task-subtasks-icon-add {
+  background-image: url(../assets/icons/add-task-subtasks-add.svg);
+  width: 26px;
+  height: 24px;
+  cursor: pointer;
+  margin-right: 0;
+}
+
+.add-task-subtasks-icon-add:hover {
+  background-image: url(../assets/icons/add-task-subtasks-add-hover.svg);
+}
+
+.add-task-subtasks-icon-done {
+  background-image: url(../assets/icons/add-task-subtasks-done.svg);
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.add-task-subtasks-icon-done:hover {
+  background-image: url(../assets/icons/add-task-subtasks-done-hover.svg);
+}
+
+.add-task-subtasks-icon-clear {
+  background-image: url(../assets/icons/add-task-subtasks-close.svg);
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.add-task-subtasks-icon-clear:hover {
+  background-image: url(../assets/icons/add-task-subtasks-close-hover.svg);
+}
+
+.add-task-subtasks-icons-divider {
+  width: 1px;
+  height: 24px;
+  background-color: var(--style);
+  margin: 2px;
+}
+
+.add-task-subtasks-input-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ATSubtask-container {
+  width: 100%;
+  border: 1px solid transparent;
+  background: none;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.ATSubtask-container:hover {
+  background-color: #f1f1f1;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.ATSubtask-container:focus-within {
+  border-bottom: 1px solid var(--white);
+  border-radius: 0;
+  background-color: var(--white);
+}
+
+.allSubtasks {
+  width: 100%;
+  max-height: 186px;
+  overflow-y: auto;
+  display: block;
+  list-style: disc;
+  padding-left: 16px;
+}
+
+.ATSubLi {
+  margin-left: 20px;
+  margin-right: -16px;
+  color: var(--black);
+  text-align: center;
+}
+
+.add-task-subtasks-input-style {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 49px;
+  padding-top: 10px;
+  padding-right: 16px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  gap: 10px;
+  border-width: 1px;
+  border-radius: 10px;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  outline: none;
+}
