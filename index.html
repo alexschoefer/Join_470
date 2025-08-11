@@ -27,7 +27,7 @@
         alt="main-logo-animation-start" />
     <div id="login-wrapper" class="login-wrapper login-wrapper-start">
         <img id="start-logo-final" class="start-logo-img d_none" src="./assets/img/MainLogo.png"
-            alt="Startlogo final"/>
+            alt="Startlogo final" />
         <div id="login-content-wrapper" class="d_none">
             <!-- Login Container -->
             <div id="login-main-container" class="login-main-container hidden">
@@ -40,8 +40,9 @@
                         <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
-                                    <input id="login-usermail-input" class="user-input" type="email" name="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
-                                        placeholder="Email" autocomplete="off" onfocus="clearErrorMessage(this)" onblur="validateLoginInput(this)"/>
+                                    <input id="login-usermail-input" class="user-input" type="email" name="email"
+                                        pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" placeholder="Email" autocomplete="off"
+                                        onfocus="clearErrorMessage(this)" onblur="validateLoginInput(this)" />
                                     <div><img src="../assets/icons/mail-icon.png" alt="email-icon"></div>
                                 </div>
                             </div>
@@ -54,11 +55,12 @@
                             <div class="user-input-wrapper">
                                 <div class="input-container">
                                     <input id="login-userpassword-input" class="user-input" type="password"
-                                        name="password" placeholder="Password" oninput="changePasswordIcon(this)" onfocus="clearErrorMessage(this)" onblur="validateLoginInput(this)"/>
+                                        name="password" placeholder="Password" oninput="changePasswordIcon(this)"
+                                        onfocus="clearErrorMessage(this)" onblur="validateLoginInput(this)" />
                                     <div>
                                         <img onclick="toggleInputTypePassword(this)" id="password-icon"
-                                        class="password-icon" src="../assets/icons/lock-icon.png"
-                                        alt="password-icon">
+                                            class="password-icon" src="../assets/icons/lock-icon.png"
+                                            alt="password-icon">
                                     </div>
                                 </div>
                             </div>
@@ -86,8 +88,8 @@
             </div>
             <!-- Footer -->
             <footer class="footer-login">
-                <a class="nav-login-privacy-legal" href="./html/privacy-policy.html">Privacy Policy</a>
-                <a class="nav-login-privacy-legal" href="./html/legal-notice.html">Legal Notice</a>
+                <a class="nav-login-privacy-legal" href="./html/privacy-policy.html?public=1">Privacy Policy</a>
+                <a class="nav-login-privacy-legal" href="./html/legal-notice.html?public=1">Legal Notice</a>
             </footer>
         </div>
     </div>

@@ -2,6 +2,14 @@
   background-color: #2d476b;
   cursor: pointer;
 }
+
+.aside-center-it {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
 .aside-content {
   padding-top: 64px;
   padding-bottom: 64px;
@@ -40,12 +48,20 @@
   padding: 8px 56px 8px 56px;
   gap: 8px;
 }
+
+.legal-information-button-public-btn {
+  width: 100%;
+  padding: 8px;
+  gap: 8px;
+}
+
 .active {
   background-color: #091931;
 }
 .active a {
   color: white;
 }
+
 .menu-selection-icons {
   height: 30px;
   width: 30px;
@@ -54,16 +70,27 @@
 .legal-information-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   gap: 4px;
   padding-top: 243px;
 }
 
 .legal-information-button {
-  display: flex;
-  align-items: center;
-
+  width: 100%;
   padding: 8px;
   gap: 8px;
+}
+.legal-information-button a {
+  display: inline-block;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.legal-information-button a:hover {
+  color: #29abe2;
+  transform: scale(1.05);
 }
 
 @media (max-width: 1020px) {
@@ -87,7 +114,7 @@
 
   .menuLogo-container,
   .legal-information-container {
-    display: none; /* Logo und Footer entfernen */
+    display: none;
   }
 
   .menu-container {
@@ -120,9 +147,55 @@
     background-color: #091931;
     cursor: pointer;
   }
+}
 
-  .menu-selection-icons {
-    height: 24px;
-    width: 24px;
+@media (max-width: 1020px) {
+  .public .menu-container {
+    height: 100%;
+  }
+
+  .public .aside-content {
+    justify-content: space-between;
+    padding: 0 16px;
+  }
+
+  .public .legal-information-container {
+    display: flex !important;
+    height: 100%;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding: 0;
+    width: auto;
+  }
+
+  .public .legal-information-button-public-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: auto;
+    padding: 0 14px;
+    line-height: 1;
+    color: #cdcdcd;
+    text-decoration: none;
+    border-radius: 16px;
+    cursor: pointer;
+  }
+
+  .public .legal-information-button-public-btn:hover {
+    background-color: #091931;
+    color: #fff;
+  }
+
+  .public .legal-information-button-public-btn.active {
+    background-color: #091931;
+    color: #fff;
+  }
+
+  .public .aside-center-it {
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 }
