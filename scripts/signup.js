@@ -29,42 +29,60 @@ function validateSignupInput(input) {
  * Triggers an asynchronous check to see if the email already exists in the database.
  * @param {HTMLInputElement} input - The input field to be validated.
  */
-function checkRequiredInputEmail(input) {
+async function checkRequiredInputEmail(input) {
     const email = input.value.trim();
-    const errorMessage = document.getElementById('usermail-input-validation-message');
-    const wrapper = input.closest('.user-input-wrapper');
-    if(email === '') {
-        errorMessage.innerText = 'This field is required.';
-        errorMessage.classList.remove('d_none');
-        wrapper.classList.add('input-error');
-    }else if(!isValidEmail(email)) {
-        errorMessage.innerText = 'Please enter a valid email address.';
-        errorMessage.classList.remove('d_none');
-        wrapper.classList.add('input-error');
-    }else {
-        errorMessage.classList.add('d_none');
-        wrapper.classList.remove('input-error');
+    if (!email) {
+        showError(input, 'This field is required.');
+        validateSignUpForm();
+        return;
     }
-    checkEmailAlreadyExist(input);
+    if (!isValidEmail(email)) {
+        showError(input, 'Please enter a valid email address.');
+        validateSignUpForm();
+        return;
+    }
+    const exists = await checkEmailAlreadyExist(input);
+    if (!exists) clearErrorMessage(input);
     validateSignUpForm();
 }
 
 
-/** 
- * Help-function - Checking the given email adress for the sign up in the database.
- * If the given email adress is already by a user in the database an error message by the calling function showEmailAlreadyExistError
- * Otherwise the error is cleared. The overall form validation is updated.
- * @param {HTMLInputElement} input - The email input field that is checking in the database. 
+/**
+ * Displays a validation error message for a specific input field. Updates the associated validation message element with the given text,
+ * makes it visible, and applies a visual error style to the input wrapper.
+ *
+ * @param {HTMLInputElement} input - The input element that triggered the error.
+ * @param {string} message - The error message to be displayed.
+ */
+function showError(input, message) {
+    const errorMessage = document.getElementById(input.id + '-validation-message');
+    const wrapper = input.closest('.user-input-wrapper');
+    errorMessage.innerText = message;
+    errorMessage.classList.remove('d_none');
+    wrapper.classList.add('input-error');
+    isEmailAlreadyUsed = false;
+}
+
+
+/**
+ * Checks whether the entered email already exists in the database.
+ * Shows an error if it exists, otherwise returns false.
+ * @param {HTMLInputElement} input - The input field containing the email.
+ * @returns {Promise<boolean>} - True if the email exists, false otherwise.
  */
 async function checkEmailAlreadyExist(input) {
-    if(input.value.trim().length > 0){
-        let email = document.getElementById('usermail-input').value.trim();
-        let response = await fetch(fetchURLDataBase + '/users' + '.json');
-        let useremails = await response.json();
-        let signupEmail = useremails && Object.values(useremails).find(
-            user => user.email === email);
-            signupEmail ? (isEmailAlreadyUsed = true, showEmailAlreadyExistError(input)) : (isEmailAlreadyUsed = false, clearErrorMessage(input));
-            validateSignUpForm();
+    const email = input.value.trim();
+    if (!email) return false;
+    const response = await fetch(fetchURLDataBase + '/users.json');
+    const useremails = await response.json();
+    const exists = useremails && Object.values(useremails).some(user => user.email === email);
+    if (exists) {
+        showEmailAlreadyExistError(input);
+        isEmailAlreadyUsed = true;
+        return true;
+    } else {
+        isEmailAlreadyUsed = false;
+        return false;
     }
 }
 
