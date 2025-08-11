@@ -602,7 +602,9 @@ div.card-drag-drop-container {
   -ms-transform: rotate(20deg);
   -o-transform: rotate(20deg);
 }
-
+div.edit-task-category{
+  display: none !important;
+}
 div.add-task-form-div {
   display: block;
   display: flex;
