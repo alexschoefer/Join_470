@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Summary</title>
+
+    <link
+      rel="shortcut icon"
+      href="../assets/img/MenuLogo.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="../styles/standard.css" />
+    <link rel="stylesheet" href="../styles/fonts.css" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../styles/summary.css" />
+    <script src="../scripts/sidebar.js"></script>
+    <link
+      rel="stylesheet"
+      href="../styles/summary.mobile.css"
+      media="(max-width: 1020px)"
+    />
+    <link
+      rel="stylesheet"
+      href="../style.mobile.css"
+      media="(max-width: 1020px)"
+    />
+    <link rel="stylesheet" href="../styles/sidebar.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&family=Teko:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="app-layout">
+      <div id="sidebar"></div>
+      <div id="header"></div>
+      <main class="main-content">
+        <div id="welcome-overlay" class="overlay hidden">
+          <div class="overlay-content">
+            <h2>
+              <span class="greeting-text" id="welcome-text"></span>
+              <span class="username-text" id="name-text"></span>
+            </h2>
+          </div>
+        </div>
+        <div class="summary-layout">
+          <div>
+            <div class="summary-head-content">
+              <h2>Join470</h2>
+              <div class="summary-head-vector"></div>
+              <p>Key Metrics at a Glance</p>
+              <div class="summary-head-vector-mobile"></div>
+            </div>
+          </div>
+          <div class="summary-main-content">
+            <div class="summary-grid">
+              <div class="box-row">
+                <section class="box box-todo">
+                  <div class="icon todo"></div>
+                  <div class="text">
+                    <p id="to-do" class="number">1</p>
+                    <p class="label">To-do</p>
+                  </div>
+                </section>
+                <section class="box box-done">
+                  <div class="icon done"></div>
+                  <div class="text">
+                    <p id="done" class="number">1</p>
+                    <p class="label">Done</p>
+                  </div>
+                </section>
+              </div>
+              <section class="box box-urgent">
+                <img src="../assets/icons/summary_ArrowUp.png" alt="" />
+                <div class="urgent-info">
+                  <p id="urgent-tasks" class="number">1</p>
+                  <p class="label">Urgent</p>
+                </div>
+                <div class="vector-urgent"></div>
+                <div class="deadline-info">
+                  <p id="deadline-date" class="date">October 16, 2022</p>
+                  <p class="label">Upcoming Deadline</p>
+                </div>
+              </section>
+              <section class="box box-board">
+                <p id="tasks-in-board" class="number">5</p>
+                <p class="label">Tasks in Board</p>
+              </section>
+              <section class="box box-progress">
+                <p id="tasks-in-progress" class="number">2</p>
+                <p class="label">Tasks in Progress</p>
+              </section>
+              <section class="box box-feedback">
+                <p id="tasks-await-feedback" class="number">2</p>
+                <p class="label">Awaiting Feedback</p>
+              </section>
+            </div>
+            <div class="summary-greating-user">
+              <h2>
+                <span id="dategreating" class="greeting-text"></span>
+                <span id="username-text" class="username-text"></span>
+              </h2>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="../scripts/include.js"></script>
+    <script src="../scripts/header.js"></script>
+    <script src="../scripts/sidebar.js"></script>
+    <script src="../scripts/summary.js"></script>
+  </body>
+</html>
