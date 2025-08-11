@@ -8,6 +8,7 @@ function getCurrentFile() {
   return f || "index.html";
 }
 
+
 /**
  * Marks sidebar links as active.
  */
@@ -26,6 +27,7 @@ function markSidebarActive() {
   });
 }
 
+
 /**
  * Checks public mode via URL parameter.
  * @returns {boolean}
@@ -33,6 +35,7 @@ function markSidebarActive() {
 function isPublicMode() {
   return new URLSearchParams(location.search).get("public") === "1";
 }
+
 
 /**
  * Selects the path to load.
@@ -49,6 +52,7 @@ function choosePath(el, def, pub, id) {
   return d;
 }
 
+
 /**
  * Fetches HTML as text.
  * @param {string} path
@@ -60,6 +64,7 @@ async function fetchHTML(path) {
   return r.text();
 }
 
+
 /**
  * Initializes sidebar after insertion.
  * @param {boolean} pub
@@ -69,6 +74,7 @@ function afterSidebar(pub) {
   if (typeof initSidebar === "function") initSidebar();
   markSidebarActive?.();
 }
+
 
 /**
  * Initializes header after insertion.
@@ -86,6 +92,7 @@ function afterHeader(el, pub) {
   if (typeof initHeader === "function") initHeader();
 }
 
+
 /**
  * Loads and sets a fragment.
  * @param {string} id
@@ -100,6 +107,7 @@ async function loadComponent(id, def) {
   if (id === "sidebar") afterSidebar(pub);
   if (id === "header") afterHeader(el, pub);
 }
+
 
 document.addEventListener("DOMContentLoaded", async () => {
   await loadComponent("header", "./header.html");
