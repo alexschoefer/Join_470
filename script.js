@@ -45,23 +45,6 @@ function updateDeviceType() {
 }
 
 
-function handleOrientationChange() {
-    const isLandscape = window.innerWidth > window.innerHeight;
-    const warning = document.getElementById('orientation-warning');
-    if (isLandscape) {
-      warning.classList.remove('d_none');
-    } else {
-      warning.classList.add('d_none');
-    }
-  }
-  
-  // Initial check
-  handleOrientationChange();
-  
-  // Add event listener
-  window.addEventListener('resize', handleOrientationChange);
-
-
 /**
  * Adjusts the layout of the contact view depending on the device type (desktop or mobile) and whether a contact is currently selected.
  * On desktop: shows all sections. In the mobile view hides the left container and contact list if a contact is open.
