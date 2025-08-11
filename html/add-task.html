@@ -169,49 +169,52 @@
                             </div>
                         </div>
                     </form>
-                                         <div class="add-task-form-buttons">
-                            <div class="required-main-bottom-legend">
-                                <span class="label-add-task"><span class="red-asterix-required">*</span>This field
-                                    is
-                                    required
-                                </span>
-                            </div>
-                            <div id="add-task-finish-animation" class="add-task-finish-animation d_none">
-                                <div id="add-task-finish-animation" class="add-task-start-overlay-animation">
-                                    <div class="add-task-finish-ovelay">
-                                        <span class="add-task-finish-ovelay-text">Task Added to Board</span>
-                                        <img class="add-task-finish-ovelay-img" src="../assets/icons/board-icon.png"
-                                            alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="add-task-buttons-create-and-clear-container">
-                                <div class="add-task-buttons-create-and-clear">
-                                    <button onclick="resetAddTaskForm()" type="button"
-                                        id="label-add-task add-task-button-clear"
-                                        class="label-add-task add-task-button-clear">
-                                        <span class="add-task-button-clear-text">Clear</span><img
-                                            class="add-task-button-clear-icon"
-                                            src="../assets/icons/add-task-iconoir_cancel.svg" alt="close-pic" />
-                                    </button>
-                                    <button onclick="sendAddTaskData()" type="button" id="add-task-button-create-task"
-                                        class="label-add-task add-task-button-create" disabled="false">
-                                        <span class="add-task-button-create-text">Create Task</span>
-                                        <div class="label-add-task add-task-button-create-capsule">
-                                            <img class="add-task-button-create-icon"
-                                                src="../assets/icons/add-task-check-white.png" alt="nike" />
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
-
+                    <div class="add-task-form-buttons">
+                        <div class="required-main-bottom-legend">
+                            <span class="label-add-task"><span class="red-asterix-required">*</span>This field
+                                is
+                                required
+                            </span>
                         </div>
+                        <div id="add-task-finish-animation" class="add-task-finish-animation d_none">
+                            <div id="add-task-finish-animation" class="add-task-start-overlay-animation">
+                                <div class="add-task-finish-ovelay">
+                                    <span class="add-task-finish-ovelay-text">Task Added to Board</span>
+                                    <img class="add-task-finish-ovelay-img" src="../assets/icons/board-icon.png"
+                                        alt="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-task-buttons-create-and-clear-container">
+                            <div class="add-task-buttons-create-and-clear">
+                                <button onclick="resetAddTaskForm()" type="button"
+                                    id="label-add-task add-task-button-clear"
+                                    class="label-add-task add-task-button-clear">
+                                    <span class="add-task-button-clear-text">Clear</span><img
+                                        class="add-task-button-clear-icon"
+                                        src="../assets/icons/add-task-iconoir_cancel.svg" alt="close-pic" />
+                                </button>
+                                <button onclick="sendAddTaskData()" type="button" id="add-task-button-create-task"
+                                    class="label-add-task add-task-button-create" disabled="false">
+                                    <span class="add-task-button-create-text">Create Task</span>
+                                    <div class="label-add-task add-task-button-create-capsule">
+                                        <img class="add-task-button-create-icon"
+                                            src="../assets/icons/add-task-check-white.png" alt="nike" />
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </main>
     </div>
     </main>
-
+    <!-- Landscape-Overlay -->
+    <div id="orientation-warning" class="orientation-warning d_none">
+        <p>The Join app works best in portrait mode. Please rotate your device.</p>
+    </div>
     <script src="../script.js" defer></script>
     <script src="../scripts/add-task-validation.js" defer></script>
     <script src="../scripts/add-task-contacts.js" defer></script>

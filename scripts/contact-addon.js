@@ -8,6 +8,16 @@ async function refreshContacts() {
 
 
 /**
+ * Help function - Sorts an array of contact objects alphabetically by their name
+ * @param {*} allContacts - The array of contact objects to sort
+ * @returns - The sorted array of contacts
+ */
+function sortContactsAlphabetically(allContacts) {
+    return allContacts.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+
+/**
  * Hides the mobile contact action buttons when clicking outside the button container
  * @param {MouseEvent} event - The click event outside triggered  on the document
  */
