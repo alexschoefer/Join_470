@@ -1,5 +1,5 @@
 /**
- * Gibt den aktuellen Dateinamen zurück.
+ * Returns the current file name.
  * @returns {string}
  */
 function getCurrentFile() {
@@ -9,7 +9,7 @@ function getCurrentFile() {
 }
 
 /**
- * Markiert Sidebar-Links als aktiv.
+ * Marks sidebar links as active.
  */
 function markSidebarActive() {
   const cur = getCurrentFile();
@@ -27,7 +27,7 @@ function markSidebarActive() {
 }
 
 /**
- * Prüft Public-Mode über URL-Param.
+ * Checks public mode via URL parameter.
  * @returns {boolean}
  */
 function isPublicMode() {
@@ -35,7 +35,7 @@ function isPublicMode() {
 }
 
 /**
- * Wählt den zu ladenden Pfad.
+ * Selects the path to load.
  * @param {HTMLElement} el
  * @param {string} def
  * @param {boolean} pub
@@ -50,7 +50,7 @@ function choosePath(el, def, pub, id) {
 }
 
 /**
- * Holt HTML als Text.
+ * Fetches HTML as text.
  * @param {string} path
  * @returns {Promise<string>}
  */
@@ -61,7 +61,7 @@ async function fetchHTML(path) {
 }
 
 /**
- * Initialisiert Sidebar nach dem Einfügen.
+ * Initializes sidebar after insertion.
  * @param {boolean} pub
  */
 function afterSidebar(pub) {
@@ -71,7 +71,7 @@ function afterSidebar(pub) {
 }
 
 /**
- * Initialisiert Header nach dem Einfügen.
+ * Initializes header after insertion.
  * @param {HTMLElement} el
  * @param {boolean} pub
  */
@@ -87,7 +87,7 @@ function afterHeader(el, pub) {
 }
 
 /**
- * Lädt und setzt ein Fragment.
+ * Loads and sets a fragment.
  * @param {string} id
  * @param {string} def
  */
