@@ -70,7 +70,11 @@ let standartTasks = [
       { title: "Add unit tests for toggle function", done: true },
       { title: "Ensure compatibility with all themes", done: true },
     ],
-    assigned: [{ name: "Alex Schöfer", color: "#1FD7C1" }],
+    assigned: [
+      { name: "Alex Schöfer", color: "#1FD7C1" },
+      { name: "Max Mustermann", color: "#FF5EB3" },
+      { name: "Nikolaos Loukataris", color: "#C3FF2B" },
+    ],
     category: "Technical Task",
     colorTo: ["#1FD7C1"],
   },
@@ -98,80 +102,6 @@ let standartTasks = [
   },
 ];
 
-
-async function pushDummyTasksToRemoteStorage() {
-  for (const task of standartTasks) {
-    try {
-      const response = await fetch(`${fetchURLDataBase}/tasks/${task.id}.json`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(task),
-      });
-    } catch (error) {
-      console.error(`Error by fetching Task from dataRemoteStorage, ${task.id}:`, error);
-    }
-  }
-}
-
-// async function getTasksFromRemoteStorage(path) {
-//   let response = await fetch(fetchURLDataBase + path + ".json");
-//   if (response.ok) {
-//     let data = await response.json();
-//     if (Array.isArray(data)) {
-//       return data;
-//     } else {
-//       return;
-//     }
-//   }
-// }
-
-async function getTasksFromRemoteStorage(path) {
-  let response = await fetch(fetchURLDataBase + path + ".json");
-  if (response.ok) {
-      let data = await response.json();
-      if (!data) return [];
-
-      // ✅ Wenn data ein Objekt ist → in Array umwandeln
-      if (typeof data === 'object' && !Array.isArray(data)) {
-          return Object.values(data); // gibt Array der Werte zurück
-      }
-
-      // Falls doch ein Array
-      if (Array.isArray(data)) {
-          return data;
-      }
-  }
-  return [];
-}
-
-async function saveTasksToRemoteStorage(path, data) {
-  await fetch(fetchURLDataBase + path + ".json", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-}
-async function deleteTasksToRemoteStorage(path) {
-  let response = await fetch(fetchURLDataBase + path + ".json", {
-    method: "DELETE",
-  });
-  return (response = await response.json());
-}
-
-async function editTasksToRemoteStorage(path, data) {
-  let response = await fetch(fetchURLDataBase + path + ".json", {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  return (response = await response.json());
-}
 
 let contactsDummy = [
   {

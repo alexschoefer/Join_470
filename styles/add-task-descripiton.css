@@ -1,0 +1,61 @@
+.add-task-input-textarea-style {
+  width: 100%;
+  height: 136px;
+  gap: 4px;
+  padding-top: 12px;
+  padding-right: 21px;
+  padding-bottom: 12px;
+  padding-left: 21px;
+  gap: 10px;
+  border-width: 1px;
+  border-radius: 10px;
+  border: 1px solid #D1D1D1;
+  resize: none;
+  flex: 1;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0%;
+}
+
+textarea {
+  resize: none;
+}
+
+.add-task-input-textarea-style:hover {
+  cursor: pointer;
+}
+
+.description-flex-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.desription-ico {
+  position: absolute;
+  right: 6px;
+  top: 89%;
+  transform: translateY(-50%);
+  margin: 0;
+  width: 20px;
+  height: 20px;
+  background: url('../assets/icons/add-task-description-corner.svg') no-repeat center center;
+  background-size: contain;
+  pointer-events: auto;
+  cursor: pointer;
+  z-index: 1;
+}
+
+#add-task-description-input:focus,
+#add-task-description-input:active {
+  outline: none;
+  border: 1px solid var(--light-blue);
+  box-shadow: none;
+}
+
+#add-task-description-textarea:focus,
+#add-task-description-textarea:active {
+  outline: none;
+  border: 1px solid var(--light-blue);
+  box-shadow: none;
+}
