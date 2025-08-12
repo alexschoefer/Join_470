@@ -15,7 +15,6 @@ let awaitFeedbackContainer = document.querySelector(".await-feedback");
 let doneContainer = document.querySelector(".done");
 let addTaskScriptInjected = false;
 
-
 /**
  * Creates and appends a task card element to the appropriate column.
  * Also opens its details overlay and updates its subtask progress bar.
@@ -34,7 +33,6 @@ function appendTaskToBoard(task) {
   updateSubtaskProgress(task.subtasks, card);
 }
 
-
 /**
  * Clears existing task and placeholder nodes from each provided column.
  * @param {{container: Element}[]} cols - Array of column objects
@@ -47,7 +45,6 @@ function clearColumns(cols) {
       .forEach((n) => n.remove());
   });
 }
-
 
 /**
  * Generates a DOM element for a task card based on its data.
@@ -79,7 +76,6 @@ function processTasks(list, filter, cb) {
     .forEach(cb);
 }
 
-
 /**
  * Refreshes the task board by clearing and re-appending tasks based on current filter.
  */
@@ -90,18 +86,27 @@ function updateBoardContent() {
   insertTemplateIfEmpty();
 }
 
-
 /**
- * Adds a real-time search filter to the board content based on user input. Listens for input events on the search field. 
+ * Adds a real-time search filter to the board content based on user input. Listens for input events on the search field.
  * If the entered query is at least 3 characters long, it sets the global `currentFilter` variable to the lowercase, trimmed input.
  * Otherwise, it clears the filter. Then it updates the board content accordingly.
  */
+let searchMessage = document.getElementById("search-message");
+
 searchInput.addEventListener("input", () => {
   let q = searchInput.value.trim().toLowerCase();
   currentFilter = q.length >= 3 ? q : "";
   updateBoardContent();
+  let found = tasks.some(
+    (t) =>
+      t && (!currentFilter || t.title.toLowerCase().startsWith(currentFilter))
+  );
+  if (!found && q.length >= 3) {
+    searchMessage.style.display = "inline-block";
+  } else {
+    searchMessage.style.display = "none";
+  }
 });
-
 
 /**
  * Initializes application: loads tasks, saves defaults if missing,
@@ -121,7 +126,6 @@ async function init() {
   openTaskDetails();
   attachAddTaskHandlers();
 }
-
 
 /**
  * Populates a column container with tasks matching its status.
@@ -147,7 +151,6 @@ function populateColumn(col) {
     });
 }
 
-
 /**
  * Updates all columns, drag settings, placeholders, and dropdown menus.
  * @async
@@ -158,7 +161,6 @@ async function updateTask() {
   insertTemplateIfEmpty();
   attachDropdownsToCards();
 }
-
 
 /**
  * Attaches click handlers to "Add Task" buttons to open overlay or navigate.
@@ -179,7 +181,6 @@ function attachAddTaskHandlers() {
   plusButtons.forEach((btn) => btn.addEventListener("click", handler));
 }
 
-
 /**
  * Converts internal status names to human-readable labels.
  * @param {string} name - Status key
@@ -194,7 +195,6 @@ function formatName(name) {
   };
   return map[name] || name;
 }
-
 
 /**
  * Customizes "Add Task" form submit to handle editing existing tasks.
@@ -213,7 +213,6 @@ function initAddTaskForm(id) {
   });
 }
 
-
 /**
  * Maps priority levels to corresponding icon image URLs.
  * @param {string} priority - Priority label (e.g., "Medium", "Low", "Urgent")
@@ -228,7 +227,6 @@ function getImageForPriority(priority) {
   return imageMap[priority] || imageMap.Low;
 }
 
-
 /**
  * Returns a hex color code for a given task category.
  * @param {string} category - Task category name
@@ -239,7 +237,6 @@ function getColoredLabels(category) {
   if (category === "Technical Task") return "#1FD7C1";
   return "";
 }
-
 
 /**
  * Updates the visual progress bar and text for subtasks within a task card.
@@ -263,7 +260,6 @@ function updateSubtaskProgress(subtasks, container) {
   if (progressText) progressText.textContent = `${doneCount}/${total} Subtasks`;
 }
 
-
 /**
  * Generates HTML string for a list of subtasks with checkboxes.
  * @param {{title: string, done: boolean}[]} subtasks - List of subtask objects
@@ -286,7 +282,6 @@ function generateSubtaskHTML(subtasks) {
     .join("");
 }
 
-
 /**
  * Closes the currently open action menu if present.
  */
@@ -296,7 +291,6 @@ function closeCurrentActionMenu() {
     currentOpenMenu = null;
   }
 }
-
 
 /**
  * Positions an action menu relative to its trigger button and card.
@@ -311,7 +305,6 @@ function positionMenu(menu, btn, card) {
   menu.style.right = `${offsetRight}px`;
 }
 
-
 /**
  * Sets up click listener to close menu when clicking outside.
  * @param {MouseEvent} ev - Click event
@@ -324,7 +317,6 @@ function outsideClick(ev, menu, btn) {
     document.removeEventListener("click", (ev) => outsideClick(ev, menu, btn));
   }
 }
-
 
 /**
  * Builds HTML options for moving a task between statuses.
@@ -362,7 +354,6 @@ function buildMoveOptions(currentStatus) {
     .join("");
 }
 
-
 /**
  * Attaches click listeners to menu options to move tasks between statuses.
  * @param {Element} menu - Action menu element
@@ -388,7 +379,6 @@ function attachMenuListeners(menu, card) {
   });
 }
 
-
 /**
  * Safely retrieves the status field from a card's data-task JSON.
  * @param {Element} card - Task card element
@@ -401,4 +391,3 @@ function getTaskStatus(card) {
     return "";
   }
 }
-

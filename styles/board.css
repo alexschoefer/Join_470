@@ -162,8 +162,6 @@ section#all-task {
   display: flex;
   gap: 24px;
   justify-content: space-between;
-  /* trebuie de facut media  */
-
 }
 
 div.task-title {
@@ -593,6 +591,9 @@ div.card-drag-drop-container {
   gap: 20px;
   border-radius: 24px;
 }
+div.board-edit-task-category{
+  display: none !important;
+}
 
 .tilt-on-drag {
   transform: rotate(20deg);
@@ -779,4 +780,16 @@ div.card-drop-down-button:hover img{
 .card-action-menu .arrow {
   font-size: 12px;
   line-height: 1;
+}
+div.search-container{
+  align-items: flex-start; 
+}
+#search-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 12px; 
+  margin-left: -15px;
+}
+ul.board-subtasks-edit {
+  overflow: initial !important;
 }
