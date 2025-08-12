@@ -1,0 +1,203 @@
+.ATContact-option-intials-container {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--white);
+  gap: 10px;
+}
+
+.ATContact-option-initials {
+  font-weight: bold;
+  color: #fff;
+  font-weight: 400;
+}
+
+.ATContact-option-name {
+  flex: 1;
+}
+
+.ATContact-option-checkbox {
+  width: 24px;
+  height: 24px;
+  background-image: url(../assets/icons/add-task-assigned-unchecked-Default.svg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ATContact-option-checkbox:hover {
+  background-image: url(../assets/icons/add-task-assigned-hover-unchecked-disable.svg);
+}
+
+.ATContact-option-checkbox-checked {
+  width: 24px;
+  height: 24px;
+  background-image: url(../assets/icons/add-task-assigned-checked.svg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ATContact-option-checkbox-checked:hover {
+  background-image: url(../assets/icons/add-task-assigned-hover-checked.svg);
+}
+
+.ATcustom-dropdown-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.ATcustom-dropdown-selected {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #D1D1D1;
+  border-radius: 8px;
+  background: #fff;
+  padding: 12px 16px;
+  cursor: pointer;
+  min-height: 48px;
+  font-size: 20px;
+}
+
+.ATcustom-dropdown-arrow {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  background: url('../assets/icons/add-task-assign-arrow-down.svg') no-repeat center center;
+  background-size: contain;
+  transition: transform 0.2s;
+  margin-left: 8px;
+  content: "";
+}
+
+.ATcustom-dropdown-arrow.open {
+  background-image: url('../assets/icons/add-task-assign-arrow-up.svg');
+}
+
+.contact-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  border-width: 2px solid var(--white);
+}
+
+.ATContact-option-initials {
+  color: white;
+  font-size: 12px;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+.ATContact-option-name {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  text-align: left;
+  color: #000000;
+  margin-left: 16px;
+}
+
+.ATcustom-dropdown {
+  border-radius: 8px;
+  min-height: 240px;
+  max-height: 240px;
+  overflow-y: auto;
+  background: #fff;
+  width: 437px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.ATcustom-dropdown-category {
+  border-radius: 8px;
+  min-height: 98px;
+  max-height: 104px;
+  overflow-y: auto;
+  background: #fff;
+  width: 437px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 10px;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  border: 1px solid #D1D1D1;
+}
+
+.ATcustom-dropdown-option {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-right: 16px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+}
+
+.ATcustom-dropdown-option:hover {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.add-task-assigned-to-chosen-initials {
+  min-height: 1px;
+  max-height: 46px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+#add-task-assigned-to-select {
+  width: 100%;
+  height: 48px;
+  border: 1px solid #D1D1D1;
+  border-radius: 10px;
+  background-color: #fff;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  padding: 0;
+  outline: none;
+  transition: border-color 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+#add-task-assigned-to-select:focus-within {
+  border: 1.5px solid var(--main-blue, #29abe2);
+  background-color: #fff;
+}
+
+.blueBackground{
+  background-color: var(--main-color);
+  border-radius: 10px;
+  border: solid #fff 1px;
+}
+
+.blueBackground:hover{
+  background-color: var(--dark-blue);
+}

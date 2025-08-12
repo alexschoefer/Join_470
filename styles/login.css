@@ -1,0 +1,358 @@
+/* .start-logo-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 247px;
+  height: auto;
+  transition: top 1.5s ease-in-out, left 1.5s ease-in-out,
+    transform 1.5s ease-in-out, width 1.5s ease-in-out;
+}
+
+#start-logo-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 247px;
+  height: auto;
+} */
+
+/* Logo, das animiert wird */
+#start-logo-animation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 247px;
+    height: auto;
+    z-index: 10;
+  }
+  
+  /* Finales statisches Logo nach Animation */
+  #start-logo-final {
+    position: absolute;
+    top: 40px;
+    left: 30px;
+    width: 64px;
+    height: auto;
+    z-index: 10;
+  }
+
+.logo-animation-move-desktop {
+  animation: logo-move 1.5s ease-in-out forwards;
+}
+
+.logo-animation-move-mobile {
+  animation: moveLogoMobile 1s forwards;
+}
+
+.login-wrapper.mobile-background {
+  background-color: #2a3647;
+}
+
+.logo-animation-start {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.logo-animation-move {
+  position: absolute;
+  animation: logo-move 1.5s ease-in-out forwards;
+}
+
+.logo-animation-end {
+  top: 80px;
+  left: 77px;
+  transform: none;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.login-wrapper {
+  position: relative;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f6f7f8;
+}
+
+.login-main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 652px;
+  height: auto;
+  gap: 32px;
+  padding: 48px 115px;
+  box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+  border-radius: 30px;
+  background-color: white;
+}
+
+.login-underline {
+  width: 150px;
+  border: 3px solid #29abe2;
+}
+
+.login-headline-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 315px;
+  height: 89px;
+  gap: 16px;
+}
+
+#login-headline {
+  font-size: 61px;
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  font-weight: 700;
+  line-height: 120%;
+  color: #000000;
+  text-align: center;
+}
+
+.user-login-input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  width: 422px;
+  height: auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.user-login-input-email {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 422px;
+  height: 48px;
+  gap: 8px;
+}
+
+.user-login-input-password {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 422px;
+  height: 68px;
+  display: flex;
+  gap: 8px;
+}
+
+/* Input-Felder */
+
+.user-input {
+  display: flex;
+  justify-content: space-between;
+  color: #000000;
+  max-width: 380px;
+  width: 100%;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 120%;
+  border: none;
+}
+
+.user-input:focus {
+  outline: none;
+}
+
+.user-input-wrapper:focus-within {
+  border: 1px solid #29abe2;
+  border-radius: 10px;
+}
+
+.input-error-email-passwort {
+  border: 1px solid #ff001f;
+}
+
+input::placeholder,
+textarea::placeholder {
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  color: #d1d1d1;
+  line-height: 120%;
+  font-weight: 400;
+}
+
+.input-validation-message {
+  color: #ff8190;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 120%;
+  text-align: left;
+  width: 100%;
+  padding-left: 4px;
+  margin: 0px;
+  margin-top: 2px;
+}
+
+.input-error {
+  border: 1px solid #ff8190 !important;
+  border-radius: 10px;
+}
+
+.input-validation-container {
+  width: 100%;
+}
+
+.btn-login-container {
+  display: flex;
+  width: 322px;
+  height: 48px;
+  gap: 35px;
+  justify-content: center;
+  align-items: center;
+}
+
+#btn-login {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 110px;
+  height: 48px;
+  border-radius: 8px;
+  background-color: #2a3647;
+  color: white;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 120%;
+  cursor: pointer;
+}
+
+#btn-login:hover {
+  background-color: rgb(41, 171, 226);
+  border: 1px solid rgb(41, 171, 226);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: white;
+  transition: ease-in-out;
+  transition-duration: 100ms;
+}
+
+#btn-login:active {
+  background-color: #2a3647;
+}
+
+.btn-login-guest {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 177px;
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid #2a3647;
+  background-color: white;
+  font-size: 21px;
+  color: #2a3647;
+  line-height: 120%;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-login-guest:hover {
+  border: 2px solid #29abe2;
+  transition: ease-in-out;
+  transition-duration: 100ms;
+  color: #29abe2;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.footer-login {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: auto;
+  height: 35px;
+}
+
+.nav-login-privacy-legal {
+  font-size: 16px;
+  color: #a8a8a8;
+  font-weight: 400;
+  line-height: 120%;
+  padding: 8px;
+}
+
+.nav-login-privacy-legal:hover {
+  color: #29abe2;
+  font-weight: 700;
+}
+
+.login-registration-container {
+  position: absolute;
+  top: 32px;
+  right: 80px;
+  display: flex;
+  gap: 35px;
+  align-items: center;
+  height: 49px;
+  width: auto;
+}
+
+#login-registration-slogan {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 120%;
+  white-space: nowrap;
+  width: auto;
+}
+
+.btn-sign-up {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #2a3647;
+  min-width: 91px;
+  height: 49px;
+  border-radius: 8px;
+  padding: 15px 16px;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 120%;
+  white-space: nowrap;
+}
+
+.btn-sign-up:hover {
+  border: 2px solid #29abe2;
+  transition: ease-in-out;
+  transition-duration: 100ms;
+  color: white;
+  background-color: #29abe2;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+

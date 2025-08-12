@@ -1,0 +1,163 @@
+.content-limit {
+  max-width: 1920px;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.header-content {
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1920px;
+  padding-top: 20px;
+  padding-right: 40px;
+  padding-bottom: 20px;
+  padding-left: 116px;
+  box-sizing: border-box;
+}
+.header-user-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+#help-icon {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+#help-icon:hover {
+  scale: 1.1;
+}
+
+#guest-icon {
+  display: flex;
+  height: 56px;
+  width: 56px;
+  cursor: pointer;
+}
+
+.burger-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 158px;
+  width: 150px;
+  background-color: #2a3647;
+  position: absolute;
+  right: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #cdcdcd;
+  padding: 15px;
+  gap: 5px;
+}
+.burger-menu-button {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 46px;
+  width: 100%;
+  color: #cdcdcd;
+  text-decoration: none;
+  font-family: "Inter", sans-serif;
+  text-align: left;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease;
+  padding: 7px;
+}
+
+.burger-menu-button:hover {
+  background-color: #2d476b;
+}
+
+.burger-menu-button-help {
+  display: none;
+  justify-content: flex-start;
+  align-items: center;
+  height: 46px;
+  width: 100%;
+  color: #cdcdcd;
+  text-decoration: none;
+  font-family: "Inter", sans-serif;
+  text-align: left;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease;
+  padding: 7px;
+}
+.burger-menu-button-help:hover {
+  background-color: #2d476b;
+}
+
+.profile-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid #2a3647;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  font-weight: 600;
+  font-size: 16px;
+  color: #29abe2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  user-select: none;
+}
+.profile-circle.active,
+.profile-circle:hover {
+  background-color: rgba(0, 0, 0, 0.11);
+}
+
+.header-logo {
+  display: none;
+}
+
+@media (max-width: 1020px) {
+  .header-content h1 {
+    display: none;
+  }
+  .header-logo {
+    display: block;
+    height: 39px;
+    width: 32px;
+  }
+
+  .content-limit {
+    height: 80px;
+  }
+
+  .header-content {
+    height: 80px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  #help-icon {
+    display: none;
+  }
+
+  .burger-menu-button-help {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 46px;
+    width: 100%;
+    color: #cdcdcd;
+    text-decoration: none;
+    font-family: "Inter", sans-serif;
+    text-align: left;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease;
+    padding: 7px;
+  }
+}

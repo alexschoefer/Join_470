@@ -1,0 +1,252 @@
+
+@media (max-width: 1441px) {
+ section#all-task{
+    flex-direction: column;
+
+ }
+ div.card-drop-down-button{
+  display: flex;
+ }
+ div.card-drag-drop-container{
+    flex-direction: row;
+    width: 100%;
+    overflow-x: auto;
+ }
+ div.board-task-column {
+   width: 100%;
+ }
+div.card{
+    width: 252px;
+    flex: 0 0 auto;
+}
+div.card:hover{
+  transform: rotate(0) !important;
+  -webkit-transform: rotate(0) !important;
+  -moz-transform: rotate(0) !important;
+  -ms-transform: rotate(0) !important;
+  -o-transform: rotate(0) !important;
+}
+section#all-task{
+    gap: 50px;
+}
+
+div.responsive-conteiner-board{
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 16px;
+
+}
+div.empty-placeholder{
+  width: 100%;
+}
+
+div.board-container{
+  padding-bottom: 80px;
+}
+}
+@media (max-width: 1100px){
+    div.input-search{
+        width: 250px;
+    }
+}
+/* @media (max-width: 1120px){
+    div.addtask-card-container{
+        width: 95%;
+    }
+} */
+@media (max-width: 850px){
+   
+    .board-find-task {
+    display: flex;         
+    flex-wrap: wrap;
+    align-items: center;
+  }
+    div.input-search{
+        margin-right: 0 !important;
+    }
+
+   div.board-container{
+      padding: 30px 40px;
+    }
+  .board-find-task > h1 {
+    order: 0;
+    margin: 0;
+  }
+
+  .board-find-task > .add-task {
+    order: 1;
+    margin-left: auto;  
+    margin-top: 0;        
+  }
+
+  .board-find-task > .task-search {
+    order: 2;
+    width: 100%;
+    margin-top: 12px;     
+    display: flex;
+    justify-content: center;
+  }
+  .board-find-task .add-task > span:not(.img-add-task) {
+    display: none;
+  }
+  .board-find-task .add-task {
+    padding: 0.5rem;        
+    width: auto;            
+    min-width: 40px;       
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+}
+@media (max-width: 1020px){
+ div.input-search{
+        width: 100%;
+        margin-right: 30px;
+    }
+    div.task-search{
+        margin-right: 0;
+    }
+    section#all-task{
+        margin-top: 30px;
+        padding-bottom: 30px;
+    }
+
+div.card-description-overlay h1{
+  font-size: 32px;
+}
+.add-task-form-buttons{
+  margin-top: 80px;
+}
+div.add-task-content{
+  margin-top: 80px;
+}
+div#task-card-container{
+  overflow: hidden;
+}
+}
+@media (max-width: 477px){
+   button.add-task-priority-button{
+    font-size: 16px;
+    flex-wrap: wrap;
+    height: fit-content;
+    padding-top: 10px;
+    padding-right: 8px;
+    padding-bottom: 10px;
+    padding-left: 8px;
+  }
+ div.input-search{
+        width: 100% !important;
+    }
+    div.board-container{
+      padding: 30px 20px;
+    }
+        div.card-description-overlay h1 {
+          font-size: 25px !important;
+        }
+        div.subtasks {
+          gap: 25px;
+        }
+        div.subtasks-input{
+          gap: 15px !important;
+        }
+        div.tasks-functionen {
+          margin-top: 20px;
+        }
+        div.card-name-overlay span.card-name {
+          font-size: 20px;
+        }
+        div.add-task-priority-buttons{
+          gap: 7px;
+        }
+}
+
+@media (max-width: 650px){
+div#task-card-container{
+     width: 89%;
+     padding: 32px 24px 32px 24px;
+  }
+  div#task-overlay{
+    width: 100%;
+  }
+  div.subtasks-input{
+    gap: 0px;
+  }
+  div.add-task-form-div-container{
+    padding: 0 !important;
+  }
+  div.add-task-form-left, div.add-task-form-right{
+    width: auto;
+  }
+  button.add-task-priority-button{
+    width: auto;
+  }
+  input.add-task-placeholder-style{
+    width: inherit;
+  }  
+  div.ATcustom-dropdown-category{
+    width: auto;
+  }
+  div.ATContact-option-name {
+    font-size: 16px;
+  }
+  div.add-task-form-left-due-date{
+    width: 100%;
+  }
+  div.add-task-form-div{
+    margin-top: 30px;
+  }
+  div.add-task-form-left{
+    margin-top: 10px;
+  }
+}
+@media (max-height: 1050px){
+  div#task-card-container{
+    top: 46%;
+    padding: 32px 24px 32px 24px;
+  }
+  div.card-description-overlay h1{
+    font-size: 36px;
+  }
+  div.card-description-overlay p {
+    font-size: 16px;
+  }
+  div.date span {
+    font-size: 16px;
+  }
+   span.assigned-list {
+    font-size: 16px;
+   }
+   span.subtasks-title {
+     font-size: 16px;
+   }
+   div.priority-card span.content-value img {
+    margin-top: 4px;
+   }
+   div.add-task-form-div{
+ max-height: 60vh;
+ margin-top: 30px;
+}
+ div#task-card-container{
+  overflow: auto;
+ } 
+div.task-button-overlay {
+  padding: 20px 0px 0px 40px;
+
+}
+div#task-overlay {
+  max-height: 60vh;
+  overflow: auto;
+}
+}
+@media (max-height: 755px){
+div.add-task-form-div{
+  max-height: 50vh;
+}
+div.functionen{
+  padding: 12px;
+}
+}

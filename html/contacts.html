@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+
+    <link rel="shortcut icon" href="../assets/img/MenuLogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../styles/standard.css">
+    <link rel="stylesheet" href="../styles/contacts.css">
+    <link rel="stylesheet" href="../styles/fonts.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../styles/summary.css">
+    <link rel="stylesheet" href="../styles/sign-up.css">
+    <link rel="stylesheet" href="../styles/login.css">
+    <link rel="stylesheet" href="../styles/assets.css">
+    <link rel="stylesheet" href="../styles/add-contact-form.css">
+    <link rel="stylesheet" href="../styles/contact-mobile.css">
+    <script src="../scripts/auth.js"></script>
+    <script src="../scripts/include.js"></script>
+    <script src="../scripts/header.js"></script>
+    <script src="../scripts/sidebar.js"></script>
+    <script src="../scripts/dataRemoteStorage.js"></script>
+    <script src="../scripts/contacts.js"></script>
+    <script src="../scripts/template-contacts.js"></script>
+    <script src="../scripts/template-mobil-contacts.js"></script>
+    <script src="../scripts/contact-addon.js"></script>
+
+</head>
+
+<body onload="checksAuthentication(); initContacts();">
+    <div class="app-layout">
+        <div id="sidebar"></div>
+        <div id="header"></div>
+        <main class="main-content">
+            <!-- Contacts -->
+            <div class="contacts">
+                <div class="contacts-left-container" id="contacts-left-container">
+                    <div class="add-new-contact">
+                        <button onclick="addNewContact()" type="button" class="contacts-button-add-new-contact">
+                            Add new Contact
+                            <img class="add-task-button-create-icon" src="../assets/icons/person-add-icon.png"
+                                alt="person-add-icon">
+                        </button>
+                    </div>
+                    <div class="mobile-button-wrapper">
+                        <button class="mobile-add-contact-button-create-icon" onclick="addNewContact()">
+                            <img src="../assets/icons/mobile-person-add-icon.png" alt="Add Contact Mobil">
+                        </button>
+                    </div>
+                    <div id="contact-list" class="contact-list">
+                        <div id="capitelLetterContactList"></div>
+                        <div id="contact"></div>
+                    </div>
+                </div>
+                <div class="contacts-right" id="contacts-right">
+                    <div class="arrow-back-container" onclick="bubblingPropagation(event)" id="arrow-back">
+                        <img src="../assets/icons/arrow-left-line-icon.png" alt="Back Arrow" class="arrow-icon"
+                            onclick="arrowBack()">
+                    </div>
+                    <div class="contacts-right-container">
+                        <h2 class="contacts-right-title">Contacts</h2>
+                        <div class="contacts-right-wrapper-headline">
+                            <div class="contacts-right-vector"></div>
+                            <p class="contacts-right-credo">Better with a team</p>
+                        </div>
+                    </div>
+                    <div id="contact-details" class="contact-detail-container"></div>
+                </div>
+            </div>
+        </main>
+        <!-- Add-new-Contact-Section -->
+        <div id="addNewContactOverlayContainer"></div>
+        <!-- Edit-Contact-Section -->
+        <div id="editContactOverlayContainer"></div>
+        <!-- Feedback Overlay -->
+        <div id="success-message-overlay" class="success-message-overlay d_none">
+            <div class="contact-success-container slide-in">
+                <p id="feedback-message" class="contact-success-message"></p>
+            </div>
+        </div>
+        <div class="mobile-contact-profil-btns-container d_none" id="mobile-contact-profil-btns-container">
+            <button class="mobile-contact-profil-btn-edit" onclick="editContact(currentContactIndex)">
+                <img src="../assets/icons/edit-icon.png" alt="edit-icon">Edit
+            </button>
+            <button class="mobile-profil-btn-delete" onclick="deleteContact(currentContactIndex)">
+                <img src="../assets/icons/delete-icon.png" alt="">Delete
+            </button>
+        </div>
+    <!-- Landscape-Overlay -->
+    <div id="orientation-warning" class="orientation-warning d_none">
+        <p>The Join app works best in portrait mode. Please rotate your device.</p>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

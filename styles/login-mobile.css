@@ -1,0 +1,161 @@
+@media (max-width: 750px) {
+  .login-registration-container {
+    position: static;
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+  }
+
+  #login-registration-slogan {
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .btn-sign-up {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+
+  #start-logo-img {
+    width: 64px;
+    height: auto;
+    top: 40px;
+    left: 30px;
+    gap: 10px;
+    position: absolute;
+  }
+
+  .login-main-container {
+    width: 450px;
+  }
+
+  #login-headline {
+    font-size: 47px;
+  }
+
+  .input-wrapper {
+    max-width: 350px;
+  }
+
+  .user-input {
+    font-size: 18px;
+  }
+
+  #btn-login,
+  .btn-login-guest {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 490px) {
+
+  .login-main-container {
+    height: 400px;
+  }
+
+  #start-logo-img {
+    width: 40px;
+    height: auto;
+    top: 40px;
+    left: 30px;
+    gap: 10px;
+    position: absolute;
+  }
+
+  .user-login-input-container {
+    gap: 16px;
+  }
+
+  #start-logo-final {
+    width: 48px;
+    top: 40px;
+    left: 20px;
+  }
+
+  .footer-login {
+    position: absolute;
+    left: 40%;
+    transform: translateX(-40%);
+  }
+
+  .login-main-container {
+    width: 350px;
+  }
+
+  .input-wrapper {
+    max-width: 300px;
+  }
+
+  .btn-login-container {
+    flex-direction: column;
+    width: 180px;
+    height: 123px;
+    gap: 32px;
+  }
+
+  .login-registration-container {
+    width: 292px;
+    height: 49px;
+    gap: 35px;
+  }
+
+  .btn-sign-up {
+    max-width: 104px;
+    height: 49px;
+  }
+}
+
+@media (max-width: 375px) {
+  #start-logo-img {
+    width: 24px;
+    height: auto;
+    top: 5px;
+    left: 20px;
+    gap: 10px;
+    position: absolute;
+  }
+
+  .login-registration-container {
+    margin-top: 20px;
+  }
+
+  .btn-sign-up {
+    height: 49px;
+  }
+
+  #btn-login,
+  .btn-login-guest {
+    font-size: 16px;
+  }
+
+  .footer-login {
+    position: absolute;
+    width: 246px;
+    height: 35px;
+    left: 20%;
+    transform: translateX(-10%);
+    bottom: 8px;
+  }
+
+  .login-main-container {
+    width: 300px;
+  }
+
+  .input-wrapper {
+    max-width: 280px;
+  }
+
+  .btn-login-container {
+    gap: 21px;
+  }
+
+  .user-input {
+    font-size: 16px;
+  }
+
+  input::placeholder {
+    font-size: 16px;
+  }
+}

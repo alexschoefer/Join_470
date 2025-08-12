@@ -1,0 +1,132 @@
+.page-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .content-row {
+    display: flex;
+    height: 100vh; 
+  }
+  
+  #sidebar {
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .right-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+  }
+  
+  .help-main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 40px 48px;
+    margin-left: 60px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 120%;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    margin-bottom: 40px;
+  }
+  
+  .help-headline-container {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 1014px;
+    height: 73px;
+    gap: 30px;
+  }
+
+  .highlight-join {
+    color: #00BEE8; 
+    font-weight: 600; 
+  }
+
+  #arrow-icon {
+    position: absolute;
+    right: 0;
+    top: 30%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 32px;  
+    height: 32px;
+  }
+  
+  #help-headline {
+    font-weight: 700;
+    font-size: 61px;
+    line-height: 120%;
+    color: #000000;
+  }
+
+  .help-introduction-container {
+    width: 1014px;
+    height: 38px;
+  }
+
+  .help-subtitle {
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 120%;
+    height: 32px;
+    width: 346px;
+  }
+
+  .help-explanation-join-container {
+    width: 1014px;
+    height: 238px;
+  }
+
+  .help-using-container {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    width: 1014px;
+    height: 521px;
+  }
+
+  .help-enumeration {
+    font-size: 27px;
+    line-height: 120%;
+    font-weight: 700;
+    color: #000000;
+  }
+
+  .help-instruction-container {
+    width: 1014px;
+    display: flex;
+    gap: 35px;
+    margin-bottom: 10px;
+  }
+
+  .help-instruction-headline {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 120%;
+    margin-bottom: 8px;
+  }
+
+  .help-instruction-text {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+  }
+
+  .help-subtitle-conclusion-h2 {
+    font-weight: 700;
+    font-size: 27px;
+    line-height: 120%;
+  }
+
+  .help-subtitle-conclusion {
+    width: 346px;
+    height: 32px;
+  }

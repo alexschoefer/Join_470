@@ -1,0 +1,255 @@
+.summary-layout {
+  padding-top: 110px;
+  padding-left: 96px;
+}
+
+.summary-main-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.summary-head-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 625px;
+  height: 73px;
+  margin-bottom: 60px;
+  gap: 30px;
+}
+
+.summary-head-content h2 {
+  font-size: 61px;
+}
+
+.summary-head-vector {
+  height: 59px;
+  border: solid 3px #29abe2;
+}
+
+.summary-head-content p {
+  font-size: 27px;
+  font-weight: 400;
+}
+
+.summary-greating-user {
+  display: flex;
+  flex-direction: column;
+  height: 136px;
+  max-width: 300px;
+}
+
+.summary-greating-user h2 {
+  font-size: 47px;
+  font-weight: 500;
+}
+
+.summary-greating-user p {
+  font-size: 64px;
+  font-weight: 700;
+  color: #29abe2;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.box-row {
+  grid-column: 1 / 4;
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.box-row .box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 168px;
+  border-radius: 30px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.15s ease;
+  padding: 25px;
+  background-color: white;
+}
+
+.box-row .box:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  background-color: #2a3647;
+  color: white;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+.icon {
+  width: 69px;
+  height: 69px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 15px;
+}
+
+.icon.todo {
+  background-image: url("../assets/icons/summary-icon-Todo.png");
+}
+
+.icon.done {
+  background-image: url("../assets/icons/summary-icon-done.png");
+}
+
+.box-todo:hover .icon.todo {
+  background-image: url("../assets/icons/summary-icon-Todo-hover.png");
+}
+
+.box-done:hover .icon.done {
+  background-image: url("../assets/icons/summary-icon-done-hover.png");
+}
+
+.box .text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.number {
+  font-size: 64px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  text-transform: capitalize;
+  max-width: 100px;
+}
+
+.box-urgent {
+  grid-column: 1 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 168px;
+  border-radius: 30px;
+  padding: 28px 48px;
+  gap: 20px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  transition: transform 0.15s ease;
+}
+
+.box-urgent:hover {
+  transform: scale(1.05);
+  background-color: #2a3647;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+.urgent-info,
+.deadline-info {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.date {
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.box-board,
+.box-progress,
+.box-feedback {
+  height: 168px;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  transition: transform 0.15s ease;
+  gap: 13px;
+}
+
+.box-board:hover,
+.box-progress:hover,
+.box-feedback:hover {
+  transform: scale(1.05);
+  background-color: #2a3647;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+.box-board {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.box-progress {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.box-feedback {
+  grid-column: 3;
+  grid-row: 3;
+}
+
+.vector-urgent {
+  height: 68px;
+  width: 2px;
+  background-color: #d1d1d1;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.overlay-content {
+  background-color: white;
+  color: black;
+  padding: 40px 60px;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.hidden {
+  display: none;
+}
+.fade-out {
+  opacity: 0;
+}
+
+.greeting-text {
+  font-size: 36px;
+  font-weight: 400;
+}
+
+.username-text {
+  font-size: 47px;
+  font-weight: 700;
+  font-style: bold;
+  color: #29abe2;
+}

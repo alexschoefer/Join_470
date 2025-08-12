@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+
+    <link rel="shortcut icon" href="../assets/img/MenuLogo.png" type="image/x-icon">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../styles/standard.css">
+    <link rel="stylesheet" href="../styles/assets.css">
+    <link rel="stylesheet" href="../styles/fonts.css">
+    <link rel="stylesheet" href="../styles/login.css">
+    <link rel="stylesheet" href="../styles/sign-up.css">
+    <link rel="stylesheet" href="../styles/signup-mobile.css">
+    <!-- Scripts -->
+    <script src="../scripts/signup.js"></script>
+    <script src="../scripts/contacts.js"></script>
+
+</head>
+
+<body>
+    <img class="main-logo-img" src="../assets/img/MainLogo.png" alt="main-logo-img">
+
+    <main id="main-content-signup" class="main-content-signup">
+        <div class="sign-up-main-container">
+            <a href="../index.html" class="arrow-back-link">
+                <img src="../assets/icons/arrow-left-line-icon.png" alt="Back Arrow" class="arrow-icon">
+            </a>
+            <div class="sign-up-form-content">
+                <div class="sign-up-headline-container">
+                    <div class="headline-wrapper">
+                        <h1 id="signup-headline">Sign up</h1>
+                        <div class="login-underline"></div>
+                    </div>
+                </div>
+
+                <!-- input-content -->
+                <form>
+                    <div class="sign-up-input-container">
+                        <!-- Name-Input -->
+                        <div class="input-wrapper">
+                            <div class="user-input-wrapper">
+                                <div class="input-container">
+                                    <input id="username-input" class="user-input" type="text" name="name"
+                                        placeholder="Name" autocomplete="off" onfocus="clearErrorMessage(this)"
+                                        onblur="validateSignupInput(this)">
+                                    <div>
+                                        <img class="person-icon" src="../assets/icons/person-icon.png"
+                                            alt="person-icon">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-validation-container">
+                                <p id="username-input-validation-message" class="input-validation-message d_none"
+                                    data-default-message="This field is required.">This field is required.</p>
+                            </div>
+                        </div>
+                        <!-- E-Mail-Input -->
+                        <div class="input-wrapper">
+                            <div class="user-input-wrapper">
+                                <div class="input-container">
+                                    <input id="usermail-input" class="user-input" type="text" name="email"
+                                        placeholder="Email" autocomplete="off" onfocus="clearErrorMessage(this)"
+                                        onblur="checkRequiredInputEmail(this)">
+                                    <div>
+                                        <img class="email-icon" src="../assets/icons/mail-icon.png" alt="email-icon">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-validation-container">
+                                <p id="usermail-input-validation-message" class="input-validation-message d_none"
+                                    data-default-message="Please enter a valid email address.">Please enter a valid
+                                    email adress.</p>
+                            </div>
+                        </div>
+                        <!-- Password-Input -->
+                        <div class="input-wrapper">
+                            <div class="user-input-wrapper">
+                                <div class="input-container">
+                                    <input id="userpassword-input" oninput="changePasswordIcon(this)" class="user-input"
+                                        type="password" name="password" placeholder="Password"
+                                        onfocus="clearErrorMessage(this)" onblur="validateSignupInput(this)">
+                                    <div>
+                                        <img onclick="toggleInputTypePassword(this)" id="password-icon"
+                                            class="password-icon" src="../assets/icons/lock-icon.png"
+                                            alt="password-icon">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-validation-container">
+                                <p id="userpassword-input-validation-message" class="input-validation-message d_none"
+                                    data-default-message="This field is required.">This field is required.</p>
+                            </div>
+                        </div>
+                        <!-- Password-Confirm-Input -->
+                        <div class="input-wrapper">
+                            <div class="user-input-wrapper">
+                                <div class="input-container">
+                                    <input id="confirm-userpassword-input" oninput="changePasswordIcon(this)"
+                                        class="user-input" type="password" name="password"
+                                        placeholder="Confirm Password" onfocus="clearErrorMessage(this)"
+                                        onblur="validateSignupInput(this), checkConfirmPassword()">
+                                    <div>
+                                        <img onclick="toggleInputTypePassword(this)" id="confirm-password-icon"
+                                            class="password-icon" src="../assets/icons/lock-icon.png"
+                                            alt="password-icon">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-validation-container">
+                                <p id="confirm-userpassword-input-validation-message"
+                                    class="input-validation-message d_none">Your passwords don´t match. Please try
+                                    again.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checkbox-privacy-policy-container">
+                        <div class="checkbox-wrapper">
+                            <input onchange="handlePrivacyPolicyChange()" class="checkbox-privacy-policy"
+                                type="checkbox" name="acception-privacy-policy" id="checkbox-privacy-policy" required>
+                            <img onclick="resetCheckbox()" id="checkbox-privacy-police-icon-check"
+                                class="checkbox-privacy-police-icon-check d_none"
+                                src="../assets/icons/checkbox-privacy-police-icon-check.png"
+                                alt="checkbox-privacy-police-icon-check">
+                        </div>
+                        <span id="acception-privacy-policy">I accept the <a id="privacy-policy"
+                                href="./privacy-policy.html">Privacy Policy</a></span>
+                    </div>
+                    <div class="sign-up-registration-container">
+                        <button onclick="saveUserInputsForRemoteStorage(event)" id="btn-form" class="btn-sign-up"
+                            disabled>Sign up</button>
+                    </div>
+            </div>
+            </form>
+        </div>
+        <!-- sign-up-Overlay-Success -->
+        <div id="sign-up-success-overlay" class="sign-up-success-overlay d_none">
+            <div class="sign-up-success-container slide-in">
+                <p class="sign-up-success-message">You signed up successfully!</p>
+            </div>
+        </div>
+
+        <!-- footer-content -->
+        <footer class="footer-sign-up">
+            <a class="nav-login-privacy-legal" href="./privacy-policy.html">Privacy Police</a>
+            <a class="nav-login-privacy-legal" href="./legal-notice.html">Legal Notice</a>
+        </footer>
+    </main>
+    <!-- Landscape-Overlay -->
+    <div id="orientation-warning" class="orientation-warning d_none">
+        <p>The Join app works best in portrait mode. Please rotate your device.</p>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

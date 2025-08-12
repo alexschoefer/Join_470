@@ -1,0 +1,148 @@
+:root {
+  --main-color: #2a3647;
+  --icon: #a8a8a8;
+  --style: #d1d1d1;
+  --bottom-gradient: #f4f4f4;
+  --black: #000000;
+  --white: #ffffff;
+  --light-blue: #29abe2;
+  --dark-blue: #091931;
+  --button-urgent: #ff3d00;
+  --button-medium: #ffa800;
+  --button-low: #7ae229;
+  --asterix: #ff8190;
+}
+
+.app-layout {
+  display: grid;
+  grid-template-columns: 232px 1fr;
+  grid-template-rows: 96px 1fr;
+  grid-template-areas:
+    "sidebar header"
+    "sidebar content";
+  height: 100vh;
+}
+
+#sidebar {
+  grid-area: sidebar;
+  background-color: #2a3647;
+  color: white;
+}
+
+#header {
+  grid-area: header;
+  background-color: white;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.main-content {
+  grid-area: content;
+  background-color: #f6f7f8;
+  overflow-y: auto;
+  display: flex;
+}
+
+@media (max-width: 1020px) {
+  .app-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: 80px 1fr 80px;
+    grid-template-areas:
+      "header"
+      "content"
+      "sidebar";
+    height: 100vh;
+  }
+  #sidebar {
+    grid-area: sidebar;
+    background-color: #2a3647;
+    color: white;
+  }
+
+  #header {
+    grid-area: header;
+    background-color: white;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+
+  .main-content {
+    grid-area: content;
+    background-color: #f6f7f8;
+    overflow-y: auto;
+  }
+}
+
+.df {
+  display: flex;
+}
+
+.fdr {
+  flex-direction: row;
+}
+
+.fdrr {
+  flex-direction: row-reverse;
+}
+
+.login-success-overlay, .success-message-overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.login-success-overlay.show, .success-message-overlay.show {
+  display: flex;
+}
+
+.login-success-overlay.show .login-success-container, .success-message-overlay.show .contact-success-container {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.login-success-container, .contact-success-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 74px;
+  width: 326px;
+  background-color: #2A3647;
+  padding: 0 25px 0 25px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.15);
+  transform: translateY(100%);
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.login-success-message, .contact-success-message {
+  font-family: 'Inter';
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 120%;
+  color: #FFFFFF;
+}
+
+.orientation-warning {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: white;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+}

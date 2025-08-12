@@ -1,0 +1,411 @@
+@media (min-width: 380px) and (max-width: 499px) {
+  .main-content {
+    display: flex;
+    height: calc(100vh - 80px);
+  }
+
+  .add-task-form-left-description {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .required-main-bottom-legend {
+    width: 100%;
+    justify-content: start;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .add-task-form-buttons {
+    flex-direction: column;
+    padding-bottom: 52px;
+  }
+
+  .label-add-task {
+    font-size: 16px;
+  }
+
+  .label-add-task-black {
+    font-size: 16px;
+  }
+
+  .add-task-input-style {
+    font-size: 16px;
+  }
+
+  .add-task-input-textarea-style::placeholder,
+  .add-task-input-title-style::placeholder,
+  .add-task-input-placeholder-style::placeholder,
+  .add-task-input-date-style {
+    font-size: 16px;
+  }
+
+  .add-task-placeholder-black::placeholder {
+    font-size: 16px;
+  }
+
+  .ATcustom-dropdown-selected {
+    font-size: 16px;
+  }
+
+  .add-task {
+    padding-top: 16px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .add-task-content {
+    padding-top: 0;
+    padding-left: 0;
+  }
+
+  .add-task-h1 {
+    font-size: 48px;
+  }
+
+  .add-task-form-div-container {
+    height: calc(100vh - 370px);
+    width: 100%;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+  }
+
+  .add-task-form-left,
+  .add-task-form-right {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .add-task-center-dividor {
+    display: none;
+  }
+
+  .add-task-buttons-create-and-clear {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .add-task-form-left-title,
+  .add-task-form-left-description {
+    height: auto;
+  }
+
+  .add-task-center-dividor {
+    display: none;
+  }
+
+  .add-task-priority-buttons {
+    height: 40px;
+  }
+
+  .add-task-priority-button {
+    width: 120px;
+    height: 40px;
+    padding-top: 16px;
+    padding-right: 10px;
+    padding-bottom: 16px;
+    padding-left: 10px;
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+  .ATContact-option-name {
+    font-size: 16px;
+  }
+
+  .ATContact-option-intials-container {
+    width: 32px;
+    height: 32px;
+  }
+
+  .ATcustom-dropdown {
+    width: 100%;
+    padding: 0;
+  }
+
+
+  .ATContact-option-initials {
+    font-size: 10px;
+    font-weight: 300;
+  }
+
+  .add-task-form-left {
+    width: 100%;
+  }
+
+  .add-task-form-right {
+    width: 100%;
+  }
+
+  .ATcustom-dropdown,
+  .ATcustom-dropdown-category {
+    width: 100%;
+  }
+
+  .add-task-buttons-create-and-clear {
+    width: 100%;
+    margin-bottom: 40px;
+    flex-direction: row;
+    padding-top: 10px;
+  }
+
+  .app-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .app-layout {
+    height: 100%;
+  }
+
+  .add-task-main-title {
+    width: 278px;
+    height: 112px;
+    gap: 1px;
+    display: flex;
+    align-items: start;
+    align-items: center;
+  }
+
+  .ATContact-option-checkbox-checked {
+    width: 24px;
+    height: 24px;
+    background-image: url(../assets/icons/add-task-checkbox-button-mobile-checked.svg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+}
+
+@media (max-width: 379px) {
+
+   .main-content {
+    display: flex;
+    height: calc(100vh - 80px);
+  }
+
+  .add-task {
+    height: calc(100% - 273px);
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .add-task-form-left-description {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .label-add-task {
+    font-size: 16px;
+  }
+
+  .label-add-task-black {
+    font-size: 16px;
+  }
+
+  .add-task-input-style {
+    font-size: 16px;
+  }
+
+  .add-task-input-textarea-style::placeholder,
+  .add-task-input-title-style::placeholder,
+  .add-task-input-placeholder-style::placeholder,
+  .add-task-input-date-style {
+    font-size: 16px;
+  }
+
+  .add-task-placeholder-black::placeholder {
+    font-size: 16px;
+  }
+
+  .ATcustom-dropdown-selected {
+    font-size: 16px;
+  }
+
+  .add-task-content {
+    padding-top: 0;
+    padding-left: 0;
+  }
+
+  .add-task-h1 {
+    font-size: 48px;
+  }
+
+  .add-task-form-div-container {
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: start;
+    gap: 12px;
+    overflow-y: auto;
+  }
+
+  .add-task-form-left,
+  .add-task-form-right {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .add-task-center-dividor {
+    display: none;
+  }
+
+  .add-task-buttons-create-and-clear {
+    width: 100%;
+    margin-bottom: 40px;
+    flex-direction: row;
+  }
+
+  .add-task-form-left-title,
+  .add-task-form-left-description {
+    height: auto;
+  }
+
+  .add-task-center-dividor {
+    display: none;
+  }
+
+  .add-task-priority-buttons {
+    height: 40px;
+  }
+
+  .add-task-priority-button {
+    width: 120px;
+    height: 40px;
+    padding-top: 16px;
+    padding-right: 10px;
+    padding-bottom: 16px;
+    padding-left: 10px;
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+  .ATContact-option-name {
+    font-size: 16px;
+  }
+
+  .ATContact-option-intials-container {
+    width: 32px;
+    height: 32px;
+  }
+
+  .ATcustom-dropdown {
+    width: 100%;
+    padding: 0;
+  }
+
+
+  .ATContact-option-initials {
+    font-size: 10px;
+    font-weight: 300;
+  }
+
+  .add-task-form-left {
+    width: 100%;
+  }
+
+  .add-task-form-right {
+    width: 100%;
+  }
+
+  .ATcustom-dropdown,
+  .ATcustom-dropdown-category {
+    width: 100%;
+  }
+
+  .add-task-buttons-create-and-clear {
+    width: 100%;
+    margin-bottom: 110px;
+    flex-direction: row;
+    align-items: flex-end;
+    padding-top: 10px;
+  }
+
+  .app-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .add-task-priority-buttons {
+    display: flex;
+    justify-content: space-between;
+    height: 56px;
+    gap: 2px;
+
+  }
+
+  .add-task-priority-button {
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 56px;
+    width: 76px;
+  }
+
+
+  .add-task-form-buttons {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+    padding-bottom: 160px;
+    padding-top: 26px;
+  }
+
+  .app-layout {
+    height: 100%;
+  }
+
+  .add-task-input-placeholder-style {
+    width: 100%;
+  }
+
+  .required-main-bottom-legend {
+    width: 100%;
+    justify-content: start;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .add-task-main-title {
+    width: 278px;
+    height: 112px;
+    gap: 1px;
+    display: flex;
+    align-items: start;
+    align-items: center;
+  }
+
+  .ATContact-option-checkbox-checked {
+    width: 24px;
+    height: 24px;
+    background-image: url(../assets/icons/add-task-checkbox-button-mobile-checked.svg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+}
+
+@media (max-width: 370px){
+    .add-task-button-clear{
+width: 100px;
+font-size: 21px;
+  }
+  .add-task-button-create {
+width: 171px;
+font-size: 21px;
+  }
+
+  .add-task-buttons-create-and-clear{
+    gap: 2px;
+  }
+
+}

@@ -1,0 +1,52 @@
+.calendar-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: url('../assets/icons/add-task-due-date-icon.svg') no-repeat center center;
+  background-size: contain;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+#add-task-due-date-input::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+.add-task-due-date-wrapper {
+  position: relative;
+}
+
+.add-task-input-date-style::placeholder {
+  color: var(--style);
+}
+
+.add-task-input-date-style.date-selected {
+  color: var(--black);
+}
+
+.add-task-due-date-wraper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 48px;
+  border-width: 1px;
+  border-radius: 10px;
+}
+
+.add-task-due-date-input {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  cursor: pointer;
+}
+
+#add-task-due-date-input:focus,
+#add-task-due-date-input:active {
+  outline: none;
+  border: 1px solid var(--light-blue);
+  box-shadow: none;
+}
