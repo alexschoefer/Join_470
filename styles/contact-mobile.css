@@ -336,6 +336,12 @@
     max-height: 600px;
   }
 
+  .contact-email {
+    font-size: 14px;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
   .delete-btn {
     max-width: 82px;
     max-height: 51px;

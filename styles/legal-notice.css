@@ -12,6 +12,7 @@
   padding-left: 96px;
   padding-right: 96px;
   gap: 24px;
+  max-width: 1440px;
 }
 
 .legal-notice-content h2 {
