@@ -25,6 +25,7 @@ window.addEventListener('resize', () => {
     handleOrientationChange();
 });
 
+
 /**
  * Updates the current device type based on the current window width. Triggers layout adaptation and overlay re-rendering when the device type changes.
  * Updates the displayed contact information if a contact is currently selected.
@@ -169,7 +170,9 @@ function validateContactSectionForms() {
     const filled = areAllInputsFilled();
     const emailInput = document.getElementById('usermail-input');
     const emailOK = isValidEmail(emailInput.value);
-    const formValid = filled && emailOK;
+    const nameInput = document.getElementById('username-input');
+    const nameOK = isFullNameValid(nameInput.value.trim());
+    const formValid = filled && emailOK && nameOK;
     setButtonState(formValid);
 }
 

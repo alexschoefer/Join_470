@@ -343,22 +343,24 @@ async function createContactForRemoteStorage(event) {
 }
 
 
-/**
- * Validates a single input field of the user input. In case of an empty input field it shows the error message
- * Calls `validateContactSectionForms()` to add another validation logic
- * @param {*} input - The input element to validate
- */
 function validateContactFormsInput(input) {
     const errorMessage = document.getElementById(input.id + '-validation-message');
     const wrapper = input.closest('.user-input-wrapper');
-    if (errorMessage && wrapper) {
-        if (input.value.trim() === '') {
-            errorMessage.classList.remove('d_none');
-            wrapper.classList.add('input-error');
-        } else {
-            errorMessage.classList.add('d_none');
-            wrapper.classList.remove('input-error');
-        }
+    const value = input.value.trim();
+    if (!errorMessage || !wrapper) return;
+    let isNameValid = value !== '';
+    if (input.id === 'username-input' && !isFullNameValid(value)) {
+        isNameValid = false;
+        errorMessage.textContent = 'Please enter both first and last name.';
+    } else {
+        errorMessage.textContent = errorMessage.dataset.defaultMessage;
     }
+    errorMessage.classList.toggle('d_none', isNameValid);
+    wrapper.classList.toggle('input-error', !isNameValid);
     validateContactSectionForms();
+}
+
+
+function isFullNameValid(fullName) {
+    return fullName.trim().split(' ').filter(Boolean).length >= 2;
 }
