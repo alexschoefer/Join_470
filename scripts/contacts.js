@@ -344,11 +344,7 @@ async function createContactForRemoteStorage(event) {
 
 
 /**
- * Validates a single input field within the contact form.
- * 
- * Displays or hides the associated error message depending on the input's validity.
- * Specifically checks the "username" input for a valid full name (at least two words).
- * 
+ * Validates a single input field based on its ID and updates UI accordingly.
  * @param {HTMLInputElement} input - The input element to validate.
  */
 function validateContactFormsInput(input) {
@@ -356,25 +352,38 @@ function validateContactFormsInput(input) {
     const wrapper = input.closest('.user-input-wrapper');
     const value = input.value.trim();
     if (!errorMessage || !wrapper) return;
-    let isNameValid = value !== '';
-    if (input.id === 'username-input' && !isFullNameValid(value)) {
-        isNameValid = false;
-        errorMessage.textContent = 'Please enter both first and last name.';
-    } else {
-        errorMessage.textContent = errorMessage.dataset.defaultMessage;
+    let isValid = value !== '';
+    if (input.id === 'username-input') {
+        isValid = isFullNameValid(value);
+        errorMessage.textContent = isValid ? errorMessage.dataset.defaultMessage : 'Please enter both first and last name.';
+    } else if (input.id === 'userphone-input') {
+        const phoneValidation = isValidPhoneNumber(value);
+        isValid = phoneValidation.valid;
+        errorMessage.textContent = isValid ? errorMessage.dataset.defaultMessage : phoneValidation.message;
     }
-    errorMessage.classList.toggle('d_none', isNameValid);
-    wrapper.classList.toggle('input-error', !isNameValid);
+    errorMessage.classList.toggle('d_none', isValid);
+    wrapper.classList.toggle('input-error', !isValid);
     validateContactSectionForms();
 }
 
 
 /**
- * Checks whether a full name string contains at least two words
- * 
- * @param {string} fullName - The full name string to validate.
- * @returns {boolean} True if the name has at least two non-empty parts; otherwise, false.
+ * Validates a phone number and returns an object with status and error message.
+ * @param {string} phone - The phone number input to validate.
+ * @returns {{ valid: boolean, message: string }}
  */
-function isFullNameValid(fullName) {
-    return fullName.trim().split(' ').filter(Boolean).length >= 2;
+function isValidPhoneNumber(phone) {
+    const cleaned = phone.trim();
+    const digitsOnly = cleaned.replace(/\D/g, '');
+    const digitCount = digitsOnly.length;
+    if (!/^\+?[\d\s\-()]{7,20}$/.test(cleaned)) {
+        return { valid: false, message: 'Invalid format. Use only digits, +, -, (), or spaces.'};
+    }
+    if (digitCount < 7) {
+        return { valid: false, message: 'Phone number must contain at least 7 digits.'};
+    }
+    if (digitCount > 15) {
+        return { valid: false, message: 'Phone number is too long. Max. 15 digits allowed.'};
+    }
+    return { valid: true, message: '' };
 }
