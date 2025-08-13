@@ -343,6 +343,14 @@ async function createContactForRemoteStorage(event) {
 }
 
 
+/**
+ * Validates a single input field within the contact form.
+ * 
+ * Displays or hides the associated error message depending on the input's validity.
+ * Specifically checks the "username" input for a valid full name (at least two words).
+ * 
+ * @param {HTMLInputElement} input - The input element to validate.
+ */
 function validateContactFormsInput(input) {
     const errorMessage = document.getElementById(input.id + '-validation-message');
     const wrapper = input.closest('.user-input-wrapper');
@@ -361,6 +369,12 @@ function validateContactFormsInput(input) {
 }
 
 
+/**
+ * Checks whether a full name string contains at least two words
+ * 
+ * @param {string} fullName - The full name string to validate.
+ * @returns {boolean} True if the name has at least two non-empty parts; otherwise, false.
+ */
 function isFullNameValid(fullName) {
     return fullName.trim().split(' ').filter(Boolean).length >= 2;
 }
