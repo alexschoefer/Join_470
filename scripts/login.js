@@ -211,6 +211,6 @@ function showLoginSuccessMessage() {
   overlay.classList.remove('d_none');
   overlay.classList.add('show');
   setTimeout(() => {
-      window.location.href = '../html/summary.html';
+      window.location.href = './html/summary.html';
   }, 800);
 }

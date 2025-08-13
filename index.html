@@ -7,17 +7,17 @@
     <title>Login</title>
     <link rel="shortcut icon" href="../assets/img/MenuLogo.png" type="image/x-icon" />
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="../styles/standard.css" />
-    <link rel="stylesheet" href="../styles/assets.css" />
-    <link rel="stylesheet" href="../styles/fonts.css" />
-    <link rel="stylesheet" href="../styles/login.css" />
-    <link rel="stylesheet" href="../styles/login-mobile.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./styles/standard.css" />
+    <link rel="stylesheet" href="./styles/assets.css" />
+    <link rel="stylesheet" href="./styles/fonts.css" />
+    <link rel="stylesheet" href="./styles/login.css" />
+    <link rel="stylesheet" href="./styles/login-mobile.css" />
     <link rel="stylesheet" href="./styles/sign-up.css" />
 
     <!-- JavaScript -->
     <script src="./scripts/login.js"></script>
-    <script src="../scripts/contacts.js"></script>
+    <script src="./scripts/contacts.js"></script>
     <script src="./scripts/dataRemoteStorage.js"></script>
 </head>
 
@@ -42,7 +42,7 @@
                                     <input id="login-usermail-input" class="user-input" type="email" name="email"
                                         pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" placeholder="Email" autocomplete="off"
                                         onfocus="clearErrorMessage(this)" onblur="validateLoginInput(this)" />
-                                    <div><img src="../assets/icons/mail-icon.png" alt="email-icon"></div>
+                                    <div><img src="./assets/icons/mail-icon.png" alt="email-icon"></div>
                                 </div>
                             </div>
                             <div class="input-validation-container">
@@ -58,7 +58,7 @@
                                         onfocus="clearErrorMessage(this)" onblur="validateLoginInput(this)" />
                                     <div>
                                         <img onclick="toggleInputTypePassword(this)" id="password-icon"
-                                            class="password-icon" src="../assets/icons/lock-icon.png"
+                                            class="password-icon" src="./assets/icons/lock-icon.png"
                                             alt="password-icon">
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@
     <div id="orientation-warning" class="orientation-warning d_none">
         <p>The Join app works best in portrait mode. Please rotate your device.</p>
     </div>
-    <script src="../script.js"></script>
+    <script src="./script.js"></script>
 </body>
 
 </html>
