@@ -2,22 +2,22 @@ let isEmailAlreadyUsed = false;
 
 /**
  * Validates a single input field in the signup form.
- * Displays an error message if the field is empty, and removes it if the input is valid.
+ * Displays an error message if the field is empty or invalid, and removes it if the input is valid.
  * Also triggers re-validation of the entire signup form to update the submit button state.
  * @param {HTMLInputElement} input - The input field to be validated.
  */
 function validateSignupInput(input) {
     const errorMessage = document.getElementById(input.id + '-validation-message');
     const wrapper = input.closest('.user-input-wrapper');
-    if (errorMessage && wrapper) {
-        if (input.value.trim() === '') {
-            errorMessage.classList.remove('d_none');
-            wrapper.classList.add('input-error');
-        } else {
-            errorMessage.classList.add('d_none');
-            wrapper.classList.remove('input-error');
-        }
+    if (!errorMessage || !wrapper) return;
+    let value = input.value.trim();
+    let isValid = value !== '';
+    if (input.id === 'username-input') {
+        isValid = isFullNameValid(value);
+        errorMessage.textContent = isValid? errorMessage.dataset.defaultMessage: 'Please enter both first and last name.';
     }
+    errorMessage.classList.toggle('d_none', isValid);
+    wrapper.classList.toggle('input-error', !isValid);
     validateSignUpForm();
 }
 
@@ -137,9 +137,11 @@ function isPrivacyPolicyChecked() {
 function validateSignUpForm() {
     const filled = areAllInputsFilled();
     const emailInput = document.getElementById('usermail-input');
-    const emailOK = isValidEmail(emailInput.value);
+    const nameInput = document.getElementById('username-input');
+    const emailOK = isValidEmail(emailInput.value.trim());
     const checkboxOK = isPrivacyPolicyChecked();
-    const formValid = filled && emailOK && checkboxOK && !isEmailAlreadyUsed;
+    const nameOK = isFullNameValid(nameInput.value.trim());
+    const formValid = filled && emailOK && checkboxOK && nameOK && !isEmailAlreadyUsed;
     setButtonState(formValid);
 }
 

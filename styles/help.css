@@ -32,7 +32,6 @@
     line-height: 120%;
     max-height: calc(100vh - 120px);
     overflow-y: auto;
-    margin-bottom: 40px;
   }
   
   .help-headline-container {

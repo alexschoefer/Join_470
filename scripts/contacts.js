@@ -344,21 +344,46 @@ async function createContactForRemoteStorage(event) {
 
 
 /**
- * Validates a single input field of the user input. In case of an empty input field it shows the error message
- * Calls `validateContactSectionForms()` to add another validation logic
- * @param {*} input - The input element to validate
+ * Validates a single input field based on its ID and updates UI accordingly.
+ * @param {HTMLInputElement} input - The input element to validate.
  */
 function validateContactFormsInput(input) {
     const errorMessage = document.getElementById(input.id + '-validation-message');
     const wrapper = input.closest('.user-input-wrapper');
-    if (errorMessage && wrapper) {
-        if (input.value.trim() === '') {
-            errorMessage.classList.remove('d_none');
-            wrapper.classList.add('input-error');
-        } else {
-            errorMessage.classList.add('d_none');
-            wrapper.classList.remove('input-error');
-        }
+    const value = input.value.trim();
+    if (!errorMessage || !wrapper) return;
+    let isValid = value !== '';
+    if (input.id === 'username-input') {
+        isValid = isFullNameValid(value);
+        errorMessage.textContent = isValid ? errorMessage.dataset.defaultMessage : 'Please enter both first and last name.';
+    } else if (input.id === 'userphone-input') {
+        const phoneValidation = isValidPhoneNumber(value);
+        isValid = phoneValidation.valid;
+        errorMessage.textContent = isValid ? errorMessage.dataset.defaultMessage : phoneValidation.message;
     }
+    errorMessage.classList.toggle('d_none', isValid);
+    wrapper.classList.toggle('input-error', !isValid);
     validateContactSectionForms();
+}
+
+
+/**
+ * Validates a phone number and returns an object with status and error message.
+ * @param {string} phone - The phone number input to validate.
+ * @returns {{ valid: boolean, message: string }}
+ */
+function isValidPhoneNumber(phone) {
+    const cleaned = phone.trim();
+    const digitsOnly = cleaned.replace(/\D/g, '');
+    const digitCount = digitsOnly.length;
+    if (!/^\+?[\d\s\-()]{7,20}$/.test(cleaned)) {
+        return { valid: false, message: 'Invalid format. Use only digits, +, -, (), or spaces.'};
+    }
+    if (digitCount < 7) {
+        return { valid: false, message: 'Phone number must contain at least 7 digits.'};
+    }
+    if (digitCount > 15) {
+        return { valid: false, message: 'Phone number is too long. Max. 15 digits allowed.'};
+    }
+    return { valid: true, message: '' };
 }
