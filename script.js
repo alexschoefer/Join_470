@@ -62,11 +62,16 @@ function handleOrientationChange() {
     const isLandscape = window.innerWidth > window.innerHeight;
     const isTooShort = window.innerHeight < 768;
     const shouldShowWarning = isMobile && isLandscape && isTooShort;
-    if (shouldShowWarning !== previousOrientationWarningVisible) {
-        warning.classList.toggle('d_none', !shouldShowWarning);
-        document.body.classList.toggle('no-scroll', shouldShowWarning);
-        previousOrientationWarningVisible = shouldShowWarning;
+    if (shouldShowWarning) {
+        warning.classList.remove('orientation-warning-z0');
+        warning.classList.add('orientation-warning-z99');
+    } else {
+        warning.classList.remove('orientation-warning-z99');
+        warning.classList.add('orientation-warning-z0');
     }
+      warning.classList.toggle('d_none', !shouldShowWarning);
+    document.body.classList.toggle('no-scroll', shouldShowWarning);
+    previousOrientationWarningVisible = shouldShowWarning;
 }
 
 
