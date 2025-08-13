@@ -7,6 +7,7 @@ let lastEditedContact = null;
 let lastEditedIndex = null;
 let currentContactIndex = null;
 let typeOfScreen = "";
+let previousOrientationWarningVisible = false;
 
 /**
  * On DOMContentLoaded event, calls updateDeviceType to initialize the device type based on the current window size.
@@ -55,16 +56,16 @@ function updateDeviceType() {
  * Handles the orientation change on mobile devices. Shows a landscape warning overlay if the device is in landscape mode and is identified as a real mobile device. 
  */
 function handleOrientationChange() {
-    const isLandscape = window.innerWidth > window.innerHeight;
-    const isMobile = isRealMobileDevice();
     const warning = document.getElementById('orientation-warning');
     if (!warning) return;
-    if (isMobile && isLandscape) {
-        warning.classList.remove('d_none');
-        document.body.classList.add('no-scroll');
-    } else {
-        warning.classList.add('d_none');
-        document.body.classList.remove('no-scroll');
+    const isMobile = window.innerWidth < 1020;
+    const isLandscape = window.innerWidth > window.innerHeight;
+    const isTooShort = window.innerHeight < 768;
+    const shouldShowWarning = isMobile && isLandscape && isTooShort;
+    if (shouldShowWarning !== previousOrientationWarningVisible) {
+        warning.classList.toggle('d_none', !shouldShowWarning);
+        document.body.classList.toggle('no-scroll', shouldShowWarning);
+        previousOrientationWarningVisible = shouldShowWarning;
     }
 }
 
