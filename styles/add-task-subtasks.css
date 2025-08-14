@@ -156,7 +156,7 @@
 
 .allSubtasks {
   width: 100%;
-  max-height: 186px;
+  max-height: 96px;
   overflow-y: auto;
   display: block;
   list-style: disc;
