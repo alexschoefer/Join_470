@@ -74,8 +74,7 @@
                                         <span class="calendar-icon"
                                             onclick="document.getElementById('add-task-due-date-input').focus();"></span>
                                     </div>
-                                    <span id="due-date-required" class="required-text d_none">This field is
-                                        required</span>
+                                    <span id="due-date-required" class="required-text d_none"></span>
                                 </div>
                             </div>
                             <div class="add-task-center-dividor"></div>
@@ -194,7 +193,7 @@
                                         class="add-task-button-clear-icon"
                                         src="../assets/icons/add-task-iconoir_cancel.svg" alt="close-pic" />
                                 </button>
-                                <button onclick="sendAddTaskData()" type="button" id="add-task-button-create-task"
+                                <button onclick="validateAddTaskInputs()" type="button" id="add-task-button-create-task"
                                     class="label-add-task add-task-button-create" disabled="false">
                                     <span class="add-task-button-create-text">Create Task</span>
                                     <div class="label-add-task add-task-button-create-capsule">

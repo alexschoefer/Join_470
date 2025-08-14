@@ -310,6 +310,7 @@ function resetAddTaskForm() {
   ATcategory.textContent = "Select a category";
   assignedCheckbox.forEach((item) => (item.checkbox = false));
   updateChosenInitials();
+  getContactsFromRemoteStorage();
   loadCategoryOptions();
 }
 

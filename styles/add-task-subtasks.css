@@ -156,7 +156,7 @@
 
 .allSubtasks {
   width: 100%;
-  max-height: 186px;
+  max-height: 96px;
   overflow-y: auto;
   display: block;
   list-style: disc;
@@ -164,8 +164,7 @@
 }
 
 .ATSubLi {
-  margin-left: 20px;
-  margin-right: -16px;
+  text-align: center;
   color: var(--black);
   text-align: center;
 }
