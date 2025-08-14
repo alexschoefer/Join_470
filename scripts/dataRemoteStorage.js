@@ -13,11 +13,11 @@ let standartTasks = [
       { title: "Load and apply theme on page load", done: false },
     ],
     assigned: [
-      { name: "Alan Turing", color: "#0038FF" },
-      { name: "Shafi Goldwasser", color: "#9327FF" },
+      { name: "Thomas Müller", color: "#FF7A00" },
+      { name: "Max Mustermann", color: "#FF5EB3" },
     ],
     category: "User Story",
-    colorTo: ["#0038FF", "#9327FF"],
+    colorTo: ["#FF7A00", "#FF5EB3"],
   },
   {
     id: 1,
@@ -31,11 +31,11 @@ let standartTasks = [
       { title: "Start page Layout", done: false },
     ],
     assigned: [
-      { name: "Shafi Goldwasser", color: "#FF7A00" },
-      { name: "Grace Hopper", color: "#FFE62B" },
+      { name: "Marianne Musterfrau", color: "#9327FF" },
+      { name: "Mark Zuckerberg", color: "#FF745E" },
     ],
     category: "User Story",
-    colorTo: ["#FF7A00", "#FFE62B"],
+    colorTo: ["#9327FF", "#FF745E"],
   },
   {
     id: 2,
@@ -50,11 +50,11 @@ let standartTasks = [
       { title: "Ensure message does not interrupt interaction", done: false },
     ],
     assigned: [
-      { name: "Grace Hopper", color: "#1FD7C1" },
-      { name: "Ada Lovelace", color: "#0038FF" },
+      { name: "Bill Gates", color: "#0038FF" },
+      { name: "Developer Akademie", color: "#FF745E" },
     ],
     category: "Technical Task",
-    colorTo: ["#1FD7C1", "#0038FF"],
+    colorTo: ["#0038FF", "#FF745E"],
   },
   {
     id: 3,
@@ -71,11 +71,12 @@ let standartTasks = [
       { title: "Ensure compatibility with all themes", done: true },
     ],
     assigned: [
-      { name: "Shafi Goldwasser", color: "#FFE62B" },
-      { name: "Tim Berners", color: "#1FD7C1" },
+      { name: "Alex Schöfer", color: "#1FD7C1" },
+      { name: "Max Mustermann", color: "#FF5EB3" },
+      { name: "Nikolaos Loukataris", color: "#C3FF2B" },
     ],
     category: "Technical Task",
-    colorTo: ["#FFE62B", "#1FD7C1"],
+    colorTo: ["#1FD7C1"],
   },
   {
     id: 4,
@@ -92,52 +93,15 @@ let standartTasks = [
       { title: "Test styles in both themes", done: false },
     ],
     assigned: [
-      { name: "Margaret Hamilton", color: "#FF7A00" },
-      { name: "Alan Turing", color: "#FFE62B" },
-      { name: "Ada Lovelace", color: "#9327FF" },
+      { name: "Certan Viorel", color: "#FFE62B" },
+      { name: "Nikolaos Loukataris", color: "#C3FF2B" },
+      { name: "Branislav Bardon", color: "#FF7A00" },
     ],
     category: "Technical Task",
-    colorTo: ["#FF7A00", "#FFE62B", "#9327FF"],
+    colorTo: ["#FFE62B", "#C3FF2B", "#FF7A00"],
   },
 ];
 
-async function getTasksFromRemoteStorage(path) {
-  let response = await fetch(fetchURLDataBase + path + ".json");
-  if (response.ok) {
-    let data = await response.json();
-    if (Array.isArray(data)) {
-      return data;
-    } else {
-      return;
-    }
-  }
-}
-async function saveTasksToRemoteStorage(path, data) {
-  await fetch(fetchURLDataBase + path + ".json", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-}
-async function deleteTasksToRemoteStorage(path) {
-  let response = await fetch(fetchURLDataBase + path + ".json", {
-    method: "DELETE",
-  });
-  return (response = await response.json());
-}
-
-async function editTasksToRemoteStorage(path, data) {
-  let response = await fetch(fetchURLDataBase + path + ".json", {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  return (response = await response.json());
-}
 
 let contactsDummy = [
   {

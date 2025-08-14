@@ -2,22 +2,22 @@ let isEmailAlreadyUsed = false;
 
 /**
  * Validates a single input field in the signup form.
- * Displays an error message if the field is empty, and removes it if the input is valid.
+ * Displays an error message if the field is empty or invalid, and removes it if the input is valid.
  * Also triggers re-validation of the entire signup form to update the submit button state.
  * @param {HTMLInputElement} input - The input field to be validated.
  */
 function validateSignupInput(input) {
     const errorMessage = document.getElementById(input.id + '-validation-message');
     const wrapper = input.closest('.user-input-wrapper');
-    if (errorMessage && wrapper) {
-        if (input.value.trim() === '') {
-            errorMessage.classList.remove('d_none');
-            wrapper.classList.add('input-error');
-        } else {
-            errorMessage.classList.add('d_none');
-            wrapper.classList.remove('input-error');
-        }
+    if (!errorMessage || !wrapper) return;
+    let value = input.value.trim();
+    let isValid = value !== '';
+    if (input.id === 'username-input') {
+        isValid = isFullNameValid(value);
+        errorMessage.textContent = isValid? errorMessage.dataset.defaultMessage: 'Please enter both first and last name.';
     }
+    errorMessage.classList.toggle('d_none', isValid);
+    wrapper.classList.toggle('input-error', !isValid);
     validateSignUpForm();
 }
 
@@ -29,36 +29,60 @@ function validateSignupInput(input) {
  * Triggers an asynchronous check to see if the email already exists in the database.
  * @param {HTMLInputElement} input - The input field to be validated.
  */
-function checkRequiredInputEmail(input) {
-    let email = input.value.trim();
-    let errorMessage = document.getElementById('usermail-input-validation-message');
-    let wrapper = input.closest('.user-input-wrapper');
-        if (!isValidEmail(email)) {
-            errorMessage.classList.remove('d_none');
-            wrapper.classList.add('input-error');
-        } else {
-            errorMessage.classList.add('d_none');
-            wrapper.classList.remove('input-error');
-        }
-        checkEmailAlreadyExist(input);
+async function checkRequiredInputEmail(input) {
+    const email = input.value.trim();
+    if (!email) {
+        showError(input, 'This field is required.');
+        validateSignUpForm();
+        return;
+    }
+    if (!isValidEmail(email)) {
+        showError(input, 'Please enter a valid email address.');
+        validateSignUpForm();
+        return;
+    }
+    const exists = await checkEmailAlreadyExist(input);
+    if (!exists) clearErrorMessage(input);
+    validateSignUpForm();
 }
 
 
-/** 
- * Help-function - Checking the given email adress for the sign up in the database.
- * If the given email adress is already by a user in the database an error message by the calling function showEmailAlreadyExistError
- * Otherwise the error is cleared. The overall form validation is updated.
- * @param {HTMLInputElement} input - The email input field that is checking in the database. 
+/**
+ * Displays a validation error message for a specific input field. Updates the associated validation message element with the given text,
+ * makes it visible, and applies a visual error style to the input wrapper.
+ *
+ * @param {HTMLInputElement} input - The input element that triggered the error.
+ * @param {string} message - The error message to be displayed.
+ */
+function showError(input, message) {
+    const errorMessage = document.getElementById(input.id + '-validation-message');
+    const wrapper = input.closest('.user-input-wrapper');
+    errorMessage.innerText = message;
+    errorMessage.classList.remove('d_none');
+    wrapper.classList.add('input-error');
+    isEmailAlreadyUsed = false;
+}
+
+
+/**
+ * Checks whether the entered email already exists in the database.
+ * Shows an error if it exists, otherwise returns false.
+ * @param {HTMLInputElement} input - The input field containing the email.
+ * @returns {Promise<boolean>} - True if the email exists, false otherwise.
  */
 async function checkEmailAlreadyExist(input) {
-    if(input.value.trim().length > 0){
-        let email = document.getElementById('usermail-input').value.trim();
-        let response = await fetch(fetchURLDataBase + '/users' + '.json');
-        let useremails = await response.json();
-        let signupEmail = useremails && Object.values(useremails).find(
-            user => user.email === email);
-            signupEmail ? (isEmailAlreadyUsed = true, showEmailAlreadyExistError(input)) : (isEmailAlreadyUsed = false, clearErrorMessage(input));
-            validateSignUpForm();
+    const email = input.value.trim();
+    if (!email) return false;
+    const response = await fetch(fetchURLDataBase + '/users.json');
+    const useremails = await response.json();
+    const exists = useremails && Object.values(useremails).some(user => user.email === email);
+    if (exists) {
+        showEmailAlreadyExistError(input);
+        isEmailAlreadyUsed = true;
+        return true;
+    } else {
+        isEmailAlreadyUsed = false;
+        return false;
     }
 }
 
@@ -72,7 +96,7 @@ async function checkEmailAlreadyExist(input) {
 function showEmailAlreadyExistError(input) {
     let errorMessage = document.getElementById('usermail-input-validation-message');
     let wrapper = input.closest('.user-input-wrapper');
-    errorMessage.innerHTML = 'An account already exists for this e-mail address. Please check.';
+    errorMessage.innerHTML = 'An account already exists for this email address. Please check.';
     errorMessage.classList.remove('d_none');
     wrapper.classList.add('input-error');
 }
@@ -113,9 +137,11 @@ function isPrivacyPolicyChecked() {
 function validateSignUpForm() {
     const filled = areAllInputsFilled();
     const emailInput = document.getElementById('usermail-input');
-    const emailOK = isValidEmail(emailInput.value);
+    const nameInput = document.getElementById('username-input');
+    const emailOK = isValidEmail(emailInput.value.trim());
     const checkboxOK = isPrivacyPolicyChecked();
-    const formValid = filled && emailOK && checkboxOK && !isEmailAlreadyUsed;
+    const nameOK = isFullNameValid(nameInput.value.trim());
+    const formValid = filled && emailOK && checkboxOK && nameOK && !isEmailAlreadyUsed;
     setButtonState(formValid);
 }
 

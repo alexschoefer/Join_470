@@ -1,4 +1,10 @@
-
+/**
+ * Generates the HTML template for a subtask entry in the Add Task form.
+ *
+ * @param {number} i - The index of the subtask.
+ * @param {string} subtaski - The subtask text value.
+ * @returns {string} The HTML string for the subtask template.
+ */
 function addSubtaskTemplate(i, subtaski) {
     return `<div id="add-task-subtask-template${i}" class="add-task-subtask-style">
                 <li class="ATSubLi" id="ATSubLi${i}"></li>                 <input id="ATSubtask-container-${i}" type="text" title="ATSubtask-container" class="ATSubtask-container"
@@ -16,6 +22,15 @@ function addSubtaskTemplate(i, subtaski) {
              </div>`;
 }
 
+
+/**
+ * Generates the HTML template for displaying a contact's initials with background color.
+ *
+ * @param {Object} contact - The contact object containing initials and color.
+ * @param {string} contact.initial - The initials of the contact.
+ * @param {string} contact.color - The background color for the initials container.
+ * @returns {string} The HTML string for the contact initials template.
+ */
 function getInitialsTemplate(contact) {
     return `
         <div class="ATContact-option-intials-container" style="background-color: ${contact.color}; display:inline-flex; margin-right:4px;">
@@ -24,6 +39,18 @@ function getInitialsTemplate(contact) {
     `;
 }
 
+
+/**
+ * Generates the HTML template for a contact option in the Add Task form dropdown (desktop version).
+ *
+ * @param {Object} contact - The contact object containing name, initials, and color.
+ * @param {string} contact.name - The name of the contact.
+ * @param {string} contact.initial - The initials of the contact.
+ * @param {string} contact.color - The background color for the initials container.
+ * @param {number} i - The index of the contact in the list.
+ * @param {string} you - Additional label to display (e.g., "(You)").
+ * @returns {string} The HTML string for the contact dropdown option.
+ */
 function getAssignedContactTemplate(contact, i, you) {
     return `
         <div class="ATcustom-dropdown-option" id="ATcustom-dropdown-Mobile-option-${i}" data-index="${i}" onclick="assignedCheckboxClick(event, ${i})">
@@ -36,6 +63,18 @@ function getAssignedContactTemplate(contact, i, you) {
     `;
 }
 
+
+/**
+ * Generates the HTML template for a contact option in the Add Task form dropdown (mobile version).
+ *
+ * @param {Object} contact - The contact object containing name, initials, and color.
+ * @param {string} contact.name - The name of the contact.
+ * @param {string} contact.initial - The initials of the contact.
+ * @param {string} contact.color - The background color for the initials container.
+ * @param {number} i - The index of the contact in the list.
+ * @param {string} you - Additional label to display (e.g., "(You)").
+ * @returns {string} The HTML string for the contact dropdown option (mobile).
+ */
 function getAssignedContactMobileTemplate(contact, i, you) {
     return `
         <div class="ATcustom-dropdown-option" id="ATcustom-dropdown-Mobile-option-${i}" data-index="${i}" onclick="assignedCheckboxClick(event, ${i})">

@@ -1,7 +1,7 @@
 let container = document.getElementById("task-card-container");
+let currentOpenMenu = null;
 let shadow = document.getElementById("shadow-container");
 let tasks = [];
-let updateTasks;
 let tasksPriority;
 let currentDraggedElement = null;
 let subtasksContent;
@@ -14,211 +14,178 @@ let inProgressContainer = document.querySelector(".in-progress");
 let awaitFeedbackContainer = document.querySelector(".await-feedback");
 let doneContainer = document.querySelector(".done");
 let addTaskScriptInjected = false;
-function updateBoardContent() {
-  let cols = [
-    { container: toDoContainer, emptyText: "No tasks To do" },
-    { container: inProgressContainer, emptyText: "No tasks In Progress" },
-    { container: awaitFeedbackContainer, emptyText: "No tasks Await Feedback" },
-    { container: doneContainer, emptyText: "No tasks Done" },
-  ];
-  cols.forEach(({ container }) => {
-    let dropArea = container.querySelector(".drag-area");
-    if (dropArea) {
-      dropArea
-        .querySelectorAll(".task, .empty-placeholder")
-        .forEach((node) => node.remove());
-    }
-  });
 
-  tasks
-    .filter((task) => {
-      return (
-        task &&
-        (!currentFilter || task.title.toLowerCase().startsWith(currentFilter))
-      );
-    })
-    .forEach((task) => {
-      let card = createCardElement(task);
-
-      let dropArea;
-      switch (task.status) {
-        case "toDo":
-          dropArea = toDoContainer.querySelector(".drag-area");
-          break;
-        case "inProgress":
-          dropArea = inProgressContainer.querySelector(".drag-area");
-          break;
-        case "awaitFeedback":
-          dropArea = awaitFeedbackContainer.querySelector(".drag-area");
-          break;
-        case "done":
-          dropArea = doneContainer.querySelector(".drag-area");
-          break;
-        default:
-          return;
-      }
-      dropArea.appendChild(card);
-      openTaskDetails();
-      updateSubtaskProgress(task.subtasks, card);
-    });
-
-  enableTiltOnDrag(".task");
-  insertTemplateIfEmpty();
+/**
+ * Creates and appends a task card element to the appropriate column.
+ * Also opens its details overlay and updates its subtask progress bar.
+ * @param {Object} task - Task object from tasks list
+ * @param {string} task.status - Status of the task (toDo, inProgress, etc.)
+ * @param {Object[]} task.subtasks - Array of subtask objects
+ */
+function appendTaskToBoard(task) {
+  let card = createCardElement(task);
+  let area = getColumns()
+    .find((c) => c.status === task.status)
+    ?.container.querySelector(".drag-area");
+  if (!area) return;
+  area.appendChild(card);
+  openTaskDetails();
+  updateSubtaskProgress(task.subtasks, card);
 }
 
-searchInput.addEventListener("input", () => {
-  let q = searchInput.value.trim().toLowerCase();
-  currentFilter = q.length >= 3 ? q : "";
-  updateBoardContent();
-});
+/**
+ * Clears existing task and placeholder nodes from each provided column.
+ * @param {{container: Element}[]} cols - Array of column objects
+ */
+function clearColumns(cols) {
+  cols.forEach(({ container }) => {
+    container
+      .querySelector(".drag-area")
+      ?.querySelectorAll(".task, .empty-placeholder")
+      .forEach((n) => n.remove());
+  });
+}
+
+/**
+ * Generates a DOM element for a task card based on its data.
+ * @param {Object} task - Task object
+ * @returns {Element} The card element
+ */
 function createCardElement(task) {
-  const assignedHtml = getInitialsList(task.assigned);
-  const html = generateTodoHTML(
+  let assignedHtml = getInitialsList(task.assigned);
+  let html = generateTodoHTML(
     task,
     getImageForPriority(task.priority),
     assignedHtml,
     getColoredLabels(task.category)
   );
-  const template = document.createElement("template");
+  let template = document.createElement("template");
   template.innerHTML = html.trim();
   return template.content.firstElementChild;
 }
 
-function openAddTaskOverlay() {
-  if (!container) return;
-  container.innerHTML = addTasks();
-  if (typeof window.addTaskInit === "function") {
-    window.addTaskInit();
-  }
-  container.classList.add("show-from-right");
-  shadow.style.display = "block";
+/**
+ * Filters and processes a list of tasks, executing a callback for each match.
+ * @param {Object[]} list - Array of task objects
+ * @param {string} filter - Lowercase search filter text
+ * @param {function(Object): void} cb - Callback to execute for each matching task
+ */
+function processTasks(list, filter, cb) {
+  list
+    .filter((t) => t && (!filter || t.title.toLowerCase().startsWith(filter)))
+    .forEach(cb);
 }
 
-function openTaskDetails() {
-  let tasksCards = document.querySelectorAll(".card");
-  if (!tasksCards.length) return;
-  tasksCards.forEach((card) => {
-    card.addEventListener("click", () => {
-      let taskData = card.dataset.task;
-      if (!taskData) return;
-      try {
-        let task = JSON.parse(taskData);
-        shadow.style.display = "block";
-        container.classList.remove("hide-to-right");
-        colorLabels = getColoredLabels(task.category);
-        tasksPriority = getImageForPriority(task.priority);
-        let assigned = generateAssignedCardOverlay(task.assigned);
-        subtasksContent = generateSubtaskHTML(task.subtasks);
-        container.innerHTML = boardTaskOverlay(
-          task,
-          tasksPriority,
-          assigned,
-          subtasksContent,
-          colorLabels
-        );
-        container.classList.add("show-from-right");
-        deleteTasksOfOverlay(task.id);
-        editTaskOfOverlay(task.id);
-      } catch (error) {
-        console.error("Error parsing task data:", error);
-      }
-    });
-  });
-}
-
-function closeContainerOverlay() {
-  shadow.style.display = "none";
-  container.classList.remove("show-from-right");
-  setTimeout(() => {
-    container.innerHTML = "";
-  }, 500);
-}
-
-async function init() {
-  tasks = await getTasksFromRemoteStorage("/tasks");
-  if (tasks === undefined) {
-    tasks = standartTasks;
-    await saveTasksToRemoteStorage("/tasks", tasks);
-  }
-  updateTask();
-  openTaskDetails();
-  let addBtn = document.querySelector(".add-task");
-  let plusButton = document.querySelectorAll(".add-task-icon");
-  if (addBtn) {
-    addBtn.addEventListener("click", openAddTaskOverlay);
-    plusButton.forEach((btn) => {
-      btn.addEventListener("click", openAddTaskOverlay);
-    });
-  }
-}
-
-async function updateTask() {
-  let columns = ["toDo", "inProgress", "awaitFeedback", "done"];
-  columns.forEach((col) => {
-    let filtered = tasks.filter((t) => t && t.status === col);
-    let container = document.getElementById(col);
-    container.innerHTML = "";
-    filtered.forEach((task) => {
-      contactColor = JSON.stringify(task.color);
-      tasksPriority = getImageForPriority(task.priority);
-      let assigned = getInitialsList(task.assigned);
-      colorLabels = getColoredLabels(task.category);
-      container.innerHTML += generateTodoHTML(
-        task,
-        tasksPriority,
-        assigned,
-        colorLabels,
-        contactColor
-      );
-      openTaskDetails(task);
-      let lastTask = container.lastElementChild;
-      updateSubtaskProgress(task.subtasks, lastTask);
-    });
-  });
+/**
+ * Refreshes the task board by clearing and re-appending tasks based on current filter.
+ */
+function updateBoardContent() {
+  clearColumns(getColumns());
+  processTasks(tasks, currentFilter, appendTaskToBoard);
   enableTiltOnDrag(".task");
   insertTemplateIfEmpty();
 }
 
-function startDragging(id) {
-  currentDraggedElement = parseInt(id);
-}
+/**
+ * Adds a real-time search filter to the board content based on user input. Listens for input events on the search field.
+ * If the entered query is at least 3 characters long, it sets the global `currentFilter` variable to the lowercase, trimmed input.
+ * Otherwise, it clears the filter. Then it updates the board content accordingly.
+ */
+let searchMessage = document.getElementById("search-message");
 
-function allowDrop(ev) {
-  ev.preventDefault();
-}
-
-async function moveTo(category) {
-  let taskIndex = tasks.findIndex(
-    (task) => task && task.id === currentDraggedElement
+searchInput.addEventListener("input", () => {
+  let q = searchInput.value.trim().toLowerCase();
+  currentFilter = q.length >= 3 ? q : "";
+  updateBoardContent();
+  let found = tasks.some(
+    (t) =>
+      t && (!currentFilter || t.title.toLowerCase().startsWith(currentFilter))
   );
-  if (taskIndex !== -1) {
-    tasks[taskIndex].status = category;
-    await saveTasksToRemoteStorage("/tasks", tasks);
-    updateTask();
+  if (!found && q.length >= 3) {
+    searchMessage.style.display = "inline-block";
+  } else {
+    searchMessage.style.display = "none";
   }
+});
+
+/**
+ * Initializes application: loads tasks, saves defaults if missing,
+ * and updates UI handlers.
+ * @async
+ */
+async function init() {
+  pushDummyTasksToRemoteStorage();
+  let loadedTasks = await getTasksFromRemoteStorage("/tasks");
+  if (!loadedTasks || loadedTasks.length === 0) {
+    tasks = standartTasks;
+    await saveTasksToRemoteStorage("/tasks", tasks);
+  } else {
+    tasks = loadedTasks;
+  }
+  updateTask();
+  openTaskDetails();
+  attachAddTaskHandlers();
 }
 
-function highlight(id) {
-  document.getElementById(id).classList.add("drag-area-highlight");
+/**
+ * Populates a column container with tasks matching its status.
+ * @param {string} col - Status name corresponding to column id
+ */
+function populateColumn(col) {
+  let cont = document.getElementById(col);
+  cont.innerHTML = "";
+  tasks
+    .filter((t) => t && t.status === col)
+    .forEach((task) => {
+      contactColor = JSON.stringify(task.color);
+      tasksPriority = getImageForPriority(task.priority);
+      cont.innerHTML += generateTodoHTML(
+        task,
+        tasksPriority,
+        getInitialsList(task.assigned),
+        getColoredLabels(task.category),
+        contactColor
+      );
+      openTaskDetails(task);
+      updateSubtaskProgress(task.subtasks, cont.lastElementChild);
+    });
 }
 
-function removeHighlight(id) {
-  document.getElementById(id).classList.remove("drag-area-highlight");
+/**
+ * Updates all columns, drag settings, placeholders, and dropdown menus.
+ * @async
+ */
+async function updateTask() {
+  ["toDo", "inProgress", "awaitFeedback", "done"].forEach(populateColumn);
+  enableTiltOnDrag(".task");
+  insertTemplateIfEmpty();
+  attachDropdownsToCards();
 }
 
-function insertTemplateIfEmpty() {
-  document.querySelectorAll(".drag-area").forEach((area) => {
-    area.querySelectorAll(".empty-placeholder").forEach((n) => n.remove());
-    if (!area.querySelector(".task")) {
-      let html = templeteNotTasks(area.id);
-      let wrapper = document.createElement("div");
-      wrapper.classList.add("empty-placeholder");
-      wrapper.innerHTML = html;
-      area.appendChild(wrapper);
+/**
+ * Attaches click handlers to "Add Task" buttons to open overlay or navigate.
+ */
+function attachAddTaskHandlers() {
+  let addBtn = document.querySelector(".add-task");
+  let plusButtons = document.querySelectorAll(".add-task-icon");
+  if (!addBtn) return;
+  let handler = (e) => {
+    if (window.innerWidth <= 1020) {
+      e.preventDefault();
+      window.location.href = "../html/add-task.html";
+    } else {
+      openAddTaskOverlay(e);
     }
-  });
+  };
+  addBtn.addEventListener("click", handler);
+  plusButtons.forEach((btn) => btn.addEventListener("click", handler));
 }
 
+/**
+ * Converts internal status names to human-readable labels.
+ * @param {string} name - Status key
+ * @returns {string} Formatted status label
+ */
 function formatName(name) {
   let map = {
     toDo: "To Do",
@@ -228,273 +195,199 @@ function formatName(name) {
   };
   return map[name] || name;
 }
-function enableTiltOnDrag(selector) {
-  let cardContainer = document.querySelectorAll(".card-drag-drop-container");
-  let elements = document.querySelectorAll(selector);
-  elements.forEach((el) => {
-    el.addEventListener("dragstart", () => {
-      el.classList.add("tilt-on-drag");
-      cardContainer.forEach((container) => {
-        container.style.height = container.offsetHeight + 250 + "px";
-        container.style.boxShadow = "inset 0 0 0 2px rgba(0, 0, 0, 0.15)";
-      });
-    });
-    el.addEventListener("dragend", () => {
-      el.classList.remove("tilt-on-drag");
-      cardContainer.forEach((container) => {
-        container.style.height = "auto";
-        container.style.boxShadow = "";
-      });
-    });
-  });
-}
 
-function deleteTasksOfOverlay(id) {
-  let deleteButton = document.querySelector(".delete");
-  if (!deleteButton) return;
-  deleteButton.addEventListener("click", async () => {
-    closeContainerOverlay();
-    try {
-      await deleteTasksToRemoteStorage(`/tasks/${id}`);
-      tasks = tasks.filter((task) => task && task.id !== id);
-      updateTask();
-    } catch (error) {
-      console.error(error);
-    }
-  });
-}
-
+/**
+ * Customizes "Add Task" form submit to handle editing existing tasks.
+ * @param {number|string} id - Task id being edited
+ */
 function initAddTaskForm(id) {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      const oldBtn = document.getElementById("add-task-button-create-task");
-      if (oldBtn) {
-        const newBtn = oldBtn.cloneNode(true);
-        newBtn.onclick = () => valueTasksToEditTasks(id);
-        oldBtn.replaceWith(newBtn);
-      }
-
+      let oldBtn = document.getElementById("add-task-button-create-task");
+      if (!oldBtn) return;
+      let newBtn = oldBtn.cloneNode(true);
+      newBtn.onclick = () => valueTasksToEditTasks(id);
+      oldBtn.replaceWith(newBtn);
       preFillTaskForm(id);
     });
   });
 }
 
-function editTaskOfOverlay(id) {
-  let currentEditId = id;
-  const taskOverlay = document.getElementById("task-card-container");
-  const taskCardContainer = document.getElementById("task-overlay");
-  const editButton = document.getElementsByClassName("edit")[0];
-  if (taskCardContainer) {
-    editButton.addEventListener("click", () => {
-      taskOverlay.innerHTML = "";
-      taskOverlay.innerHTML = editTasksOfBoard(id);
-      injectAddTask(currentEditId);
-    });
-  }
-}
-
-function injectAddTask(currentEditId) {
-  if (typeof window.addTaskInit === "function") {
-    window.addTaskInit();
-  }
-  requestAnimationFrame(() => {
-    initAddTaskForm(currentEditId);
-  });
-  shadow.style.display = "block";
-  container.classList.add("show-from-right");
-}
-
-function preFillTaskForm(id) {
-  let task = tasks.find((t) => t?.id === id);
-
-  if (!task) return;
-  document.getElementById("add-task-title-input").value = task.title;
-  document.getElementById("add-task-description-textarea").value =
-    task.description;
-  const dateInput = document.getElementById("add-task-due-date-input");
-  dateInput.value = task.dueDate;
-  if (dateInput.value) dateInput.classList.add("date-selected");
-  addTaskPrioButtonClick(task.priority);
-  const categoryText = document.getElementById("categoryDropdownSelectedText");
-  categoryText.textContent = task.category;
-  getContactsFromRemoteStorage().then(() => {
-    resultContactList.forEach((contact, i) => {
-      if (task.assigned.some((a) => a.name === contact.name)) {
-        assignedCheckbox[i].checkbox = true;
-        const checkboxDiv = document.getElementById(
-          "ATContact-option-checkbox" + i
-        );
-        if (checkboxDiv) {
-          checkboxDiv.classList.remove("ATContact-option-checkbox");
-          checkboxDiv.classList.add("ATContact-option-checkbox-checked");
-        }
-      }
-    });
-    updateChosenInitials();
-  });
-
-  subtasks = task.subtasks.map((st) => st.title);
-  subtaskRender();
-}
-
-async function valueTasksToEditTasks(id) {
-  const title = document.getElementById("add-task-title-input").value.trim();
-  const description = document
-    .getElementById("add-task-description-textarea")
-    .value.trim();
-  const dueDate = document
-    .getElementById("add-task-due-date-input")
-    .value.trim();
-  const category = document
-    .getElementById("categoryDropdownSelectedText")
-    .textContent.trim();
-  const assigned = getAssignedContacts();
-  const priority = prioButtonState;
-  const subtasksArray = getSubtasksArray();
-
-  let isValid = true;
-
-  if (!title) {
-    document.getElementById("add-task-title-input").classList.add("error");
-    document.getElementById("title-required").classList.remove("d_none");
-    isValid = false;
-  }
-
-  if (!dueDate) {
-    document.getElementById("add-task-due-date-input").classList.add("error");
-    document.getElementById("due-date-required").classList.remove("d_none");
-    isValid = false;
-  }
-
-  if (category === "Select a category") {
-    document.getElementById("categoryDropdownSelected").classList.add("error");
-    document.getElementById("category-required").classList.remove("d_none");
-    isValid = false;
-  }
-  const selected = getAssignedContacts();
-  const assignedWithColor = selected.map((item) => {
-    const name = typeof item === "string" ? item : item.name;
-    const dummy = contactsDummy.find((c) => c.name === name);
-    const color = dummy ? dummy.profilcolor : "#000000";
-    return { name, color };
-  });
-
-  if (!isValid) return;
-  const updatedTask = {
-    id,
-    title,
-    description,
-    dueDate: dueDate,
-    priority,
-    status: tasks.find((t) => t?.id === id)?.status || "toDo",
-    category,
-    assigned: assignedWithColor,
-    subtasks: subtasksArray,
-  };
-  await editTasksToRemoteStorage(`/tasks/${id}`, updatedTask);
-  const index = tasks.findIndex((t) => t?.id === id);
-  if (index !== -1) {
-    tasks[index] = updatedTask;
-  }
-  closeContainerOverlay();
-  updateTask();
-}
-
+/**
+ * Maps priority levels to corresponding icon image URLs.
+ * @param {string} priority - Priority label (e.g., "Medium", "Low", "Urgent")
+ * @returns {string} URL of priority icon
+ */
 function getImageForPriority(priority) {
   let imageMap = {
     Medium: "../assets/icons/priority-medium.png",
     Low: "../assets/icons/low-medium.png",
     Urgent: "../assets/icons/urgent-medium.png",
   };
-  return imageMap[priority] || "../assets/icons/low-medium.png";
+  return imageMap[priority] || imageMap.Low;
 }
 
-function generateAssignedCardOverlay(assignedList) {
-  if (!Array.isArray(assignedList)) return "";
+/**
+ * Returns a hex color code for a given task category.
+ * @param {string} category - Task category name
+ * @returns {string} Hex color string
+ */
+function getColoredLabels(category) {
+  if (category === "User Story") return "#0038FF";
+  if (category === "Technical Task") return "#1FD7C1";
+  return "";
+}
 
-  let result = "";
-  for (let i = 0; i < assignedList.length; i++) {
-    let person = assignedList[i];
-    let name = person?.name;
-    if (typeof name !== "string" || !name.trim()) continue;
-
-    let initials = name
-      .split(" ")
-      .map((w) => w[0])
-      .join("")
-      .toUpperCase();
-
-    result += `
-      <div class="assigned-content" >
-        <span class="logo" style="background-color: ${person.color}">${initials}</span>
-        <span class="name">${name}</span>
-      </div>
-    `;
+/**
+ * Updates the visual progress bar and text for subtasks within a task card.
+ * @param {Object[]} subtasks - Array of subtask objects
+ * @param {Element} container - Card element containing subtask UI
+ */
+function updateSubtaskProgress(subtasks, container) {
+  // Sicherstellen, dass subtasks ein Array ist
+  if (!Array.isArray(subtasks)) {
+    subtasks = []; // Leeres Array, um Absturz zu vermeiden
   }
-  return result;
+
+  let total = subtasks.length;
+  let doneCount = subtasks.filter((s) => s.done).length;
+  let pct = total ? (doneCount / total) * 100 : 0;
+
+  const bar = container.querySelector(".col-bar");
+  const progressText = container.querySelector("#nr-progress-tasks");
+
+  if (bar) bar.style.width = pct + "%";
+  if (progressText) progressText.textContent = `${doneCount}/${total} Subtasks`;
 }
 
-function getInitialsList(assignedList) {
-  if (!Array.isArray(assignedList)) return "";
-
-  return assignedList
-
-    .filter((person) => person && typeof person.name === "string")
-    .map((person) => {
-      let initials = person.name
-        .trim()
-        .split(/\s+/)
-        .map((w) => w[0])
-        .join("")
-        .toUpperCase();
-      return `
-        <div class="assignees" style="background-color: ${person.color}">
-          <span>${initials}</span>
-        </div>
-      `;
-    })
-    .join("");
-}
-
-function updateSubtaskProgress(subtasksVolume, container) {
-  let total = subtasksVolume.length;
-  let completed = subtasksVolume.filter((t) => t.done === true).length;
-
-  let percent = total === 0 ? 0 : (completed / total) * 100;
-
-  container.querySelector(".col-bar").style.width = percent + "%";
-  container.querySelector(
-    "#nr-progress-tasks"
-  ).textContent = `${completed}/${total} Subtasks`;
-}
-
+/**
+ * Generates HTML string for a list of subtasks with checkboxes.
+ * @param {{title: string, done: boolean}[]} subtasks - List of subtask objects
+ * @returns {string} HTML markup string
+ */
 function generateSubtaskHTML(subtasks) {
+  if (!Array.isArray(subtasks) || subtasks.length === 0) {
+    return "";
+  }
   return subtasks
-    .map((subtask, index) => {
-      let checked = subtask.done ? "checked" : "";
-      let id = index + 1;
-      return `
-      <div class="subtask-container">
-        <input
-          class="checkbox"
-          type="checkbox"
-          id="${id}"
-          name="task${id}"
-          value="task${id}"
-          ${checked}
-        />
-        <label> ${subtask.title}</label><br />
-      </div>
-    `;
-    })
+    .map(
+      (st, i) => `
+    <div class="subtask-container">
+      <input type="checkbox" class="checkbox" id="${i + 1}" ${
+        st.done ? "checked" : ""
+      }/>
+      <label>${st.title}</label>
+    </div>`
+    )
     .join("");
 }
-function getColoredLabels(items) {
-  let color = "";
-  if (items === "User Story") {
-    color = "#0038FF";
-  } else if (items === "Technical Task") {
-    color = "#1FD7C1";
+
+/**
+ * Closes the currently open action menu if present.
+ */
+function closeCurrentActionMenu() {
+  if (currentOpenMenu) {
+    currentOpenMenu.remove();
+    currentOpenMenu = null;
   }
-  return color;
+}
+
+/**
+ * Positions an action menu relative to its trigger button and card.
+ * @param {Element} menu - Menu element to position
+ * @param {Element} btn - Button that triggered the menu
+ * @param {Element} card - Card containing the button/menu
+ */
+function positionMenu(menu, btn, card) {
+  menu.style.position = "absolute";
+  menu.style.top = `${btn.offsetTop + btn.offsetHeight + 6}px`;
+  let offsetRight = card.offsetWidth - (btn.offsetLeft + btn.offsetWidth);
+  menu.style.right = `${offsetRight}px`;
+}
+
+/**
+ * Sets up click listener to close menu when clicking outside.
+ * @param {MouseEvent} ev - Click event
+ * @param {Element} menu - Menu element
+ * @param {Element} btn - Button that opened menu
+ */
+function outsideClick(ev, menu, btn) {
+  if (!menu.contains(ev.target) && ev.target !== btn) {
+    closeCurrentActionMenu();
+    document.removeEventListener("click", (ev) => outsideClick(ev, menu, btn));
+  }
+}
+
+/**
+ * Builds HTML options for moving a task between statuses.
+ * @param {string} currentStatus - Task's current status
+ * @returns {string} HTML string for menu options
+ */
+function buildMoveOptions(currentStatus) {
+  let flow = ["toDo", "inProgress", "awaitFeedback", "done"];
+  let labels = {
+    toDo: "To-do",
+    inProgress: "In progress",
+    awaitFeedback: "Review",
+    done: "Done",
+  };
+  let idx = flow.indexOf(currentStatus);
+  let prev = idx > 0 ? flow[idx - 1] : null;
+  let next = idx < flow.length - 1 ? flow[idx + 1] : null;
+  if (!prev && !next)
+    return ["toDo", "awaitFeedback"]
+      .map(
+        (status) =>
+          `<div class="menu-option" data-status="${status}"><span class="arrow">${
+            status === "toDo" ? "↑" : "↓"
+          }</span> ${labels[status]}</div>`
+      )
+      .join("");
+  return [prev, next]
+    .filter(Boolean)
+    .map(
+      (status) =>
+        `<div class="menu-option" data-status="${status}"><span class="arrow">${
+          status === prev ? "↑" : "↓"
+        }</span> ${labels[status]}</div>`
+    )
+    .join("");
+}
+
+/**
+ * Attaches click listeners to menu options to move tasks between statuses.
+ * @param {Element} menu - Action menu element
+ * @param {Element} card - Task card element containing data-task attribute
+ */
+function attachMenuListeners(menu, card) {
+  menu.querySelectorAll(".menu-option").forEach((opt) => {
+    opt.addEventListener("click", (e) => {
+      e.stopPropagation();
+      let newStatus = opt.dataset.status;
+      let task = JSON.parse(card.dataset.task);
+      if (task.status === newStatus) return closeCurrentActionMenu();
+      task.status = newStatus;
+      let i = tasks.findIndex((t) => t && t.id === task.id);
+      if (i > -1) {
+        tasks[i] = task;
+        editTasksToRemoteStorage(`/tasks/${task.id}`, task)
+          .then(updateTask)
+          .catch(console.error);
+      }
+      closeCurrentActionMenu();
+    });
+  });
+}
+
+/**
+ * Safely retrieves the status field from a card's data-task JSON.
+ * @param {Element} card - Task card element
+ * @returns {string} Task status or empty string on error
+ */
+function getTaskStatus(card) {
+  try {
+    return JSON.parse(card.dataset.task).status;
+  } catch {
+    return "";
+  }
 }

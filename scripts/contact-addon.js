@@ -8,6 +8,16 @@ async function refreshContacts() {
 
 
 /**
+ * Help function - Sorts an array of contact objects alphabetically by their name
+ * @param {*} allContacts - The array of contact objects to sort
+ * @returns - The sorted array of contacts
+ */
+function sortContactsAlphabetically(allContacts) {
+    return allContacts.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+
+/**
  * Hides the mobile contact action buttons when clicking outside the button container
  * @param {MouseEvent} event - The click event outside triggered  on the document
  */
@@ -66,4 +76,123 @@ function changeContact() {
 
 function resetDummySync() {
     localStorage.removeItem("cachedContacts");
+}
+
+
+/**
+ * Displays a temporary success message in the feedback overlay
+ * @param {string} message - The message to display (given in the function)
+ */
+async function showCreateContactSuccess(message) {
+    const overlay = document.getElementById('success-message-overlay');
+    const messageBox = document.getElementById('feedback-message');
+    messageBox.innerText = message;
+    overlay.classList.remove('d_none');
+    overlay.classList.add('show');
+    setTimeout(() => {
+        overlay.classList.add('d_none');
+        overlay.classList.remove('show');
+    }, 800);
+    await initContacts();
+}
+
+
+/**
+* Help-function - Checking the required input email by adding or eding a contact
+* Displays an error message if the email is not valid by the function isValidEmail
+* Also triggers re-validation of the entire signup form to update the submit button state.
+* @param {HTMLInputElement} input - The input field to be validated.
+*/
+function checkRequiredInputContactEmail(input) {
+    let email = input.value.trim();
+    let errorMessage = document.getElementById('usermail-input-validation-message');
+    let wrapper = input.closest('.user-input-wrapper');
+    if (!isValidEmail(email)) {
+        errorMessage.classList.remove('d_none');
+        wrapper.classList.add('input-error');
+    } else {
+        errorMessage.classList.add('d_none');
+        wrapper.classList.remove('input-error');
+    }
+}
+
+
+/**
+ * Checks all tasks for a contact assigned by name and removes the contact from the assigned list if found. 
+ * If a change is made, the task is updated in the database.
+ * 
+ * @param {*} contactName - The contact who should be delete in the tasks
+ * @returns {Promise<void>} Resolves when all necessary tasks have been updated.
+ */
+async function checkDeleteContactInTasks(contactName) {
+    try {
+        const response = await fetch(`${fetchURLDataBase}/tasks.json`);
+        const existingTaskData = await response.json();
+        if (!existingTaskData) return;
+        const tasks = Object.entries(existingTaskData);
+        for (let [taskId, task] of tasks) {
+            const assignedContactsBefore = task.assigned || [];
+            const updatedContactsAssigned = assignedContactsBefore.filter(person => person.name !== contactName);
+            if (updatedContactsAssigned.length !== assignedContactsBefore.length) {
+                task.assigned = updatedContactsAssigned;
+                await updateTaskOnContactDelete(taskId, task);
+            }
+        }
+    } catch (error) {
+        console.error("Error by Deleting assigned Contact in the tasks:", error);
+    }
+}
+
+
+/**
+ * Updates a task in the database after deleting an assigned contact.
+ *
+ * @param {string} taskId - The unique ID of the task to update.
+ * @param {Object} updatedTask - The updated task object to be saved.
+ */
+async function updateTaskOnContactDelete(taskId, updatedTask) {
+    try {
+        await fetch(`${fetchURLDataBase}/tasks/${taskId}.json`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedTask),
+        });
+    } catch (error) {
+        console.error(`Error by updating a task by ${taskId}:`, error);
+    }
+}
+
+
+/**
+ * Validates a phone number and returns an object with status and error message.
+ * @param {string} phone - The phone number input to validate.
+ * @returns {{ valid: boolean, message: string }}
+ */
+function isValidPhoneNumber(phone) {
+    const userPhoneInput = phone.trim();
+    const phoneDigitsOnly = userPhoneInput.replace(/\D/g, '');
+    const phoneDigitCount = phoneDigitsOnly.length;
+    if (!/^\+?[\d\s\-()]{7,20}$/.test(userPhoneInput)) {
+        return { valid: false, message: 'Please enter a valid phone number.' };
+    }
+    if (phoneDigitCount < 7) {
+        return { valid: false, message: 'Phone number must contain at least 7 digits.' };
+    }
+    if (phoneDigitCount > 15) {
+        return { valid: false, message: 'Phone number is too long. max. 15 digits allowed.' };
+    }
+    return{ valid: true, message: ''};
+}
+
+
+/**
+ * Checks whether a full name string contains at least two words
+ * 
+ * @param {string} fullName - The full name string to validate.
+ * @returns {boolean} True if the name has at least two non-empty parts; otherwise, false.
+ */
+function isFullNameValid(fullName) {
+    return fullName.trim().split(' ').filter(Boolean).length >= 2;
 }

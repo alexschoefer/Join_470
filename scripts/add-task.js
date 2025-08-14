@@ -10,6 +10,7 @@ async function sendAddTaskData() {
   }, 1100);
 }
 
+
 /**
  * Collects all user inputs from the form and sends them to Firebase.
  * @async
@@ -24,18 +25,9 @@ async function saveUserInputsForFirebase() {
   let colorTo = getAssignedColor();
   let category = ATcategory.textContent;
   let subtasks = getSubtasksArray();
-  await postAddTaskDataToFirebase(
-    title,
-    description,
-    date,
-    priority,
-    status,
-    assignTo,
-    category,
-    subtasks,
-    colorTo
-  );
+  await postAddTaskDataToFirebase(title, description, date, priority, status, assignTo, category, subtasks, colorTo);
 }
+
 
 /**
  * Sends the new task to Firebase.
@@ -51,32 +43,15 @@ async function saveUserInputsForFirebase() {
  * @param {string[]} colorTo
  * @returns {Promise<Object>} The saved task
  */
-async function postAddTaskDataToFirebase(
-  title,
-  description,
-  date,
-  priority,
-  status,
-  assignTo,
-  category,
-  subtasks,
-  colorTo
-) {
+async function postAddTaskDataToFirebase( title, description, date, priority, status, assignTo, category, subtasks, colorTo) {
   const nextId = await getNextTaskId();
   const assigned = combineAssignedWithColors(assignTo, colorTo);
   const newTask = buildTaskData(
-    nextId,
-    title,
-    description,
-    date,
-    priority,
-    status,
-    assigned,
-    category,
-    subtasks
+    nextId, title, description, date, priority, status, assigned, category, subtasks
   );
   return await sendTaskToFirebase(nextId, newTask);
 }
+
 
 /**
  * Sends a task object to Firebase.
@@ -93,6 +68,7 @@ async function sendTaskToFirebase(nextId, newTask) {
   });
   return await response.json();
 }
+
 
 /**
  * Sets the state of the prio buttons and calls the corresponding styling function.
@@ -111,6 +87,11 @@ function addTaskPrioButtonClick(state) {
   }
 }
 
+
+/**
+ * Applies the "Urgent" priority button styles.
+ * Highlights the urgent button and icon, and removes highlight from the others.
+ */
 function holdButtonUrgent() {
   ATButtonLowPicRef.classList.remove(
     "add-task-priority-button-low-pic-pressed"
@@ -126,6 +107,11 @@ function holdButtonUrgent() {
   ATButtonLowRef.classList.remove("add-task-priority-button-low");
 }
 
+
+/**
+ * Applies the "Medium" priority button styles.
+ * Highlights the medium button and icon, and removes highlight from the others.
+ */
 function holdButtonMedium() {
   ATButtonUrgentPicRef.classList.remove(
     "add-task-priority-button-urgent-pic-pressed"
@@ -141,6 +127,11 @@ function holdButtonMedium() {
   ATButtonLowRef.classList.remove("add-task-priority-button-low");
 }
 
+
+/**
+ * Applies the "Low" priority button styles.
+ * Highlights the low button and icon, and removes highlight from the others.
+ */
 function holdButtonLow() {
   ATButtonUrgentPicRef.classList.remove(
     "add-task-priority-button-urgent-pic-pressed"
@@ -154,6 +145,7 @@ function holdButtonLow() {
   ATButtonLowRef.classList.add("add-task-priority-button-low");
 }
 
+
 /**
  * Adds a new subtask, resets the subtask input field, and re-renders the list.
  */
@@ -163,6 +155,7 @@ function addTaskAddSubtask() {
   ADSShowIcons();
 }
 
+
 /**
  * Gets the current value from the subtask input field and adds it to the subtask array.
  */
@@ -171,6 +164,7 @@ function subtasksToArray() {
   subtasks.push(inputData);
   subtaskRender();
 }
+
 
 /**
  * Renders all subtasks in the DOM.
@@ -186,6 +180,7 @@ function subtaskRender() {
   ADSShowIcons();
 }
 
+
 /**
  * Removes a subtask by index and re-renders the list.
  * @param {number} index - Index of the subtask to delete.
@@ -194,6 +189,7 @@ function deleteAddTaskSubtask(index) {
   subtasks.splice(index, 1);
   subtaskRender(index);
 }
+
 
 /**
  * Starts the finish animation after adding a task.
@@ -210,6 +206,7 @@ function startTaskAddedFinishAnimation() {
   }, 1000);
 }
 
+
 /**
  * Clears the subtask input field and shows the plus icon again.
  */
@@ -218,23 +215,16 @@ function clearAddTaskSubtask() {
   ATSubtasksIconAddRef.classList.remove("d_none");
 }
 
+
 /**
  * Sets the current subtask as "done" and returns to the normal view.
  * @param {number} id - The ID of the subtask.
  */
 function getDoneAddTaskSubtask(id) {
-  const ATSubSubtaskContainerRef = document.getElementById(
-    "ATSubtask-container-" + id
-  );
-  const addTaskSubtasksIconDoneRef = document.getElementById(
-    "add-task-subtasks-icon-done-" + id
-  );
-  const ATSubSubtaskIconEditRef = document.getElementById(
-    "add-task-subtasks-icon-edit-" + id
-  );
-  const ATSubSubtaskIconsRef = document.getElementById(
-    "add-task-subtasks-icons-" + id
-  );
+  const ATSubSubtaskContainerRef = document.getElementById("ATSubtask-container-" + id);
+  const addTaskSubtasksIconDoneRef = document.getElementById("add-task-subtasks-icon-done-" + id);
+  const ATSubSubtaskIconEditRef = document.getElementById("add-task-subtasks-icon-edit-" + id);
+  const ATSubSubtaskIconsRef = document.getElementById("add-task-subtasks-icons-" + id);
   const ATSubLiRef = document.getElementById("ATSubLi" + id);
   ATSubSubtaskContainerRef.blur();
   ATSubLiRef.classList.remove("d_none");
@@ -243,23 +233,16 @@ function getDoneAddTaskSubtask(id) {
   addTaskSubtasksIconDoneRef.classList.add("d_none");
 }
 
+
 /**
  * Activates the edit mode for a subtask.
  * @param {number} id - The ID of the subtask.
  */
 function editAddTaskSubtask(id) {
-  const ATSubSubtaskContainerRef = document.getElementById(
-    "ATSubtask-container-" + id
-  );
-  const ATSubSubtaskIconEditRef = document.getElementById(
-    "add-task-subtasks-icon-edit-" + id
-  );
-  const ATSubSubtaskIconsRef = document.getElementById(
-    "add-task-subtasks-icons-" + id
-  );
-  const addTaskSubtasksIconDoneRef = document.getElementById(
-    "add-task-subtasks-icon-done-" + id
-  );
+  const ATSubSubtaskContainerRef = document.getElementById("ATSubtask-container-" + id);
+  const ATSubSubtaskIconEditRef = document.getElementById("add-task-subtasks-icon-edit-" + id);
+  const ATSubSubtaskIconsRef = document.getElementById("add-task-subtasks-icons-" + id);
+  const addTaskSubtasksIconDoneRef = document.getElementById("add-task-subtasks-icon-done-" + id);
   const ATSubLiRef = document.getElementById("ATSubLi" + id);
   ATSubLiRef.classList.add("d_none");
   ATSubSubtaskContainerRef.focus();
@@ -267,6 +250,7 @@ function editAddTaskSubtask(id) {
   ATSubSubtaskIconEditRef.classList.add("d_none");
   addTaskSubtasksIconDoneRef.classList.remove("d_none");
 }
+
 
 /**
  * Shows the "Clear" and "Done" buttons for the subtask input field.
@@ -276,6 +260,7 @@ function showClearAndDoneButtons() {
   ATSubtasksIconAddRef.classList.add("d_none");
 }
 
+
 /**
  * Hides the "Clear" and "Done" buttons for the subtask input field.
  */
@@ -284,6 +269,7 @@ function hideClearAndDoneButtons() {
   ATSubtasksIconAddRef.classList.remove("d_none");
 }
 
+
 /**
  * Sets the focus in the subtask input field and hides the plus icon.
  */
@@ -291,6 +277,7 @@ function getFocusInSubtasksInput() {
   document.getElementById("add-task-subtasks-input").focus();
   ATSubtasksIconAddRef.classList.add("d_none");
 }
+
 
 /**
  * Controls the display and hiding of subtask icons when hovering over subtasks.
@@ -310,6 +297,7 @@ function ADSShowIcons() {
   });
 }
 
+
 /**
  * Resets the entire Add Task form.
  */
@@ -324,6 +312,7 @@ function resetAddTaskForm() {
   updateChosenInitials();
   loadCategoryOptions();
 }
+
 
 /**
  * Creates a category option for the dropdown menu.
@@ -344,6 +333,7 @@ function createCategoryOption(cat) {
   });
   return option;
 }
+
 
 /**
  * Loads the available categories into the dropdown menu.

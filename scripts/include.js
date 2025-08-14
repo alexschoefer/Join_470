@@ -1,32 +1,114 @@
 /**
- * Loads an HTML file asynchronously and inserts it into the given element.
- * Also calls initHeader() or initSidebar() if the ID matches.
- * Logs an error if loading fails.
- * @param {string} id - The ID of the target DOM element.
- * @param {string} path - The path to the HTML file.
- * @returns {Promise<void>}
+ * Returns the current file name.
+ * @returns {string}
  */
-async function loadComponent(id, path) {
-  try {
-    const res = await fetch(path);
-    if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-    const html = await res.text();
-    document.getElementById(id).innerHTML = html;
-    if (id === "header" && typeof initHeader === "function") {
-      initHeader();
-    }
-    if (id === "sidebar" && typeof initSidebar === "function") {
-      initSidebar();
-    }
-  } catch (err) {
-    console.error(`Error loading ${path}:`, err);
-  }
+function getCurrentFile() {
+  const p = window.location.pathname;
+  const f = p.substring(p.lastIndexOf("/") + 1);
+  return f || "index.html";
 }
 
+
 /**
- * Loads the header and sidebar components after the DOM is ready.
- * Uses loadComponent() to fetch and inject HTML content.
+ * Marks sidebar links as active.
  */
+function markSidebarActive() {
+  const cur = getCurrentFile();
+  const pub = document.body.classList.contains("public");
+  document.querySelectorAll("#sidebar a").forEach((a) => {
+    const f =
+      new URL(a.getAttribute("href"), location.href).pathname
+        .split("/")
+        .pop() || "index.html";
+    if (f !== cur) return;
+    if (pub && a.classList.contains("legal-information-button-public-btn"))
+      a.classList.add("active");
+    else a.parentElement?.classList?.add("active");
+  });
+}
+
+
+/**
+ * Checks public mode via URL parameter.
+ * @returns {boolean}
+ */
+function isPublicMode() {
+  return new URLSearchParams(location.search).get("public") === "1";
+}
+
+
+/**
+ * Selects the path to load.
+ * @param {HTMLElement} el
+ * @param {string} def
+ * @param {boolean} pub
+ * @param {string} id
+ * @returns {string}
+ */
+function choosePath(el, def, pub, id) {
+  const d = el.getAttribute("data-component") || def;
+  if (!el.getAttribute("data-component") && pub && id === "sidebar")
+    return "./sidebar-public.html";
+  return d;
+}
+
+
+/**
+ * Fetches HTML as text.
+ * @param {string} path
+ * @returns {Promise<string>}
+ */
+async function fetchHTML(path) {
+  const r = await fetch(path);
+  if (!r.ok) throw new Error(`HTTP error! Status: ${r.status}`);
+  return r.text();
+}
+
+
+/**
+ * Initializes sidebar after insertion.
+ * @param {boolean} pub
+ */
+function afterSidebar(pub) {
+  if (pub) document.body.classList.add("public");
+  if (typeof initSidebar === "function") initSidebar();
+  markSidebarActive?.();
+}
+
+
+/**
+ * Initializes header after insertion.
+ * @param {HTMLElement} el
+ * @param {boolean} pub
+ */
+function afterHeader(el, pub) {
+  if (pub) {
+    el.querySelector(".header-user-content")?.remove();
+    document.body.classList.add("public");
+    el.querySelector("#help-icon")?.remove();
+    el.querySelector("#profileCircle")?.remove();
+    el.querySelector("#burger-menu")?.remove();
+  }
+  if (typeof initHeader === "function") initHeader();
+}
+
+
+/**
+ * Loads and sets a fragment.
+ * @param {string} id
+ * @param {string} def
+ */
+async function loadComponent(id, def) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const pub = isPublicMode();
+  const path = choosePath(el, def, pub, id);
+  el.innerHTML = await fetchHTML(path);
+  if (id === "sidebar") afterSidebar(pub);
+  if (id === "header") afterHeader(el, pub);
+}
+
+
 document.addEventListener("DOMContentLoaded", async () => {
   await loadComponent("header", "./header.html");
   await loadComponent("sidebar", "./sidebar.html");

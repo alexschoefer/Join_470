@@ -57,16 +57,21 @@ function generateTodoHTML(task, priorityImg, assigned, color) {
            task
          )}' ondragstart="startDragging(${task.id})">
                 <div class="card-content">
+                    <div class="card-name-container">
                   <span style="background-color: ${color}" class="card-name"> ${
     task.category
   }</span>
+  <div class="card-drop-down-button">
+  <img src="../assets/icons/drop-down.png" />
+  </div>
+                </div>
                   <div class="card-description">
                     <h4>${task.title}</h4>
                     <p>${task.description}</p>
                   </div>
                   <div class="progress-bar">
                     <div class="bar"><span class="col-bar"></span></div>
-                    <span id="nr-progress-tasks"></span>
+                    <span id="nr-progress-tasks">0/0</span>
                   </div>
                   <div class="assignees-priority"> 
                   <div class="card-assigned-initials">
@@ -130,7 +135,6 @@ function editTasksOfBoard(id) {
                             <div class="add-task-form-right">
                                 <div class="add-task-form-right-priority">
                                     <span class="label-add-task-black">Priority</span>
-
                                     <div class="add-task-priority-buttons">
                                         <button onclick="addTaskPrioButtonClick('Urgent')"
                                             id="add-task-prio-button-urgent" class="add-task-priority-button"
@@ -139,7 +143,6 @@ function editTasksOfBoard(id) {
                                             <div id="add-task-prio-button-urgent-picture"
                                                 class="add-task-priority-button-urgent-image"></div>
                                         </button>
-
                                         <button onclick="addTaskPrioButtonClick('Medium')"
                                             id="add-task-prio-button-medium"
                                             class="add-task-priority-button add-task-priority-button-medium"
@@ -149,7 +152,6 @@ function editTasksOfBoard(id) {
                                                 class="add-task-priority-button-medium-image add-task-priority-button-medium-pic-pressed">
                                             </div>
                                         </button>
-
                                         <button onclick="addTaskPrioButtonClick('Low')" id="add-task-prio-button-low"
                                             class="add-task-priority-button" type="button">
                                             Low
@@ -167,13 +169,12 @@ function editTasksOfBoard(id) {
                                         </div>
                                         <div class="ATcustom-dropdown" id="add-task-assigned-to-select"
                                             style="display: none;">
-                                            <!-- Hier werden die Optionen per JS eingefügt -->
                                         </div>
                                     </div>
                                     <div id="add-task-assigned-to-chosen-initials"
                                         class="add-task-assigned-to-chosen-initials"></div>
                                 </div>
-                                <div class="add-task-form-right-category">
+                                <div class="add-task-form-right-category board-edit-task-category">
                                     <p class="label-add-task label-corrector-bottom-category">Category<span
                                             class="red-asterix-required">*</span></p>
                                     <div class="ATcustom-dropdown-wrapper" id="categoryDropdownWrapper">
@@ -183,19 +184,8 @@ function editTasksOfBoard(id) {
                                         </div>
                                         <div class="ATcustom-dropdown-category" id="add-task-category-select"
                                             style="display: none;">
-                                            <!-- Optionen per JS -->
                                         </div>
                                     </div>
-                                    <!-- <select id="add-task-category" title="add-task-category"
-                                        class="add-task-input-style" required>
-                                        <option value="">Select a category</option>
-                                        <option value="Technical Task" class="label-add-task">
-                                            Technical Task
-                                        </option>
-                                        <option value="User Story" class="label-add-task">
-                                            User Story
-                                        </option>
-                                    </select> -->
                                     <span id="category-required" class="required-text d_none">This field is
                                         required</span>
                                 </div>
@@ -228,7 +218,7 @@ function editTasksOfBoard(id) {
                                 </div>
                             </div>
                         </div>
-                        <ul id="allSubtasks" class="allSubtasks"></ul>
+                        <ul id="allSubtasks" class="allSubtasks board-subtasks-edit"></ul>
                      </div>
                      <div class="task-button-overlay">
                        <button type="button" id="add-task-button-create-task" onclick="valueTasksToEditTasks(${id})"
@@ -331,7 +321,6 @@ function addTasks() {
                                         </div>
                                         <div class="ATcustom-dropdown" id="add-task-assigned-to-select"
                                             style="display: none;">
-                                            <!-- Hier werden die Optionen per JS eingefügt -->
                                         </div>
                                     </div>
                                     <div id="add-task-assigned-to-chosen-initials"
@@ -347,19 +336,8 @@ function addTasks() {
                                         </div>
                                         <div class="ATcustom-dropdown-category" id="add-task-category-select"
                                             style="display: none;">
-                                            <!-- Optionen per JS -->
                                         </div>
                                     </div>
-                                    <!-- <select id="add-task-category" title="add-task-category"
-                                        class="add-task-input-style" required>
-                                        <option value="">Select a category</option>
-                                        <option value="Technical Task" class="label-add-task">
-                                            Technical Task
-                                        </option>
-                                        <option value="User Story" class="label-add-task">
-                                            User Story
-                                        </option>
-                                    </select> -->
                                     <span id="category-required" class="required-text d_none">This field is
                                         required</span>
                                 </div>
@@ -389,10 +367,10 @@ function addTasks() {
                                             </div>
                                         </div>
                                     </div>
+                                    <ul id="allSubtasks" class="allSubtasks"></ul>
                                 </div>
                             </div>
                         </div>
-                        <ul id="allSubtasks" class="allSubtasks"></ul>
                         <div class="add-task-form-buttons">
                             <div>
                                 <span class="label-add-task"><span class="red-asterix-required">*</span>This field is

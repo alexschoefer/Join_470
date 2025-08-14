@@ -13,20 +13,16 @@
   <link rel="stylesheet" href="../styles/summary.css" />
   <script src="../scripts/sidebar.js"></script>
   <link rel="stylesheet" href="../styles/summary.mobile.css" media="(max-width: 1020px)" />
-  <link rel="stylesheet" href="../style.mobile.css" media="(max-width: 1020px)" />
-  <link rel="stylesheet" href="../styles/sidebar.css">
+  <link rel="stylesheet" href="../styles/sidebar.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&family=Teko:wght@300..700&display=swap"
     rel="stylesheet" />
-
-
-
 </head>
 
-<body>
+<body onload="checksAuthentication()">
   <div class="app-layout">
     <div id="sidebar"></div>
     <div id="header"></div>
@@ -39,6 +35,7 @@
           </h2>
         </div>
       </div>
+
       <div class="summary-layout">
         <div>
           <div class="summary-head-content">
@@ -100,11 +97,17 @@
         </div>
       </div>
     </main>
+    <!-- Landscape-Overlay -->
+    <div id="orientation-warning" class="orientation-warning d_none">
+      <p>The Join app works best in portrait mode. Please rotate your device.</p>
+    </div>
   </div>
   <script src="../scripts/include.js"></script>
   <script src="../scripts/header.js"></script>
   <script src="../scripts/sidebar.js"></script>
   <script src="../scripts/summary.js"></script>
+  <script src="../scripts/auth.js"></script>
+  <script src="../script.js"></script>
 </body>
 
 </html>

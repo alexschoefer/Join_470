@@ -16,9 +16,9 @@
     <link rel="stylesheet" href="../styles/sign-up.css">
     <link rel="stylesheet" href="../styles/signup-mobile.css">
     <!-- Scripts -->
-    <script src="../script.js"></script>
     <script src="../scripts/signup.js"></script>
     <script src="../scripts/contacts.js"></script>
+    <script src="../scripts/contact-addon.js"></script>
 
 </head>
 
@@ -55,18 +55,18 @@
                                 </div>
                             </div>
                             <div class="input-validation-container">
-                                <p id="username-input-validation-message" class="input-validation-message d_none"
-                                    data-default-message="This field is required.">This field is required.</p>
+                                <p id="username-input-validation-message" class="input-validation-message d_none" data-default-message="Please enter both first and last name.">
+                                    Please enter both first and last name.
+                                </p>
                             </div>
                         </div>
                         <!-- E-Mail-Input -->
                         <div class="input-wrapper">
                             <div class="user-input-wrapper">
                                 <div class="input-container">
-                                    <input id="usermail-input" class="user-input" type="email" name="email"
-                                        pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" placeholder="Email" autocomplete="off"
-                                        onfocus="clearErrorMessage(this)"
-                                        onblur="validateSignupInput(this), checkRequiredInputEmail(this)">
+                                    <input id="usermail-input" class="user-input" type="text" name="email"
+                                        placeholder="Email" autocomplete="off" onfocus="clearErrorMessage(this)"
+                                        onblur="checkRequiredInputEmail(this)">
                                     <div>
                                         <img class="email-icon" src="../assets/icons/mail-icon.png" alt="email-icon">
                                     </div>
@@ -151,7 +151,11 @@
             <a class="nav-login-privacy-legal" href="./legal-notice.html">Legal Notice</a>
         </footer>
     </main>
-
+    <!-- Landscape-Overlay -->
+    <div id="orientation-warning" class="orientation-warning d_none">
+        <p>The Join app works best in portrait mode. Please rotate your device.</p>
+    </div>
+    <script src="../script.js"></script>
 </body>
 
 </html>

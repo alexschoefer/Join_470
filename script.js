@@ -7,17 +7,24 @@ let lastEditedContact = null;
 let lastEditedIndex = null;
 let currentContactIndex = null;
 let typeOfScreen = "";
+let previousOrientationWarningVisible = false;
 
 /**
  * On DOMContentLoaded event, calls updateDeviceType to initialize the device type based on the current window size.
  */
-document.addEventListener('DOMContentLoaded', updateDeviceType);
+document.addEventListener('DOMContentLoaded', () => {
+    updateDeviceType();
+    handleOrientationChange();
+});
 
 
 /**
  * Adds a listener for window resize events to update the device type dynamically whenever the window size changes.
  */
-window.addEventListener('resize', updateDeviceType);
+window.addEventListener('resize', () => {
+    updateDeviceType();
+    handleOrientationChange();
+});
 
 
 /**
@@ -43,6 +50,39 @@ function updateDeviceType() {
         }
     }
 }
+
+
+/**
+ * Handles the orientation change on mobile devices. Shows a landscape warning overlay if the device is in landscape mode and is identified as a real mobile device. 
+ */
+function handleOrientationChange() {
+    const warning = document.getElementById('orientation-warning');
+    if (!warning) return;
+    const isMobile = window.innerWidth < 1020;
+    const isLandscape = window.innerWidth > window.innerHeight;
+    const isTooShort = window.innerHeight < 768;
+    const shouldShowWarning = isMobile && isLandscape && isTooShort;
+    if (shouldShowWarning) {
+        warning.classList.remove('orientation-warning-z0');
+        warning.classList.add('orientation-warning-z99');
+    } else {
+        warning.classList.remove('orientation-warning-z99');
+        warning.classList.add('orientation-warning-z0');
+    }
+      warning.classList.toggle('d_none', !shouldShowWarning);
+    document.body.classList.toggle('no-scroll', shouldShowWarning);
+    previousOrientationWarningVisible = shouldShowWarning;
+}
+
+
+/**
+ * Checks whether the current device is a real mobile device based on the user agent string. 
+ * @returns {boolean} Returns true if the device is identified as mobile, otherwise false.
+ */
+function isRealMobileDevice() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
 
 
 /**
@@ -99,7 +139,6 @@ function clearErrorMessage(input) {
 function changePasswordIcon(input) {
     const container = input.closest('.input-container');
     const icon = container.querySelector('.password-icon');
-
     if (input.value.trim().length > 0) {
         icon.src = "../assets/icons/visibility-off-icon.png";
         icon.classList.add('visibility-off-icon');
@@ -137,7 +176,11 @@ function validateContactSectionForms() {
     const filled = areAllInputsFilled();
     const emailInput = document.getElementById('usermail-input');
     const emailOK = isValidEmail(emailInput.value);
-    const formValid = filled && emailOK;
+    const nameInput = document.getElementById('username-input');
+    const nameOK = isFullNameValid(nameInput.value.trim());
+    const phoneInput = document.getElementById('userphone-input');
+    const phoneOK = isValidPhoneNumber(phoneInput.value.trim());
+    const formValid = filled && emailOK && nameOK && phoneOK;
     setButtonState(formValid);
 }
 
@@ -346,35 +389,6 @@ function checkRequiredFieldsAndToggleButton() {
     } else {
         ATButtonAddTaskRef.disabled = true;
     }
-}
-
-
-/**
- * Displays a temporary success message in the feedback overlay
- * @param {string} message - The message to display (given in the function)
- */
-async function showCreateContactSuccess(message) {
-    console.log('Overlay function triggered with message:', message);
-    const overlay = document.getElementById('success-message-overlay');
-    const messageBox = document.getElementById('feedback-message');
-    messageBox.innerText = message;
-    overlay.classList.remove('d_none');
-    overlay.classList.add('show');
-    setTimeout(() => {
-      overlay.classList.add('d_none');
-      overlay.classList.remove('show');
-    }, 800);
-    await initContacts();
-  }
-
-
-/**
- * Help function - Sorts an array of contact objects alphabetically by their name
- * @param {*} allContacts - The array of contact objects to sort
- * @returns - The sorted array of contacts
- */
-function sortContactsAlphabetically(allContacts) {
-    return allContacts.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 
