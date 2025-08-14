@@ -358,8 +358,10 @@ function validateContactFormsInput(input) {
         errorMessage.textContent = isValid ? errorMessage.dataset.defaultMessage : 'Please enter both first and last name.';
     } else if (input.id === 'userphone-input') {
         const phoneValidation = isValidPhoneNumber(value);
+        console.log(phoneValidation);
         isValid = phoneValidation.valid;
-        errorMessage.textContent = isValid ? errorMessage.dataset.defaultMessage : phoneValidation.message;
+        console.log('Fehlermeldung setzen:', isValid ? errorMessage.dataset.defaultMessage : phoneValidation.message);
+        errorMessage.textContent = isValid ? '' : phoneValidation.message;
     }
     errorMessage.classList.toggle('d_none', isValid);
     wrapper.classList.toggle('input-error', !isValid);
@@ -374,16 +376,21 @@ function validateContactFormsInput(input) {
  */
 function isValidPhoneNumber(phone) {
     const cleaned = phone.trim();
+
+    // 1. Format prüfen
+    if (!/^[\d\s\-()+]+$/.test(cleaned)) {
+        return { valid: false, message: 'Invalid format. Use only digits, +, -, (), or spaces.' };
+    }
+
+    // 2. Ziffern zählen
     const digitsOnly = cleaned.replace(/\D/g, '');
     const digitCount = digitsOnly.length;
-    if (!/^\+?[\d\s\-()]{7,20}$/.test(cleaned)) {
-        return { valid: false, message: 'Invalid format. Use only digits, +, -, (), or spaces.'};
-    }
+
     if (digitCount < 7) {
-        return { valid: false, message: 'Phone number must contain at least 7 digits.'};
+        return { valid: false, message: 'Phone number must contain at least 7 digits.' };
+    } else if (digitCount > 15) {
+        return { valid: false, message: 'Phone number is too long. Max. 15 digits allowed.' };
     }
-    if (digitCount > 15) {
-        return { valid: false, message: 'Phone number is too long. Max. 15 digits allowed.'};
-    }
+
     return { valid: true, message: '' };
 }

@@ -166,28 +166,6 @@ async function updateTaskOnContactDelete(taskId, updatedTask) {
 
 
 /**
- * Validates a phone number and returns an object with status and error message.
- * @param {string} phone - The phone number input to validate.
- * @returns {{ valid: boolean, message: string }}
- */
-function isValidPhoneNumber(phone) {
-    const userPhoneInput = phone.trim();
-    const phoneDigitsOnly = userPhoneInput.replace(/\D/g, '');
-    const phoneDigitCount = phoneDigitsOnly.length;
-    if (!/^\+?[\d\s\-()]{7,20}$/.test(userPhoneInput)) {
-        return { valid: false, message: 'Please enter a valid phone number.' };
-    }
-    if (phoneDigitCount < 7) {
-        return { valid: false, message: 'Phone number must contain at least 7 digits.' };
-    }
-    if (phoneDigitCount > 15) {
-        return { valid: false, message: 'Phone number is too long. max. 15 digits allowed.' };
-    }
-    return{ valid: true, message: ''};
-}
-
-
-/**
  * Checks whether a full name string contains at least two words
  * 
  * @param {string} fullName - The full name string to validate.
