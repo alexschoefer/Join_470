@@ -75,7 +75,7 @@
   justify-content: center;
   text-align: center;
   gap: 4px;
-  padding-top: 243px;
+  padding-top: 220px;
 }
 
 .legal-information-button {
@@ -83,6 +83,7 @@
   padding: 8px;
   gap: 8px;
 }
+
 .legal-information-button a {
   display: inline-block;
   transition: transform 0.2s ease, color 0.2s ease;

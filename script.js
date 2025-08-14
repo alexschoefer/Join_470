@@ -179,8 +179,9 @@ function validateContactSectionForms() {
     const nameInput = document.getElementById('username-input');
     const nameOK = isFullNameValid(nameInput.value.trim());
     const phoneInput = document.getElementById('userphone-input');
-    const phoneOK = isValidPhoneNumber(phoneInput.value.trim());
-    const formValid = filled && emailOK && nameOK && phoneOK;
+    const phoneValidation = isValidPhoneNumber(phoneInput.value.trim());
+    const phoneOK = phoneValidation.valid;
+    const formValid = filled && emailOK && nameOK && phoneOK;    
     setButtonState(formValid);
 }
 
