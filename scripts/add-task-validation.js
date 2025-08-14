@@ -18,19 +18,74 @@ function validateTitle() {
 
 /**
  * Validates the due date input field for a new task.
- * Shows an error message if the field is empty.
- * @returns {boolean} true if the field is filled, otherwise false.
+ * Shows an error message if the field is empty or the date is in the past.
+ * @returns {boolean} true if the field is filled and the date is valid, otherwise false.
  */
 function validateDueDate() {
-    if (!ATDueDateRef.value.trim()) {
-        ATDueDateRef.classList.add('error');
-        document.getElementById('due-date-required').classList.remove('d_none');
+    const input = document.getElementById('add-task-due-date-input');
+    const errorMsg = document.getElementById('due-date-required');
+    if (!input) return false;
+
+    if (!isDueDateFilled(input, errorMsg)) return false;
+    if (!isDueDateInFuture(input, errorMsg)) return false;
+
+    clearDueDateError(input, errorMsg);
+    return true;
+}
+
+
+/**
+ * Checks if the due date input is filled.
+ * Shows an error message if not.
+ * @param {HTMLInputElement} input - The due date input element.
+ * @param {HTMLElement} errorMsg - The error message element.
+ * @returns {boolean} true if filled, otherwise false.
+ */
+function isDueDateFilled(input, errorMsg) {
+    if (!input.value) {
+        input.classList.add('error');
+        if (errorMsg) {
+            errorMsg.textContent = "This field is required.";
+            errorMsg.classList.remove('d_none');
+        }
         return false;
-    } else {
-        ATDueDateRef.classList.remove('error');
-        document.getElementById('due-date-required').classList.add('d_none');
-        return true;
     }
+    return true;
+}
+
+
+/**
+ * Checks if the due date is today or in the future.
+ * Shows an error message if the date is in the past.
+ * @param {HTMLInputElement} input - The due date input element.
+ * @param {HTMLElement} errorMsg - The error message element.
+ * @returns {boolean} true if the date is valid, otherwise false.
+ */
+function isDueDateInFuture(input, errorMsg) {
+    const selectedDate = new Date(input.value);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Compare only date
+
+    if (selectedDate < today) {
+        input.classList.add('error');
+        if (errorMsg) {
+            errorMsg.textContent = "You have to choose right date";
+            errorMsg.classList.remove('d_none');
+        }
+        return false;
+    }
+    return true;
+}
+
+
+/**
+ * Clears the error state and hides the error message for the due date input.
+ * @param {HTMLInputElement} input - The due date input element.
+ * @param {HTMLElement} errorMsg - The error message element.
+ */
+function clearDueDateError(input, errorMsg) {
+    input.classList.remove('error');
+    if (errorMsg) errorMsg.classList.add('d_none');
 }
 
 
@@ -63,5 +118,8 @@ function validateAddTaskInputs() {
     if (!validateTitle()) valid = false;
     if (!validateDueDate()) valid = false;
     if (!validateCategory()) valid = false;
+    if(valid == true){
+         initAddTaskButtonEvent();
+    }
     return valid;
 }

@@ -4,11 +4,11 @@
 function addTaskEventInit() {
   initInputValidationEvents();
   initSubtaskInputEvents();
-  initAddTaskButtonEvent();
   initDropdownEvents();
   initDueDateInputEvent();
   initDocumentClickEvents();
   initCalendarIconEvent();
+  initAddTaskButtonEvent();
 }
 
 
