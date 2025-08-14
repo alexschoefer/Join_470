@@ -358,7 +358,6 @@ function validateContactFormsInput(input) {
         errorMessage.textContent = isValid ? errorMessage.dataset.defaultMessage : 'Please enter both first and last name.';
     } else if (input.id === 'userphone-input') {
         const phoneValidation = isValidPhoneNumber(value);
-        console.log(phoneValidation);
         isValid = phoneValidation.valid;
         errorMessage.textContent = isValid ? '' : phoneValidation.message;
     }
