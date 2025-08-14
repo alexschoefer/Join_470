@@ -73,7 +73,9 @@ function changeContact() {
     }, 10);
 }
 
-
+/**
+ * Remove the localStorage for the key "cachedContacts"
+ */
 function resetDummySync() {
     localStorage.removeItem("cachedContacts");
 }
