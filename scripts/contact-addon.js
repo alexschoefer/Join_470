@@ -8,6 +8,21 @@ async function refreshContacts() {
 
 
 /**
+ *  Loads all contacts from remote storage and returns them as an array
+ * @async
+ * @returns - Array of contact objects including id and contact data
+ */
+async function loadAllContactsFromRemoteStorage() {
+    const response = await fetch(fetchURLDataBase + '/contacts' + '.json');
+    const contactsData = await response.json();
+    return Object.entries(contactsData).map(([id, contact]) => ({
+        id,
+        ...contact
+    }));
+}
+
+
+/**
  * Help function - Sorts an array of contact objects alphabetically by their name
  * @param {*} allContacts - The array of contact objects to sort
  * @returns - The sorted array of contacts

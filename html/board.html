@@ -1,162 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Board</title>
-    <link
-      rel="shortcut icon"
-      href="../assets/img/MenuLogo.png"
-      type="image/x-icon"
-    />
-    <link rel="stylesheet" href="../styles/standard.css" />
-    <link rel="stylesheet" href="../styles/assets.css" />
-    <link rel="stylesheet" href="../styles/board.css" />
-    <link rel="stylesheet" href="../styles/board-media.css" />
-    <link rel="stylesheet" href="../styles/add-task.css" />
-    <link rel="stylesheet" href="../styles/add-task-descripiton.css" />
-    <link rel="stylesheet" href="../styles/add-task-due-date.css" />
-    <link rel="stylesheet" href="../styles/add-task-priority.css" />
-    <link rel="stylesheet" href="../styles/add-task-contacts.css" />
-    <link rel="stylesheet" href="../styles/add-task-subtasks.css" />
-    <link rel="stylesheet" href="../styles/fonts.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&family=Teko:wght@300..700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../style.css" />
-    <script src="../scripts/include.js"></script>
-    <script src="../scripts/header.js"></script>
-    <script src="../scripts/sidebar.js"></script>
-    <script src="../scripts/auth.js"></script>
-  </head>
 
-  <body onload="checksAuthentication(), init()">
-    <div class="app-layout">
-      <div id="sidebar"></div>
-      <div id="header"></div>
-      <div id="shadow-container" onclick="closeContainerOverlay()"></div>
-      <main class="main-content">
-        <section id="board-content">
-          <div class="board-container">
-            <div class="board-find-task">
-              <h1>Board</h1>
-              <div class="task-search">
-                <div class="input-search">
-                  <div class="search-container">
-                    <input
-                      id="searchInput"
-                      type="text"
-                      placeholder="Find Task"
-                    />
-                    <span id="search-message" style="color: red; display: none">
-                      No task matching your search was found.
-                    </span>
-                  </div>
-                  <button class="search">
-                    <span class="border-img">
-                      <img src="../assets/icons/search.png" />
-                    </span>
-                  </button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Board</title>
+  <!-- Styles CSS -->
+  <link rel="shortcut icon" href="../assets/img/MenuLogo.png" type="image/x-icon" />
+  <link rel="stylesheet" href="../styles/standard.css" />
+  <link rel="stylesheet" href="../styles/assets.css" />
+  <link rel="stylesheet" href="../styles/board.css" />
+  <link rel="stylesheet" href="../styles/board-addon.css">
+  <link rel="stylesheet" href="../styles/board-media.css" />
+  <link rel="stylesheet" href="../styles/add-task.css" />
+  <link rel="stylesheet" href="../styles/add-task-descripiton.css" />
+  <link rel="stylesheet" href="../styles/add-task-due-date.css" />
+  <link rel="stylesheet" href="../styles/add-task-priority.css" />
+  <link rel="stylesheet" href="../styles/add-task-contacts.css" />
+  <link rel="stylesheet" href="../styles/add-task-subtasks.css" />
+  <link rel="stylesheet" href="../styles/fonts.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&family=Teko:wght@300..700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+
+  <!-- JavaScript -->
+  <script src="../scripts/include.js"></script>
+  <script src="../scripts/header.js"></script>
+  <script src="../scripts/sidebar.js"></script>
+  <script src="../scripts/auth.js"></script>
+</head>
+
+<body onload="checksAuthentication(), init()">
+  <div class="app-layout">
+    <div id="sidebar"></div>
+    <div id="header"></div>
+    <div id="shadow-container" onclick="closeContainerOverlay()"></div>
+    <main class="main-content">
+      <section id="board-content">
+        <div class="board-container">
+          <div class="board-find-task">
+            <h1>Board</h1>
+            <div class="task-search">
+              <div class="input-search">
+                <div class="search-container">
+                  <input id="searchInput" type="text" placeholder="Find Task" autocomplete="off" />
+                  <span id="search-message" style="color: red; display: none">
+                    No task matching your search was found.
+                  </span>
                 </div>
+                <button class="search">
+                  <span class="border-img">
+                    <img src="../assets/icons/search.png" />
+                  </span>
+                </button>
               </div>
-              <button class="add-task">
-                <span>Add task</span>
-                <span class="img-add-task"
-                  ><img src="../assets/icons/add.png"
-                /></span>
-              </button>
             </div>
-            <section id="all-task">
-              <div class="board-task-column to-do">
-                <div class="task-title">
-                  <h2>To do</h2>
-                  <div class="add-task-icon"></div>
-                </div>
-                <div class="responsive-conteiner-board">
-                  <div
-                    class="card-drag-drop-container drag-area"
-                    id="toDo"
-                    ondrop="moveTo('toDo')"
-                    ondragleave="removeHighlight('toDo')"
-                    ondragover="allowDrop(event); highlight('toDo')"
-                  ></div>
-                </div>
-              </div>
-
-              <div class="board-task-column in-progress">
-                <div class="task-title">
-                  <h2>In progress</h2>
-                  <div class="add-task-icon"></div>
-                </div>
-                <div class="responsive-conteiner-board">
-                  <div
-                    class="card-drag-drop-container drag-area"
-                    id="inProgress"
-                    ondrop="moveTo('inProgress')"
-                    ondragleave="removeHighlight('inProgress')"
-                    ondragover="allowDrop(event); highlight('inProgress')"
-                  ></div>
-                </div>
-              </div>
-
-              <div class="board-task-column await-feedback">
-                <div class="task-title">
-                  <h2>Await feedback</h2>
-                  <div class="add-task-icon"></div>
-                </div>
-                <div class="responsive-conteiner-board">
-                  <div
-                    class="card-drag-drop-container drag-area"
-                    id="awaitFeedback"
-                    ondrop="moveTo('awaitFeedback')"
-                    ondragleave="removeHighlight('awaitFeedback')"
-                    ondragover="allowDrop(event); highlight('awaitFeedback')"
-                  ></div>
-                </div>
-              </div>
-
-              <div class="board-task-column done">
-                <div class="task-title">
-                  <h2>Done</h2>
-                </div>
-                <div class="responsive-conteiner-board">
-                  <div
-                    class="card-drag-drop-container drag-area"
-                    id="done"
-                    ondrop="moveTo('done')"
-                    ondragleave="removeHighlight('done')"
-                    ondragover="allowDrop(event); highlight('done')"
-                  ></div>
-                </div>
-              </div>
-            </section>
-            <div id="task-card-container"></div>
+            <button class="add-task">
+              <span>Add task</span>
+              <span class="img-add-task"><img src="../assets/icons/add.png" /></span>
+            </button>
           </div>
-        </section>
-      </main>
-    </div>
-    <!-- Landscape-Overlay -->
-    <div id="orientation-warning" class="orientation-warning d_none">
-      <p>
-        The Join app works best in portrait mode. Please rotate your device.
-      </p>
-    </div>
-    <script src="../script.js"></script>
-    <script src="../scripts/template-add-task.js"></script>
-    <script src="../scripts/dataRemoteStorage.js"></script>
-    <script src="../scripts/remoteStorage.js"></script>
-    <script src="../scripts/add-task-validation.js" defer></script>
-    <script src="../scripts/board-drag-drop.js"></script>
-    <script src="../scripts/board-overlay.js" defer></script>
-    <script src="../scripts/add-task-contacts.js" defer></script>
-    <script src="../scripts/add-task-events.js" defer></script>
-    <script src="../scripts/add-task-ref.js" defer></script>
-    <script src="../scripts/add-task.js" defer></script>
-    <script src="../scripts/template-board.js"></script>
-    <script src="../scripts/board.js" defer></script>
-    <script src="../scripts/board-addon.js" defer></script>
-  </body>
+          <section id="all-task">
+            <div class="board-task-column to-do">
+              <div class="task-title">
+                <h2>To do</h2>
+                <div class="add-task-icon"></div>
+              </div>
+              <div class="responsive-conteiner-board">
+                <div class="card-drag-drop-container drag-area" id="toDo" ondrop="moveTo('toDo')"
+                  ondragleave="removeHighlight('toDo')" ondragover="allowDrop(event); highlight('toDo')"></div>
+              </div>
+            </div>
+
+            <div class="board-task-column in-progress">
+              <div class="task-title">
+                <h2>In progress</h2>
+                <div class="add-task-icon"></div>
+              </div>
+              <div class="responsive-conteiner-board">
+                <div class="card-drag-drop-container drag-area" id="inProgress" ondrop="moveTo('inProgress')"
+                  ondragleave="removeHighlight('inProgress')" ondragover="allowDrop(event); highlight('inProgress')">
+                </div>
+              </div>
+            </div>
+
+            <div class="board-task-column await-feedback">
+              <div class="task-title">
+                <h2>Await feedback</h2>
+                <div class="add-task-icon"></div>
+              </div>
+              <div class="responsive-conteiner-board">
+                <div class="card-drag-drop-container drag-area" id="awaitFeedback" ondrop="moveTo('awaitFeedback')"
+                  ondragleave="removeHighlight('awaitFeedback')"
+                  ondragover="allowDrop(event); highlight('awaitFeedback')"></div>
+              </div>
+            </div>
+
+            <div class="board-task-column done">
+              <div class="task-title">
+                <h2>Done</h2>
+              </div>
+              <div class="responsive-conteiner-board">
+                <div class="card-drag-drop-container drag-area" id="done" ondrop="moveTo('done')"
+                  ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done')"></div>
+              </div>
+            </div>
+          </section>
+          <div id="task-card-container"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <!-- Landscape-Overlay -->
+  <div id="orientation-warning" class="orientation-warning d_none">
+    <p>
+      The Join app works best in portrait mode. Please rotate your device.
+    </p>
+  </div>
+  <script src="../script.js"></script>
+  <script src="../scripts/template-add-task.js"></script>
+  <script src="../scripts/dataRemoteStorage.js"></script>
+  <script src="../scripts/remoteStorage.js"></script>
+  <script src="../scripts/add-task-validation.js" defer></script>
+  <script src="../scripts/board-drag-drop.js"></script>
+  <script src="../scripts/board-overlay.js" defer></script>
+  <script src="../scripts/add-task-contacts.js" defer></script>
+  <script src="../scripts/add-task-events.js" defer></script>
+  <script src="../scripts/add-task-ref.js" defer></script>
+  <script src="../scripts/add-task.js" defer></script>
+  <script src="../scripts/template-board.js"></script>
+  <script src="../scripts/board.js" defer></script>
+  <script src="../scripts/board-addon.js" defer></script>
+</body>
+
 </html>
