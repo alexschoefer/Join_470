@@ -140,10 +140,10 @@ function changePasswordIcon(input) {
     const container = input.closest('.input-container');
     const icon = container.querySelector('.password-icon');
     if (input.value.trim().length > 0) {
-        icon.src = "../assets/icons/visibility-off-icon.png";
+        icon.src = "./assets/icons/visibility-off-icon.png";
         icon.classList.add('visibility-off-icon');
     } else {
-        icon.src = "../assets/icons/lock-icon.png";
+        icon.src = "./assets/icons/lock-icon.png";
         icon.classList.remove('visibility-off-icon');
     }
 }
