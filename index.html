@@ -19,6 +19,7 @@
     <script src="./scripts/login.js"></script>
     <script src="./scripts/contacts.js"></script>
     <script src="./scripts/dataRemoteStorage.js"></script>
+    <script src="./scripts/signup.js"></script>
 </head>
 
 <body onload="startLogoAnimation()">
@@ -41,7 +42,7 @@
                                 <div class="input-container">
                                     <input id="login-usermail-input" class="user-input" type="email" name="email"
                                         pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" placeholder="Email" autocomplete="off"
-                                        onfocus="clearErrorMessage(this)" onblur="validateLoginInput(this)" />
+                                        onfocus="clearErrorMessage(this)" onblur="validateLoginInput(this), checkRequiredLoginInputEmail(this)" />
                                     <div><img src="./assets/icons/mail-icon.png" alt="email-icon"></div>
                                 </div>
                             </div>

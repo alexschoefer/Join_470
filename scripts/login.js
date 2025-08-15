@@ -214,3 +214,19 @@ function showLoginSuccessMessage() {
       window.location.href = './html/summary.html';
   }, 800);
 }
+
+/**
+ * Help-function - Checking the required input email for login
+ * Displays an error message if the email is not valid by the function isValidEmail
+ */
+async function checkRequiredLoginInputEmail(input) {
+  const email = input.value.trim();
+  if (!email) {
+      showError(input, 'This field is required.');
+      return;
+  }
+  if (!isValidEmail(email)) {
+      showError(input, 'Please enter a valid email address.');
+      return;
+  }
+}
