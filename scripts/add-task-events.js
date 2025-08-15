@@ -13,13 +13,18 @@ function addTaskEventInit() {
 
 
 /**
- * Initializes input validation events for title and due date.
+ * Initializes input validation events for the Add Task form.
+ * 
+ * - Adds input and blur event listeners for title and due date fields.
+ * - Calls validation functions on user interaction.
+ * - Sets minimum and maximum allowed dates for the due date input.
  */
 function initInputValidationEvents() {
   ATTitleRef.addEventListener("input", checkRequiredFieldsAndToggleButton);
   ATDueDateRef.addEventListener("input", checkRequiredFieldsAndToggleButton);
   ATTitleRef.addEventListener("blur", validateTitle);
   ATDueDateRef.addEventListener("blur", validateDueDate);
+  setDueDateLimits();
 }
 
 
