@@ -167,6 +167,8 @@
   text-align: center;
   color: var(--black);
   text-align: center;
+  width: 8px;
+  margin-left: 2px;
 }
 
 .add-task-subtasks-input-style {
@@ -189,3 +191,4 @@
   letter-spacing: 0%;
   outline: none;
 }
+
