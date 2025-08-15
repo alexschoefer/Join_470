@@ -84,7 +84,6 @@ function isRealMobileDevice() {
 }
 
 
-
 /**
  * Adjusts the layout of the contact view depending on the device type (desktop or mobile) and whether a contact is currently selected.
  * On desktop: shows all sections. In the mobile view hides the left container and contact list if a contact is open.
