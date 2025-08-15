@@ -39,3 +39,17 @@ window.addEventListener("resize", () => {
       closeContainerOverlay();
     }
   });
+
+
+  /**
+ * Safely retrieves the status field from a card's data-task JSON.
+ * @param {Element} card - Task card element
+ * @returns {string} Task status or empty string on error
+ */
+function getTaskStatus(card) {
+    try {
+      return JSON.parse(card.dataset.task).status;
+    } catch {
+      return "";
+    }
+  }

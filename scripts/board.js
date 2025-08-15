@@ -33,6 +33,7 @@ function appendTaskToBoard(task) {
   updateSubtaskProgress(task.subtasks, card);
 }
 
+
 /**
  * Clears existing task and placeholder nodes from each provided column.
  * @param {{container: Element}[]} cols - Array of column objects
@@ -45,6 +46,7 @@ function clearColumns(cols) {
       .forEach((n) => n.remove());
   });
 }
+
 
 /**
  * Generates a DOM element for a task card based on its data.
@@ -64,6 +66,7 @@ function createCardElement(task) {
   return template.content.firstElementChild;
 }
 
+
 /**
  * Filters and processes a list of tasks, executing a callback for each match.
  * @param {Object[]} list - Array of task objects
@@ -72,7 +75,7 @@ function createCardElement(task) {
  */
 function processTasks(list, filter, cb) {
   list
-    .filter((t) => t && (!filter || t.title.toLowerCase().startsWith(filter)))
+    .filter((t) => t && (!filter || t.title.toLowerCase().includes(currentFilter)) || t.description.toLowerCase().includes(currentFilter))
     .forEach(cb);
 }
 
@@ -87,6 +90,7 @@ function updateBoardContent() {
   insertTemplateIfEmpty();
 }
 
+
 /**
  * Adds a real-time search filter to the board content based on user input. Listens for input events on the search field.
  * If the entered query is at least 3 characters long, it sets the global `currentFilter` variable to the lowercase, trimmed input.
@@ -100,7 +104,7 @@ searchInput.addEventListener("input", () => {
   updateBoardContent();
   let found = tasks.some(
     (t) =>
-      t && (!currentFilter || t.title.toLowerCase().startsWith(currentFilter))
+      t && (!currentFilter || t.title.toLowerCase().includes(currentFilter) || t.description.toLowerCase().includes(currentFilter))
   );
   if (!found && q.length >= 3) {
     searchMessage.style.display = "inline-block";
@@ -223,7 +227,7 @@ function initAddTaskForm(id) {
 
 /**
  * Maps priority levels to corresponding icon image URLs.
- * @param {string} priority - Priority label (e.g., "Medium", "Low", "Urgent")
+ * @param {string} priority - Priority label
  * @returns {string} URL of priority icon
  */
 function getImageForPriority(priority) {
@@ -389,18 +393,4 @@ function attachMenuListeners(menu, card) {
       closeCurrentActionMenu();
     });
   });
-}
-
-
-/**
- * Safely retrieves the status field from a card's data-task JSON.
- * @param {Element} card - Task card element
- * @returns {string} Task status or empty string on error
- */
-function getTaskStatus(card) {
-  try {
-    return JSON.parse(card.dataset.task).status;
-  } catch {
-    return "";
-  }
 }
