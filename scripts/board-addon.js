@@ -28,3 +28,14 @@ window.addEventListener("load", () => {
     updateDraggables();
     updateBoardContent();
 });
+
+
+/**
+ * Initialize on page load and bind resize events
+ */
+window.addEventListener("resize", () => {
+    updateDraggables();
+    if (container.classList.contains("show-from-right")) {
+      closeContainerOverlay();
+    }
+  });

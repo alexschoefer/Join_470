@@ -108,6 +108,7 @@ searchInput.addEventListener("input", () => {
   }
 });
 
+
 /**
  * Initializes application: loads tasks, saves defaults if missing,
  * and updates UI handlers.
@@ -126,6 +127,7 @@ async function init() {
   openTaskDetails();
   attachAddTaskHandlers();
 }
+
 
 /**
  * Populates a column container with tasks matching its status.
@@ -151,6 +153,7 @@ function populateColumn(col) {
     });
 }
 
+
 /**
  * Updates all columns, drag settings, placeholders, and dropdown menus.
  * @async
@@ -161,6 +164,7 @@ async function updateTask() {
   insertTemplateIfEmpty();
   attachDropdownsToCards();
 }
+
 
 /**
  * Attaches click handlers to "Add Task" buttons to open overlay or navigate.
@@ -180,6 +184,7 @@ function attachAddTaskHandlers() {
   addBtn.addEventListener("click", handler);
   plusButtons.forEach((btn) => btn.addEventListener("click", handler));
 }
+
 
 /**
  * Converts internal status names to human-readable labels.
@@ -213,6 +218,7 @@ function initAddTaskForm(id) {
   });
 }
 
+
 /**
  * Maps priority levels to corresponding icon image URLs.
  * @param {string} priority - Priority label (e.g., "Medium", "Low", "Urgent")
@@ -226,6 +232,7 @@ function getImageForPriority(priority) {
   };
   return imageMap[priority] || imageMap.Low;
 }
+
 
 /**
  * Returns a hex color code for a given task category.
@@ -244,11 +251,9 @@ function getColoredLabels(category) {
  * @param {Element} container - Card element containing subtask UI
  */
 function updateSubtaskProgress(subtasks, container) {
-  // Sicherstellen, dass subtasks ein Array ist
   if (!Array.isArray(subtasks)) {
-    subtasks = []; // Leeres Array, um Absturz zu vermeiden
+    subtasks = [];
   }
-
   let total = subtasks.length;
   let doneCount = subtasks.filter((s) => s.done).length;
   let pct = total ? (doneCount / total) * 100 : 0;
@@ -259,6 +264,7 @@ function updateSubtaskProgress(subtasks, container) {
   if (bar) bar.style.width = pct + "%";
   if (progressText) progressText.textContent = `${doneCount}/${total} Subtasks`;
 }
+
 
 /**
  * Generates HTML string for a list of subtasks with checkboxes.
@@ -281,6 +287,7 @@ function generateSubtaskHTML(subtasks) {
     )
     .join("");
 }
+
 
 /**
  * Closes the currently open action menu if present.
@@ -305,6 +312,7 @@ function positionMenu(menu, btn, card) {
   menu.style.right = `${offsetRight}px`;
 }
 
+
 /**
  * Sets up click listener to close menu when clicking outside.
  * @param {MouseEvent} ev - Click event
@@ -317,6 +325,7 @@ function outsideClick(ev, menu, btn) {
     document.removeEventListener("click", (ev) => outsideClick(ev, menu, btn));
   }
 }
+
 
 /**
  * Builds HTML options for moving a task between statuses.
@@ -354,6 +363,7 @@ function buildMoveOptions(currentStatus) {
     .join("");
 }
 
+
 /**
  * Attaches click listeners to menu options to move tasks between statuses.
  * @param {Element} menu - Action menu element
@@ -378,6 +388,7 @@ function attachMenuListeners(menu, card) {
     });
   });
 }
+
 
 /**
  * Safely retrieves the status field from a card's data-task JSON.
