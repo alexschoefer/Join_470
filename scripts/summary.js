@@ -37,6 +37,7 @@ function setGreetingAndName() {
   }
 }
 
+
 /**
  * Returns a greeting based on the current time.
  * Morning: 0–12, Afternoon: 13–18, Evening: 19–23.
@@ -51,6 +52,7 @@ function getCurrentGreeting() {
   return "Good Evening";
 }
 
+
 /**
  * Sets the current greeting inside #dategreating.
  * Uses getCurrentGreeting() for the text.
@@ -61,6 +63,7 @@ function getCurrentDate() {
   const greetingEl = document.getElementById("dategreating");
   greetingEl.innerText = getCurrentGreeting();
 }
+
 
 /**
  * Loads all tasks from the database and counts them.
@@ -81,6 +84,7 @@ async function getTasks() {
     taskscount.innerText = "0";
   }
 }
+
 
 /**
  * Counts all tasks with status "inProgress" from the database.
@@ -106,6 +110,7 @@ async function getTasksInProgress() {
   }
 }
 
+
 /**
  * Counts all tasks with status "awaitFeedback" from the database.
  * Updates the #tasks-await-feedback element with the count.
@@ -129,6 +134,7 @@ async function getTasksAwaitFeedback() {
     taskscount.innerText = "0";
   }
 }
+
 
 /**
  * Counts all tasks with status "toDo" from the database.
@@ -154,6 +160,7 @@ async function getTasksToDo() {
   }
 }
 
+
 /**
  * Counts all tasks with status "done" from the database.
  * Updates the #done element with the total count.
@@ -178,6 +185,7 @@ async function getTasksDone() {
   }
 }
 
+
 /**
  * Counts all tasks with priority "Urgent" from the database.
  * Displays the number in the #urgent-tasks element.
@@ -201,6 +209,7 @@ async function getTaskUrgent() {
     taskscount.innerText = "0";
   }
 }
+
 
 /**
  * Finds the earliest due date among tasks with priority "Urgent".
@@ -227,6 +236,7 @@ async function getUrgentDate() {
   }
 }
 
+
 /**
  * Formats a Date object into a readable US-style date string.
  * Example output: "October 16, 2022".
@@ -240,6 +250,7 @@ function formatDate(date) {
     day: "numeric",
   });
 }
+
 
 /**
  * Initializes the app once the DOM is fully loaded.
@@ -262,6 +273,7 @@ function enableBoxNavigation() {
   });
 }
 
+
 /**
  * Displays a welcome overlay on small screens for first-time users.
  * Checks localStorage for the "showWelcomeOnce" flag.
@@ -277,6 +289,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const guest = !name || ["gast", "guest"].includes(name.toLowerCase());
   showWelcomeOverlay(greeting, guest ? "" : name);
 });
+
 
 /**
  * Displays a temporary welcome overlay with a greeting and user name.
