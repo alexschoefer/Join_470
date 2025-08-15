@@ -501,6 +501,7 @@ input.checkbox {
   position: relative;
   transition: all 0.2s ease;
   flex: 0 0 auto;
+  cursor: pointer;
 }
 
 input.checkbox:checked::after {
@@ -515,6 +516,7 @@ input.checkbox:checked::after {
 div.functionen {
   display: flex;
   gap: 8px;
+  margin-right: 10px;
 }
 
 div.tasks-functionen {
@@ -591,6 +593,7 @@ div.card-drag-drop-container {
   gap: 20px;
   border-radius: 24px;
 }
+
 div.board-edit-task-category{
   display: none !important;
 }
@@ -603,9 +606,11 @@ div.board-edit-task-category{
   -ms-transform: rotate(20deg);
   -o-transform: rotate(20deg);
 }
+
 div.edit-task-category{
   display: none !important;
 }
+
 div.add-task-form-div {
   display: block;
   display: flex;
@@ -616,6 +621,7 @@ div.add-task-form-div {
   max-height: 685px;
   margin-top: 10px;
 }
+
 .ATSubLi{
   margin-right: -6px !important;
 } 
@@ -659,14 +665,17 @@ div.card-assigned-initials {
 div.assignees:first-child {
   margin-left: 0;
 }
+
 div.add-task-overlay{
   width: 100% !important;
 }
+
 div.add-task-form-div-container{
     display: flex;
     justify-content: space-between;
     margin-left: 74px;
 }
+
 .add-task-title{
   width: auto !important;
   height: auto !important;
@@ -674,30 +683,35 @@ div.add-task-form-div-container{
   padding-left: 34px !important;
   padding-right: 34px !important;
 }
+
 div.add-task-overlay{
   padding: 0 !important;
 }
+
 div.add-task-content{
   padding-left: 0;
   padding-top: 0;
 }
+
 div.add-task-form-div-container{
-  /* padding-left: 34px !important; */
-  /* padding-right: 34px !important; */
   margin-left: 0px;
 }
+
 .add-task-form-buttons{
   width: auto !important;
 }
+
 .add-task-h1{
   margin-bottom: 0 !important;
 }
+
 .add-task-form-buttons{
   padding-right: 34px;
   padding-left: 34px;
   padding-bottom: 0 !important;
   margin-top: 180px;
 }
+
 .add-task-button-clear {
   width: auto !important;
     height: 56px;
@@ -705,6 +719,7 @@ div.add-task-form-div-container{
     padding: 16px !important;
     justify-content: space-between;
 }
+
 div.card:hover{
   transform: rotate(7deg);
   -webkit-transform: rotate(7deg);
@@ -715,16 +730,19 @@ div.card:hover{
 .no-scroll {
   overflow: hidden;
 }
+
 .card-name-container {
   display: flex;
   align-items: center;
   gap: 8px;
   justify-content: space-between;
 }
+
 div.card-drop-down-button img{
   width: 26px;
   height: 24px;
 }
+
 div.card-drop-down-button{
   cursor: pointer;
   border-radius: 10px;
@@ -733,8 +751,8 @@ div.card-drop-down-button{
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
   display: none;
-  
 }
+
 div.card-drop-down-button:hover img{
   transform: scale(1.1);
   -webkit-transform: scale(1.1);
@@ -742,6 +760,7 @@ div.card-drop-down-button:hover img{
   -ms-transform: scale(1.1);
   -o-transform: scale(1.1);
 }
+
 .card-action-menu {
   position: absolute;
   background: #2A3647;

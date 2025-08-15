@@ -27,7 +27,7 @@ let standartTasks = [
     status: "inProgress",
     dueDate: "2024-04-16",
     subtasks: [
-      { title: "mplement Recipe Recommendation", done: true },
+      { title: "Implement Recipe Recommendation", done: true },
       { title: "Start page Layout", done: false },
     ],
     assigned: [

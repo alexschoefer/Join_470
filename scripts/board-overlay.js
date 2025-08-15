@@ -370,26 +370,29 @@ function generateAssignedCardOverlay(assignedList) {
     .join("");
 }
 
+/**
+ * Extracts and returns the uppercase initials from a full name.
+ * @param {string} name - The full name of a person.
+ * @returns {string} The uppercase initials derived from the name.
+ */
+function getInitials(name) {
+  return name.trim().split(/\s+/).map(w => w[0]).join("").toUpperCase();
+}
 
 /**
- * Generates compact initials badges for assigned users on cards.
- * @param {Array<{name: string, color: string}>} assignedList
- * @returns {string} HTML string of initials badges
+ * Generates HTML string for up to 4 assignee initials, with a "+X" badge if there are more.
+ * @param {Array<{name: string, color: string}>} assignedList - List of assigned contacts.
+ * @returns {string} HTML Template displaying initials and an overflow counter if applicable.
  */
 function getInitialsList(assignedList) {
   if (!Array.isArray(assignedList)) return "";
-  return assignedList
-    .map((person) => {
-      let initials = person.name
-        .trim()
-        .split(/\s+/)
-        .map((w) => w[0])
-        .join("")
-        .toUpperCase();
-      return `
-      <div class="assignees" style="background-color: ${person.color}">
-        <span>${initials}</span>
-      </div>`;
-    })
-    .join("");
+  const maxVisible = 4;
+  const visible = assignedList.slice(0, maxVisible);
+  const hidden = assignedList.length - maxVisible;
+  const visibleHTML = visible.map(p => `
+    <div class="assignees" style="background-color: ${p.color}">
+      <span>${getInitials(p.name)}</span>
+    </div>`).join("");
+  const hiddenHTML = hidden > 0 ? `<div class="assignees overflow-count"><span>+${hidden}</span></div>` : "";
+  return visibleHTML + hiddenHTML;
 }
