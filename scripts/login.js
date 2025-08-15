@@ -6,7 +6,6 @@
  * showLoginContent(): Replaces the animated logo with login container
  */
 function startLogoAnimation() {
-
   const animatedJoinLogo = document.getElementById("start-logo-animation");
   const finalJoinLogo = document.getElementById("start-logo-final");
   const loginContainer = document.getElementById("login-main-container");
@@ -202,7 +201,6 @@ async function guestLogin(event) {
 
 /**
  * Displays a success overlay and redirects the user to the login page after a short delay.
- *
  * Shows the success message about the registration
  * Then, after 800 milliseconds, navigates the user to the login page.
  */
@@ -213,4 +211,21 @@ function showLoginSuccessMessage() {
   setTimeout(() => {
       window.location.href = './html/summary.html';
   }, 800);
+}
+
+
+/**
+ * Help-function - Checking the required input email for login
+ * Displays an error message if the email is not valid by the function isValidEmail
+ */
+async function checkRequiredLoginInputEmail(input) {
+  const email = input.value.trim();
+  if (!email) {
+      showError(input, 'This field is required.');
+      return;
+  }
+  if (!isValidEmail(email)) {
+      showError(input, 'Please enter a valid email address.');
+      return;
+  }
 }

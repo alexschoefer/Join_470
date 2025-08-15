@@ -84,7 +84,6 @@ function isRealMobileDevice() {
 }
 
 
-
 /**
  * Adjusts the layout of the contact view depending on the device type (desktop or mobile) and whether a contact is currently selected.
  * On desktop: shows all sections. In the mobile view hides the left container and contact list if a contact is open.
@@ -157,13 +156,12 @@ function changePasswordIcon(input) {
 function toggleInputTypePassword(iconElement) {
     const container = iconElement.closest('.input-container');
     const input = container.querySelector('input');
-
     if (input.type === 'password' && input.value.trim().length > 0) {
         input.type = 'text';
-        iconElement.src = "../assets/icons/visibility-icon.png";
+        iconElement.src = "./assets/icons/visibility-icon.png";
     } else if (input.type === 'text' && input.value.trim().length > 0) {
         input.type = 'password';
-        iconElement.src = "../assets/icons/visibility-off-icon.png";
+        iconElement.src = "./assets/icons/visibility-off-icon.png";
     }
 }
 
@@ -278,17 +276,17 @@ function combineAssignedWithColors(assignTo, colorTo) {
 
 
 /**
- * Baut ein Task-Objekt aus den übergebenen Parametern.
- * @param {number} nextId - Die ID für die neue Task.
- * @param {string} title - Der Titel der Task.
- * @param {string} description - Die Beschreibung der Task.
- * @param {string} date - Das Fälligkeitsdatum.
- * @param {string} priority - Die Priorität.
- * @param {string} status - Der Status.
- * @param {Object[]} assigned - Array der zugewiesenen Personen.
- * @param {string} category - Die Kategorie.
- * @param {Object[]} subtasks - Array der Subtasks.
- * @returns {Object} Das Task-Objekt.
+ * Builds a task object from the provided parameters.
+ * @param {number} nextId - The ID for the new task.
+ * @param {string} title - The title of the task.
+ * @param {string} description - The description of the task.
+ * @param {string} date - The due date of the task.
+ * @param {string} priority - The priority level of the task.
+ * @param {string} status - The current status of the task.
+ * @param {Object[]} assigned - Array of assigned users.
+ * @param {string} category - The task category.
+ * @param {Object[]} subtasks - Array of subtasks related to the task.
+ * @returns {Object} The constructed task object.
  */
 function buildTaskData(nextId, title, description, date, priority, status, assigned, category, subtasks) {
     return {
@@ -392,17 +390,3 @@ function checkRequiredFieldsAndToggleButton() {
     }
 }
 
-
-/**
- *  Loads all contacts from remote storage and returns them as an array
- * @async
- * @returns - Array of contact objects including id and contact data
- */
-async function loadAllContactsFromRemoteStorage() {
-    const response = await fetch(fetchURLDataBase + '/contacts' + '.json');
-    const contactsData = await response.json();
-    return Object.entries(contactsData).map(([id, contact]) => ({
-        id,
-        ...contact
-    }));
-}

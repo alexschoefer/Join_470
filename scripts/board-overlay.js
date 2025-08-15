@@ -7,6 +7,7 @@ function showOverlay() {
   container.classList.add("show-from-right", "addtask-card-container");
 }
 
+
 /**
  * Initializes the add-task overlay by injecting the form HTML and
  * invoking any page-specific initialization function.
@@ -15,6 +16,7 @@ function setupAddTask() {
   container.innerHTML = addTasks();
   if (typeof window.addTaskInit === "function") window.addTaskInit();
 }
+
 
 /**
  * Opens the add-task overlay or navigates to a separate page on small screens.
@@ -31,6 +33,7 @@ function openAddTaskOverlay(e) {
   showOverlay();
 }
 
+
 /**
  * Parses a task object from a card's data-task attribute.
  * @param {Element} card - DOM element representing the task card
@@ -46,6 +49,7 @@ function parseTask(card) {
   }
   return null;
 }
+
 
 /**
  * Renders full task details in the overlay for viewing or editing.
@@ -66,6 +70,7 @@ function displayTaskDetails(task, card) {
   );
 }
 
+
 /**
  * Attaches listeners to subtask checkboxes to update completion state
  * and persist changes to remote storage.
@@ -84,6 +89,7 @@ function attachSubtaskListeners(task, card) {
     });
   });
 }
+
 
 /**
  * Sets up click handlers on each card to open detailed view overlay.
@@ -104,6 +110,7 @@ function openTaskDetails() {
   );
 }
 
+
 /**
  * Closes the overlay, restores scrolling, and clears content after animation.
  */
@@ -115,6 +122,7 @@ function closeContainerOverlay() {
     container.innerHTML = "";
   }, 500);
 }
+
 
 /**
  * Attaches delete button handler within overlay to remove a task.
@@ -135,6 +143,7 @@ function deleteTasksOfOverlay(id) {
   });
 }
 
+
 /**
  * Injects the edit form into the overlay and initializes it.
  * @param {number|string} id - ID of the task to edit
@@ -144,6 +153,7 @@ function injectEditForm(id) {
   requestAnimationFrame(() => initAddTaskForm(id));
   showOverlay();
 }
+
 
 /**
  * Attaches edit button handler within overlay to switch to edit mode.
@@ -160,6 +170,7 @@ function editTaskOfOverlay(id) {
   }
 }
 
+
 /**
  * Pre-fills the add/edit task form fields based on existing task data.
  * @param {number|string} id - Task ID to load data for
@@ -171,6 +182,7 @@ function preFillTaskForm(id) {
   setupContacts(task);
   setupSubtasks(task);
 }
+
 
 /**
  * Populates basic input fields (title, description, date, priority, category)
@@ -188,6 +200,7 @@ function fillBasicFields(task) {
   document.getElementById("categoryDropdownSelectedText").textContent =
     task.category;
 }
+
 
 /**
  * Marks already-assigned contacts in the form based on task data.
@@ -211,6 +224,7 @@ function setupContacts(task) {
   });
 }
 
+
 /**
  * Renders existing subtasks into the form for editing.
  * @param {Object} task - Task object with subtasks array
@@ -219,6 +233,7 @@ function setupSubtasks(task) {
   subtasks = task.subtasks.map((st) => st.title);
   subtaskRender();
 }
+
 
 /**
  * Retrieves current form input values as a task data object.
@@ -240,6 +255,7 @@ function getFormValues(id) {
     subtasksArray: getSubtasksArray(),
   };
 }
+
 
 /**
  * Validates required form fields and marks errors in the UI.
@@ -266,6 +282,7 @@ function validateFormValues({ title, dueDate, category }) {
   return isValid;
 }
 
+
 /**
  * Gathers form values, validates, and submits updates for editing tasks.
  * @param {number|string} id - Task ID to update
@@ -276,6 +293,7 @@ function valueTasksToEditTasks(id) {
   let updated = buildUpdatedTask(id, values);
   saveUpdatedTask(id, updated);
 }
+
 
 /**
  * Constructs a new task object from form values for saving.
@@ -314,6 +332,7 @@ function buildUpdatedTask(
   };
 }
 
+
 /**
  * Persists the updated task to remote storage and refreshes the UI.
  * @param {number|string} id - Task ID
@@ -326,6 +345,7 @@ async function saveUpdatedTask(id, updatedTask) {
   closeContainerOverlay();
   updateTask();
 }
+
 
 /**
  * Generates HTML for displaying assigned users in the task overlay.
@@ -351,32 +371,28 @@ function generateAssignedCardOverlay(assignedList) {
 }
 
 /**
- * Generates compact initials badges for assigned users on cards.
- * @param {Array<{name: string, color: string}>} assignedList
- * @returns {string} HTML string of initials badges
+ * Extracts and returns the uppercase initials from a full name.
+ * @param {string} name - The full name of a person.
+ * @returns {string} The uppercase initials derived from the name.
+ */
+function getInitials(name) {
+  return name.trim().split(/\s+/).map(w => w[0]).join("").toUpperCase();
+}
+
+/**
+ * Generates HTML string for up to 4 assignee initials, with a "+X" badge if there are more.
+ * @param {Array<{name: string, color: string}>} assignedList - List of assigned contacts.
+ * @returns {string} HTML Template displaying initials and an overflow counter if applicable.
  */
 function getInitialsList(assignedList) {
   if (!Array.isArray(assignedList)) return "";
-  return assignedList
-    .map((person) => {
-      let initials = person.name
-        .trim()
-        .split(/\s+/)
-        .map((w) => w[0])
-        .join("")
-        .toUpperCase();
-      return `
-      <div class="assignees" style="background-color: ${person.color}">
-        <span>${initials}</span>
-      </div>`;
-    })
-    .join("");
+  const maxVisible = 4;
+  const visible = assignedList.slice(0, maxVisible);
+  const hidden = assignedList.length - maxVisible;
+  const visibleHTML = visible.map(p => `
+    <div class="assignees" style="background-color: ${p.color}">
+      <span>${getInitials(p.name)}</span>
+    </div>`).join("");
+  const hiddenHTML = hidden > 0 ? `<div class="assignees overflow-count"><span>+${hidden}</span></div>` : "";
+  return visibleHTML + hiddenHTML;
 }
-
-// Initialize on page load and bind resize events
-window.addEventListener("resize", () => {
-  updateDraggables();
-  if (container.classList.contains("show-from-right")) {
-    closeContainerOverlay();
-  }
-});
