@@ -76,6 +76,7 @@ function processTasks(list, filter, cb) {
     .forEach(cb);
 }
 
+
 /**
  * Refreshes the task board by clearing and re-appending tasks based on current filter.
  */
@@ -201,6 +202,7 @@ function formatName(name) {
   return map[name] || name;
 }
 
+
 /**
  * Customizes "Add Task" form submit to handle editing existing tasks.
  * @param {number|string} id - Task id being edited
@@ -245,6 +247,7 @@ function getColoredLabels(category) {
   return "";
 }
 
+
 /**
  * Updates the visual progress bar and text for subtasks within a task card.
  * @param {Object[]} subtasks - Array of subtask objects
@@ -257,10 +260,8 @@ function updateSubtaskProgress(subtasks, container) {
   let total = subtasks.length;
   let doneCount = subtasks.filter((s) => s.done).length;
   let pct = total ? (doneCount / total) * 100 : 0;
-
   const bar = container.querySelector(".col-bar");
   const progressText = container.querySelector("#nr-progress-tasks");
-
   if (bar) bar.style.width = pct + "%";
   if (progressText) progressText.textContent = `${doneCount}/${total} Subtasks`;
 }
@@ -298,6 +299,7 @@ function closeCurrentActionMenu() {
     currentOpenMenu = null;
   }
 }
+
 
 /**
  * Positions an action menu relative to its trigger button and card.
