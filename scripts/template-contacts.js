@@ -277,10 +277,9 @@ function editContactTemplate(contact, index) {
                                 </div>
                             </div>
                                 <div class="input-validation-container">
-                                    <p id="userphone-input-validation-message"
-                                        class="input-validation-message d_none"
-                                        data-default-message="Please enter a valid phone number.">Please enter a valid
-                                        phone number.</p>
+                                        <p id="userphone-input-validation-message"
+                                        class="input-validation-message d_none">
+                                        </p>
                                 </div>
                         </div>
                         <div class="add-contact-btns-container">
