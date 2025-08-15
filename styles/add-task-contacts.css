@@ -45,6 +45,32 @@
   background-image: url(../assets/icons/add-task-assigned-hover-checked.svg);
 }
 
+.ATContact-option-checkbox-white {
+  width: 24px;
+  height: 24px;
+  background-image: url(../assets/icons/add-task-checkbox-button-mobile-default.svg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ATContact-option-checkbox-white:hover {
+  background-image: url(../assets/icons/add-task-checkbox-button-mobile-default.svg);
+}
+
+.ATContact-option-checkbox-white-checked {
+  width: 24px;
+  height: 24px;
+  background-image: url(../assets/icons/add-task-checkbox-button-mobile-checked.svg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ATContact-option-checkbox-white-checked:hover {
+  background-image: url(../assets/icons/add-task-checkbox-button-mobile-checked.svg);
+}
+
 .ATcustom-dropdown-wrapper {
   position: relative;
   width: 100%;

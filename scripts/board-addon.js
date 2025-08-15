@@ -28,3 +28,28 @@ window.addEventListener("load", () => {
     updateDraggables();
     updateBoardContent();
 });
+
+
+/**
+ * Initialize on page load and bind resize events
+ */
+window.addEventListener("resize", () => {
+    updateDraggables();
+    if (container.classList.contains("show-from-right")) {
+        closeContainerOverlay();
+    }
+});
+
+
+/**
+ * Safely retrieves the status field from a card's data-task JSON.
+ * @param {Element} card - Task card element
+ * @returns {string} Task status or empty string on error
+ */
+function getTaskStatus(card) {
+    try {
+        return JSON.parse(card.dataset.task).status;
+    } catch {
+        return "";
+    }
+}

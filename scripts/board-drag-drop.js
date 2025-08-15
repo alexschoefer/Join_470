@@ -11,6 +11,7 @@ function getColumns() {
   ];
 }
 
+
 /**
  * Starts dragging for the given task id.
  * @param {number|string} id - Task identifier
@@ -18,6 +19,7 @@ function getColumns() {
 function startDragging(id) {
   currentDraggedElement = +id;
 }
+
 
 /**
  * Checks if drag-and-drop should be enabled based on viewport width.
@@ -27,6 +29,7 @@ function isDragDropEnabled() {
   return window.innerWidth > 1441;
 }
 
+
 /**
  * Allows drop if drag-and-drop is enabled.
  * @param {DragEvent} ev - Drag event
@@ -35,6 +38,7 @@ function allowDrop(ev) {
   if (!isDragDropEnabled()) return;
   ev.preventDefault();
 }
+
 
 /**
  * Moves the current dragged task to a new category and persists change.
@@ -50,6 +54,7 @@ async function moveTo(category) {
   }
 }
 
+
 /**
  * Highlights the drag area of the given column id.
  * @param {string} id - Column container id
@@ -58,6 +63,7 @@ function highlight(id) {
   document.getElementById(id).classList.add("drag-area-highlight");
 }
 
+
 /**
  * Removes highlight from the drag area of the given column id.
  * @param {string} id - Column container id
@@ -65,6 +71,7 @@ function highlight(id) {
 function removeHighlight(id) {
   document.getElementById(id).classList.remove("drag-area-highlight");
 }
+
 
 /**
  * Inserts an empty placeholder in columns with no tasks.
@@ -81,6 +88,7 @@ function insertTemplateIfEmpty() {
     }
   });
 }
+
 
 /**
  * Enables tilt animation on dragstart and dragend for card elements.
@@ -106,6 +114,7 @@ function enableTiltOnDrag(selector) {
   });
 }
 
+
 /**
  * Sets draggable attribute on all task elements based on viewport.
  */
@@ -114,6 +123,7 @@ function updateDraggables() {
     .querySelectorAll(".task")
     .forEach((el) => (el.draggable = isDragDropEnabled()));
 }
+
 
 /**
  * Attaches dropdown (action menu) toggles to all cards.
@@ -124,6 +134,7 @@ function attachToCardDropdown(card) {
   btn.dataset._dropdownAttached = "true";
   btn.addEventListener("click", (e) => handleDropdownClick(e, card, btn));
 }
+
 
 /**
  * Handles click on dropdown button: positions and shows menu.

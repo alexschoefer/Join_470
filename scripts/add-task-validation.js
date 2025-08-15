@@ -123,3 +123,26 @@ function validateAddTaskInputs() {
     }
     return valid;
 }
+
+
+/**
+ * Sets the minimum and maximum allowed dates for the due date input field.
+ * Prevents selection of past dates and limits the maximum date to one year in the future.
+ *
+ * The function sets the 'min' and 'max' attributes on the input element with id 'add-task-due-date-input'.
+ */
+function setDueDateLimits() {
+    const input = document.getElementById('add-task-due-date-input');
+    if (!input) return;
+
+    const today = new Date();
+    const nextYear = new Date();
+    nextYear.setFullYear(today.getFullYear() + 1);
+
+    const pad = n => n.toString().padStart(2, '0');
+    const minDate = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
+    const maxDate = `${nextYear.getFullYear()}-${pad(nextYear.getMonth() + 1)}-${pad(nextYear.getDate())}`;
+
+    input.setAttribute('min', minDate);
+    input.setAttribute('max', maxDate);
+}

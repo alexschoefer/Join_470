@@ -140,7 +140,7 @@ function changeContactBackground(event, id) {
  */
 function changeContactBackgroundYes(id, ATContactOptionCheckboxRef, ATcustomDropdownMobileOption ,ATContactOptionName){
   ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox');
-        ATContactOptionCheckboxRef.classList.add('ATContact-option-checkbox-checked');
+        ATContactOptionCheckboxRef.classList.add('ATContact-option-checkbox-white-checked');
         assignedCheckbox[id].checkbox = true;
         ATcustomDropdownMobileOption.classList.add("blueBackground");
         ATContactOptionName.style.color = "#FFFFFF";
@@ -157,7 +157,7 @@ function changeContactBackgroundYes(id, ATContactOptionCheckboxRef, ATcustomDrop
  * @param {HTMLElement} ATContactOptionName - The contact name element.
  */
 function changeContactBackgroundNo(id, ATContactOptionCheckboxRef, ATcustomDropdownMobileOption ,ATContactOptionName){
-     ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox-checked');
+     ATContactOptionCheckboxRef.classList.remove('ATContact-option-checkbox-white-checked');
         ATContactOptionCheckboxRef.classList.add('ATContact-option-checkbox');
         assignedCheckbox[id].checkbox = false;
         ATcustomDropdownMobileOption.classList.remove("blueBackground");
