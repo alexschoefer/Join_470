@@ -1,5 +1,5 @@
 const fetchURLDataBase = "https://join-470-80a5e-default-rtdb.europe-west1.firebasedatabase.app/";
-let currentDeviceType = ''; 
+let currentDeviceType = '';
 let currentOverlayMode = '';
 let isOverlayOpen = false;
 let currentOverlayType = null;
@@ -69,7 +69,7 @@ function handleOrientationChange() {
         warning.classList.remove('orientation-warning-z99');
         warning.classList.add('orientation-warning-z0');
     }
-      warning.classList.toggle('d_none', !shouldShowWarning);
+    warning.classList.toggle('d_none', !shouldShowWarning);
     document.body.classList.toggle('no-scroll', shouldShowWarning);
     previousOrientationWarningVisible = shouldShowWarning;
 }
@@ -91,7 +91,7 @@ function isRealMobileDevice() {
 function adaptLayoutOnResize(newType) {
     typeOfScreen = newType;
     const contactDetails = document.getElementById('contact-details');
-    if(!contactDetails) return; 
+    if (!contactDetails) return;
     const contactIsOpen = document.getElementById('contact-details').innerHTML.trim() !== '';
     const containerLeft = document.getElementById('contacts-left-container');
     const contactList = document.getElementById('contact-list');
@@ -138,14 +138,16 @@ function clearErrorMessage(input) {
 function changePasswordIcon(input) {
     const container = input.closest('.input-container');
     const icon = container.querySelector('.password-icon');
+    const iconPath = getIconPath();
     if (input.value.trim().length > 0) {
-        icon.src = "./assets/icons/visibility-off-icon.png";
-        icon.classList.add('visibility-off-icon');
+      icon.src = `${iconPath}/visibility-off-icon.png`;
+      icon.classList.add('visibility-off-icon');
     } else {
-        icon.src = "./assets/icons/lock-icon.png";
-        icon.classList.remove('visibility-off-icon');
+      icon.src = `${iconPath}/lock-icon.png`;
+      icon.classList.remove('visibility-off-icon');
     }
-}
+  }
+
 
 /**
  * Toggles the visibility of a password input field.
@@ -156,14 +158,16 @@ function changePasswordIcon(input) {
 function toggleInputTypePassword(iconElement) {
     const container = iconElement.closest('.input-container');
     const input = container.querySelector('input');
-    if (input.type === 'password' && input.value.trim().length > 0) {
-        input.type = 'text';
-        iconElement.src = "./assets/icons/visibility-icon.png";
-    } else if (input.type === 'text' && input.value.trim().length > 0) {
-        input.type = 'password';
-        iconElement.src = "./assets/icons/visibility-off-icon.png";
+    const iconPath = getIconPath();
+    if (input.value.trim().length === 0) return;
+    if (input.type === 'password') {
+      input.type = 'text';
+      iconElement.src = `${iconPath}/visibility-icon.png`;
+    } else {
+      input.type = 'password';
+      iconElement.src = `${iconPath}/visibility-off-icon.png`;
     }
-}
+  }
 
 
 /**
@@ -179,7 +183,7 @@ function validateContactSectionForms() {
     const phoneInput = document.getElementById('userphone-input');
     const phoneValidation = isValidPhoneNumber(phoneInput.value.trim());
     const phoneOK = phoneValidation.valid;
-    const formValid = filled && emailOK && nameOK && phoneOK;    
+    const formValid = filled && emailOK && nameOK && phoneOK;
     setButtonState(formValid);
 }
 
@@ -219,7 +223,7 @@ function isValidEmail(email) {
  * @param {boolean} enabled - If true, the sign-up button is enabled; if false, it is disabled.
  */
 function setButtonState(enabled) {
-    const button = document.getElementById('btn-form') ;
+    const button = document.getElementById('btn-form');
     button.disabled = !enabled;
 }
 
@@ -390,3 +394,12 @@ function checkRequiredFieldsAndToggleButton() {
     }
 }
 
+
+/**
+ * Returns the correct icon path depending on the current HTML file location.
+ * Ensures compatibility between root and subfolder paths like 'html/'.
+ * @returns {string} Path to the icons folder.
+ */
+function getIconPath() {
+    return window.location.pathname.includes('/html/') ? '../assets/icons' : 'assets/icons';
+}
