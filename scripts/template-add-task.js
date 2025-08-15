@@ -7,7 +7,10 @@
  */
 function addSubtaskTemplate(i, subtaski) {
     return `<div id="add-task-subtask-template${i}" class="add-task-subtask-style">
-                <li class="ATSubLi" id="ATSubLi${i}"></li>                 <input id="ATSubtask-container-${i}" type="text" title="ATSubtask-container" class="ATSubtask-container"
+    <div id="add-task-li-container" class="add-task-li-container">
+        <li class="ATSubLi" id="ATSubLi${i}"></li>
+    </div>
+      <input id="ATSubtask-container-${i}" type="text" title="ATSubtask-container" class="ATSubtask-container"
                      value="${subtaski}">
                  <div class="add-task-subtasks-icons d_none" id="add-task-subtasks-icons-${i}">
                      <div id="add-task-subtasks-icon-edit-${i}" class="add-task-subtasks-icon-edit" onclick="editAddTaskSubtask(${i})">
